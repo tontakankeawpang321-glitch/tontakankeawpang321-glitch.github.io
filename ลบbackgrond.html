@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ตัวแก้รูป – ลบพื้นหลัง + Photoshop Tool (Mobile Ready)</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fabric@5.3.0/dist/fabric.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root{
+  --bg:#0b1020; --panel:#111936; --ink:#eef2ff; --muted:#a3b2e4; --line:#23305c;
+  --brand:#3b82f6; --ok:#22c55e; --warn:#f59e0b; --danger:#ef4444; --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:"Sarabun",system-ui,Segoe UI,Roboto,Arial;background:#0b1020;color:var(--ink);overflow:hidden;}
+.app{display:flex;flex-direction:row;height:100vh}
+
+/* Left toolbar (Photoshop-like) */
+.side-tools{
+  background:#111936;border-right:1px solid var(--line);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  padding:.5rem 0;width:64px
+}
+.tool-btn{width:44px;height:44px;display:grid;place-items:center;border-radius:8px;cursor:pointer;color:var(--muted);transition:.15s}
+.tool-btn:hover{background:rgba(255,255,255,.12);color:var(--ink)}
+.tool-btn.active{background:var(--brand);color:#fff}
+
+/* Top toolbar */
+.main-area{flex:1;display:flex;flex-direction:column;height:100%}
+.toolbar{
+  background:linear-gradient(180deg,rgba(17,25,54,.95),rgba(17,25,54,.85));
+  border-bottom:1px solid var(--line);padding:.5rem .75rem;
+  display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;justify-content:center
+}
+.toolbar button,.toolbar select,.toolbar input[type="color"],.toolbar input[type="range"]{
+  background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--ink);
+  border-radius:8px;height:36px;padding:.35rem .6rem;font-size:.92rem
+}
+
+.stage-wrap{flex:1;display:grid;place-items:center;background:#0f172a;overflow:auto}
+canvas{border:1px solid #334155;border-radius:12px;max-width:100%;height:auto}
+footer{background:#111936;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;text-align:center;padding:.6rem}
+
+/* Mobile */
+@media (max-width:768px){
+  .app{flex-direction:column}
+  .side-tools{flex-direction:row;justify-content:space-around;border-right:none;border-bottom:1px solid var(--line);width:100%;height:60px}
+  .tool-btn{width:38px;height:38px}
+  .toolbar{justify-content:center}
+  .toolbar button,.toolbar select,.toolbar input{font-size:.85rem;height:34px}
+  footer{font-size:.8rem}
+}
+.badge{font-size:.78rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Left tools (เอา move/crop ออกแล้ว) -->
+  <div class="side-tools">
+    <div class="tool-btn" id="tool-brush" title="ดินสอ"><i data-lucide="brush"></i></div>
+    <div class="tool-btn" id="tool-eraser" title="ยางลบ (โปร่งพื้น)"><i data-lucide="eraser"></i></div>
+    <div class="tool-btn" id="tool-text" title="เพิ่มข้อความ"><i data-lucide="type"></i></div>
+    <div class="tool-btn" id="tool-ai" title="✨ AI ลบพื้นหลัง (remove.bg)"><i data-lucide="sparkles"></i></div>
+    <div class="tool-btn" id="tool-undo" title="↩️ ย้อนกลับ (Undo)"><i data-lucide="undo"></i></div>
+    <div class="tool-btn" id="tool-redo" title="↪️ ทำซ้ำ (Redo)"><i data-lucide="redo"></i></div>
+    <div class="tool-btn" id="tool-save" title="⬇️ ดาวน์โหลด"><i data-lucide="download"></i></div>
+  </div>
+
+  <!-- Main -->
+  <div class="main-area">
+    <div class="toolbar">
+      <button id="btnUpload">📁 อัปโหลดรูป</button>
+      <input type="file" id="fileInput" accept="image/*" style="display:none">
+      <select id="fontFamily">
+        <option value="Sarabun">Sarabun</option>
+        <option value="Prompt">Prompt</option>
+        <option value="Kodchasan">Kodchasan</option>
+      </select>
+      <input type="color" id="colorPicker" value="#ffffff" title="สีตัวอักษร/ดินสอ">
+      <input type="range" id="brushSize" min="1" max="60" value="10" title="ขนาดดินสอ/ยางลบ">
+      <span class="badge">เลย์เอาต์คล้าย Photoshop • มือถือ 100%</span>
+    </div>
+
+    <div class="stage-wrap">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <footer>⚡ ลบพื้นหลังด้วย AI – ดาวน์โหลดได้ทันที | ถ้าติด CORS ใส่ GAS Proxy ที่ <code>GAS_PROXY_URL</code></footer>
+  </div>
+</div>
+
+<script>
+/** ===== Config ===== **/
+const REMOVE_BG_API_KEY = 'Y7DB2iMAFoY8WNvjrYgXYEu3';
+const GAS_PROXY_URL = 'https://script.google.com/macros/s/AKfycbzU6yc8GWL8qprpAcUfM8BuZgDFw48f3a1mSwM-_7bQUFJ453kdRgHPSqYG7jaaKBon/exec'; // ใส่ URL Web App ของ Apps Script ถ้าต้องการ proxy (แก้ CORS)
+
+/** ===== Init ===== **/
+lucide.createIcons();
+const canvas = new fabric.Canvas('canvas',{ backgroundColor:'transparent', preserveObjectStacking:true });
+function resizeCanvas(){
+  const pad = window.innerWidth < 768 ? 12 : 80;
+  const topbar = window.innerWidth < 768 ? 140 : 160;
+  const w = Math.max(280, window.innerWidth - pad);
+  const h = Math.max(240, window.innerHeight - topbar);
+  canvas.setWidth(w); canvas.setHeight(h); canvas.renderAll();
+}
+resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+
+const fileInput = document.getElementById('fileInput');
+const btnUpload  = document.getElementById('btnUpload');
+const colorPicker= document.getElementById('colorPicker');
+const fontFamily = document.getElementById('fontFamily');
+const brushSize  = document.getElementById('brushSize');
+
+let currentImgObj = null;
+let originalFileBlob = null; // เก็บไฟล์ต้นฉบับ
+let isRestoring = false;
+
+/** ===== History (Undo/Redo) ===== **/
+const undoStack = [];
+const redoStack = [];
+function saveState(){
+  if(isRestoring) return;
+  undoStack.push(JSON.stringify(canvas.toJSON()));
+  if(undoStack.length>60) undoStack.shift();
+  redoStack.length = 0;
+}
+function undo(){
+  if(undoStack.length<2) return;
+  isRestoring = true;
+  const cur = undoStack.pop();
+  redoStack.push(cur);
+  const prev = undoStack[undoStack.length-1];
+  canvas.loadFromJSON(prev, ()=>{ canvas.renderAll(); isRestoring=false; });
+}
+function redo(){
+  if(!redoStack.length) return;
+  isRestoring = true;
+  const next = redoStack.pop();
+  undoStack.push(next);
+  canvas.loadFromJSON(next, ()=>{ canvas.renderAll(); isRestoring=false; });
+}
+['object:added','object:modified','object:removed'].forEach(e=>canvas.on(e, saveState));
+
+/** ===== Upload ===== **/
+btnUpload.onclick = () => fileInput.click();
+fileInput.onchange = e => {
+  const file = e.target.files && e.target.files[0];
+  if(!file) return;
+  originalFileBlob = file;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    fabric.Image.fromURL(reader.result, img=>{
+      canvas.clear();
+      currentImgObj = img;
+      img.set({ selectable:true, hasControls:true, erasable:true }); // เปิดให้ลบด้วยยางลบ
+      addDeleteControl(img); // ปุ่ม close (×) บนอ็อบเจ็กต์
+      const scale = (canvas.width * 0.9) / img.width;
+      img.scale(scale);
+      canvas.add(img);
+      canvas.centerObject(img);
+      canvas.setActiveObject(img);
+      canvas.renderAll();
+      saveState();
+    }, { crossOrigin: 'anonymous' });
+  };
+  reader.readAsDataURL(file);
+};
+
+/** ===== Tools ===== **/
+function setActiveTool(btnId){
+  document.querySelectorAll('.side-tools .tool-btn').forEach(b=>b.classList.remove('active'));
+  const el = document.getElementById(btnId);
+  if(el) el.classList.add('active');
+}
+
+document.getElementById('tool-brush').onclick = ()=>{
+  setActiveTool('tool-brush');
+  canvas.isDrawingMode = true;
+  canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+  canvas.freeDrawingBrush.width = parseInt(brushSize.value,10)||10;
+  canvas.freeDrawingBrush.color = colorPicker.value;
+};
+document.getElementById('tool-eraser').onclick = ()=>{
+  setActiveTool('tool-eraser');
+  if(fabric.EraserBrush){
+    canvas.isDrawingMode = true;
+    canvas.freeDrawingBrush = new fabric.EraserBrush(canvas);
+    canvas.freeDrawingBrush.width = parseInt(brushSize.value,10)||10;
+  }else{
+    alert('เวอร์ชัน Fabric นี้ไม่รองรับ EraserBrush');
+  }
+};
+document.getElementById('tool-text').onclick = ()=>{
+  setActiveTool('tool-text');
+  canvas.isDrawingMode = false;
+  const text = new fabric.IText('พิมพ์ข้อความ', {
+    left: 40, top: 40, fill: colorPicker.value, fontFamily: fontFamily.value, fontSize: 36, erasable:true
+  });
+  addDeleteControl(text);
+  canvas.add(text); canvas.setActiveObject(text); canvas.renderAll();
+};
+colorPicker.oninput = ()=>{
+  if(canvas.isDrawingMode && canvas.freeDrawingBrush && !(canvas.freeDrawingBrush instanceof fabric.EraserBrush)){
+    canvas.freeDrawingBrush.color = colorPicker.value;
+  }
+  const obj = canvas.getActiveObject();
+  if(obj && obj.type?.includes('text')){ obj.set('fill', colorPicker.value); canvas.renderAll(); }
+};
+fontFamily.onchange = ()=>{
+  const obj = canvas.getActiveObject();
+  if(obj && obj.type?.includes('text')){ obj.set('fontFamily', fontFamily.value); canvas.renderAll(); }
+};
+brushSize.oninput = ()=>{
+  if(canvas.isDrawingMode && canvas.freeDrawingBrush){
+    canvas.freeDrawingBrush.width = parseInt(brushSize.value,10)||10;
+  }
+};
+
+/** ===== Delete (ปุ่ม Delete + ปุ่ม Close บนวัตถุ) ===== **/
+function removeActive(){
+  const obj = canvas.getActiveObject();
+  if(!obj) return;
+  if(obj === currentImgObj){ currentImgObj=null; originalFileBlob=null; }
+  canvas.remove(obj); canvas.discardActiveObject(); canvas.requestRenderAll(); saveState();
+}
+// ปุ่ม Delete บนคีย์บอร์ด
+document.addEventListener('keydown', (ev)=>{
+  if(ev.key==='Delete' || ev.key==='Backspace'){ // เผื่อมือถือมีคีย์บอร์ด
+    removeActive();
+  }
+});
+
+// ปุ่ม Close (×) บนวัตถุ
+function addDeleteControl(obj){
+  const deleteIconSize = 22;
+  obj.controls.deleteControl = new fabric.Control({
+    x: 0.5, y: -0.5, offsetX: 12, offsetY: -12, cursorStyle: 'pointer',
+    mouseUpHandler: (eventData, transform) => {
+      const target = transform.target;
+      if(target === currentImgObj){ currentImgObj=null; originalFileBlob=null; }
+      canvas.remove(target); canvas.requestRenderAll(); saveState();
+      return true;
+    },
+    render: function(ctx, left, top, styleOverride, fabricObject){
+      ctx.save();
+      ctx.translate(left, top);
+      ctx.beginPath();
+      ctx.arc(0, 0, deleteIconSize/2, 0, Math.PI*2);
+      ctx.fillStyle = '#ef4444';
+      ctx.fill();
+      ctx.strokeStyle = 'white';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(-6,-6); ctx.lineTo(6,6);
+      ctx.moveTo(6,-6); ctx.lineTo(-6,6);
+      ctx.stroke();
+      ctx.restore();
+    },
+    cornerSize: deleteIconSize
+  });
+}
+
+/** ===== Undo / Redo ===== **/
+document.getElementById('tool-undo').onclick = ()=>{ setActiveTool('tool-undo'); undo(); };
+document.getElementById('tool-redo').onclick = ()=>{ setActiveTool('tool-redo'); redo(); };
+
+/** ===== AI Remove Background (remove.bg) ===== **/
+async function removeBgDirect(blob){
+  const fd = new FormData();
+  fd.append('image_file', blob, 'upload.png');
+  fd.append('size','auto');
+  const res = await fetch('https://api.remove.bg/v1.0/removebg', {
+    method:'POST',
+    headers:{ 'X-Api-Key': REMOVE_BG_API_KEY },
+    body: fd
+  });
+  if(!res.ok){
+    const txt = await res.text().catch(()=> '');
+    throw new Error('Remove.bg HTTP '+res.status+' '+txt);
+  }
+  return await res.blob();
+}
+async function removeBgViaGAS(blob){
+  if(!GAS_PROXY_URL) throw new Error('ยังไม่ได้ตั้งค่า GAS_PROXY_URL');
+  const fd = new FormData();
+  fd.append('image_file', blob, 'upload.png');
+  fd.append('x_api_key', REMOVE_BG_API_KEY);
+  const res = await fetch(GAS_PROXY_URL, { method:'POST', body: fd });
+  if(!res.ok){
+    const txt = await res.text().catch(()=> '');
+    throw new Error('GAS proxy HTTP '+res.status+' '+txt);
+  }
+  return await res.blob();
+}
+async function doRemoveBg(){
+  if(!originalFileBlob && !currentImgObj){ alert('กรุณาอัปโหลดรูปก่อน'); return; }
+  const srcBlob = originalFileBlob || await (await fetch(canvas.toDataURL('image/png'))).blob();
+  try{
+    let outBlob;
+    try{ outBlob = await removeBgDirect(srcBlob); }
+    catch(err1){
+      if(GAS_PROXY_URL){ outBlob = await removeBgViaGAS(srcBlob); }
+      else{ throw err1; }
+    }
+    const url = URL.createObjectURL(outBlob);
+    fabric.Image.fromURL(url, img=>{
+      canvas.clear();
+      currentImgObj = img;
+      img.set({ selectable:true, hasControls:true, erasable:true, objectCaching:false });
+      addDeleteControl(img);
+      const scale = (canvas.width * 0.9) / img.width;
+      img.scale(scale);
+      canvas.add(img);
+      canvas.centerObject(img);
+      canvas.setActiveObject(img);
+      canvas.renderAll();
+      saveState();
+    }, { crossOrigin:'anonymous' });
+  }catch(err){
+    console.error(err);
+    alert('❌ ลบพื้นหลังไม่สำเร็จ: ' + err.message + '\nถ้าติด CORS ให้ตั้งค่า GAS proxy แล้วกรอก GAS_PROXY_URL');
+  }
+}
+document.getElementById('tool-ai').onclick = ()=>{ setActiveTool('tool-ai'); doRemoveBg(); };
+
+/** ===== Download ===== **/
+function downloadImage(){
+  const dataURL = canvas.toDataURL({ format:'png', multiplier:1 });
+  const a = document.createElement('a');
+  a.href = dataURL; a.download = 'edited.png';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+document.getElementById('tool-save').onclick = ()=>{ setActiveTool('tool-save'); downloadImage(); };
+</script>
+</body>
+</html>
