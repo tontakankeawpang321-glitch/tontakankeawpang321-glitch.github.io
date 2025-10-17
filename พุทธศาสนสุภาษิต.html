@@ -1,0 +1,358 @@
+<!DOCTYPE html>  
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>พุทธศาสนสุภาษิต – Dialog UI (White · Montserrat 12px)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Press+Start+2P&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f8fc; --ink:#0f172a; --muted:#4b5563; --line:#e7eaf0; --card:#ffffff;
+    --brand:#195fcb; --accent:#0ea5e9;
+    --radius:12px; --shadow-soft:0 10px 28px rgba(15,23,42,.08); --shadow-soft-2:0 2px 0 rgba(15,23,42,.06);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{ margin:0; background:linear-gradient(180deg,#fbfcff 0%,#f3f6fb 100%); color:var(--ink); font-family:"Sarabun",system-ui; line-height:1.6; }
+  .wrap{max-width:1080px; margin:0 auto; padding:20px;}
+
+  header{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+  .logo{ font-family:"Press Start 2P", monospace; font-size:14px; letter-spacing:1px; color:var(--brand); text-shadow:0 1px 0 #fff; }
+
+  .ghost-btn{ appearance:none; border:1px solid rgba(25,95,203,.35); background:rgba(255,255,255,.7); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); color:var(--ink); padding:10px 14px; font-weight:700; border-radius:12px; box-shadow:var(--shadow-soft-2); cursor:pointer; transition:transform .08s ease, box-shadow .12s ease, border-color .12s; }
+  .ghost-btn:hover{ box-shadow:0 6px 18px rgba(15,23,42,.08); border-color:rgba(25,95,203,.55); }
+  .ghost-btn:active{ transform:translateY(1px); }
+  .ghost-btn--brand{ border-color:rgba(25,95,203,.75); color:#0b4f9a; }
+
+  .chip-bar{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{ padding:8px 12px; background:#fff; border:1px solid var(--line); color:var(--ink); border-radius:999px; cursor:pointer; box-shadow:var(--shadow-soft-2); transition:background .12s, border-color .12s, transform .08s; }
+  .chip:hover{ transform:translateY(-1px); }
+  .chip.is-active{ background:#e8f2ff; border-color:#b7d3fb; color:#0b4f9a; }
+
+  .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+  .spacer{flex:1}
+
+  .search,.select{ background:#fff; color:var(--ink); border:1px solid var(--line); padding:10px 12px; border-radius:12px; box-shadow:var(--shadow-soft-2); }
+  .search{ width:280px; max-width:100%; }
+
+  .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:16px; margin-top:18px;}
+  @media (max-width:900px){ .grid{ grid-template-columns:repeat(8,1fr);} }
+  @media (max-width:640px){ .grid{ grid-template-columns:repeat(6,1fr);} }
+  .card{ grid-column:span 6; background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-soft); padding:16px; transition:transform .08s ease, box-shadow .12s ease; }
+  .card:hover{ transform:translateY(-1px); box-shadow:0 14px 34px rgba(15,23,42,.1); }
+
+  .from-sheet{ font-family:"Montserrat","Sarabun",system-ui; font-size:12px; }
+  .meta{ font-size:12px; color:var(--muted); display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .meta .tag{ background:#f1f5f9; border:1px solid #e2e8f0; padding:4px 8px; border-radius:999px; box-shadow:var(--shadow-soft-2); font-weight:600; }
+  .pali{ margin:6px 0 0; }
+  .trans{ background:#f8fafc; padding:10px; border:1px dashed #dbeafe; margin-top:10px; border-radius:8px; white-space:pre-wrap; }
+
+  dialog{ width:min(860px,96vw); border:1px solid var(--line); border-radius:18px; padding:0; background:#ffffff; color:var(--ink); box-shadow:0 28px 80px rgba(15,23,42,.2); }
+  dialog::backdrop{ background:rgba(0,0,0,.35); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
+  .dlg-head{ padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; }
+  .dlg-head h2{ margin:0; font-family:"Press Start 2P"; font-size:13px; color:#0b4f9a; letter-spacing:.4px; }
+  .dlg-body{ max-height:min(70vh,560px); overflow:auto; padding:16px; }
+  .dlg-foot{ padding:12px 16px; border-top:1px solid var(--line); display:flex; justify-content:flex-end; gap:10px; }
+
+  .subgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  @media (max-width:640px){ .subgrid{ grid-template-columns:repeat(2,1fr);} }
+  .subcat{ padding:10px; border:1px solid var(--line); background:#ffffff; cursor:pointer; text-align:center; border-radius:12px; box-shadow:var(--shadow-soft-2); transition:transform .08s, box-shadow .12s; }
+  .subcat:hover{ transform:translateY(-1px); box-shadow:0 10px 20px rgba(15,23,42,.08); }
+  .subcat.is-active{ outline:2px solid #b7d3fb; }
+
+  body.lock{ overflow:hidden; position:fixed; width:100%; }
+
+  /* เพิ่มปุ่มเพจเล็กน้อย (สไตล์ตามของเดิม) */
+  #pager{display:flex; gap:8px; align-items:center; justify-content:flex-end; margin-top:8px;}
+  #pager .pbtn{border:1px solid var(--line); background:#fff; border-radius:10px; padding:6px 10px; cursor:pointer; box-shadow:var(--shadow-soft-2);}
+  #pager .pbtn[disabled]{opacity:.5; cursor:not-allowed;}
+  #pager .pcounter{font-size:12px; color:var(--muted);}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">พุทธศาสนสุภาษิต</div>
+      <button id="openDlg" class="ghost-btn ghost-btn--brand">เลือกหมวด</button>
+      <div class="spacer"></div>
+      <div class="chip-bar" id="levelChips">
+        <button class="chip is-active" data-level="นักธรรมตรี">นักธรรมตรี</button>
+        <button class="chip" data-level="นักธรรมโท">นักธรรมโท</button>
+        <button class="chip" data-level="นักธรรมเอก">นักธรรมเอก</button>
+      </div>
+    </header>
+
+    <div class="row" style="margin-top:12px;">
+      <input id="q" class="search" placeholder="ค้นหาเรื่อง/คำแปล… (พิมพ์แล้วกด Enter)"/>
+      <select id="sorter" class="select">
+        <option value="no">เรียงตามลำดับ</option>
+        <option value="cat">เรียงตามหมวด</option>
+      </select>
+      <button id="btnRefresh" class="ghost-btn">รีเฟรชรายการ</button>
+    </div>
+
+    <section class="grid" id="list"></section>
+    <!-- แถบเพจใหม่ (เพิ่ม) -->
+    <div id="pager" aria-label="ตัวแบ่งหน้า" hidden>
+      <button id="prevPage" class="pbtn">ก่อนหน้า</button>
+      <span class="pcounter" id="pageInfo"></span>
+      <button id="nextPage" class="pbtn">ถัดไป</button>
+    </div>
+  </div>
+
+  <!-- Dialog เดิม: เลือกหมวด -->
+  <dialog id="dlgCats">
+    <div class="dlg-head">
+      <h2>เลือกหมวด / หมวดย่อย</h2>
+      <button id="closeDlg" class="ghost-btn">ปิด</button>
+    </div>
+    <div class="dlg-body">
+      <div class="row" style="margin-bottom:12px;">
+        <div style="font-weight:700;">ระดับ:</div>
+        <div class="chip-bar" id="dlgLevelChips"></div>
+      </div>
+      <div class="row" style="margin-bottom:6px;"><div style="font-weight:700;">หมวด:</div></div>
+      <div id="cats" class="subgrid"></div>
+      <div class="row" style="margin:16px 0 6px;"><div style="font-weight:700;">หมวดย่อย:</div></div>
+      <div id="subcats" class="subgrid"></div>
+    </div>
+    <div class="dlg-foot">
+      <button class="ghost-btn" id="clearFilter">ล้างตัวกรอง</button>
+      <button class="ghost-btn ghost-btn--brand" id="applyFilter">นำไปใช้</button>
+    </div>
+  </dialog>
+
+  <!-- Dialog ใหม่: คำอธิบายย่อ (เพิ่ม) -->
+  <dialog id="dlgInfo" aria-modal="true">
+    <div class="dlg-head">
+      <h2>คำอธิบายย่อ</h2>
+      <button id="closeInfo" class="ghost-btn">ปิด</button>
+    </div>
+    <div class="dlg-body">
+      <div id="infoContent" class="from-sheet"></div>
+    </div>
+    <div class="dlg-foot">
+      <button id="okInfo" class="ghost-btn ghost-btn--brand">โอเค</button>
+    </div>
+  </dialog>
+
+<!-- 🧠 SCRIPT SECTION – รองรับการเปิดจาก HTML ภายนอก -->
+<script>
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzIGnlkPk4xiH33NnXlH9yWsmsABe06mL-3i7Of9F00EHKp6u6Vn89YNYLekTrgtFpL/exec'; // ⚙️ ของเดิม
+
+// === STATE เดิม + เพจใหม่ ===
+let state = { level: 'นักธรรมตรี', category: '', subcategory: '', q: '', sort: 'no', cats: [], subcats: [] };
+let temp = null;
+let allItems = [];        // เก็บผลรวมทั้งหมดจาก API
+let page = 1;             // หน้าปัจจุบัน
+const pageSize = 5;       // ✅ แสดง 5 รายการ/หน้า
+
+// REFS เดิม
+const listEl = document.getElementById('list');
+const dlg = document.getElementById('dlgCats');
+const dlgLevelChips = document.getElementById('dlgLevelChips');
+const catsEl = document.getElementById('cats');
+const subcatsEl = document.getElementById('subcats');
+const qEl = document.getElementById('q');
+const sorterEl = document.getElementById('sorter');
+
+// REFS ใหม่ (เพจ + info)
+const pagerEl = document.getElementById('pager');
+const prevBtn = document.getElementById('prevPage');
+const nextBtn = document.getElementById('nextPage');
+const pageInfo = document.getElementById('pageInfo');
+const dlgInfo = document.getElementById('dlgInfo');
+const infoContent = document.getElementById('infoContent');
+
+// HELPERS เดิม
+const escapeHtml = s => String(s||'').replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+const pixelTag = t => `<span class="tag from-sheet">${escapeHtml(t)}</span>`;
+
+// === UNIVERSAL API (เดิม) ===
+async function api(action, params = {}) {
+  if (window.google && google.script && google.script.run)
+    return new Promise((ok, err)=>{
+      const run = google.script.run.withSuccessHandler(ok).withFailureHandler(err);
+      if (action==='categories') run.apiCategories(params.level);
+      else if (action==='subcategories') run.apiSubcategories(params.level, params.category||'');
+      else run.apiList(params);
+    });
+
+  try {
+    const url = WEB_APP_URL + '?' + new URLSearchParams({action, ...params}).toString();
+    const res = await fetch(url);
+    return await res.json();
+  } catch {
+    // JSONP fallback
+    return new Promise((resolve, reject)=>{
+      const cb='cb'+Math.random().toString(36).slice(2);
+      window[cb]=(d)=>{resolve(d);cleanup();};
+      const s=document.createElement('script');
+      s.src=WEB_APP_URL+'?action='+action+'&callback='+cb+'&'+new URLSearchParams(params);
+      s.onerror=()=>{reject(new Error('JSONP error'));cleanup();};
+      function cleanup(){delete window[cb];s.remove();}
+      document.body.appendChild(s);
+    });
+  }
+}
+
+// === สร้าง “คำอธิบายย่อ” ออนไลน์ (on-the-fly) โดยสรุปจากข้อมูลที่มี ===
+function buildSummary(item){
+  // ตัดประโยคให้กระชับ และประกอบบริบท
+  const pali = (item.pali||'').trim();
+  const trans = (item.trans||'').trim();
+  const speaker = (item.speaker||'').trim();
+  const source = (item.source||'').trim();
+
+  const transShort = trans.length>180 ? trans.slice(0,180)+'…' : trans;
+  const parts = [];
+  if (pali) parts.push(`หัวข้อ: ${escapeHtml(pali)}`);
+  if (transShort) parts.push(`ใจความ: ${escapeHtml(transShort)}`);
+  const metaBits = [];
+  if (item.category) metaBits.push(`หมวด: ${escapeHtml(item.category)}`);
+  if (item.subcategory) metaBits.push(`ย่อย: ${escapeHtml(item.subcategory)}`);
+  if (speaker) metaBits.push(`ผู้กล่าว: ${escapeHtml(speaker)}`);
+  if (source) metaBits.push(`ที่มา: ${escapeHtml(source)}`);
+  if (metaBits.length) parts.push(metaBits.join(' · '));
+
+  return `<div class="meta" style="margin-bottom:8px;">${pixelTag('ลำดับ '+escapeHtml(item.no||''))}</div>
+          <div class="from-sheet" style="white-space:pre-wrap;">${parts.join('\n')}</div>`;
+}
+
+// === RENDER (เพิ่ม data-idx เพื่อเปิด dialog) ===
+function cardTemplate(it, idx){
+  return `<article class="card" data-idx="${idx}" role="button" tabindex="0" title="คลิกเพื่อดูคำอธิบายย่อ">
+    <div class="meta from-sheet">${pixelTag('ลำดับ '+escapeHtml(it.no))}${pixelTag('หมวด '+escapeHtml(it.category))}${it.subcategory?pixelTag('ย่อย '+escapeHtml(it.subcategory)):''}</div>
+    <div class="pali from-sheet">${escapeHtml(it.pali)}</div>
+    ${it.trans?`<div class="trans from-sheet">${escapeHtml(it.trans)}</div>`:''}
+    ${(it.speaker||it.source)?`<div class="meta from-sheet" style="margin-top:8px;">${it.speaker?pixelTag('ผู้กล่าว '+escapeHtml(it.speaker)):''}${it.source?pixelTag('ที่มา '+escapeHtml(it.source)):''}</div>`:''}
+  </article>`;
+}
+
+// แสดงเฉพาะ 5 รายการ/หน้า
+function renderPage(){
+  const total = allItems.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  if (page > totalPages) page = totalPages;
+  const start = (page - 1) * pageSize;
+  const end = Math.min(start + pageSize, total);
+  const view = allItems.slice(start, end);
+
+  listEl.innerHTML = view.map((it, i)=> cardTemplate(it, start + i)).join('');
+  pagerEl.hidden = total <= pageSize;
+  pageInfo.textContent = `หน้า ${page} / ${totalPages}`;
+  prevBtn.disabled = page <= 1;
+  nextBtn.disabled = page >= totalPages;
+}
+
+// === โหลดข้อมูลแล้วค่อยตัดหน้า ===
+async function refreshList(){
+  listEl.innerHTML = '<div class="card from-sheet">กำลังโหลด…</div>';
+  try{
+    const d = await api('list', state);
+    allItems = (d && d.items) || [];
+    if (!allItems.length){
+      listEl.innerHTML = '<div class="card from-sheet">ไม่พบข้อมูล</div>';
+      pagerEl.hidden = true;
+      return;
+    }
+    page = 1;       // รีเซ็ตกลับหน้าแรกทุกครั้งที่โหลดใหม่
+    renderPage();
+  }catch(e){
+    listEl.innerHTML = `<div class="card from-sheet" style="background:#fff1f2;border-color:#fca5a5;">เกิดข้อผิดพลาด: ${escapeHtml(e.message)}</div>`;
+    pagerEl.hidden = true;
+  }
+}
+
+// === โหลดหมวด/หมวดย่อย (เดิม) ===
+async function loadCats(){ const d = await api('categories',{level:temp.level}); temp.cats = d.categories || []; renderCats(); }
+async function loadSubcats(){ const d = await api('subcategories',{level:temp.level,category:temp.category}); temp.subcats = d.subcategories || []; renderSubcats(); }
+
+function renderLevelChips(){
+  const lv=['นักธรรมตรี','นักธรรมโท','นักธรรมเอก'];
+  document.getElementById('levelChips').innerHTML=lv.map(l=>`<button class="chip ${l===state.level?'is-active':''}" data-level="${l}">${l}</button>`).join('');
+}
+function renderDlgLevelChips(){
+  const lv=['นักธรรมตรี','นักธรรมโท','นักธรรมเอก'];
+  dlgLevelChips.innerHTML=lv.map(l=>`<button class="chip ${l===(temp?.level||state.level)?'is-active':''}" data-dlg-level="${l}">${l}</button>`).join('');
+}
+function renderCats(){ catsEl.innerHTML=(temp?.cats||[]).map(c=>`<div class="subcat ${c===temp.category?'is-active':''}" data-cat="${c}">${escapeHtml(c)}</div>`).join(''); }
+function renderSubcats(){
+  const sc=temp?.subcats||[];
+  subcatsEl.innerHTML=sc.length?sc.map(s=>`<div class="subcat ${s===temp.subcategory?'is-active':''}" data-subcat="${s}">${escapeHtml(s)}</div>`).join('')
+    :'<div class="subcat" style="opacity:.6">(ไม่มีหมวดย่อย)</div>';
+}
+
+// === เปิด/ปิด dialog เลือกหมวด (เดิม) ===
+document.getElementById('openDlg').onclick=async()=>{
+  temp=JSON.parse(JSON.stringify(state));
+  renderDlgLevelChips();await loadCats();await loadSubcats();
+  dlg.showModal();document.body.classList.add('lock');
+};
+document.getElementById('closeDlg').onclick=()=>{dlg.close();document.body.classList.remove('lock');};
+document.getElementById('applyFilter').onclick=()=>{state=JSON.parse(JSON.stringify(temp));dlg.close();renderLevelChips();refreshList();};
+document.getElementById('clearFilter').onclick=()=>{temp.category='';temp.subcategory='';renderCats();renderSubcats();};
+
+// === อีเวนต์คลิกการ์ด → เปิด dialog คำอธิบายย่อ (ใหม่) ===
+document.addEventListener('click', ev=>{
+  // level chips (เดิม)
+  const l=ev.target.closest('.chip[data-level]'); 
+  if(l){ state.level=l.dataset.level; renderLevelChips(); refreshList(); return; }
+
+  const dchip=ev.target.closest('.chip[data-dlg-level]');
+  if(dchip){ temp.level=dchip.dataset.dlgLevel; renderDlgLevelChips(); loadCats().then(loadSubcats); return; }
+
+  const c=ev.target.closest('.subcat[data-cat]'); 
+  if(c){ temp.category=c.dataset.cat; loadSubcats(); renderCats(); return; }
+
+  const s=ev.target.closest('.subcat[data-subcat]'); 
+  if(s){ temp.subcategory=s.dataset.subcat; renderSubcats(); return; }
+
+  // เปิดสรุป
+  const card = ev.target.closest('.card[data-idx]');
+  if (card){
+    const idx = Number(card.dataset.idx);
+    const item = allItems[idx];
+    infoContent.innerHTML = buildSummary(item);
+    dlgInfo.showModal();
+    document.body.classList.add('lock');
+  }
+});
+
+// ปิด dialog สรุป
+document.getElementById('closeInfo').onclick = ()=>{
+  dlgInfo.close();
+  document.body.classList.remove('lock');
+};
+document.getElementById('okInfo').onclick = ()=>{
+  dlgInfo.close();
+  document.body.classList.remove('lock');
+};
+
+// รีเฟรช/ค้นหา/เรียง (เดิม) + รีเซ็ตหน้าแรก
+document.getElementById('btnRefresh').onclick=refreshList;
+qEl.onkeydown=e=>{ if(e.key==='Enter'){ state.q=qEl.value.trim(); refreshList(); } };
+sorterEl.onchange=()=>{ state.sort=sorterEl.value; refreshList(); };
+
+// เพจ (ใหม่)
+prevBtn.onclick = ()=>{ if(page>1){ page--; renderPage(); } };
+nextBtn.onclick = ()=>{ const totalPages = Math.max(1, Math.ceil(allItems.length/pageSize)); if(page<totalPages){ page++; renderPage(); } };
+
+// ESC ปิด dialog เลือกหมวด (เดิม)
+window.addEventListener('keydown', (e)=>{ 
+  if (e.key==='Escape' && dlg.open){ dlg.close(); document.body.classList.remove('lock'); } 
+  if (e.key==='Escape' && dlgInfo.open){ dlgInfo.close(); document.body.classList.remove('lock'); }
+});
+
+// === Init (เดิม) ===
+renderLevelChips();
+refreshList();
+</script>
+<a    class="dlg-head"  href="https://sites.google.com/view/privacy-policy-pdpa-crow-studi/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81" target="_blank"> <div class="title">นโยบายส่วนตัว Privacy policy
+</div>  </a>
+    </div>
+</div>
+</body>
+</html>
