@@ -111,202 +111,246 @@
   </dialog>
 
 <script>
-// ✨ 1. ตั้งค่าไฟล์ JSON ที่จะโหลด (เหมือนเดิม)
+// === CONFIG ===
 const DATA_FILES = {
   'นักธรรมตรี': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_tri.json',
   'นักธรรมโท': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_to.json',
   'นักธรรมเอก': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_ek.json'
 };
-let ALL_DATA = {}; 
 
-// === STATE, REFS, HELPERS (เหมือนเดิม) ===
-let state = { level: 'นักธรรมตรี', category: '', subcategory: '', q: '', sort: 'no' };
-let temp = null;
+// === STATE & REFS ===
+let ALL_DATA = {};
+let state = { level:'นักธรรมตรี', category:'', subcategory:'', q:'', sort:'no' };
 let currentLevelData = [];
 let filteredItems = [];
 let page = 1;
 const pageSize = 5;
-const listEl = document.getElementById('list');
-const dlg = document.getElementById('dlgCats');
-const dlgLevelChips = document.getElementById('dlgLevelChips');
-const catsEl = document.getElementById('cats');
-const subcatsEl = document.getElementById('subcats');
-const qEl = document.getElementById('q');
-const sorterEl = document.getElementById('sorter');
-const pagerEl = document.getElementById('pager');
-const prevBtn = document.getElementById('prevPage');
-const nextBtn = document.getElementById('nextPage');
-const pageInfo = document.getElementById('pageInfo');
-const dlgInfo = document.getElementById('dlgInfo');
-const infoContent = document.getElementById('infoContent');
-const escapeHtml = s => String(s||'').replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
-const pixelTag = t => `<span class="tag from-sheet">${escapeHtml(t)}</span>`;
 
-// === ฟังก์ชันโหลดข้อมูล (เหมือนเดิม) ===
-async function loadAllDataFromFiles() {
-  if (Object.keys(ALL_DATA).length > 0) return;
-  listEl.innerHTML = '<div class="card from-sheet">กำลังโหลดข้อมูล...</div>';
-  try {
-    const fetchPromises = Object.entries(DATA_FILES).map(([level, file]) => 
-      fetch(file).then(response => {
-        if (!response.ok) throw new Error(`ไม่สามารถโหลดไฟล์ ${file}`);
-        return response.json();
-      }).then(data => [level, data])
-    );
-    const allResults = await Promise.all(fetchPromises);
-    ALL_DATA = Object.fromEntries(allResults);
-    console.log("โหลดข้อมูลทั้งหมดสำเร็จ:", ALL_DATA);
-  } catch (error) {
-    console.error("เกิดข้อผิดพลาดในการโหลดไฟล์ JSON:", error);
-    listEl.innerHTML = `<div class="card from-sheet" style="background:#fff1f2;border-color:#fca5a5;">เกิดข้อผิดพลาด: ${escapeHtml(error.message)}</div>`;
-    throw error;
+const listEl   = document.getElementById('list');
+const qEl      = document.getElementById('q');
+const sorterEl = document.getElementById('sorter');
+const pagerEl  = document.getElementById('pager');
+const prevBtn  = document.getElementById('prevPage');
+const nextBtn  = document.getElementById('nextPage');
+const pageInfo = document.getElementById('pageInfo');
+const dlg      = document.getElementById('dlgCats');
+const dlgInfo  = document.getElementById('dlgInfo');
+const infoContent = document.getElementById('infoContent');
+const dlgLevelChips = document.getElementById('dlgLevelChips');
+const catsEl   = document.getElementById('cats');
+const subcatsEl= document.getElementById('subcats');
+
+// === UTILS ===
+const escapeHtml = s => String(s ?? '').replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+const pixelTag   = t => `<span class="tag from-sheet">${escapeHtml(t)}</span>`;
+
+// 🔧 ป้องกันคีย์ภาษาไทยที่มี BOM/ช่องว่าง/สระลอย ฯลฯ
+const NKMAP = {
+  'ลำดับ':'ลำดับ', 'หมวด':'หมวด', 'เรื่อง':'เรื่อง', 'คำแปล':'คำแปล', 'ที่มา':'ที่มา'
+};
+function normalizeKeys(obj){
+  const out = {};
+  for(const k in obj){
+    // ตัดช่องว่าง, ลบ BOM และอักขระควบคุม
+    const clean = k.replace(/^\uFEFF|\s+$/g,'');
+    const mapped = NKMAP[clean] ?? clean;
+    out[mapped] = obj[k];
+  }
+  // บังคับชนิดข้อมูลเป็นสตริงสำหรับคีย์ที่ต้องแสดงผล
+  out['ลำดับ'] = out['ลำดับ'] != null ? String(out['ลำดับ']) : '';
+  out['หมวด']  = out['หมวด']  != null ? String(out['หมวด'])  : '';
+  out['เรื่อง'] = out['เรื่อง'] != null ? String(out['เรื่อง']) : '';
+  out['คำแปล'] = out['คำแปล'] != null ? String(out['คำแปล']) : '';
+  return out;
+}
+
+// === LOADERS ===
+async function loadAllDataFromFiles(){
+  if (Object.keys(ALL_DATA).length) return;
+  listEl.innerHTML = '<div class="card from-sheet">กำลังโหลดข้อมูล…</div>';
+  const entries = Object.entries(DATA_FILES);
+  try{
+    const results = await Promise.all(entries.map(async ([level, url])=>{
+      const res = await fetch(url, {cache:'no-store'}); // กัน CDN ค้าง
+      if(!res.ok) throw new Error(`โหลดไม่ได้: ${url} (HTTP ${res.status})`);
+      const raw = await res.json();
+      // รองรับทั้งแบบ Array ตรงๆ และแบบ {data:[...]}
+      const arr = Array.isArray(raw) ? raw : (Array.isArray(raw?.data) ? raw.data : []);
+      if(!Array.isArray(arr)) throw new Error(`รูปแบบ JSON ของ ${level} ไม่ใช่อาร์เรย์`);
+      const norm = arr.map(normalizeKeys);
+      return [level, norm];
+    }));
+    ALL_DATA = Object.fromEntries(results);
+  }catch(err){
+    console.error(err);
+    listEl.innerHTML = `<div class="card from-sheet" style="background:#fff1f2;border-color:#fca5a5;">เกิดข้อผิดพลาด: ${escapeHtml(err.message)}</div>`;
+    throw err;
   }
 }
 
-// ✨ 2. ปรับปรุงฟังก์ชันให้ใช้ KEY ภาษาไทย
+// === RENDERERS ===
 function buildSummary(item){
-  constเรื่อง = (item['เรื่อง']||'').trim();
-  const คำแปล = (item['คำแปล']||'').trim();
+  const เรื่อง  = (item['เรื่อง']||'').trim();
+  const คำแปล  = (item['คำแปล']||'').trim();
   const transShort = คำแปล.length > 180 ? คำแปล.slice(0,180)+'…' : คำแปล;
   const parts = [];
-  if (เรื่อง) parts.push(`หัวข้อ: ${escapeHtml(เรื่อง)}`);
+  if (เรื่อง)    parts.push(`หัวข้อ: ${escapeHtml(เรื่อง)}`);
   if (transShort) parts.push(`ใจความ: ${escapeHtml(transShort)}`);
-  const metaBits = [];
-  if (item['หมวด']) metaBits.push(`หมวด: ${escapeHtml(item['หมวด'])}`);
-  
-  // หมายเหตุ: โค้ดนี้ไม่ได้ใช้ subcategory, speaker, source แล้วตามโครงสร้างใหม่
-  // หากต้องการเพิ่ม ให้ใส่ข้อมูลใน JSON แล้วแก้โค้ดตรงนี้
-  
-  if (metaBits.length) parts.push(metaBits.join(' · '));
-
+  const meta = [];
+  if (item['หมวด']) meta.push(`หมวด: ${escapeHtml(item['หมวด'])}`);
+  if (meta.length)  parts.push(meta.join(' · '));
   return `<div class="meta" style="margin-bottom:8px;">${pixelTag('ลำดับ '+escapeHtml(item['ลำดับ']||''))}</div>
           <div class="from-sheet" style="white-space:pre-wrap;">${parts.join('\n')}</div>`;
 }
 
-// ✨ 3. ปรับปรุง Template การ์ดให้ใช้ KEY ภาษาไทย
 function cardTemplate(it, idx){
   return `<article class="card" data-idx="${idx}" role="button" tabindex="0" title="คลิกเพื่อดูคำอธิบายย่อ">
-    <div class="meta from-sheet">${pixelTag('ลำดับ '+escapeHtml(it['ลำดับ']))}${pixelTag('หมวด '+escapeHtml(it['หมวด']))}</div>
-    <div class="pali from-sheet">${escapeHtml(it['เรื่อง'])}</div>
-    <div class="trans from-sheet">${escapeHtml(it['คำแปล'])}</div>
+    <div class="meta from-sheet">
+      ${pixelTag('ลำดับ '+escapeHtml(it['ลำดับ']||''))}
+      ${pixelTag('หมวด '+escapeHtml(it['หมวด']||''))}
+    </div>
+    <div class="pali from-sheet">${escapeHtml(it['เรื่อง']||'')}</div>
+    <div class="trans from-sheet">${escapeHtml(it['คำแปล']||'')}</div>
   </article>`;
 }
 
-// === ส่วนของโค้ดที่เหลือ (ปรับปรุงเล็กน้อย) ===
 function renderPage(){
   const total = filteredItems.length;
-  if (total === 0) { listEl.innerHTML = '<div class="card from-sheet">ไม่พบข้อมูลที่ตรงกับเงื่อนไข</div>'; pagerEl.hidden = true; return; }
+  if (!total){
+    listEl.innerHTML = '<div class="card from-sheet">ไม่พบข้อมูลที่ตรงกับเงื่อนไข</div>';
+    pagerEl.hidden = true; return;
+  }
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
   if (page > totalPages) page = totalPages;
+  const start = (page-1)*pageSize, end = Math.min(start+pageSize, total);
 
-  const start = (page - 1) * pageSize;
-  const end = Math.min(start + pageSize, total);
-  
-  const fragment = document.createDocumentFragment();
-  for(let i = start; i < end; i++) {
-    const item = filteredItems[i];
-    const originalIndex = currentLevelData.indexOf(item);
-    const cardEl = document.createElement('div');
-    cardEl.innerHTML = cardTemplate(item, originalIndex);
-    fragment.appendChild(cardEl.firstChild);
+  const frag = document.createDocumentFragment();
+  for(let i=start; i<end; i++){
+    const it = filteredItems[i];
+    const idx = currentLevelData.indexOf(it);
+    const wrap = document.createElement('div');
+    wrap.innerHTML = cardTemplate(it, idx);
+    frag.appendChild(wrap.firstChild);
   }
-  
   listEl.innerHTML = '';
-  listEl.appendChild(fragment);
-  
+  listEl.appendChild(frag);
+
   pagerEl.hidden = total <= pageSize;
   pageInfo.textContent = `หน้า ${page} / ${totalPages}`;
   prevBtn.disabled = page <= 1;
   nextBtn.disabled = page >= totalPages;
 }
 
-// ✨ 4. ปรับปรุงฟังก์ชัน filter และ sort ให้ใช้ KEY ภาษาไทย
 function refreshList(){
-  listEl.innerHTML = '<div class="card from-sheet">กำลังประมวลผล…</div>';
-  pagerEl.hidden = true;
-  
-  currentLevelData = ALL_DATA[state.level] || [];
-  
-  filteredItems = currentLevelData.filter(item => {
-    const categoryMatch = !state.category || item['หมวด'] === state.category;
-    // หมายเหตุ: ไม่มีการกรอง subcategory แล้ว
-    const queryMatch = !state.q || 
-      (item['เรื่อง'] && item['เรื่อง'].toLowerCase().includes(state.q.toLowerCase())) ||
-      (item['คำแปล'] && item['คำแปล'].toLowerCase().includes(state.q.toLowerCase()));
-    return categoryMatch && queryMatch;
-  });
+  try{
+    listEl.innerHTML = '<div class="card from-sheet">กำลังประมวลผล…</div>';
+    pagerEl.hidden = true;
 
-  if (state.sort === 'cat') {
-    filteredItems.sort((a, b) => a['หมวด'].localeCompare(b['หมวด'], 'th') || Number(a['ลำดับ']) - Number(b['ลำดับ']));
-  } else {
-    filteredItems.sort((a, b) => Number(a['ลำดับ']) - Number(b['ลำดับ']));
+    currentLevelData = ALL_DATA[state.level] || [];
+
+    const q = (state.q||'').toLowerCase();
+    filteredItems = currentLevelData.filter(item=>{
+      const catOK = !state.category || item['หมวด'] === state.category;
+      const qOK = !q ||
+        (item['เรื่อง'] && item['เรื่อง'].toLowerCase().includes(q)) ||
+        (item['คำแปล'] && item['คำแปล'].toLowerCase().includes(q));
+      return catOK && qOK;
+    });
+
+    if (state.sort === 'cat'){
+      filteredItems.sort((a,b)=>
+        (a['หมวด']||'').localeCompare(b['หมวด']||'', 'th') ||
+        (parseInt(a['ลำดับ'])||0) - (parseInt(b['ลำดับ'])||0)
+      );
+    }else{
+      filteredItems.sort((a,b)=>
+        (parseInt(a['ลำดับ'])||0) - (parseInt(b['ลำดับ'])||0)
+      );
+    }
+
+    page = 1;
+    renderPage();
+  }catch(err){
+    console.error(err);
+    listEl.innerHTML = `<div class="card from-sheet" style="background:#fff1f2;border-color:#fca5a5;">ประมวลผลล้มเหลว: ${escapeHtml(err.message)}</div>`;
   }
-  
-  page = 1;
-  renderPage();
 }
 
-// ✨ 5. ปรับปรุงฟังก์ชันดึงหมวดหมู่
-function getUniqueValues(data, key) {
-    const values = data.map(item => item[key]).filter(Boolean);
-    return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b, 'th'));
+// === DIALOGS / FILTER UI (ย่อส่วนที่ไม่เกี่ยวกับ JSON) ===
+function getUniqueValues(data, key){
+  const values = data.map(x=>x[key]).filter(Boolean);
+  return Array.from(new Set(values)).sort((a,b)=>String(a).localeCompare(String(b),'th'));
+}
+let temp = null;
+function renderLevelChips(){
+  const lv = ['นักธรรมตรี','นักธรรมโท','นักธรรมเอก'];
+  document.getElementById('levelChips').innerHTML =
+    lv.map(l=>`<button class="chip ${l===state.level?'is-active':''}" data-level="${l}">${l}</button>`).join('');
+}
+function renderDlgLevelChips(){
+  const lv = ['นักธรรมตรี','นักธรรมโท','นักธรรมเอก'];
+  dlgLevelChips.innerHTML =
+    lv.map(l=>`<button class="chip ${l===(temp?.level||state.level)?'is-active':''}" data-dlg-level="${l}">${l}</button>`).join('');
+}
+function renderCats(){
+  catsEl.innerHTML = (temp?.cats||[]).map(c=>`<div class="subcat ${c===temp.category?'is-active':''}" data-cat="${c}">${escapeHtml(c)}</div>`).join('');
+}
+function renderSubcats(){ subcatsEl.innerHTML = ''; }
+function loadCats(){
+  temp.cats = getUniqueValues(ALL_DATA[temp.level]||[], 'หมวด');
+  temp.subcats = [];
+  renderCats(); renderSubcats();
 }
 
-function loadCats() {
-    temp.cats = getUniqueValues(ALL_DATA[temp.level], 'หมวด');
-    // ไม่มี subcats แล้ว
-    temp.subcats = []; 
-    renderCats();
-    renderSubcats(); 
-}
+// === EVENTS ===
+document.getElementById('openDlg').onclick = ()=>{ temp = JSON.parse(JSON.stringify(state)); renderDlgLevelChips(); loadCats(); dlg.showModal(); document.body.classList.add('lock'); };
+document.getElementById('closeDlg').onclick= ()=>{ dlg.close(); document.body.classList.remove('lock'); };
+document.getElementById('applyFilter').onclick= ()=>{ state = JSON.parse(JSON.stringify(temp)); dlg.close(); renderLevelChips(); refreshList(); };
+document.getElementById('clearFilter').onclick= ()=>{ temp.category=''; temp.subcategory=''; renderCats(); renderSubcats(); };
 
-// === Event Listeners และ Init (มีการปรับปรุง) ===
-function renderLevelChips(){ const lv=['นักธรรมตรี','นักธรรมโท','นักธรรมเอก']; document.getElementById('levelChips').innerHTML=lv.map(l=>`<button class="chip ${l===state.level?'is-active':''}" data-level="${l}">${l}</button>`).join(''); }
-function renderDlgLevelChips(){ const lv=['นักธรรมตรี','นักธรรมโท','นักธรรมเอก']; dlgLevelChips.innerHTML=lv.map(l=>`<button class="chip ${l===(temp?.level||state.level)?'is-active':''}" data-dlg-level="${l}">${l}</button>`).join(''); }
-function renderCats(){ catsEl.innerHTML=(temp?.cats||[]).map(c=>`<div class="subcat ${c===temp.category?'is-active':''}" data-cat="${c}">${escapeHtml(c)}</div>`).join(''); }
-// ทำให้ส่วน subcat หายไปเพราะไม่มีข้อมูล
-function renderSubcats(){ subcatsEl.innerHTML = ''; } 
+document.addEventListener('click', (ev)=>{
+  const l = ev.target.closest('.chip[data-level]');
+  if(l){ state.level=l.dataset.level; state.category=''; state.subcategory=''; renderLevelChips(); refreshList(); return; }
 
-document.getElementById('openDlg').onclick=()=>{ temp=JSON.parse(JSON.stringify(state)); renderDlgLevelChips(); loadCats(); dlg.showModal(); document.body.classList.add('lock'); };
-document.getElementById('closeDlg').onclick=()=>{dlg.close();document.body.classList.remove('lock');};
-document.getElementById('applyFilter').onclick=()=>{state=JSON.parse(JSON.stringify(temp));dlg.close();renderLevelChips();refreshList();};
-document.getElementById('clearFilter').onclick=()=>{temp.category=''; temp.subcategory=''; renderCats(); renderSubcats();};
-document.addEventListener('click', ev=>{
-  const l=ev.target.closest('.chip[data-level]'); if(l){ state.level=l.dataset.level; state.category = ''; state.subcategory = ''; renderLevelChips(); refreshList(); return; }
-  const dchip=ev.target.closest('.chip[data-dlg-level]'); if(dchip){ if (temp.level !== dchip.dataset.dlgLevel) { temp.level=dchip.dataset.dlgLevel; temp.category=''; temp.subcategory=''; renderDlgLevelChips(); loadCats(); } return; }
-  const c=ev.target.closest('.subcat[data-cat]'); if(c){ temp.category=c.dataset.cat; renderCats(); return; }
-  // ไม่มี subcat แล้ว
+  const dchip = ev.target.closest('.chip[data-dlg-level]');
+  if(dchip){ if(temp.level !== dchip.dataset.dlgLevel){ temp.level=dchip.dataset.dlgLevel; temp.category=''; temp.subcategory=''; renderDlgLevelChips(); loadCats(); } return; }
+
+  const c = ev.target.closest('.subcat[data-cat]');
+  if(c){ temp.category=c.dataset.cat; renderCats(); return; }
+
   const card = ev.target.closest('.card[data-idx]');
-  if (card){
+  if(card){
     const idx = Number(card.dataset.idx);
-    if (currentLevelData[idx]) { infoContent.innerHTML = buildSummary(currentLevelData[idx]); dlgInfo.showModal(); document.body.classList.add('lock'); }
+    if(currentLevelData[idx]){ infoContent.innerHTML = buildSummary(currentLevelData[idx]); dlgInfo.showModal(); document.body.classList.add('lock'); }
   }
 });
-document.getElementById('closeInfo').onclick = ()=>{ dlgInfo.close(); document.body.classList.remove('lock'); };
-document.getElementById('okInfo').onclick = ()=>{ dlgInfo.close(); document.body.classList.remove('lock'); };
-document.getElementById('btnRefresh').onclick=() => { ALL_DATA = {}; init(); };
-qEl.onkeydown=e=>{ if(e.key==='Enter'){ state.q=qEl.value.trim(); refreshList(); } };
-sorterEl.onchange=()=>{ state.sort=sorterEl.value; refreshList(); };
-prevBtn.onclick = ()=>{ if(page>1){ page--; renderPage(); window.scrollTo(0, 0); } };
-nextBtn.onclick = ()=>{ const totalPages = Math.max(1, Math.ceil(filteredItems.length/pageSize)); if(page<totalPages){ page++; renderPage(); window.scrollTo(0, 0); } };
-window.addEventListener('keydown', (e)=>{ if (e.key==='Escape' && dlg.open){ dlg.close(); document.body.classList.remove('lock'); } if (e.key==='Escape' && dlgInfo.open){ dlgInfo.close(); document.body.classList.remove('lock'); } });
 
-async function init() {
+document.getElementById('closeInfo').onclick = ()=>{ dlgInfo.close(); document.body.classList.remove('lock'); };
+document.getElementById('okInfo').onclick    = ()=>{ dlgInfo.close(); document.body.classList.remove('lock'); };
+
+document.getElementById('btnRefresh').onclick = ()=>{ ALL_DATA = {}; init(); };
+qEl.onkeydown = (e)=>{ if(e.key==='Enter'){ state.q = qEl.value.trim(); refreshList(); } };
+sorterEl.onchange = ()=>{ state.sort = sorterEl.value; refreshList(); };
+prevBtn.onclick = ()=>{ if(page>1){ page--; renderPage(); window.scrollTo(0,0); } };
+nextBtn.onclick = ()=>{ const totalPages = Math.max(1, Math.ceil(filteredItems.length/pageSize)); if(page<totalPages){ page++; renderPage(); window.scrollTo(0,0); } };
+window.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && dlg.open){ dlg.close(); document.body.classList.remove('lock'); } if(e.key==='Escape' && dlgInfo.open){ dlgInfo.close(); document.body.classList.remove('lock'); } });
+
+// === INIT ===
+async function init(){
   renderLevelChips();
-  try {
+  try{
     await loadAllDataFromFiles();
     refreshList();
-  } catch (error) { /* error handled in loadAllDataFromFiles */ }
+  }catch(e){ /* แสดงแล้วในหน้าจอ */ }
 }
-
 init();
 </script>
-
 <a class="dlg-head" href="https://sites.google.com/view/privacy-policy-pdpa-crow-studi/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%B8%E0%B8%A3%E0%B8%81" target="_blank" style="display: block; text-align: center; padding: 10px; text-decoration: none;">
   <div class="title">นโยบายส่วนตัว Privacy policy</div>
 </a>
 </body>
 </html>
+
 
 
 
