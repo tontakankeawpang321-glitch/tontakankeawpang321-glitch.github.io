@@ -21,7 +21,7 @@
     color:var(--ink); 
     font-family:"Sarabun",system-ui; 
     line-height:1.6; 
-    font-size: 14px; /* [ปรับปรุง] ตั้งค่าขนาดตัวอักษรหลัก */
+    font-size: 14px;
   }
   .wrap{max-width:1080px; margin:0 auto; padding:20px;}
   header{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
@@ -38,11 +38,11 @@
   .spacer{flex:1}
   .search,.select{ background:#fff; color:var(--ink); border:1px solid var(--line); padding:10px 12px; border-radius:12px; box-shadow:var(--shadow-soft-2); }
   .search{ width:280px; max-width:100%; }
-  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px; margin-top:18px;} /* [ปรับปรุง] แก้ไข minmax เพื่อรองรับจอมือถือ */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px; margin-top:18px;}
   .card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-soft); padding:16px; transition:transform .08s ease, box-shadow .12s ease; cursor: pointer; }
   .card:hover{ transform:translateY(-1px); box-shadow:0 14px 34px rgba(15,23,42,.1); }
-  .from-sheet{ font-family:"Montserrat","Sarabun",system-ui; } /* [ปรับปรุง] ลบ font-size:12px เพื่อให้รับค่าจาก body */
-  .meta{ color:var(--muted); display:flex; gap:10px; flex-wrap:wrap; align-items:center; } /* [ปรับปรุง] ลบ font-size:12px */
+  .from-sheet{ font-family:"Montserrat","Sarabun",system-ui; }
+  .meta{ color:var(--muted); display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
   .meta .tag{ background:#f1f5f9; border:1px solid #e2e8f0; padding:4px 8px; border-radius:999px; box-shadow:var(--shadow-soft-2); font-weight:600; }
   .pali{ margin:6px 0 0; }
   .trans{ background:#f8fafc; padding:10px; border:1px dashed #dbeafe; margin-top:10px; border-radius:8px; white-space:pre-wrap; }
@@ -61,7 +61,7 @@
   #pager{display:flex; gap:8px; align-items:center; justify-content:flex-end; margin-top:8px;}
   #pager .pbtn{border:1px solid var(--line); background:#fff; border-radius:10px; padding:6px 10px; cursor:pointer; box-shadow:var(--shadow-soft-2);}
   #pager .pbtn[disabled]{opacity:.5; cursor:not-allowed;}
-  #pager .pcounter{color:var(--muted);} /* [ปรับปรุง] ลบ font-size:12px */
+  #pager .pcounter{color:var(--muted);}
 </style>
 </head>
 <body>
@@ -74,12 +74,12 @@
     </header>
 
     <div class="row" style="margin-top:12px;">
-      <input id="q" class="search" placeholder="ค้นหาเรื่อง/คำแปล… (พิมพ์แล้วกด Enter)"/>
+      <input id="q" class="search" placeholder="ค้นหาเรื่อง/คำแปล…"/>
       <select id="sorter" class="select">
         <option value="no">เรียงตามลำดับ</option>
         <option value="cat">เรียงตามหมวด</option>
       </select>
-      <button id="btnRefresh" class="ghost-btn" title="โหลดข้อมูลใหม่">รีเฟรช</button>
+      <button id="btnSearch" class="ghost-btn" title="ค้นหา">ค้นหา</button>
     </div>
 
     <section class="grid" id="list"></section>
@@ -151,19 +151,16 @@ const subcatsEl= document.getElementById('subcats');
 const escapeHtml = s => String(s ?? '').replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 const pixelTag   = t => `<span class="tag from-sheet">${escapeHtml(t)}</span>`;
 
-// 🔧 ป้องกันคีย์ภาษาไทยที่มี BOM/ช่องว่าง/สระลอย ฯลฯ
 const NKMAP = {
   'ลำดับ':'ลำดับ', 'หมวด':'หมวด', 'เรื่อง':'เรื่อง', 'คำแปล':'คำแปล', 'ที่มา':'ที่มา'
 };
 function normalizeKeys(obj){
   const out = {};
   for(const k in obj){
-    // ตัดช่องว่าง, ลบ BOM และอักขระควบคุม
     const clean = k.replace(/^\uFEFF|\s+$/g,'');
     const mapped = NKMAP[clean] ?? clean;
     out[mapped] = obj[k];
   }
-  // บังคับชนิดข้อมูลเป็นสตริงสำหรับคีย์ที่ต้องแสดงผล
   out['ลำดับ'] = out['ลำดับ'] != null ? String(out['ลำดับ']) : '';
   out['หมวด']  = out['หมวด']  != null ? String(out['หมวด'])  : '';
   out['เรื่อง'] = out['เรื่อง'] != null ? String(out['เรื่อง']) : '';
@@ -178,10 +175,9 @@ async function loadAllDataFromFiles(){
   const entries = Object.entries(DATA_FILES);
   try{
     const results = await Promise.all(entries.map(async ([level, url])=>{
-      const res = await fetch(url, {cache:'no-store'}); // กัน CDN ค้าง
+      const res = await fetch(url, {cache:'no-store'});
       if(!res.ok) throw new Error(`โหลดไม่ได้: ${url} (HTTP ${res.status})`);
       const raw = await res.json();
-      // รองรับทั้งแบบ Array ตรงๆ และแบบ {data:[...]}
       const arr = Array.isArray(raw) ? raw : (Array.isArray(raw?.data) ? raw.data : []);
       if(!Array.isArray(arr)) throw new Error(`รูปแบบ JSON ของ ${level} ไม่ใช่อาร์เรย์`);
       const norm = arr.map(normalizeKeys);
@@ -196,7 +192,6 @@ async function loadAllDataFromFiles(){
 }
 
 // === RENDERERS ===
-// [ปรับปรุง] แก้ไขฟังก์ชันนี้ให้แสดงข้อมูลฉบับเต็มใน Dialog
 function buildFullDetail(item){
   const เรื่อง = (item['เรื่อง'] || '').trim();
   const คำแปล = (item['คำแปล'] || '').trim();
@@ -285,7 +280,7 @@ function refreshList(){
   }
 }
 
-// === DIALOGS / FILTER UI (ย่อส่วนที่ไม่เกี่ยวกับ JSON) ===
+// === DIALOGS / FILTER UI ===
 function getUniqueValues(data, key){
   const values = data.map(x=>x[key]).filter(Boolean);
   return Array.from(new Set(values)).sort((a,b)=>String(a).localeCompare(String(b),'th'));
@@ -331,7 +326,7 @@ document.addEventListener('click', (ev)=>{
   if(card){
     const idx = Number(card.dataset.idx);
     if(currentLevelData[idx]){ 
-      infoContent.innerHTML = buildFullDetail(currentLevelData[idx]); // [ปรับปรุง] เรียกใช้ฟังก์ชันใหม่
+      infoContent.innerHTML = buildFullDetail(currentLevelData[idx]);
       dlgInfo.showModal(); 
       document.body.classList.add('lock'); 
     }
@@ -341,7 +336,8 @@ document.addEventListener('click', (ev)=>{
 document.getElementById('closeInfo').onclick = ()=>{ dlgInfo.close(); document.body.classList.remove('lock'); };
 document.getElementById('okInfo').onclick    = ()=>{ dlgInfo.close(); document.body.classList.remove('lock'); };
 
-document.getElementById('btnRefresh').onclick = ()=>{ ALL_DATA = {}; init(); };
+// [ปรับปรุง] เปลี่ยน Event ของปุ่ม
+document.getElementById('btnSearch').onclick = ()=>{ state.q = qEl.value.trim(); refreshList(); };
 qEl.onkeydown = (e)=>{ if(e.key==='Enter'){ state.q = qEl.value.trim(); refreshList(); } };
 sorterEl.onchange = ()=>{ state.sort = sorterEl.value; refreshList(); };
 prevBtn.onclick = ()=>{ if(page>1){ page--; renderPage(); window.scrollTo(0,0); } };
