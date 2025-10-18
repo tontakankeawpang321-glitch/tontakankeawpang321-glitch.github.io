@@ -140,16 +140,21 @@
 
 <!-- 🧠 SCRIPT SECTION – รองรับการเปิดจาก HTML ภายนอก -->
 <script>
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzIGnlkPk4xiH33NnXlH9yWsmsABe06mL-3i7Of9F00EHKp6u6Vn89YNYLekTrgtFpL/exec'; // ⚙️ ของเดิม
+// ⚙️ 1. เปลี่ยน URL ชี้ไปที่ไฟล์ CSV บน GitHub ของคุณ (ต้องเป็นลิงก์ Raw)
+const GITHUB_CSV_URL = 'https://raw.githubusercontent.com/your-username/your-repo/main/data.csv';
 
-// === STATE เดิม + เพจใหม่ ===
-let state = { level: 'นักธรรมตรี', category: '', subcategory: '', q: '', sort: 'no', cats: [], subcats: [] };
+// ⚙️ 2. เพิ่มการตั้งค่าแคช
+const CACHE_KEY = 'buddhaQuotesCache';
+const CACHE_DURATION_MS = 6 * 60 * 60 * 1000; // แคชข้อมูลไว้ 6 ชั่วโมง
+
+// === STATE และ REFS (เหมือนเดิมทั้งหมด) ===
+let state = { level: 'นักธรรมตรี', category: '', subcategory: '', q: '', sort: 'no' };
 let temp = null;
-let allItems = [];        // เก็บผลรวมทั้งหมดจาก API
-let page = 1;             // หน้าปัจจุบัน
-const pageSize = 5;       // ✅ แสดง 5 รายการ/หน้า
+let allBuddhaQuotes = [];
+let filteredItems = [];
+let page = 1;
+const pageSize = 5;
 
-// REFS เดิม
 const listEl = document.getElementById('list');
 const dlg = document.getElementById('dlgCats');
 const dlgLevelChips = document.getElementById('dlgLevelChips');
@@ -157,8 +162,6 @@ const catsEl = document.getElementById('cats');
 const subcatsEl = document.getElementById('subcats');
 const qEl = document.getElementById('q');
 const sorterEl = document.getElementById('sorter');
-
-// REFS ใหม่ (เพจ + info)
 const pagerEl = document.getElementById('pager');
 const prevBtn = document.getElementById('prevPage');
 const nextBtn = document.getElementById('nextPage');
@@ -166,47 +169,67 @@ const pageInfo = document.getElementById('pageInfo');
 const dlgInfo = document.getElementById('dlgInfo');
 const infoContent = document.getElementById('infoContent');
 
-// HELPERS เดิม
+// === HELPERS (เหมือนเดิม) ===
 const escapeHtml = s => String(s||'').replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 const pixelTag = t => `<span class="tag from-sheet">${escapeHtml(t)}</span>`;
 
-// === UNIVERSAL API (เดิม) ===
-async function api(action, params = {}) {
-  if (window.google && google.script && google.script.run)
-    return new Promise((ok, err)=>{
-      const run = google.script.run.withSuccessHandler(ok).withFailureHandler(err);
-      if (action==='categories') run.apiCategories(params.level);
-      else if (action==='subcategories') run.apiSubcategories(params.level, params.category||'');
-      else run.apiList(params);
-    });
+// ✨ 3. ฟังก์ชันโหลดข้อมูลที่ปรับปรุงใหม่ให้ใช้แคช
+async function loadDataFromGithub() {
+  const cached = localStorage.getItem(CACHE_KEY);
+  if (cached) {
+    const { timestamp, data } = JSON.parse(cached);
+    // ถ้าข้อมูลในแคชยังไม่หมดอายุ ให้ใช้ไปก่อนเลย
+    if (Date.now() - timestamp < CACHE_DURATION_MS) {
+      allBuddhaQuotes = data;
+      console.log(`แสดงผล ${data.length} รายการจากแคช`);
+      return; // ออกจากการทำงานทันที ไม่ต้องโหลดใหม่
+    }
+  }
+  
+  // ถ้าไม่มีแคช หรือแคชหมดอายุ ให้ไปโหลดใหม่
+  console.log("แคชหมดอายุ หรือไม่มีแคช, กำลังโหลดข้อมูลใหม่จาก GitHub...");
+  listEl.innerHTML = '<div class="card from-sheet">กำลังโหลดข้อมูลล่าสุด…</div>';
 
   try {
-    const url = WEB_APP_URL + '?' + new URLSearchParams({action, ...params}).toString();
-    const res = await fetch(url);
-    return await res.json();
-  } catch {
-    // JSONP fallback
-    return new Promise((resolve, reject)=>{
-      const cb='cb'+Math.random().toString(36).slice(2);
-      window[cb]=(d)=>{resolve(d);cleanup();};
-      const s=document.createElement('script');
-      s.src=WEB_APP_URL+'?action='+action+'&callback='+cb+'&'+new URLSearchParams(params);
-      s.onerror=()=>{reject(new Error('JSONP error'));cleanup();};
-      function cleanup(){delete window[cb];s.remove();}
-      document.body.appendChild(s);
+    const response = await fetch(GITHUB_CSV_URL);
+    if (!response.ok) throw new Error(`โหลดไฟล์ไม่ได้: ${response.statusText}`);
+    
+    const csvText = await response.text();
+    const lines = csvText.split(/\r?\n/).filter(line => line.trim() !== '');
+    if (lines.length < 2) {
+      allBuddhaQuotes = [];
+      return;
+    }
+
+    const headers = lines[0].split(',').map(h => h.trim());
+    const data = lines.slice(1).map(line => {
+      const values = line.split(',');
+      return headers.reduce((obj, header, index) => {
+        obj[header] = (values[index] || '').trim();
+        return obj;
+      }, {});
     });
+    
+    allBuddhaQuotes = data;
+    // บันทึกข้อมูลใหม่ลงแคชพร้อมเวลาปัจจุบัน
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data }));
+    console.log(`โหลดและแคชข้อมูล ${data.length} รายการสำเร็จ`);
+  } catch (error) {
+    console.error("เกิดข้อผิดพลาดในการโหลด CSV:", error);
+    listEl.innerHTML = `<div class="card from-sheet" style="background:#fff1f2;border-color:#fca5a5;">เกิดข้อผิดพลาด: ${escapeHtml(error.message)}</div>`;
+    throw error;
   }
 }
 
-// === สร้าง “คำอธิบายย่อ” ออนไลน์ (on-the-fly) โดยสรุปจากข้อมูลที่มี ===
+// === ส่วนที่เหลือของโค้ด (เหมือนเดิมเกือบทั้งหมด) ===
+// (ฟังก์ชัน buildSummary, cardTemplate, renderPage, และอื่นๆ เหมือนเดิมทุกประการ)
+
 function buildSummary(item){
-  // ตัดประโยคให้กระชับ และประกอบบริบท
   const pali = (item.pali||'').trim();
   const trans = (item.trans||'').trim();
   const speaker = (item.speaker||'').trim();
   const source = (item.source||'').trim();
-
-  const transShort = trans.length>180 ? trans.slice(0,180)+'…' : trans;
+  const transShort = trans.length > 180 ? trans.slice(0,180)+'…' : trans;
   const parts = [];
   if (pali) parts.push(`หัวข้อ: ${escapeHtml(pali)}`);
   if (transShort) parts.push(`ใจความ: ${escapeHtml(transShort)}`);
@@ -216,12 +239,10 @@ function buildSummary(item){
   if (speaker) metaBits.push(`ผู้กล่าว: ${escapeHtml(speaker)}`);
   if (source) metaBits.push(`ที่มา: ${escapeHtml(source)}`);
   if (metaBits.length) parts.push(metaBits.join(' · '));
-
   return `<div class="meta" style="margin-bottom:8px;">${pixelTag('ลำดับ '+escapeHtml(item.no||''))}</div>
           <div class="from-sheet" style="white-space:pre-wrap;">${parts.join('\n')}</div>`;
 }
 
-// === RENDER (เพิ่ม data-idx เพื่อเปิด dialog) ===
 function cardTemplate(it, idx){
   return `<article class="card" data-idx="${idx}" role="button" tabindex="0" title="คลิกเพื่อดูคำอธิบายย่อ">
     <div class="meta from-sheet">${pixelTag('ลำดับ '+escapeHtml(it.no))}${pixelTag('หมวด '+escapeHtml(it.category))}${it.subcategory?pixelTag('ย่อย '+escapeHtml(it.subcategory)):''}</div>
@@ -231,124 +252,125 @@ function cardTemplate(it, idx){
   </article>`;
 }
 
-// แสดงเฉพาะ 5 รายการ/หน้า
 function renderPage(){
-  const total = allItems.length;
+  const total = filteredItems.length;
+  if (total === 0) {
+    listEl.innerHTML = '<div class="card from-sheet">ไม่พบข้อมูลที่ตรงกับเงื่อนไข</div>';
+    pagerEl.hidden = true;
+    return;
+  }
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
   if (page > totalPages) page = totalPages;
+
   const start = (page - 1) * pageSize;
   const end = Math.min(start + pageSize, total);
-  const view = allItems.slice(start, end);
-
-  listEl.innerHTML = view.map((it, i)=> cardTemplate(it, start + i)).join('');
+  
+  const fragment = document.createDocumentFragment();
+  for(let i = start; i < end; i++) {
+    const item = filteredItems[i];
+    const originalIndex = allBuddhaQuotes.indexOf(item);
+    const cardEl = document.createElement('div');
+    cardEl.innerHTML = cardTemplate(item, originalIndex);
+    fragment.appendChild(cardEl.firstChild);
+  }
+  
+  listEl.innerHTML = '';
+  listEl.appendChild(fragment);
+  
   pagerEl.hidden = total <= pageSize;
   pageInfo.textContent = `หน้า ${page} / ${totalPages}`;
   prevBtn.disabled = page <= 1;
   nextBtn.disabled = page >= totalPages;
 }
 
-// === โหลดข้อมูลแล้วค่อยตัดหน้า ===
-async function refreshList(){
-  listEl.innerHTML = '<div class="card from-sheet">กำลังโหลด…</div>';
-  try{
-    const d = await api('list', state);
-    allItems = (d && d.items) || [];
-    if (!allItems.length){
-      listEl.innerHTML = '<div class="card from-sheet">ไม่พบข้อมูล</div>';
-      pagerEl.hidden = true;
-      return;
-    }
-    page = 1;       // รีเซ็ตกลับหน้าแรกทุกครั้งที่โหลดใหม่
-    renderPage();
-  }catch(e){
-    listEl.innerHTML = `<div class="card from-sheet" style="background:#fff1f2;border-color:#fca5a5;">เกิดข้อผิดพลาด: ${escapeHtml(e.message)}</div>`;
-    pagerEl.hidden = true;
+async function refreshList(forceReload = false){
+  if (forceReload) {
+    localStorage.removeItem(CACHE_KEY);
+    allBuddhaQuotes = [];
   }
+  listEl.innerHTML = '<div class="card from-sheet">กำลังประมวลผล…</div>';
+  pagerEl.hidden = true;
+  
+  try {
+    await loadDataFromGithub();
+    
+    filteredItems = allBuddhaQuotes.filter(item => {
+      const levelMatch = item.level === state.level;
+      const categoryMatch = !state.category || item.category === state.category;
+      const subcategoryMatch = !state.subcategory || item.subcategory === state.subcategory;
+      const queryMatch = !state.q || 
+        (item.pali && item.pali.toLowerCase().includes(state.q.toLowerCase())) ||
+        (item.trans && item.trans.toLowerCase().includes(state.q.toLowerCase()));
+      return levelMatch && categoryMatch && subcategoryMatch && queryMatch;
+    });
+
+    if (state.sort === 'cat') {
+      filteredItems.sort((a, b) => a.category.localeCompare(b.category, 'th') || Number(a.no) - Number(b.no));
+    } else {
+      filteredItems.sort((a, b) => Number(a.no) - Number(b.no));
+    }
+    
+    page = 1;
+    renderPage();
+  } catch(e) { /* error handled in loadDataFromGithub */ }
 }
 
-// === โหลดหมวด/หมวดย่อย (เดิม) ===
-async function loadCats(){ const d = await api('categories',{level:temp.level}); temp.cats = d.categories || []; renderCats(); }
-async function loadSubcats(){ const d = await api('subcategories',{level:temp.level,category:temp.category}); temp.subcats = d.subcategories || []; renderSubcats(); }
+function getUniqueValues(key, filterLevel, filterCategory = null) {
+    const filtered = allBuddhaQuotes.filter(item => {
+        const levelMatch = item.level === filterLevel;
+        const categoryMatch = !filterCategory || item.category === filterCategory;
+        return levelMatch && categoryMatch;
+    });
+    const values = filtered.map(item => item[key]).filter(Boolean);
+    return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b, 'th'));
+}
 
-function renderLevelChips(){
-  const lv=['นักธรรมตรี','นักธรรมโท','นักธรรมเอก'];
-  document.getElementById('levelChips').innerHTML=lv.map(l=>`<button class="chip ${l===state.level?'is-active':''}" data-level="${l}">${l}</button>`).join('');
-}
-function renderDlgLevelChips(){
-  const lv=['นักธรรมตรี','นักธรรมโท','นักธรรมเอก'];
-  dlgLevelChips.innerHTML=lv.map(l=>`<button class="chip ${l===(temp?.level||state.level)?'is-active':''}" data-dlg-level="${l}">${l}</button>`).join('');
-}
+function loadCats() { temp.cats = getUniqueValues('category', temp.level); renderCats(); }
+function loadSubcats() { temp.subcats = getUniqueValues('subcategory', temp.level, temp.category); renderSubcats(); }
+
+function renderLevelChips(){ const lv=['นักธรรมตรี','นักธรรมโท','นักธรรมเอก']; document.getElementById('levelChips').innerHTML=lv.map(l=>`<button class="chip ${l===state.level?'is-active':''}" data-level="${l}">${l}</button>`).join(''); }
+function renderDlgLevelChips(){ const lv=['นักธรรมตรี','นักธรรมโท','นักธรรมเอก']; dlgLevelChips.innerHTML=lv.map(l=>`<button class="chip ${l===(temp?.level||state.level)?'is-active':''}" data-dlg-level="${l}">${l}</button>`).join(''); }
 function renderCats(){ catsEl.innerHTML=(temp?.cats||[]).map(c=>`<div class="subcat ${c===temp.category?'is-active':''}" data-cat="${c}">${escapeHtml(c)}</div>`).join(''); }
-function renderSubcats(){
-  const sc=temp?.subcats||[];
-  subcatsEl.innerHTML=sc.length?sc.map(s=>`<div class="subcat ${s===temp.subcategory?'is-active':''}" data-subcat="${s}">${escapeHtml(s)}</div>`).join('')
-    :'<div class="subcat" style="opacity:.6">(ไม่มีหมวดย่อย)</div>';
-}
-
-// === เปิด/ปิด dialog เลือกหมวด (เดิม) ===
-document.getElementById('openDlg').onclick=async()=>{
-  temp=JSON.parse(JSON.stringify(state));
-  renderDlgLevelChips();await loadCats();await loadSubcats();
-  dlg.showModal();document.body.classList.add('lock');
-};
+function renderSubcats(){ const sc=temp?.subcats||[]; subcatsEl.innerHTML=sc.length?sc.map(s=>`<div class="subcat ${s===temp.subcategory?'is-active':''}" data-subcat="${s}">${escapeHtml(s)}</div>`).join('') :'<div class="subcat" style="opacity:.6">(ไม่มีหมวดย่อย)</div>'; }
+document.getElementById('openDlg').onclick=async()=>{ temp=JSON.parse(JSON.stringify(state)); await loadDataFromGithub(); renderDlgLevelChips(); loadCats(); loadSubcats(); dlg.showModal(); document.body.classList.add('lock'); };
 document.getElementById('closeDlg').onclick=()=>{dlg.close();document.body.classList.remove('lock');};
 document.getElementById('applyFilter').onclick=()=>{state=JSON.parse(JSON.stringify(temp));dlg.close();renderLevelChips();refreshList();};
 document.getElementById('clearFilter').onclick=()=>{temp.category='';temp.subcategory='';renderCats();renderSubcats();};
-
-// === อีเวนต์คลิกการ์ด → เปิด dialog คำอธิบายย่อ (ใหม่) ===
 document.addEventListener('click', ev=>{
-  // level chips (เดิม)
-  const l=ev.target.closest('.chip[data-level]'); 
-  if(l){ state.level=l.dataset.level; renderLevelChips(); refreshList(); return; }
-
-  const dchip=ev.target.closest('.chip[data-dlg-level]');
-  if(dchip){ temp.level=dchip.dataset.dlgLevel; renderDlgLevelChips(); loadCats().then(loadSubcats); return; }
-
-  const c=ev.target.closest('.subcat[data-cat]'); 
-  if(c){ temp.category=c.dataset.cat; loadSubcats(); renderCats(); return; }
-
-  const s=ev.target.closest('.subcat[data-subcat]'); 
-  if(s){ temp.subcategory=s.dataset.subcat; renderSubcats(); return; }
-
-  // เปิดสรุป
+  const l=ev.target.closest('.chip[data-level]'); if(l){ state.level=l.dataset.level; renderLevelChips(); refreshList(); return; }
+  const dchip=ev.target.closest('.chip[data-dlg-level]'); if(dchip){ temp.level=dchip.dataset.dlgLevel; renderDlgLevelChips(); loadCats(); loadSubcats(); return; }
+  const c=ev.target.closest('.subcat[data-cat]'); if(c){ temp.category=c.dataset.cat; temp.subcategory=''; loadSubcats(); renderCats(); return; }
+  const s=ev.target.closest('.subcat[data-subcat]'); if(s){ temp.subcategory=s.dataset.subcat; renderSubcats(); return; }
   const card = ev.target.closest('.card[data-idx]');
   if (card){
     const idx = Number(card.dataset.idx);
-    const item = allItems[idx];
-    infoContent.innerHTML = buildSummary(item);
-    dlgInfo.showModal();
-    document.body.classList.add('lock');
+    if (allBuddhaQuotes[idx]) {
+      infoContent.innerHTML = buildSummary(allBuddhaQuotes[idx]);
+      dlgInfo.showModal();
+      document.body.classList.add('lock');
+    }
   }
 });
-
-// ปิด dialog สรุป
-document.getElementById('closeInfo').onclick = ()=>{
-  dlgInfo.close();
-  document.body.classList.remove('lock');
-};
-document.getElementById('okInfo').onclick = ()=>{
-  dlgInfo.close();
-  document.body.classList.remove('lock');
-};
-
-// รีเฟรช/ค้นหา/เรียง (เดิม) + รีเซ็ตหน้าแรก
-document.getElementById('btnRefresh').onclick=refreshList;
+document.getElementById('closeInfo').onclick = ()=>{ dlgInfo.close(); document.body.classList.remove('lock'); };
+document.getElementById('okInfo').onclick = ()=>{ dlgInfo.close(); document.body.classList.remove('lock'); };
+document.getElementById('btnRefresh').onclick=() => refreshList(true);
 qEl.onkeydown=e=>{ if(e.key==='Enter'){ state.q=qEl.value.trim(); refreshList(); } };
 sorterEl.onchange=()=>{ state.sort=sorterEl.value; refreshList(); };
+prevBtn.onclick = ()=>{ if(page>1){ page--; renderPage(); window.scrollTo(0, 0); } };
+nextBtn.onclick = ()=>{ const totalPages = Math.max(1, Math.ceil(filteredItems.length/pageSize)); if(page<totalPages){ page++; renderPage(); window.scrollTo(0, 0); } };
+window.addEventListener('keydown', (e)=>{ if (e.key==='Escape' && dlg.open){ dlg.close(); document.body.classList.remove('lock'); } if (e.key==='Escape' && dlgInfo.open){ dlgInfo.close(); document.body.classList.remove('lock'); } });
 
-// เพจ (ใหม่)
-prevBtn.onclick = ()=>{ if(page>1){ page--; renderPage(); } };
-nextBtn.onclick = ()=>{ const totalPages = Math.max(1, Math.ceil(allItems.length/pageSize)); if(page<totalPages){ page++; renderPage(); } };
-
-// ESC ปิด dialog เลือกหมวด (เดิม)
-window.addEventListener('keydown', (e)=>{ 
-  if (e.key==='Escape' && dlg.open){ dlg.close(); document.body.classList.remove('lock'); } 
-  if (e.key==='Escape' && dlgInfo.open){ dlgInfo.close(); document.body.classList.remove('lock'); }
-});
-
-// === Init (เดิม) ===
-renderLevelChips();
-refreshList();
+(async function init() {
+  renderLevelChips();
+  await refreshList();
+  
+  // โหลดข้อมูลใหม่เบื้องหลัง ถ้าข้อมูลในแคชถูกใช้งาน
+  const cached = localStorage.getItem(CACHE_KEY);
+  if (cached) {
+    console.log("กำลังตรวจสอบข้อมูลใหม่เบื้องหลัง...");
+    await refreshList(true); // บังคับโหลดใหม่เบื้องหลัง
+  }
+})();
 </script>
 <a    class="dlg-head"  href="https://sites.google.com/view/privacy-policy-pdpa-crow-studi/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81" target="_blank"> <div class="title">นโยบายส่วนตัว Privacy policy
 </div>  </a>
@@ -356,3 +378,4 @@ refreshList();
 </div>
 </body>
 </html>
+
