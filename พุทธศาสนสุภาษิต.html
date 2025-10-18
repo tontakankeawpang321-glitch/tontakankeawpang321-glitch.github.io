@@ -111,13 +111,13 @@
   </dialog>
 
 <script>
-// ✨ 1. ตั้งค่าไฟล์ JSON ที่จะโหลด
+// ✨ 1. ตั้งค่าไฟล์ JSON ที่จะโหลด (เหมือนเดิม)
 const DATA_FILES = {
   'นักธรรมตรี': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_tri.json',
   'นักธรรมโท': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_to.json',
   'นักธรรมเอก': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_ek.json'
 };
-let ALL_DATA = {}; // Object ที่จะเก็บข้อมูลทั้งหมดหลังโหลดเสร็จ
+let ALL_DATA = {}; 
 
 // === STATE, REFS, HELPERS (เหมือนเดิม) ===
 let state = { level: 'นักธรรมตรี', category: '', subcategory: '', q: '', sort: 'no' };
@@ -142,11 +142,9 @@ const infoContent = document.getElementById('infoContent');
 const escapeHtml = s => String(s||'').replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
 const pixelTag = t => `<span class="tag from-sheet">${escapeHtml(t)}</span>`;
 
-// ✨ 2. ฟังก์ชันใหม่สำหรับโหลดไฟล์ JSON ทั้งหมด
+// === ฟังก์ชันโหลดข้อมูล (เหมือนเดิม) ===
 async function loadAllDataFromFiles() {
-  // ถ้าโหลดข้อมูลมาแล้ว ไม่ต้องทำอีก
   if (Object.keys(ALL_DATA).length > 0) return;
-
   listEl.innerHTML = '<div class="card from-sheet">กำลังโหลดข้อมูล...</div>';
   try {
     const fetchPromises = Object.entries(DATA_FILES).map(([level, file]) => 
@@ -155,22 +153,46 @@ async function loadAllDataFromFiles() {
         return response.json();
       }).then(data => [level, data])
     );
-    
     const allResults = await Promise.all(fetchPromises);
     ALL_DATA = Object.fromEntries(allResults);
-    
     console.log("โหลดข้อมูลทั้งหมดสำเร็จ:", ALL_DATA);
   } catch (error) {
     console.error("เกิดข้อผิดพลาดในการโหลดไฟล์ JSON:", error);
     listEl.innerHTML = `<div class="card from-sheet" style="background:#fff1f2;border-color:#fca5a5;">เกิดข้อผิดพลาด: ${escapeHtml(error.message)}</div>`;
-    throw error; // หยุดการทำงาน
+    throw error;
   }
 }
 
-// === ส่วนของโค้ดที่เหลือ (ปรับปรุงเล็กน้อย) ===
-function buildSummary(item){ /* ...เหมือนเดิม... */ return `<div class="meta" style="margin-bottom:8px;">${pixelTag('ลำดับ '+escapeHtml(item.no||''))}</div> <div class="from-sheet" style="white-space:pre-wrap;">${(item.pali?`หัวข้อ: ${escapeHtml(item.pali)}\n`:'')}${(item.trans?`ใจความ: ${(item.trans.length>180?item.trans.slice(0,180)+'…':item.trans)}\n`:'')}${[item.category,item.subcategory,item.speaker,item.source].filter(Boolean).join(' · ')}</div>`;}
-function cardTemplate(it, idx){ return `<article class="card" data-idx="${idx}" role="button" tabindex="0" title="คลิกเพื่อดูคำอธิบายย่อ"><div class="meta from-sheet">${pixelTag('ลำดับ '+escapeHtml(it.no))}${pixelTag('หมวด '+escapeHtml(it.category))}${it.subcategory?pixelTag('ย่อย '+escapeHtml(it.subcategory)):''}</div><div class="pali from-sheet">${escapeHtml(it.pali)}</div>${it.trans?`<div class="trans from-sheet">${escapeHtml(it.trans)}</div>`:''}${(it.speaker||it.source)?`<div class="meta from-sheet" style="margin-top:8px;">${it.speaker?pixelTag('ผู้กล่าว '+escapeHtml(it.speaker)):''}${it.source?pixelTag('ที่มา '+escapeHtml(it.source)):''}</div>`:''}</article>`;}
+// ✨ 2. ปรับปรุงฟังก์ชันให้ใช้ KEY ภาษาไทย
+function buildSummary(item){
+  constเรื่อง = (item['เรื่อง']||'').trim();
+  const คำแปล = (item['คำแปล']||'').trim();
+  const transShort = คำแปล.length > 180 ? คำแปล.slice(0,180)+'…' : คำแปล;
+  const parts = [];
+  if (เรื่อง) parts.push(`หัวข้อ: ${escapeHtml(เรื่อง)}`);
+  if (transShort) parts.push(`ใจความ: ${escapeHtml(transShort)}`);
+  const metaBits = [];
+  if (item['หมวด']) metaBits.push(`หมวด: ${escapeHtml(item['หมวด'])}`);
+  
+  // หมายเหตุ: โค้ดนี้ไม่ได้ใช้ subcategory, speaker, source แล้วตามโครงสร้างใหม่
+  // หากต้องการเพิ่ม ให้ใส่ข้อมูลใน JSON แล้วแก้โค้ดตรงนี้
+  
+  if (metaBits.length) parts.push(metaBits.join(' · '));
 
+  return `<div class="meta" style="margin-bottom:8px;">${pixelTag('ลำดับ '+escapeHtml(item['ลำดับ']||''))}</div>
+          <div class="from-sheet" style="white-space:pre-wrap;">${parts.join('\n')}</div>`;
+}
+
+// ✨ 3. ปรับปรุง Template การ์ดให้ใช้ KEY ภาษาไทย
+function cardTemplate(it, idx){
+  return `<article class="card" data-idx="${idx}" role="button" tabindex="0" title="คลิกเพื่อดูคำอธิบายย่อ">
+    <div class="meta from-sheet">${pixelTag('ลำดับ '+escapeHtml(it['ลำดับ']))}${pixelTag('หมวด '+escapeHtml(it['หมวด']))}</div>
+    <div class="pali from-sheet">${escapeHtml(it['เรื่อง'])}</div>
+    <div class="trans from-sheet">${escapeHtml(it['คำแปล'])}</div>
+  </article>`;
+}
+
+// === ส่วนของโค้ดที่เหลือ (ปรับปรุงเล็กน้อย) ===
 function renderPage(){
   const total = filteredItems.length;
   if (total === 0) { listEl.innerHTML = '<div class="card from-sheet">ไม่พบข้อมูลที่ตรงกับเงื่อนไข</div>'; pagerEl.hidden = true; return; }
@@ -198,7 +220,7 @@ function renderPage(){
   nextBtn.disabled = page >= totalPages;
 }
 
-// ✨ 3. refreshList ถูกปรับให้ง่ายขึ้น
+// ✨ 4. ปรับปรุงฟังก์ชัน filter และ sort ให้ใช้ KEY ภาษาไทย
 function refreshList(){
   listEl.innerHTML = '<div class="card from-sheet">กำลังประมวลผล…</div>';
   pagerEl.hidden = true;
@@ -206,47 +228,54 @@ function refreshList(){
   currentLevelData = ALL_DATA[state.level] || [];
   
   filteredItems = currentLevelData.filter(item => {
-    const categoryMatch = !state.category || item.category === state.category;
-    const subcategoryMatch = !state.subcategory || item.subcategory === state.subcategory;
+    const categoryMatch = !state.category || item['หมวด'] === state.category;
+    // หมายเหตุ: ไม่มีการกรอง subcategory แล้ว
     const queryMatch = !state.q || 
-      (item.pali && item.pali.toLowerCase().includes(state.q.toLowerCase())) ||
-      (item.trans && item.trans.toLowerCase().includes(state.q.toLowerCase()));
-    return categoryMatch && subcategoryMatch && queryMatch;
+      (item['เรื่อง'] && item['เรื่อง'].toLowerCase().includes(state.q.toLowerCase())) ||
+      (item['คำแปล'] && item['คำแปล'].toLowerCase().includes(state.q.toLowerCase()));
+    return categoryMatch && queryMatch;
   });
 
   if (state.sort === 'cat') {
-    filteredItems.sort((a, b) => a.category.localeCompare(b.category, 'th') || Number(a.no) - Number(b.no));
+    filteredItems.sort((a, b) => a['หมวด'].localeCompare(b['หมวด'], 'th') || Number(a['ลำดับ']) - Number(b['ลำดับ']));
   } else {
-    filteredItems.sort((a, b) => Number(a.no) - Number(b.no));
+    filteredItems.sort((a, b) => Number(a['ลำดับ']) - Number(b['ลำดับ']));
   }
   
   page = 1;
   renderPage();
 }
 
-function getUniqueValues(data, key, filterCategory = null) {
-    const filtered = data.filter(item => !filterCategory || item.category === filterCategory);
-    const values = filtered.map(item => item[key]).filter(Boolean);
+// ✨ 5. ปรับปรุงฟังก์ชันดึงหมวดหมู่
+function getUniqueValues(data, key) {
+    const values = data.map(item => item[key]).filter(Boolean);
     return Array.from(new Set(values)).sort((a, b) => a.localeCompare(b, 'th'));
 }
 
-function loadCats() { temp.cats = getUniqueValues(ALL_DATA[temp.level], 'category'); renderCats(); }
-function loadSubcats() { temp.subcats = getUniqueValues(ALL_DATA[temp.level], 'subcategory', temp.category); renderSubcats(); }
+function loadCats() {
+    temp.cats = getUniqueValues(ALL_DATA[temp.level], 'หมวด');
+    // ไม่มี subcats แล้ว
+    temp.subcats = []; 
+    renderCats();
+    renderSubcats(); 
+}
 
-// === Event Listeners และ Init (ไม่มีการเปลี่ยนแปลง) ===
+// === Event Listeners และ Init (มีการปรับปรุง) ===
 function renderLevelChips(){ const lv=['นักธรรมตรี','นักธรรมโท','นักธรรมเอก']; document.getElementById('levelChips').innerHTML=lv.map(l=>`<button class="chip ${l===state.level?'is-active':''}" data-level="${l}">${l}</button>`).join(''); }
 function renderDlgLevelChips(){ const lv=['นักธรรมตรี','นักธรรมโท','นักธรรมเอก']; dlgLevelChips.innerHTML=lv.map(l=>`<button class="chip ${l===(temp?.level||state.level)?'is-active':''}" data-dlg-level="${l}">${l}</button>`).join(''); }
 function renderCats(){ catsEl.innerHTML=(temp?.cats||[]).map(c=>`<div class="subcat ${c===temp.category?'is-active':''}" data-cat="${c}">${escapeHtml(c)}</div>`).join(''); }
-function renderSubcats(){ const sc=temp?.subcats||[]; subcatsEl.innerHTML=sc.length?sc.map(s=>`<div class="subcat ${s===temp.subcategory?'is-active':''}" data-subcat="${s}">${escapeHtml(s)}</div>`).join('') :'<div class="subcat" style="opacity:.6">(ไม่มีหมวดย่อย)</div>'; }
-document.getElementById('openDlg').onclick=()=>{ temp=JSON.parse(JSON.stringify(state)); renderDlgLevelChips(); loadCats(); loadSubcats(); dlg.showModal(); document.body.classList.add('lock'); };
+// ทำให้ส่วน subcat หายไปเพราะไม่มีข้อมูล
+function renderSubcats(){ subcatsEl.innerHTML = ''; } 
+
+document.getElementById('openDlg').onclick=()=>{ temp=JSON.parse(JSON.stringify(state)); renderDlgLevelChips(); loadCats(); dlg.showModal(); document.body.classList.add('lock'); };
 document.getElementById('closeDlg').onclick=()=>{dlg.close();document.body.classList.remove('lock');};
 document.getElementById('applyFilter').onclick=()=>{state=JSON.parse(JSON.stringify(temp));dlg.close();renderLevelChips();refreshList();};
-document.getElementById('clearFilter').onclick=()=>{temp.category='';temp.subcategory='';renderCats();renderSubcats();};
+document.getElementById('clearFilter').onclick=()=>{temp.category=''; temp.subcategory=''; renderCats(); renderSubcats();};
 document.addEventListener('click', ev=>{
-  const l=ev.target.closest('.chip[data-level]'); if(l){ state.level=l.dataset.level; renderLevelChips(); refreshList(); return; }
-  const dchip=ev.target.closest('.chip[data-dlg-level]'); if(dchip){ if (temp.level !== dchip.dataset.dlgLevel) { temp.level=dchip.dataset.dlgLevel; temp.category=''; temp.subcategory=''; renderDlgLevelChips(); loadCats(); loadSubcats(); } return; }
-  const c=ev.target.closest('.subcat[data-cat]'); if(c){ temp.category=c.dataset.cat; temp.subcategory=''; loadSubcats(); renderCats(); return; }
-  const s=ev.target.closest('.subcat[data-subcat]'); if(s){ temp.subcategory=s.dataset.subcat; renderSubcats(); return; }
+  const l=ev.target.closest('.chip[data-level]'); if(l){ state.level=l.dataset.level; state.category = ''; state.subcategory = ''; renderLevelChips(); refreshList(); return; }
+  const dchip=ev.target.closest('.chip[data-dlg-level]'); if(dchip){ if (temp.level !== dchip.dataset.dlgLevel) { temp.level=dchip.dataset.dlgLevel; temp.category=''; temp.subcategory=''; renderDlgLevelChips(); loadCats(); } return; }
+  const c=ev.target.closest('.subcat[data-cat]'); if(c){ temp.category=c.dataset.cat; renderCats(); return; }
+  // ไม่มี subcat แล้ว
   const card = ev.target.closest('.card[data-idx]');
   if (card){
     const idx = Number(card.dataset.idx);
@@ -262,24 +291,22 @@ prevBtn.onclick = ()=>{ if(page>1){ page--; renderPage(); window.scrollTo(0, 0);
 nextBtn.onclick = ()=>{ const totalPages = Math.max(1, Math.ceil(filteredItems.length/pageSize)); if(page<totalPages){ page++; renderPage(); window.scrollTo(0, 0); } };
 window.addEventListener('keydown', (e)=>{ if (e.key==='Escape' && dlg.open){ dlg.close(); document.body.classList.remove('lock'); } if (e.key==='Escape' && dlgInfo.open){ dlgInfo.close(); document.body.classList.remove('lock'); } });
 
-// ✨ 4. Init function ที่จะเริ่มโหลดข้อมูลทั้งหมดก่อน
 async function init() {
   renderLevelChips();
   try {
     await loadAllDataFromFiles();
     refreshList();
-  } catch (error) {
-    // ข้อผิดพลาดถูกแสดงบนหน้าจอแล้วใน loadAllDataFromFiles
-  }
+  } catch (error) { /* error handled in loadAllDataFromFiles */ }
 }
 
 init();
 </script>
 
-<a class="dlg-head" href="https://sites.google.com/view/privacy-policy-pdpa-crow-studi/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81" target="_blank" style="display: block; text-align: center; padding: 10px; text-decoration: none;">
+<a class="dlg-head" href="https://sites.google.com/view/privacy-policy-pdpa-crow-studi/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%B8%E0%B8%A3%E0%B8%81" target="_blank" style="display: block; text-align: center; padding: 10px; text-decoration: none;">
   <div class="title">นโยบายส่วนตัว Privacy policy</div>
 </a>
 </body>
 </html>
+
 
 
