@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="th">
 <head>
 <meta charset="utf-8"/>
@@ -15,7 +15,14 @@
   }
   *{box-sizing:border-box}
   html,body{height:100%}
-  body{ margin:0; background:linear-gradient(180deg,#fbfcff 0%,#f3f6fb 100%); color:var(--ink); font-family:"Sarabun",system-ui; line-height:1.6; }
+  body{ 
+    margin:0; 
+    background:linear-gradient(180deg,#fbfcff 0%,#f3f6fb 100%); 
+    color:var(--ink); 
+    font-family:"Sarabun",system-ui; 
+    line-height:1.6; 
+    font-size: 14px; /* [ปรับปรุง] ตั้งค่าขนาดตัวอักษรหลัก */
+  }
   .wrap{max-width:1080px; margin:0 auto; padding:20px;}
   header{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
   .logo{ font-family:"Press Start 2P", monospace; font-size:14px; letter-spacing:1px; color:var(--brand); text-shadow:0 1px 0 #fff; }
@@ -31,11 +38,11 @@
   .spacer{flex:1}
   .search,.select{ background:#fff; color:var(--ink); border:1px solid var(--line); padding:10px 12px; border-radius:12px; box-shadow:var(--shadow-soft-2); }
   .search{ width:280px; max-width:100%; }
-  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(400px, 1fr)); gap:16px; margin-top:18px;}
-  .card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-soft); padding:16px; transition:transform .08s ease, box-shadow .12s ease; }
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px; margin-top:18px;} /* [ปรับปรุง] แก้ไข minmax เพื่อรองรับจอมือถือ */
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-soft); padding:16px; transition:transform .08s ease, box-shadow .12s ease; cursor: pointer; }
   .card:hover{ transform:translateY(-1px); box-shadow:0 14px 34px rgba(15,23,42,.1); }
-  .from-sheet{ font-family:"Montserrat","Sarabun",system-ui; font-size:12px; }
-  .meta{ font-size:12px; color:var(--muted); display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+  .from-sheet{ font-family:"Montserrat","Sarabun",system-ui; } /* [ปรับปรุง] ลบ font-size:12px เพื่อให้รับค่าจาก body */
+  .meta{ color:var(--muted); display:flex; gap:10px; flex-wrap:wrap; align-items:center; } /* [ปรับปรุง] ลบ font-size:12px */
   .meta .tag{ background:#f1f5f9; border:1px solid #e2e8f0; padding:4px 8px; border-radius:999px; box-shadow:var(--shadow-soft-2); font-weight:600; }
   .pali{ margin:6px 0 0; }
   .trans{ background:#f8fafc; padding:10px; border:1px dashed #dbeafe; margin-top:10px; border-radius:8px; white-space:pre-wrap; }
@@ -54,7 +61,7 @@
   #pager{display:flex; gap:8px; align-items:center; justify-content:flex-end; margin-top:8px;}
   #pager .pbtn{border:1px solid var(--line); background:#fff; border-radius:10px; padding:6px 10px; cursor:pointer; box-shadow:var(--shadow-soft-2);}
   #pager .pbtn[disabled]{opacity:.5; cursor:not-allowed;}
-  #pager .pcounter{font-size:12px; color:var(--muted);}
+  #pager .pcounter{color:var(--muted);} /* [ปรับปรุง] ลบ font-size:12px */
 </style>
 </head>
 <body>
@@ -103,7 +110,7 @@
 
   <dialog id="dlgInfo" aria-modal="true">
     <div class="dlg-head">
-      <h2>คำอธิบายย่อ</h2>
+      <h2>รายละเอียด</h2>
       <button id="closeInfo" class="ghost-btn">ปิด</button>
     </div>
     <div class="dlg-body"><div id="infoContent" class="from-sheet"></div></div>
@@ -189,22 +196,24 @@ async function loadAllDataFromFiles(){
 }
 
 // === RENDERERS ===
-function buildSummary(item){
-  const เรื่อง  = (item['เรื่อง']||'').trim();
-  const คำแปล  = (item['คำแปล']||'').trim();
-  const transShort = คำแปล.length > 180 ? คำแปล.slice(0,180)+'…' : คำแปล;
-  const parts = [];
-  if (เรื่อง)    parts.push(`หัวข้อ: ${escapeHtml(เรื่อง)}`);
-  if (transShort) parts.push(`ใจความ: ${escapeHtml(transShort)}`);
-  const meta = [];
-  if (item['หมวด']) meta.push(`หมวด: ${escapeHtml(item['หมวด'])}`);
-  if (meta.length)  parts.push(meta.join(' · '));
-  return `<div class="meta" style="margin-bottom:8px;">${pixelTag('ลำดับ '+escapeHtml(item['ลำดับ']||''))}</div>
-          <div class="from-sheet" style="white-space:pre-wrap;">${parts.join('\n')}</div>`;
+// [ปรับปรุง] แก้ไขฟังก์ชันนี้ให้แสดงข้อมูลฉบับเต็มใน Dialog
+function buildFullDetail(item){
+  const เรื่อง = (item['เรื่อง'] || '').trim();
+  const คำแปล = (item['คำแปล'] || '').trim();
+  const หมวด = (item['หมวด'] || '').trim();
+  const ลำดับ = (item['ลำดับ'] || '').trim();
+
+  let content = '<div class="from-sheet" style="line-height: 1.8;">';
+  if (ลำดับ) content += `<p style="margin:0 0 10px;"><b>ลำดับ:</b> ${escapeHtml(ลำดับ)}</p>`;
+  if (หมวด) content += `<p style="margin:0 0 10px;"><b>หมวด:</b> ${escapeHtml(หมวด)}</p>`;
+  if (เรื่อง) content += `<p style="margin:0 0 10px;"><b>สุภาษิต:</b><br>${escapeHtml(เรื่อง)}</p>`;
+  if (คำแปล) content += `<p style="margin:0 0 10px;"><b>คำแปล:</b><br><span style="white-space: pre-wrap;">${escapeHtml(คำแปล)}</span></p>`;
+  content += '</div>';
+  return content;
 }
 
 function cardTemplate(it, idx){
-  return `<article class="card" data-idx="${idx}" role="button" tabindex="0" title="คลิกเพื่อดูคำอธิบายย่อ">
+  return `<article class="card" data-idx="${idx}" role="button" tabindex="0" title="คลิกเพื่อดูรายละเอียด">
     <div class="meta from-sheet">
       ${pixelTag('ลำดับ '+escapeHtml(it['ลำดับ']||''))}
       ${pixelTag('หมวด '+escapeHtml(it['หมวด']||''))}
@@ -321,7 +330,11 @@ document.addEventListener('click', (ev)=>{
   const card = ev.target.closest('.card[data-idx]');
   if(card){
     const idx = Number(card.dataset.idx);
-    if(currentLevelData[idx]){ infoContent.innerHTML = buildSummary(currentLevelData[idx]); dlgInfo.showModal(); document.body.classList.add('lock'); }
+    if(currentLevelData[idx]){ 
+      infoContent.innerHTML = buildFullDetail(currentLevelData[idx]); // [ปรับปรุง] เรียกใช้ฟังก์ชันใหม่
+      dlgInfo.showModal(); 
+      document.body.classList.add('lock'); 
+    }
   }
 });
 
@@ -350,7 +363,3 @@ init();
 </a>
 </body>
 </html>
-
-
-
-
