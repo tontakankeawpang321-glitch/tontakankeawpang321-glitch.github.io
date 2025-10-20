@@ -1,0 +1,606 @@
+<!DOCTYPE html>  
+<html lang="th">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title> ประกาศขายฟาง – Demo Client</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0f172a; --muted:#475569; --bg:#fffdf7; --card:#ffffff; --line:#e5e7eb;
+    --brand:#b88910; --brand-2:#a1730e; --ok:#16a34a; --danger:#dc2626; --ring:#f6d98a; --radius:14px;
+    --shadow:0 10px 30px -18px rgba(2,8,23,.25);
+    --chip:#fff4cf;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; font-family:"Sarabun","Noto Sans Thai",sans-serif; background:var(--bg); color:var(--ink)}
+  .wrap{max-width:980px; margin:auto; padding:16px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow)}
+  .hd{display:flex; align-items:center; gap:10px; padding:16px 18px; border-bottom:1px solid var(--line); font-weight:700}
+  .hd .icon{font-size:22px}
+  .bd{padding:16px 18px}
+
+  /* ฟอร์ม */
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+  .row-1{display:grid; grid-template-columns:1fr; gap:14px}
+  label{display:block; font-size:14px; color:var(--muted); margin-bottom:6px}
+  input[type="text"], input[type="tel"], input[type="file"], select{
+    width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; outline:none; background:#fff; font-size:16px
+  }
+  input:focus, select:focus{border-color:var(--brand); box-shadow:0 0 0 3px rgba(246,217,138,.65)}
+  .btns{display:flex; gap:10px; flex-wrap:wrap}
+  button{padding:10px 14px; border-radius:10px; border:1px solid var(--line); background:#fff; cursor:pointer; font-size:16px}
+  .primary{background:var(--brand); color:#fff; border-color:var(--brand)}
+  .primary:hover{background:var(--brand-2); border-color:var(--brand-2)}
+  .ok{color:var(--ok)}
+
+  /* ปุ่มลบแบบกรอบธรรมดา */
+  .btn-ghost-danger{
+    background:#fff; color:#111; border:1px solid var(--line);
+  }
+  .btn-ghost-danger:hover{filter:brightness(.98)}
+
+  /* ลิสต์ */
+  .list{margin-top:16px}
+  .list-head{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; color:var(--muted); font-size:14px}
+  .item{display:grid; grid-template-columns: 1fr auto; gap:12px; align-items:center; padding:12px 12px; border-top:1px dashed var(--line)}
+  .item h4{margin:0 0 4px 0; font-size:18px}
+  .meta{display:flex; flex-wrap:wrap; gap:6px; margin-top:4px}
+  .chip{background:var(--chip); border:1px solid var(--line); padding:2px 8px; border-radius:999px; font-size:12px}
+  .imgs{display:flex; gap:6px}
+  .thumb{width:56px; height:56px; object-fit:cover; border-radius:8px; border:1px solid var(--line)}
+  .muted{color:var(--muted)}
+
+  /* Side View (อย่าปรับตามคำขอ) */
+  .sideview{position:fixed; inset:0; display:none; z-index:50}
+  .sideview.show{display:block}
+  .sideview .backdrop{position:absolute; inset:0; background:rgba(2,8,23,.45)}
+  .sideview .panel{
+    position:absolute; top:0; right:0; height:100%; width:min(420px, 92vw);
+    background:#fff; border-left:1px solid var(--line); box-shadow: -8px 0 24px -16px rgba(2,8,23,.35);
+    display:flex; flex-direction:column; transform:translateX(100%); transition:transform .28s ease;
+  }
+  .sideview.show .panel{transform:translateX(0)}
+  .side-hd{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 16px; border-bottom:1px solid var(--line)}
+  .side-bd{padding:14px 16px; overflow:auto}
+  .bigimgs{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:8px}
+  .bigimgs img{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:10px; border:1px solid var(--line)}
+  .side-row{display:grid; grid-template-columns:96px 1fr; gap:10px; padding:8px 0; border-bottom:1px dashed var(--line)}
+  .side-row b{color:#555}
+  .side-actions{display:flex; gap:8px; padding:12px 16px; border-top:1px solid var(--line)}
+  .linklike{background:#fff; border-color:var(--brand); color:var(--brand)}
+
+  /* Accordion (ยุบ/ขยาย) */
+  details.ac{border:1px solid var(--line); border-radius:12px; background:#fff; overflow:hidden}
+  details.ac + details.ac{margin-top:12px}
+  details.ac[open] .ac-body{animation:fade .15s ease}
+  summary.ac-hd{
+    list-style:none; cursor:pointer; padding:12px 16px; font-weight:700; display:flex; align-items:center; gap:10px;
+    background:linear-gradient(180deg,#fffdf5,#fff8db);
+    border-bottom:1px solid var(--line); font-size:18px;
+  }
+  summary.ac-hd::-webkit-details-marker{display:none}
+  .ac-body{padding:14px 16px}
+  .caret{margin-left:auto; transition:transform .2s ease}
+  details[open] .caret{transform:rotate(90deg)}
+  @keyframes fade{from{opacity:0; transform:translateY(-2px)} to{opacity:1; transform:translateY(0)}}
+
+  /* ===== FILTER BAR ===== */
+  .filter-bar{display:grid; grid-template-columns: 1fr 1fr 1fr auto; gap:12px; align-items:end; margin-bottom:10px}
+  .filter-actions{display:flex; gap:8px}
+  .active-filters{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
+  .pill{display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; background:#fff; border:1px solid var(--line); font-size:12px}
+  .pill button{border:none; background:transparent; cursor:pointer; padding:0 4px}
+
+  /* ===== Mobile tweaks ===== */
+  @media (max-width:720px){
+    .wrap{padding:12px}
+    .hd{padding:12px 14px; font-size:16px}
+    .bd{padding:12px 14px}
+    summary.ac-hd{padding:10px 12px; font-size:16px}
+    .ac-body{padding:12px}
+    .row{grid-template-columns:1fr; gap:10px}
+    .filter-bar{grid-template-columns: 1fr; gap:8px}
+    label{font-size:12px}
+    input[type="text"], input[type="tel"], input[type="file"], select{padding:9px 10px; font-size:14px}
+    button{padding:8px 10px; border-radius:8px; font-size:14px}
+    .item{grid-template-columns:1fr; gap:10px; padding:10px}
+    .item h4{font-size:16px}
+    .chip{font-size:11px; padding:2px 6px}
+    .thumb{width:48px; height:48px}
+  }
+
+  /* เล็กมาก (<= 400px) เพิ่มความหนาแน่นอีกนิด */
+  @media (max-width:400px){
+    .hd{font-size:15px}
+    input[type="text"], input[type="tel"], input[type="file"], select{font-size:13px}
+    button{font-size:13px}
+    .item h4{font-size:15px}
+  }
+
+  /* ===== Confirm Modal (ใหม่) – ใช้แทน window.confirm() ===== */
+  .confirm-backdrop{
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(2,8,23,.45); z-index:9999; padding:16px;
+  }
+  .confirm-backdrop.show{display:flex}
+  .confirm-box{
+    width:min(92vw, 360px); background:#fff; border:1px solid var(--line); border-radius:16px;
+    box-shadow:var(--shadow); padding:18px;
+  }
+  .confirm-title{font-weight:700; margin:0 0 6px 0}
+  .confirm-text{margin:0 0 14px 0; color:var(--muted)}
+  .confirm-actions{display:flex; gap:8px; justify-content:flex-end}
+  .btn-danger{background:#fff; color:var(--danger); border-color:var(--danger)}
+  .btn-danger:hover{filter:brightness(.98)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="hd"><span class="icon">🌾</span> ประกาศขายฟาง — จัดการประกาศ</div>
+    <div class="bd">
+
+      <!-- ===== ตัวกรองโพส (ใหม่) ===== -->
+      <details class="ac" open>
+        <summary class="ac-hd">🔎 ตัวกรองโพส <span class="caret">▶</span></summary>
+        <div class="ac-body">
+          <div class="filter-bar">
+            <div>
+              <label for="provinceSelect">จังหวัด</label>
+              <select id="provinceSelect">
+                <option value="">— ทุกจังหวัด —</option>
+              </select>
+            </div>
+            <div>
+              <label for="placeInput">สถานที่/คำค้น</label>
+              <input id="placeInput" type="text" placeholder="เช่น อำเภอ เมือง หน่วยงาน จุดนัดรับ">
+            </div>
+            <div>
+              <label for="shipInput">พื้นที่จัดส่ง (ค้นจากข้อความ)</label>
+              <input id="shipInput" type="text" placeholder="เช่น ส่งทั่วจังหวัด / 50 กม. / ใกล้เคียง">
+            </div>
+            <div class="filter-actions">
+              <button id="btnApply" class="primary">ค้นหา</button>
+              <button id="btnClear">ล้างตัวกรอง</button>
+            </div>
+          </div>
+          <div id="activeFilters" class="active-filters"></div>
+        </div>
+      </details>
+
+      <!-- เพิ่มข้อมูล = ยุบ/ขยาย (เริ่มต้นซ่อน) -->
+      <details class="ac" id="ac-create">
+        <summary class="ac-hd">➕ บันทึก/เพิ่มข้อมูล <span class="caret">▶</span></summary>
+        <div class="ac-body">
+          <div class="row">
+            <div>
+              <label>ชื่อผู้ขาย</label>
+              <input id="ownerName" type="text" placeholder="เช่น คุณสมชาย เกษตรกร"/>
+            </div>
+            <div>
+              <label>หัวข้อ/ชนิดฟาง</label>
+              <input id="dogName" type="text" placeholder="เช่น ฟางข้าวนิ่มอัดก้อน แห้งสนิท"/>
+            </div>
+            <div>
+              <label>เบอร์ติดต่อ</label>
+              <input id="phone" type="tel" placeholder="081-234-5678"/>
+            </div>
+            <div>
+              <label>ราคาโดยประมาณ</label>
+              <input id="reward" type="text" placeholder="เช่น 35 บาท/กก. หรือ 45 บาท/มัด"/>
+            </div>
+            <div>
+              <label>พื้นที่/การจัดส่ง</label>
+              <input id="lastSeen" type="text" placeholder="เช่น โคราช ส่งได้รัศมี 50 กม."/>
+            </div>
+            <div>
+              <label>รหัสประกาศ (ถ้าใส่ = แก้ไข, ว่าง = เพิ่มใหม่)</label>
+              <input id="id" type="text" placeholder="เพิ่มใหม่เว้นว่างไว้"/>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:12px">
+            <div>
+              <label>รูปที่ 1</label>
+              <input id="image1" type="file" accept="image/*"/>
+            </div>
+            <div>
+              <label>รูปที่ 2</label>
+              <input id="image2" type="file" accept="image/*"/>
+            </div>
+            <div>
+              <label>รูปที่ 3</label>
+              <input id="image3" type="file" accept="image/*"/>
+            </div>
+          </div>
+
+          <!-- ปุ่มเดียว ใช้ได้ทั้งเพิ่ม & แก้ไข -->
+          <div class="btns" style="margin-top:14px">
+            <button class="primary" id="btnSave">บันทึก/เพิ่มข้อมูล</button>
+          </div>
+
+          <div id="msg" style="margin-top:10px" class="muted"></div>
+        </div>
+      </details>
+
+      <!-- หัวลิสต์ + จำนวนที่พบ -->
+      <div class="list-head">
+        <div id="countText">กำลังโหลด…</div>
+        <div></div>
+      </div>
+
+      <!-- ลิสต์รายการ -->
+      <div class="list" id="list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Side View (ไม่แก้ไข) -->
+<div id="sideview" class="sideview" aria-hidden="true">
+  <div class="backdrop" onclick="closeSide()"></div>
+  <div class="panel" role="dialog" aria-modal="true">
+    <div class="side-hd">
+      <div style="display:flex;align-items:center;gap:8px">
+        <span>🌾</span><b id="svTitle">รายละเอียด</b>
+      </div>
+      <button onclick="closeSide()">✖️ ปิด</button>
+    </div>
+    <div class="side-bd">
+      <div class="bigimgs" id="svImgs"></div>
+
+      <div class="side-row"><b>รหัส</b><div id="svId">-</div></div>
+      <div class="side-row"><b>ผู้ขาย</b><div id="svOwner">-</div></div>
+      <div class="side-row"><b>หัวข้อ</b><div id="svName">-</div></div>
+      <div class="side-row"><b>ราคา</b><div id="svPrice">-</div></div>
+      <div class="side-row"><b>ติดต่อ</b><div id="svPhone">-</div></div>
+      <div class="side-row"><b>พื้นที่</b><div id="svArea">-</div></div>
+      <div class="side-row"><b>วันที่</b><div id="svCreated">-</div></div>
+    </div>
+    <div class="side-actions">
+      <button class="linklike" id="svFill">ใส่ลงแบบฟอร์มเพื่อแก้ไข</button>
+      <button class="primary" id="svCall">โทร / แชท</button>
+    </div>
+  </div>
+</div>
+
+<!-- === Confirm Modal (ใหม่) === -->
+<div id="confirmBackdrop" class="confirm-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="confirm-box">
+    <h3 id="confirmTitle" class="confirm-title">ยืนยันการลบโพสนี้?</h3>
+    <p class="confirm-text">การลบไม่สามารถย้อนกลับได้</p>
+    <div class="confirm-actions">
+      <button id="confirmCancel">ยกเลิก</button>
+      <button id="confirmOk" class="btn-danger">🗑️ ลบเลย</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzlcpIEkW3-mWrGfZOB5Wglbm3n7I_IORPiXhD-yCrJhfRBC0Ia7kAruJB3k72p-3Qk/exec'; // << ใส่ของคุณ
+
+/* ===== Utilities ===== */
+function setMsg(text, ok=false){
+  const el = document.getElementById('msg');
+  if(!el) return;
+  el.textContent = text || '';
+  el.className = ok ? 'ok' : 'muted';
+}
+function esc(s){ return (s??'').toString().replace(/[&<>"']/g,m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])) }
+function scrollToForm(){ const ac=document.getElementById('ac-create'); if(ac && !ac.open) ac.open=true; ac?.scrollIntoView({behavior:'smooth', block:'start'}); }
+const norm = s => (s??'').toString().toLowerCase().normalize('NFKC').trim();
+
+/* ===== Provinces (77) ===== */
+const PROVINCES = ["กรุงเทพมหานคร","กระบี่","กาญจนบุรี","กาฬสินธุ์","กำแพงเพชร","ขอนแก่น","จันทบุรี","ฉะเชิงเทรา","ชลบุรี","ชัยนาท","ชัยภูมิ","ชุมพร","เชียงราย","เชียงใหม่","ตรัง","ตราด","ตาก","นครนายก","นครปฐม","นครพนม","นครราชสีมา","นครศรีธรรมราช","นครสวรรค์","นนทบุรี","นราธิวาส","น่าน","บึงกาฬ","บุรีรัมย์","ปทุมธานี","ประจวบคีรีขันธ์","ปราจีนบุรี","ปัตตานี","พระนครศรีอยุธยา","พังงา","พัทลุง","พิจิตร","พิษณุโลก","เพชรบุรี","เพชรบูรณ์","แพร่","พะเยา","ภูเก็ต","มหาสารคาม","มุกดาหาร","ยะลา","ยโสธร","ระนอง","ระยอง","ราชบุรี","ร้อยเอ็ด","ลพบุรี","ลำปาง","ลำพูน","เลย","ศรีสะเกษ","สกลนคร","สงขลา","สตูล","สมุทรปราการ","สมุทรสงคราม","สมุทรสาคร","สระแก้ว","สระบุรี","สิงห์บุรี","สุโขทัย","สุพรรณบุรี","สุราษฎร์ธานี","สุรินทร์","หนองคาย","หนองบัวลำภู","อ่างทอง","อำนาจเจริญ","อุดรธานี","อุตรดิตถ์","อุทัยธานี","อุบลราชธานี"];
+
+/* ====== FILTERS STATE ====== */
+let ALL_ROWS = [];    // เก็บทั้งหมดจาก backend
+let VIEW_ROWS = [];   // แถวหลังกรอง
+const filters = { province:"", place:"", ship:"" };
+
+function populateProvinces(){
+  const sel = document.getElementById('provinceSelect');
+  PROVINCES.forEach(p=>{
+    const o = document.createElement('option'); o.value=p; o.textContent=p; sel.appendChild(o);
+  });
+}
+
+function guessProvinceFromText(txt=""){
+  // หา “จังหวัด/คำย่อ/ชื่อเล่น” จากข้อความพื้นที่/การจัดส่ง
+  const t = norm(txt);
+  // โคราช -> นครราชสีมา / กทม -> กรุงเทพมหานคร
+  const nick = { "กทม":"กรุงเทพมหานคร","กรุงเทพ":"กรุงเทพมหานคร","โคราช":"นครราชสีมา","อยุธยา":"พระนครศรีอยุธยา" };
+  for(const [k,v] of Object.entries(nick)){ if(t.includes(norm(k))) return v; }
+  for(const p of PROVINCES){ if(t.includes(norm(p))) return p; }
+  return "";
+}
+
+function buildActiveFilterPills(){
+  const wrap = document.getElementById('activeFilters');
+  const pills = [];
+  if(filters.province) pills.push({key:'province', label:`จังหวัด: ${filters.province}`});
+  if(filters.place)    pills.push({key:'place',    label:`สถานที่: ${filters.place}`});
+  if(filters.ship)     pills.push({key:'ship',     label:`พื้นที่จัดส่ง: ${filters.ship}`});
+  wrap.innerHTML = pills.map(p=>`<span class="pill">${esc(p.label)} <button aria-label="ลบตัวกรอง" onclick="removeFilter('${p.key}')">✕</button></span>`).join('');
+}
+
+function removeFilter(key){
+  if(key==='province') document.getElementById('provinceSelect').value = '';
+  if(key==='place')    document.getElementById('placeInput').value = '';
+  if(key==='ship')     document.getElementById('shipInput').value = '';
+  applyFilters();
+}
+
+function applyFilters(){
+  filters.province = document.getElementById('provinceSelect').value || "";
+  filters.place    = document.getElementById('placeInput').value || "";
+  filters.ship     = document.getElementById('shipInput').value || "";
+
+  const pq = norm(filters.place);
+  const sq = norm(filters.ship);
+  const province = filters.province;
+
+  VIEW_ROWS = ALL_ROWS.filter(r=>{
+    const area = norm(r.lastSeen||"");
+    const name = norm(r.dogName||"");
+    const owner= norm(r.ownerName||"");
+
+    // province: ใช้ province ที่กรอกโดยผู้ขายใน lastSeen หรือเดาจากข้อความ
+    const rowProvince = r._province || guessProvinceFromText(r.lastSeen||"");
+
+    const okProvince = province ? (rowProvince===province) : true;
+    const okPlace    = pq ? (area.includes(pq) || name.includes(pq) || owner.includes(pq)) : true;
+    const okShip     = sq ? area.includes(sq) : true;
+
+    return okProvince && okPlace && okShip;
+  });
+
+  buildActiveFilterPills();
+  renderList(VIEW_ROWS);
+}
+
+/* ===== Backend I/O ===== */
+function fileToBase64(file){
+  return new Promise((resolve, reject)=>{
+    if(!file) return resolve('');
+    const reader = new FileReader();
+    reader.onload = () => {
+      const res = String(reader.result || '');
+      resolve(res.includes(',') ? res.split(',').pop() : res);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function postForm(params){
+  const body = new URLSearchParams(params);
+  const res = await fetch(WEB_APP_URL, {
+    method: 'POST',
+    headers: {'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+    body
+  });
+  return await res.json();
+}
+
+/* ===== Render ===== */
+function renderList(rows){
+  const list = document.getElementById('list');
+  const count = document.getElementById('countText');
+  const total = ALL_ROWS.length;
+  const n = rows?.length || 0;
+  count.textContent = `พบ ${n.toLocaleString()} รายการ ${n!==total ? `(จากทั้งหมด ${total.toLocaleString()})` : ''}`;
+
+  if(!rows || !rows.length){
+    list.innerHTML = '<div class="muted">ไม่พบรายการที่ตรงกับตัวกรอง</div>';
+    return;
+  }
+
+  list.innerHTML = rows.map(r=>{
+    const imgs = [r.image1Url, r.image2Url, r.image3Url].filter(Boolean);
+    const thumbs = imgs.map(u=>`<img class="thumb" src="${esc(u)}" alt="">`).join('');
+    const rjson = esc(JSON.stringify(r));
+    // แสดงจังหวัด (คำนวนจาก lastSeen ถ้าไม่มี)
+    const rowProv = r._province || guessProvinceFromText(r.lastSeen||"") || '-';
+    return `
+      <div class="item">
+        <div onclick='openSide(JSON.parse(this.dataset.r))' data-r='${rjson}' style="cursor:pointer">
+          <h4>🌾 ${esc(r.dogName || '(ยังไม่ระบุหัวข้อ)')}</h4>
+          <div class="meta">
+            <span class="chip">ราคา: ${esc(r.reward || '-')}</span>
+            <span class="chip">จังหวัด: ${esc(rowProv)}</span>
+            <span class="chip">พื้นที่: ${esc(r.lastSeen || '-')}</span>
+            <span class="chip">ผู้ขาย: ${esc(r.ownerName || '-')}</span>
+          </div>
+          <div class="imgs" style="margin-top:8px">${thumbs || ''}</div>
+        </div>
+        <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap">
+          <button onclick='openSide(JSON.parse(this.dataset.r))' data-r='${rjson}'>👁️ ดูรายละเอียด</button>
+          <button onclick='fillForm(JSON.parse(this.dataset.r)); scrollToForm();' data-r='${rjson}'>✍️ ใส่แบบฟอร์ม</button>
+          <button class="btn-ghost-danger" onclick='handleDelete(JSON.parse(this.dataset.r))' data-r='${rjson}'>🗑️ ลบโพส</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function fillForm(r){
+  document.getElementById('id').value = r.id || '';
+  document.getElementById('ownerName').value = r.ownerName || '';
+  document.getElementById('dogName').value = r.dogName || '';
+  document.getElementById('phone').value = r.phone || '';
+  document.getElementById('reward').value = r.reward || '';
+  document.getElementById('lastSeen').value = r.lastSeen || '';
+  scrollToForm();
+  setMsg('ใส่ข้อมูลลงฟอร์มแล้ว (แก้ไขได้)', true);
+}
+
+function openSide(r){
+  const sv = document.getElementById('sideview');
+  document.getElementById('svTitle').textContent = r.dogName || '(ยังไม่ระบุหัวข้อ)';
+  document.getElementById('svId').textContent = r.id || '-';
+  document.getElementById('svOwner').textContent = r.ownerName || '-';
+  document.getElementById('svName').textContent = r.dogName || '-';
+  document.getElementById('svPrice').textContent = r.reward || '-';
+  document.getElementById('svPhone').textContent = r.phone || '-';
+  document.getElementById('svArea').textContent = r.lastSeen || '-';
+  document.getElementById('svCreated').textContent = r.createdAt || '-';
+
+  const imgs = [r.image1Url, r.image2Url, r.image3Url].filter(Boolean);
+  document.getElementById('svImgs').innerHTML = imgs.length
+    ? imgs.map(u=>`<img src="${esc(u)}" alt="">`).join('')
+    : '<div class="muted">ไม่มีรูปแนบ</div>';
+
+  document.getElementById('svFill').onclick = ()=>{ fillForm(r); closeSide(); };
+  document.getElementById('svCall').onclick = ()=>{
+    if(r.phone){ window.location.href = `tel:${r.phone}`; }
+    else alert('ไม่มีเบอร์ติดต่อ');
+  };
+
+  sv.classList.add('show');
+  sv.setAttribute('aria-hidden','false');
+}
+function closeSide(){
+  const sv = document.getElementById('sideview');
+  sv.classList.remove('show');
+  sv.setAttribute('aria-hidden','true');
+}
+
+/* ===== Load list & enrich rows ===== */
+async function handleList(){
+  setMsg('กำลังโหลดรายการ…');
+  try{
+    const data = await postForm({action:'list'});
+    if(!data.ok) throw new Error(data.error || 'list error');
+    // enrich: เดา province ล่วงหน้า (แคชไว้ใน _province)
+    ALL_ROWS = (data.rows || []).map(r => ({...r, _province: guessProvinceFromText(r.lastSeen||"")}));
+    VIEW_ROWS = [...ALL_ROWS];
+    setMsg('โหลดรายการสำเร็จ', true);
+    renderList(VIEW_ROWS);
+  }catch(err){
+    setMsg('ผิดพลาด: '+err.message);
+  }
+}
+
+/* ===== Confirm Modal utilities (ใหม่) ===== */
+function showConfirm(onYes, opts={}){
+  const backdrop = document.getElementById('confirmBackdrop');
+  const btnOk = document.getElementById('confirmOk');
+  const btnCancel = document.getElementById('confirmCancel');
+  const title = document.getElementById('confirmTitle');
+
+  if(opts.title) title.textContent = String(opts.title);
+  backdrop.classList.add('show');
+
+  const close = ()=>backdrop.classList.remove('show');
+
+  const onOk = ()=>{ cleanup(); close(); onYes && onYes(); };
+  const onCancel = ()=>{ cleanup(); close(); };
+  const onKey = (e)=>{ if(e.key==='Escape') onCancel(); if(e.key==='Enter') onOk(); };
+  const onClickBackdrop = (e)=>{ if(e.target === backdrop) onCancel(); };
+
+  function cleanup(){
+    btnOk.removeEventListener('click', onOk);
+    btnCancel.removeEventListener('click', onCancel);
+    window.removeEventListener('keydown', onKey);
+    backdrop.removeEventListener('click', onClickBackdrop);
+  }
+
+  btnOk.addEventListener('click', onOk);
+  btnCancel.addEventListener('click', onCancel);
+  window.addEventListener('keydown', onKey);
+  backdrop.addEventListener('click', onClickBackdrop);
+}
+
+/* ปุ่มเดียว: ถ้ามี id => update, ถ้าไม่มี => create แล้วรีเฟรชรายการ */
+document.getElementById('btnSave').addEventListener('click', async ()=>{
+  try{
+    setMsg('กำลังบันทึก…');
+    const id        = document.getElementById('id').value.trim();
+    const ownerName = document.getElementById('ownerName').value.trim();
+    const dogName   = document.getElementById('dogName').value.trim();
+    const phone     = document.getElementById('phone').value.trim();
+    const reward    = document.getElementById('reward').value.trim();
+    const lastSeen  = document.getElementById('lastSeen').value.trim();
+
+    const f1 = document.getElementById('image1').files[0] || null;
+    const f2 = document.getElementById('image2').files[0] || null;
+    const f3 = document.getElementById('image3').files[0] || null;
+
+    const [b1,b2,b3] = await Promise.all([fileToBase64(f1), fileToBase64(f2), fileToBase64(f3)]);
+
+    if(id){
+      const p = { action:'update', id, ownerName, dogName, phone, reward, lastSeen };
+      if(f1){ p.image1 = b1; p.image1_type = f1.type; p.image1_name = f1.name; }
+      if(f2){ p.image2 = b2; p.image2_type = f2.type; p.image2_name = f2.name; }
+      if(f3){ p.image3 = b3; p.image3_type = f3.type; p.image3_name = f3.name; }
+      const data = await postForm(p);
+      if(!data.ok) throw new Error(data.error || 'update error');
+      setMsg('อัปเดตสำเร็จ', true);
+    }else{
+      const params = {
+        action: 'create',
+        ownerName, dogName, phone, reward, lastSeen,
+        image1: b1, image1_type: f1 ? f1.type : '', image1_name: f1 ? f1.name : '',
+        image2: b2, image2_type: f2 ? f2.type : '', image2_name: f2 ? f2.name : '',
+        image3: b3, image3_type: f3 ? f3.type : '', image3_name: f3 ? f3.name : ''
+      };
+      const data = await postForm(params);
+      if(!data.ok) throw new Error(data.error || 'create error');
+      setMsg('เพิ่มข้อมูลสำเร็จ: '+ data.row.id, true);
+      ['image1','image2','image3'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+    }
+
+    await handleList();
+    const ac = document.getElementById('ac-create'); if(ac) ac.open = false;
+  }catch(err){
+    setMsg('ผิดพลาด: '+err.message);
+  }
+});
+
+/* ลบโพส: ใช้ modal ของเราเองแทน window.confirm() */
+function handleDelete(r){
+  if(!r?.id) return alert('ไม่พบ ID ของโพส');
+
+  showConfirm(async ()=>{
+    try{
+      setMsg('กำลังลบ…');
+      const data = await postForm({
+        action:'delete',
+        id: r.id,
+        deleteImages: '1',
+        image1Url: r.image1Url || '',
+        image2Url: r.image2Url || '',
+        image3Url: r.image3Url || ''
+      });
+      if(!data.ok) throw new Error(data.error || 'delete error');
+      setMsg('ลบสำเร็จ', true);
+      await handleList();
+      const sv = document.getElementById('sideview');
+      if(sv?.classList.contains('show')) closeSide();
+    }catch(err){
+      setMsg('ผิดพลาด: '+err.message);
+    }
+  }, { title:'ยืนยันการลบโพสนี้?' });
+}
+
+/* ===== Filter wiring ===== */
+document.getElementById('btnApply').addEventListener('click', applyFilters);
+document.getElementById('btnClear').addEventListener('click', ()=>{
+  document.getElementById('provinceSelect').value='';
+  document.getElementById('placeInput').value='';
+  document.getElementById('shipInput').value='';
+  applyFilters();
+});
+document.getElementById('placeInput').addEventListener('keydown', e=>{ if(e.key==='Enter') applyFilters(); });
+document.getElementById('shipInput').addEventListener('keydown', e=>{ if(e.key==='Enter') applyFilters(); });
+
+/* โหลดรายการเมื่อเข้าเพจ */
+populateProvinces();
+handleList();
+
+/* ปิด SideView ด้วย ESC */
+window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeSide(); });
+</script>
+</body>
+</html>
