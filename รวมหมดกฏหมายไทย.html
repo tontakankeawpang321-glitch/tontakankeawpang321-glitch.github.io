@@ -541,9 +541,8 @@ loadJsonAndStart();
   try {
     genAI = new GoogleGenerativeAI(API_KEY);
 
-    // ✅ ใช้รุ่น -latest เพื่อให้เข้ากับ API v1 ล่าสุด
-    model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
-
+ // ✅ ใช้รุ่น 1.5-flash
+    model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const generationConfig = {
       temperature: 0.7,
       maxOutputTokens: 2048,
@@ -654,3 +653,4 @@ loadJsonAndStart();
 
 </body>
 </html>
+
