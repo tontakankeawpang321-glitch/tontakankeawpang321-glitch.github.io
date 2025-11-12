@@ -531,14 +531,14 @@ loadJsonAndStart();
   let model;
   let chat;
 
-  try {
+try {
     genAI = new GoogleGenerativeAI(API_KEY);
-    model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    // ❗️ เปลี่ยน "gemini-pro" เป็น "gemini-1.5-flash" ตรงนี้ครับ ❗️
+    model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     // เริ่มแชทใหม่ (เก็บประวัติการสนทนา)
     chat = model.startChat();
   } catch (e) {
     console.error("AI Initialization Error:", e);
-    // (เราจะแสดงข้อผิดพลาดในแชทถ้าผู้ใช้พยายามส่ง)
   }
 
   // --- ส่วนควบคุม Chatbot (UI) ---
@@ -671,3 +671,4 @@ loadJsonAndStart();
 
 </body>
 </html>
+
