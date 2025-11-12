@@ -101,7 +101,7 @@
 
   @media (max-width:420px){ .catbar{grid-template-columns:1fr 1fr} }
 
-  /* ===== CSS ของ Chatbot (ที่เหมือนกับ 3 ไฟล์นั้น) ===== */
+  /* ===== CSS ของ Chatbot ===== */
   .chat-bubble::before {
     content: '';
     position: absolute;
@@ -280,16 +280,17 @@ async function loadJsonAndStart() {
       `<div class="empty">ไม่สามารถโหลดข้อมูลได้</div>`;
   }
 }
+
 /* * ==================================================================
- * ❗️❗️ จุดที่ปรับให้ตรงกับ lawsData.json ของคุณ ❗️❗️
+ * ❗️❗️ จุดที่ 1: แก้ไขให้ตรงกับ lawsData.json ❗️❗️
  * ================================================================== 
  */
 const COLS = { 
   category: "หมวด", 
   title: "ชื่อกฎหมาย", 
   date: "วันที่", 
-  volume: "เล่มตอน",  // <-- ปรับให้ตรงกับ "เล่มตอน"
-  url: "URL_Pdf"     // <-- ปรับให้ตรงกับ "URL_Pdf"
+  volume: "เล่มตอน",  // <-- ใช้ "เล่มตอน"
+  url: "URL_PD"     // <-- แก้เป็น "URL_PD" ให้ตรงกับ JSON
 };
 const col = k => COLS[k];
 
@@ -460,7 +461,7 @@ btnPrev.addEventListener('click', ()=>{
 const elQ = $("#q"), elBtnSearch=$("#btnSearch");
 elBtnSearch.addEventListener('click', doSearch);
 elQ.addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
-function normalizeThai(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim().normalize('NFC').replace(/[\u0E31\uE0E34-\u0E3A\u0E47-\u0E4E]/g,''); }
+function normalizeThai(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim().normalize('NFC').replace(/[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/g,''); }
 function doSearch(){
   const q=(elQ.value||'').trim();
   if(!q){ if(selectedCat) renderPage(selectedCat); return; }
@@ -531,14 +532,20 @@ loadJsonAndStart();
   let model;
   let chat;
 
-try {
+  try {
     genAI = new GoogleGenerativeAI(API_KEY);
-    // ❗️ เปลี่ยน "gemini-pro" เป็น "gemini-1.5-flash" ตรงนี้ครับ ❗️
+
+    /* * ==================================================================
+     * ❗️❗️ จุดที่ 2: อัปเกรดโมเดลเป็น gemini-1.5-flash ❗️❗️
+     * ================================================================== 
+     */
     model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    
     // เริ่มแชทใหม่ (เก็บประวัติการสนทนา)
     chat = model.startChat();
   } catch (e) {
     console.error("AI Initialization Error:", e);
+    // (เราจะแสดงข้อผิดพลาดในแชทถ้าผู้ใช้พยายามส่ง)
   }
 
   // --- ส่วนควบคุม Chatbot (UI) ---
@@ -671,4 +678,3 @@ try {
 
 </body>
 </html>
-
