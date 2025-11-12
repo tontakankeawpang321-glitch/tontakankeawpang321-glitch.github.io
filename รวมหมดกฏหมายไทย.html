@@ -142,13 +142,16 @@ let lawsData = [];
 
 async function loadJsonAndStart() {
   try {
-    const res = await fetch("./lawsData.json");
+    const res = await fetch("./lawsData.json", { cache: "no-store" });
     lawsData = await res.json();
+
     renderChips();
     loadAllData();
+
     const u = new URL(location.href);
-    const initQ = u.searchParams.get('q') || '';
-    if (initQ) { $("#q").value = initQ; doSearch(); }
+    const initQ = u.searchParams.get("q") || "";
+    if (initQ) { document.querySelector("#q").value = initQ; doSearch(); }
+
   } catch (e) {
     console.error("โหลด lawsData.json ไม่สำเร็จ", e);
     document.getElementById("list").innerHTML =
@@ -425,3 +428,4 @@ loadJsonAndStart();
 </script>
 </body>
 </html>
+
