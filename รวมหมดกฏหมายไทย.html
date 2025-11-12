@@ -650,21 +650,23 @@ newChatBtn.addEventListener('click', async () => {
 
 // --- ส่วนควบคุมการเปิด/ปิด (Glue) ---
 const fabToggle = document.getElementById('fab-chat-toggle');
-const chatModal = document.getElementById('chatbot-modal');
-const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
-if (fabToggle && chatModal && chatbotCloseBtn) {
-  fabToggle.addEventListener('click', () => {
-    chatModal.classList.remove('chatbot-hidden');
-    fabToggle.style.opacity = '0';
-  });
-  chatbotCloseBtn.addEventListener('click', () => {
-    chatModal.classList.add('chatbot-hidden');
-    fabToggle.style.opacity = '1';
-  });
-}
+  const chatModal = document.getElementById('chatbot-modal');
+  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+  if (fabToggle && chatModal && chatbotCloseBtn) {
+    fabToggle.addEventListener('click', () => {
+      chatModal.classList.remove('chatbot-hidden');
+      fabToggle.style.opacity = '0';
+    });
+    chatbotCloseBtn.addEventListener('click', () => {
+      chatModal.classList.add('chatbot-hidden');
+      fabToggle.style.opacity = '1';
+    });
+  }
 
+</script>
 </body>
 </html>
+
 
 
 
