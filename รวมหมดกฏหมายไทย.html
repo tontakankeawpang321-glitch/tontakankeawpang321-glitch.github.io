@@ -14,7 +14,6 @@
 <script type="module" src="https://unpkg.com/@google/generative-ai"></script>
 
 <style>
-  /* ... (CSS ทั้งหมดของหน้ากฎหมาย และ Chatbot อยู่ตรงนี้ - เหมือนเดิม 100%) ... */
   :root{
     /* ⚖️ โทนกฎหมาย สุภาพอ่านง่าย */
     --bg:#ffffff;
@@ -38,10 +37,71 @@
   .wrap{max-width:980px;margin:0 auto;padding:12px 12px 28px}
   .section{margin-top:12px}
 
-  /* ... (CSS อื่นๆ ทั้งหมด) ... */
+  /* กล่อง/การ์ด */
+  .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px;box-shadow:0 10px 20px -18px rgba(0,0,0,.18)}
+  .row{display:flex;gap:8px;align-items:center;justify-content:space-between}
+  .row h3{color:var(--brand)}
+  .note{color:var(--muted);font-size:12px}
+
+  /* ปุ่ม 3D โทนกฎหมาย */
+  .btn{
+    appearance:none;border:1px solid #d7dbe6;background:linear-gradient(#ffffff,#f7f9fd);
+    padding:10px 14px;border-radius:12px;cursor:pointer;color:#0f1a2b;font-weight:700;
+    box-shadow:var(--shadow-sm),var(--shadow-inset);transform:translateY(0);
+    transition:transform .05s, box-shadow .1s, filter .15s; text-shadow:0 1px 0 rgba(255,255,255,.9);
+  }
+  .btn:hover{filter:brightness(1.02)}
+  .btn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(15,26,43,.18), 0 6px 14px -10px rgba(0,0,0,.15), inset 0 2px 0 rgba(0,0,0,.06)}
+  .btn.primary{border-color:#e7dba9;background:linear-gradient(var(--ivory), #ffeaa8)}
+  .btn.secondary{background:linear-gradient(#ffffff,#f4f6fb);border-color:#d7dbe6}
+
+  /* ค้นหา */
+  .searchbar{display:flex;gap:8px;margin:8px 0 12px}
+  .searchbar input{flex:1;height:42px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:inset 0 2px 6px rgba(0,0,0,.03)}
+
+  /* ชิปหมวดใหญ่ (Fixed 6 หมวด) */
+  .catbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+  .chip{
+    display:flex;align-items:center;gap:8px;justify-content:center;
+    padding:14px 12px;border-radius:18px;border:1px solid var(--line);
+    background:linear-gradient(#ffffff,#f6f7fb);
+    box-shadow:0 8px 20px -16px rgba(0,0,0,.18);
+    cursor:pointer;font-weight:800;color:var(--ink);
+  }
+  .chip .emoji{font-size:18px}
+  .chip.active{border-color:#d9e1f2;background:linear-gradient(#f7fbff,#eef3ff);color:var(--brand)}
+  .chip:focus-visible{outline:2px solid #b6c6ff;outline-offset:2px}
+
+  /* รายการ */
+  .list{display:grid;gap:10px;margin-top:10px}
+  .card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;box-shadow:0 8px 18px -16px rgba(0,0,0,.15)}
+  .title{margin:0 0 4px;font-weight:800;color:var(--brand)}
+  .meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+  .tag{background:#f7f9ff;border:1px solid #e2e7f2;border-radius:999px;padding:2px 8px}
+  .actions{margin-top:8px}
+  .link{
+    display:inline-block;font-weight:800;border:1px solid #e7dba9;border-radius:10px;padding:6px 12px;text-decoration:none;
+    color:#3b2f0a;background:linear-gradient(var(--ivory), #ffeaa8);box-shadow:var(--shadow-sm),var(--shadow-inset)
+  }
+  .link:active{transform:translateY(2px)}
+
+  /* สไลด์ล่าสุด */
+  .latest-slider{position:relative}
+  .latest-viewport{overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff}
+  .latest-track{display:flex;transition:transform .35s ease;will-change:transform}
+  .latest-slide{min-width:100%;padding:12px;display:grid;grid-template-columns:1fr;gap:6px;border-right:1px solid var(--line)}
+  .latest-slide h4{margin:0 0 4px;font-size:14px;font-weight:800;color:var(--brand)}
+  .latest-slide .meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px}
+  .dots{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:8px}
+  .dot{width:6px;height:6px;border-radius:50%;background:#d9e1f2;opacity:.95}
+  .dot.active{background:#1f3d75}
+
+  .loadbar{display:flex;justify-content:center;gap:8px;margin-top:10px}
+  .empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px;background:#fff}
 
   @media (max-width:420px){ .catbar{grid-template-columns:1fr 1fr} }
 
+  /* ===== CSS ของ Chatbot ===== */
   .chat-bubble::before {
     content: '';
     position: absolute;
@@ -84,6 +144,8 @@
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
   }
+  
+  /* CSS ของ FAB และ Modal */
   #fab-chat-toggle {
     position: fixed;
     bottom: 24px;
@@ -218,7 +280,8 @@ async function loadJsonAndStart() {
       `<div class="empty">ไม่สามารถโหลดข้อมูลได้</div>`;
   }
 }
-const COLS = { category:"หมวด", title:"ชื่อกฎหมาย", date:"วันที่", volume:"เล่ม+ตอน", url:"URL_Pdf" };
+// (ใช้ URL_Pdf ให้ตรงกับ JSON ของคุณ)
+const COLS = { category:"หมวด", title:"ชื่อกฎหมาย", date:"วันที่", volume:"เล่มตอน", url:"URL_Pdf" };
 const col = k => COLS[k];
 const FIXED_CATS = [
   {key:"ประมวลกฎหมาย",      label:"ประมวลกฎหมาย",      emoji:"📚"},
@@ -442,12 +505,13 @@ function buildLatestSlider(){
 loadJsonAndStart();
 </script>
 
-<script type="module"> // <-- (เปลี่ยนเป็น type="module" เพื่อให้ใช้ AI SDK ได้)
+
+<script type="module"> 
   
   // --- ส่วน API Key และการตั้งค่า AI ---
   
   // ❗️❗️❗️ ใส่ API Key ของคุณตรงนี้ ❗️❗️❗️
-  const API_KEY = "AIzaSyDS2_5gYxFOJ4sGjNffFbqgSmPqQnweBTg"; 
+  const API_KEY = "!!! 1. ใส่ API KEY ของคุณที่นี่ !!!"; 
   // ❗️❗️❗️ (ถ้าไม่ใส่ตรงนี้ AI จะไม่ทำงาน) ❗️❗️❗️
 
   // (นำเข้า SDK ที่เราโหลดใน <head>)
@@ -474,20 +538,17 @@ loadJsonAndStart();
   const newChatBtn = document.getElementById('new-chat-btn');
   const thinkingIndicator = document.getElementById('thinking-indicator');
 
-  // ฟังก์ชันเพิ่ม Bubble แชท (เหมือนเดิม)
+  // ฟังก์ชันเพิ่ม Bubble แชท
   function addChatBubble(message, isUser = true) {
     const bubbleType = isUser ? 'user' : 'model';
-    const alignClass = isUser ? 'justify-end' : 'justify-start';
-    const bubbleColor = isUser ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800';
     const icon = isUser ? '👤' : '🤖';
     const bubbleWrapper = document.createElement('div');
     bubbleWrapper.className = `flex items-start space-x-2 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
     
-    // (ใช้ .innerText เพื่อความปลอดภัย)
     const bubbleContent = document.createElement('div');
-    bubbleContent.className = `chat-bubble chat-bubble-${bubbleType} ${bubbleColor} p-3 rounded-lg max-w-lg relative`;
+    bubbleContent.className = `chat-bubble chat-bubble-${bubbleType} ${isUser ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'} p-3 rounded-lg max-w-lg relative`;
     bubbleContent.innerHTML = `<p></p>`;
-    // (แทนที่ .innerText เพื่อป้องกัน HTML Injection)
+    // (ใช้ .innerText เพื่อความปลอดภัย ป้องกันการใส่โค้ดอันตรายในแชท)
     bubbleContent.querySelector('p').innerText = message; 
     
     bubbleWrapper.innerHTML = `<span class="text-2xl">${icon}</span>`;
@@ -497,7 +558,7 @@ loadJsonAndStart();
     chatHistory.scrollTop = chatHistory.scrollHeight; // เลื่อนลงล่างสุด
   }
 
-  // ฟังก์ชันแสดงข้อผิดพลาดในแชท (ใหม่)
+  // ฟังก์ชันแสดงข้อผิดพลาดในแชท
   function addChatError(message) {
     const errorWrapper = document.createElement('div');
     errorWrapper.className = 'flex justify-center my-2';
@@ -506,7 +567,7 @@ loadJsonAndStart();
     chatHistory.scrollTop = chatHistory.scrollHeight;
   }
 
-  // ฟังก์ชันแสดงสถานะกำลังคิด (เหมือนเดิม)
+  // ฟังก์ชันแสดงสถานะกำลังคิด
   function setThinking(isThinking) {
     if (isThinking) {
       thinkingIndicator.classList.remove('hidden');
@@ -516,7 +577,7 @@ loadJsonAndStart();
     }
   }
 
-  // --- ฟังก์ชันส่งข้อความ (แก้ไขใหม่ทั้งหมด) ---
+  // --- ฟังก์ชันส่งข้อความ (เชื่อม AI จริง) ---
   async function handleSend() {
     const message = userInput.value.trim();
     if (!message) return;
@@ -553,7 +614,7 @@ loadJsonAndStart();
     }
   }
 
-  // --- Event Listeners (แก้ไขปุ่ม 'แชทใหม่') ---
+  // --- Event Listeners ---
   sendBtn.addEventListener('click', handleSend);
   userInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -575,14 +636,14 @@ loadJsonAndStart();
     userInput.value = '';
     setThinking(false);
 
-    // ❗️ (ใหม่) สร้าง session แชทใหม่ เพื่อล้างประวัติใน AI ด้วย
+    // สร้าง session แชทใหม่ เพื่อล้างประวัติใน AI ด้วย
     if (model) {
       chat = model.startChat();
     }
   });
 
 
-  // --- ส่วนควบคุมการเปิด/ปิด (Glue) (เหมือนเดิม) ---
+  // --- ส่วนควบคุมการเปิด/ปิด (Glue) ---
   const fabToggle = document.getElementById('fab-chat-toggle');
   const chatModal = document.getElementById('chatbot-modal');
   const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
