@@ -514,170 +514,131 @@ function buildLatestSlider(){
   latestIndex=0; updateLatestSlider(); startAuto();
 }
 loadJsonAndStart();
-</script>
 
-
-<script type="module"> 
   
-  // --- ส่วน API Key และการตั้งค่า AI ---
-  
-  // ❗️❗️❗️ ใส่ API Key ของคุณตรงนี้ ❗️❗️❗️
-  const API_KEY = "AIzaSyDS2_5gYxFOJ4sGjNffFbqgSmPqQnweBTg"; 
-  // ❗️❗️❗️ (ถ้าไม่ใส่ตรงนี้ AI จะไม่ทำงาน) ❗️❗️❗️
+<script type="module">
+  import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-  // (นำเข้า SDK ที่เราโหลดใน <head>)
-  const { GoogleGenerativeAI } = await import("https://unpkg.com/@google/generative-ai?module");
+  // ❗ ใส่ API Key ของคุณ
+  const API_KEY = "AIzaSyDS2_5gYxFOJ4sGjNffFbqgSmPqQnweBTg";
 
-  let genAI;
-  let model;
-  let chat;
+  let genAI, model, chat;
 
   try {
     genAI = new GoogleGenerativeAI(API_KEY);
 
-    /* * ==================================================================
-     * ❗️❗️ จุดที่ 2: อัปเกรดโมเดลเป็น gemini-1.5-flash ❗️❗️
-     * ================================================================== 
-     */
-    model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    
-    // เริ่มแชทใหม่ (เก็บประวัติการสนทนา)
-    chat = model.startChat();
+    // ✅ ใช้รุ่น -latest เพื่อให้เข้ากับ API v1
+    model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+
+    // (ถ้าต้องการโทนคำตอบ/ความยาว ปรับที่นี่)
+    const generationConfig = {
+      temperature: 0.7,
+      maxOutputTokens: 2048,
+    };
+
+    chat = await model.startChat({ generationConfig });
+
   } catch (e) {
     console.error("AI Initialization Error:", e);
-    // (เราจะแสดงข้อผิดพลาดในแชทถ้าผู้ใช้พยายามส่ง)
   }
 
-  // --- ส่วนควบคุม Chatbot (UI) ---
+  // ===== glue กับ UI เดิม =====
   const chatHistory = document.getElementById('chat-history');
-  const userInput = document.getElementById('user-input');
-  const sendBtn = document.getElementById('send-btn');
-  const newChatBtn = document.getElementById('new-chat-btn');
+  const userInput   = document.getElementById('user-input');
+  const sendBtn     = document.getElementById('send-btn');
+  const newChatBtn  = document.getElementById('new-chat-btn');
   const thinkingIndicator = document.getElementById('thinking-indicator');
 
-  // ฟังก์ชันเพิ่ม Bubble แชท
   function addChatBubble(message, isUser = true) {
     const bubbleType = isUser ? 'user' : 'model';
     const icon = isUser ? '👤' : '🤖';
-    const bubbleWrapper = document.createElement('div');
-    bubbleWrapper.className = `flex items-start space-x-2 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
-    
-    const bubbleContent = document.createElement('div');
-    bubbleContent.className = `chat-bubble chat-bubble-${bubbleType} ${isUser ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'} p-3 rounded-lg max-w-lg relative`;
-    bubbleContent.innerHTML = `<p></p>`;
-    // (ใช้ .innerText เพื่อความปลอดภัย ป้องกันการใส่โค้ดอันตรายในแชท)
-    bubbleContent.querySelector('p').innerText = message; 
-    
-    bubbleWrapper.innerHTML = `<span class="text-2xl">${icon}</span>`;
-    bubbleWrapper.appendChild(bubbleContent);
-
-    chatHistory.appendChild(bubbleWrapper);
-    chatHistory.scrollTop = chatHistory.scrollHeight; // เลื่อนลงล่างสุด
-  }
-
-  // ฟังก์ชันแสดงข้อผิดพลาดในแชท
-  function addChatError(message) {
-    const errorWrapper = document.createElement('div');
-    errorWrapper.className = 'flex justify-center my-2';
-    errorWrapper.innerHTML = `<span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">${message}</span>`;
-    chatHistory.appendChild(errorWrapper);
+    const wrap = document.createElement('div');
+    wrap.className = `flex items-start space-x-2 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
+    const bubble = document.createElement('div');
+    bubble.className = `chat-bubble chat-bubble-${bubbleType} ${isUser ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'} p-3 rounded-lg max-w-lg relative`;
+    bubble.innerHTML = `<p></p>`;
+    bubble.querySelector('p').innerText = message;
+    wrap.innerHTML = `<span class="text-2xl">${icon}</span>`;
+    wrap.appendChild(bubble);
+    chatHistory.appendChild(wrap);
     chatHistory.scrollTop = chatHistory.scrollHeight;
   }
-
-  // ฟังก์ชันแสดงสถานะกำลังคิด
-  function setThinking(isThinking) {
-    if (isThinking) {
-      thinkingIndicator.classList.remove('hidden');
-      chatHistory.scrollTop = chatHistory.scrollHeight;
-    } else {
-      thinkingIndicator.classList.add('hidden');
-    }
+  function addChatError(message) {
+    const w = document.createElement('div');
+    w.className = 'flex justify-center my-2';
+    w.innerHTML = `<span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">${message}</span>`;
+    chatHistory.appendChild(w);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+  }
+  function setThinking(on) {
+    thinkingIndicator.classList.toggle('hidden', !on);
+    if (on) chatHistory.scrollTop = chatHistory.scrollHeight;
   }
 
-  // --- ฟังก์ชันส่งข้อความ (เชื่อม AI จริง) ---
   async function handleSend() {
-    const message = userInput.value.trim();
+    const message = (userInput.value || '').trim();
     if (!message) return;
-
-    // 1. ตรวจสอบว่า AI พร้อมหรือไม่
     if (!genAI || !chat) {
-      addChatError("เกิดข้อผิดพลาด: ไม่สามารถเริ่มต้น AI ได้ (กรุณาตรวจสอบ API Key)");
-      setThinking(false);
+      addChatError("ไม่สามารถเริ่ม AI ได้ (ตรวจ API Key/การโหลด SDK)");
       return;
     }
-
     addChatBubble(message, true);
     userInput.value = '';
     setThinking(true);
-    sendBtn.disabled = true; // ปิดปุ่มส่งชั่วคราว
-
+    sendBtn.disabled = true;
     try {
-      // 2. ส่งข้อความไปที่ AI จริง
       const result = await chat.sendMessage(message);
-      const response = await result.response;
-      const text = response.text();
-
-      // 3. แสดงผลคำตอบ
-      setThinking(false);
-      addChatBubble(text, false); // เพิ่มคำตอบจริงจาก AI
-
-    } catch (error) {
-      // 4. จัดการข้อผิดพลาด
-      console.error("AI Error:", error);
-      setThinking(false);
-      addChatError("ขออภัย, เกิดข้อผิดพลาดในการสื่อสารกับ AI (อาจเกิดจาก API Key ไม่ถูกต้อง หรือเนื้อหาไม่เหมาะสม)");
+      const text = (await result.response).text();
+      addChatBubble(text, false);
+    } catch (err) {
+      console.error("AI Error:", err);
+      addChatError("สื่อสารกับ AI ไม่สำเร็จ (ตรวจ API Key/สิทธิ์/โควต้า)");
     } finally {
-      sendBtn.disabled = false; // เปิดปุ่มส่งกลับ
+      setThinking(false);
+      sendBtn.disabled = false;
     }
   }
 
-  // --- Event Listeners ---
   sendBtn.addEventListener('click', handleSend);
-  userInput.addEventListener('keydown', (e) => {
+  userInput.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
   });
-
-  newChatBtn.addEventListener('click', () => {
-    // ล้างประวัติบนจอ
+  newChatBtn.addEventListener('click', async () => {
     chatHistory.innerHTML = `
       <div class="flex items-start space-x-2">
         <span class="text-2xl">🤖</span>
         <div class="chat-bubble chat-bubble-model bg-gray-200 text-gray-800 p-3 rounded-lg max-w-lg relative">
-          <p>สวัสดีครับ! เริ่มแชทใหม่ได้เลยครับ (ประวัติการสนทนาถูกล้างแล้ว)</p>
+          <p>สวัสดีครับ! เริ่มแชทใหม่ได้เลยครับ (ประวัติถูกล้างแล้ว)</p>
         </div>
-      </div>
-    `;
+      </div>`;
     userInput.value = '';
     setThinking(false);
-
-    // สร้าง session แชทใหม่ เพื่อล้างประวัติใน AI ด้วย
-    if (model) {
-      chat = model.startChat();
-    }
+    if (model) chat = await model.startChat();
   });
 
-
-  // --- ส่วนควบคุมการเปิด/ปิด (Glue) ---
+  // เปิด/ปิด modal (ถ้ายังใช้ FAB แบบ modal)
   const fabToggle = document.getElementById('fab-chat-toggle');
   const chatModal = document.getElementById('chatbot-modal');
   const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
-
-  fabToggle.addEventListener('click', () => {
-    chatModal.classList.remove('chatbot-hidden');
-    fabToggle.style.opacity = '0';
-  });
-
-  chatbotCloseBtn.addEventListener('click', () => {
-    chatModal.classList.add('chatbot-hidden');
-    fabToggle.style.opacity = '1';
-  });
+  if (fabToggle && chatModal && chatbotCloseBtn) {
+    fabToggle.addEventListener('click', () => {
+      chatModal.classList.remove('chatbot-hidden');
+      fabToggle.style.opacity = '0';
+    });
+    chatbotCloseBtn.addEventListener('click', () => {
+      chatModal.classList.add('chatbot-hidden');
+      fabToggle.style.opacity = '1';
+    });
+  }
 </script>
+
 
 </body>
 </html>
+
 
 
 
