@@ -11,8 +11,6 @@
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<script type="module" src="https://unpkg.com/@google/generative-ai"></script>
-
 <style>
   :root{
     /* ⚖️ โทนกฎหมาย สุภาพอ่านง่าย */
@@ -295,12 +293,12 @@ const COLS = {
 const col = k => COLS[k];
 
 const FIXED_CATS = [
-  {key:"ประมวลกฎหมาย",      label:"ประมวลกฎหมาย",      emoji:"📚"},
-  {key:"รัฐธรรมนูญ",          label:"รัฐธรรมนูญ",          emoji:"📜"},
-  {key:"พระราชกฤษฎีกา",     label:"พระราชกฤษฎีกา",     emoji:"🏛️"},
-  {key:"พระราชกำหนด",       label:"พระราชกำหนด",       emoji:"📘"},
-  {key:"พระราชบัญญัติ",      label:"พระราชบัญญัติ",      emoji:"📖"},
-  {key:"ระเบียบคณะกรรมการ",        label:"กฎกระทรวง",          emoji:"🧷"}
+  {key:"ประมวลกฎหมาย",     label:"ประมวลกฎหมาย",     emoji:"📚"},
+  {key:"รัฐธรรมนูญ",        label:"รัฐธรรมนูญ",        emoji:"📜"},
+  {key:"พระราชกฤษฎีกา",   label:"พระราชกฤษฎีกา",   emoji:"🏛️"},
+  {key:"พระราชกำหนด",      label:"พระราชกำหนด",      emoji:"📘"},
+  {key:"พระราชบัญญัติ",    label:"พระราชบัญญัติ",    emoji:"📖"},
+  {key:"ระเบียบคณะกรรมการ",      label:"กฎกระทรวง",        emoji:"🧷"}
 ];
 function normalizeCatName(raw=""){
   const s = (raw||"").trim();
@@ -315,8 +313,16 @@ function normalizeCatName(raw=""){
   return map.get(s) || s;
 }
 const $ = (s,el=document)=>el.querySelector(s);
+
+//
+// 🐞🐞🐞 นี่คือจุดที่แก้ไข Bug 🐞🐞🐞
+//
 function sanitizeUrl(u=''){
-  try{ const url=new URL(u, location.origin); if(url.protocol==='http:'||url.protocol==='https://') return url.href; }catch{}
+  try{ 
+    const url=new URL(u, location.origin); 
+    // แก้ไข: เปลี่ยน 'https://' เป็น 'https:' (ลบ / ออก)
+    if(url.protocol==='http:'||url.protocol==='https:') return url.href; 
+  }catch{}
   return '';
 }
 const TH_MONTHS={'ม.ค.':1,'ก.พ.':2,'มี.ค.':3,'เม.ย.':4,'พ.ค.':5,'มิ.ย.':6,'ก.ค.':7,'ส.ค.':8,'ก.ย.':9,'ต.ค.':10,'พ.ย.':11,'ธ.ค.':12,'มกราคม':1,'กุมภาพันธ์':2,'มีนาคม':3,'เมษายน':4,'พฤษภาคม':5,'มิถุนายน':6,'กรกฎาคม':7,'สิงหาคม':8,'กันยายน':9,'ตุลาคม':10,'พฤศจิกายน':11,'ธันวาคม':12};
@@ -513,36 +519,45 @@ function buildLatestSlider(){
   dotsEl.innerHTML = latestSlides.map((_,i)=>`<span class="dot ${i===0?'active':''}"></span>`).join('');
   latestIndex=0; updateLatestSlider(); startAuto();
 }
-loadJsonAndStart();
 
-  
+// เริ่มการทำงานของหน้าเว็บ
+loadJsonAndStart();
+</script>
+
+
 <script type="module">
+  // เราจะ import จาก URL ที่เป็นทางการของ SDK
   import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-  // ❗ ใส่ API Key ของคุณ
-  const API_KEY = "AIzaSyDS2_5gYxFOJ4sGjNffFbqgSmPqQnweBTg";
+  //
+  // 🚨🚨🚨 ความปลอดภัย 🚨🚨🚨
+  // API Key ของคุณรั่วไหล! กรุณาสร้างคีย์ใหม่
+  // และห้ามใส่คีย์จริงไว้ในโค้ดแบบนี้
+  //
+  const API_KEY = "AIzaSyCX5HhTO2g4F23bMVzfSN359ZTy6AX_Nu4"; // <-- ❗️❗️ ใส่คีย์ใหม่ของคุณตรงนี้ ❗️❗️
 
   let genAI, model, chat;
 
   try {
     genAI = new GoogleGenerativeAI(API_KEY);
 
-    // ✅ ใช้รุ่น -latest เพื่อให้เข้ากับ API v1
+    // ✅ ใช้รุ่น -latest เพื่อให้เข้ากับ API v1 ล่าสุด
     model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
 
-    // (ถ้าต้องการโทนคำตอบ/ความยาว ปรับที่นี่)
     const generationConfig = {
       temperature: 0.7,
       maxOutputTokens: 2048,
     };
 
+    // เริ่มแชท (ใช้ await เพราะเราอยู่ใน module)
     chat = await model.startChat({ generationConfig });
 
   } catch (e) {
     console.error("AI Initialization Error:", e);
+    // (เราจะแสดง error ใน UI ถ้าผู้ใช้พยายามแชท)
   }
 
-  // ===== glue กับ UI เดิม =====
+  // ===== เชื่อมต่อกับ UI เดิม =====
   const chatHistory = document.getElementById('chat-history');
   const userInput   = document.getElementById('user-input');
   const sendBtn     = document.getElementById('send-btn');
@@ -557,7 +572,8 @@ loadJsonAndStart();
     const bubble = document.createElement('div');
     bubble.className = `chat-bubble chat-bubble-${bubbleType} ${isUser ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'} p-3 rounded-lg max-w-lg relative`;
     bubble.innerHTML = `<p></p>`;
-    bubble.querySelector('p').innerText = message;
+    // ใช้ .innerText เพื่อความปลอดภัย
+    bubble.querySelector('p').innerText = message; 
     wrap.innerHTML = `<span class="text-2xl">${icon}</span>`;
     wrap.appendChild(bubble);
     chatHistory.appendChild(wrap);
@@ -579,7 +595,7 @@ loadJsonAndStart();
     const message = (userInput.value || '').trim();
     if (!message) return;
     if (!genAI || !chat) {
-      addChatError("ไม่สามารถเริ่ม AI ได้ (ตรวจ API Key/การโหลด SDK)");
+      addChatError("ไม่สามารถเริ่ม AI ได้ (โปรดตรวจสอบ API Key)");
       return;
     }
     addChatBubble(message, true);
@@ -592,7 +608,7 @@ loadJsonAndStart();
       addChatBubble(text, false);
     } catch (err) {
       console.error("AI Error:", err);
-      addChatError("สื่อสารกับ AI ไม่สำเร็จ (ตรวจ API Key/สิทธิ์/โควต้า)");
+      addChatError("สื่อสารกับ AI ไม่สำเร็จ (อาจเกิดจาก API Key ไม่ถูกต้อง หรือเนื้อหาไม่เหมาะสม)");
     } finally {
       setThinking(false);
       sendBtn.disabled = false;
@@ -616,10 +632,11 @@ loadJsonAndStart();
       </div>`;
     userInput.value = '';
     setThinking(false);
+    // เริ่ม session แชทใหม่ใน AI
     if (model) chat = await model.startChat();
   });
 
-  // เปิด/ปิด modal (ถ้ายังใช้ FAB แบบ modal)
+  // --- ส่วนควบคุมการเปิด/ปิด (Glue) ---
   const fabToggle = document.getElementById('fab-chat-toggle');
   const chatModal = document.getElementById('chatbot-modal');
   const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
@@ -635,12 +652,5 @@ loadJsonAndStart();
   }
 </script>
 
-
 </body>
 </html>
-
-
-
-
-
-
