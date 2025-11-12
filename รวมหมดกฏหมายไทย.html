@@ -528,13 +528,13 @@ loadJsonAndStart();
 <script type="module">
   // เราจะ import จาก URL ที่เป็นทางการของ SDK
   import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-
+const BACKEND_URL = "https://pleasant-goldenrod-generics-tontakan.replit.dev/chat"; // ✅ ถูกต้อง! ต้องมี /chat
   //
   // 🚨🚨🚨 ความปลอดภัย 🚨🚨🚨
   // API Key ของคุณรั่วไหล! กรุณาสร้างคีย์ใหม่
   // และห้ามใส่คีย์จริงไว้ในโค้ดแบบนี้
   //
-  const API_KEY = "AIzaSyCX5HhTO2g4F23bMVzfSN359ZTy6AX_Nu4"; // <-- ❗️❗️ ใส่คีย์ใหม่ของคุณตรงนี้ ❗️❗️
+  const API_KEY = "AIzaSyCiTYlGR0JuyUIdf_iH6ZLaGO5Q6OLtaPg"; // <-- ❗️❗️ ใส่คีย์ใหม่ของคุณตรงนี้ ❗️❗️
 
   let genAI, model, chat;
 
@@ -653,4 +653,5 @@ loadJsonAndStart();
 
 </body>
 </html>
+
 
