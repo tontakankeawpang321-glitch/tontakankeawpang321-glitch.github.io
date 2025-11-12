@@ -525,39 +525,59 @@ loadJsonAndStart();
 </script>
 
 
+**ยังไม่ถูกครับ\!** ❌
+
+คุณเกือบจะถูกต้องแล้วครับ แต่ตอนนี้โค้ดใน `<script type="module">` ของคุณกำลัง "ตีกัน" ครับ
+
+### 🧐 ปัญหาคืออะไร?
+
+คุณได้นำโค้ด 2 แบบมาผสมกันครับ:
+
+1.  **ส่วนที่ถูก ✅:**
+
+      * คุณใส่ `const BACKEND_URL = "https://....replit.dev/chat";`
+      * นี่คือโค้ดจากวิธี "หลังบ้าน" (Backend) ที่ปลอดภัยครับ
+
+2.  **ส่วนที่ผิด ❌:**
+
+      * คุณ **ยังไม่ได้ลบ** โค้ดของวิธี "หน้าบ้าน" (Client-side) แบบเก่าที่ *ไม่ปลอดภัย* ทิ้งไป
+      * โค้ดทั้งหมดที่ขึ้นต้นด้วย `import { GoogleGenerativeAI } ...` , `new GoogleGenerativeAI(API_KEY)` , และ `chat.sendMessage(...)` **คือโค้ดเก่าที่ต้องลบออกครับ**
+
+-----
+
+### 💡 วิธีแก้ไข (ง่ายมาก)
+
+คุณต้อง **"ลบของเก่า"** และ **"ใส่ของใหม่"** ครับ
+
+1.  ไปที่ไฟล์ `.html` ของคุณ
+2.  ลบโค้ด *ทั้งหมด* ที่อยู่ระหว่าง `<script type="module">` และ `</script>` (ลบของเก่าทิ้งให้หมด)
+3.  **คัดลอกโค้ด "หน้าบ้าน" (Frontend) ที่ผมเคยให้ไป** (ซึ่งใช้ `fetch`) ไปวางแทนที่
+
+-----
+
+### ✅ โค้ดที่ถูกต้องสำหรับ `<script type="module">`
+
+นี่คือโค้ดที่ถูกต้องทั้งหมดที่ควรจะอยู่ใน `<script type="module">` ของคุณครับ (คัดลอกอันนี้ไปวางทับของเดิมได้เลย):
+
+```javascript
 <script type="module">
-  // เราจะ import จาก URL ที่เป็นทางการของ SDK
-  import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-const BACKEND_URL = "https://pleasant-goldenrod-generics-tontakan.replit.dev/chat"; // ✅ ถูกต้อง! ต้องมี /chat
-  //
-  // 🚨🚨🚨 ความปลอดภัย 🚨🚨🚨
-  // API Key ของคุณรั่วไหล! กรุณาสร้างคีย์ใหม่
-  // และห้ามใส่คีย์จริงไว้ในโค้ดแบบนี้
-  //
-  const API_KEY = "AIzaSyCiTYlGR0JuyUIdf_iH6ZLaGO5Q6OLtaPg"; // <-- ❗️❗️ ใส่คีย์ใหม่ของคุณตรงนี้ ❗️❗️
+  // ❗️ เราไม่ import GoogleGenerativeAI ในหน้าบ้านอีกต่อไป
+  // import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-  let genAI, model, chat;
+  // ❗️ ใส่ URL ของ REPLIT ของคุณ (ซึ่งคุณใส่ถูกแล้ว)
+  const BACKEND_URL = "https://pleasant-goldenrod-generics-tontakan.replit.dev/chat";
 
-  try {
-    genAI = new GoogleGenerativeAI(API_KEY);
+  // ❗️ ลบ API_KEY, genAI, model, chat (ตัวแปรเก่า) ทิ้งให้หมด
+  // เราไม่ต้องการมันในหน้าบ้านอีกต่อไป
 
- // ✅ ใช้รุ่น 1.5-flash
-    model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    const generationConfig = {
-      temperature: 0.7,
-      maxOutputTokens: 2048,
-    };
+  // ✅ สร้างตัวแปรสำหรับเก็บประวัติแชท
+  let chatHistory = [
+    // { role: "user", parts: [{ text: "สวัสดี" }] },
+    // { role: "model", parts: [{ text: "สวัสดีครับ" }] }
+  ];
 
-    // เริ่มแชท (ใช้ await เพราะเราอยู่ใน module)
-    chat = await model.startChat({ generationConfig });
-
-  } catch (e) {
-    console.error("AI Initialization Error:", e);
-    // (เราจะแสดง error ใน UI ถ้าผู้ใช้พยายามแชท)
-  }
-
-  // ===== เชื่อมต่อกับ UI เดิม =====
-  const chatHistory = document.getElementById('chat-history');
+  // ===== เชื่อมต่อกับ UI เดิม (โค้ดส่วนนี้เหมือนเดิม) =====
+  const chatHistoryEl = document.getElementById('chat-history');
   const userInput   = document.getElementById('user-input');
   const sendBtn     = document.getElementById('send-btn');
   const newChatBtn  = document.getElementById('new-chat-btn');
@@ -575,42 +595,70 @@ const BACKEND_URL = "https://pleasant-goldenrod-generics-tontakan.replit.dev/cha
     bubble.querySelector('p').innerText = message; 
     wrap.innerHTML = `<span class="text-2xl">${icon}</span>`;
     wrap.appendChild(bubble);
-    chatHistory.appendChild(wrap);
-    chatHistory.scrollTop = chatHistory.scrollHeight;
+    chatHistoryEl.appendChild(wrap);
+    chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
   }
   function addChatError(message) {
     const w = document.createElement('div');
     w.className = 'flex justify-center my-2';
     w.innerHTML = `<span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">${message}</span>`;
-    chatHistory.appendChild(w);
-    chatHistory.scrollTop = chatHistory.scrollHeight;
+    chatHistoryEl.appendChild(w);
+    chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
   }
   function setThinking(on) {
     thinkingIndicator.classList.toggle('hidden', !on);
-    if (on) chatHistory.scrollTop = chatHistory.scrollHeight;
+    if (on) chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
   }
 
+  //
+  // ✅✅✅ นี่คือฟังก์ชัน handleSend ที่เขียนใหม่ทั้งหมด (ใช้ fetch) ✅✅✅
+  //
   async function handleSend() {
     const message = (userInput.value || '').trim();
     if (!message) return;
-    if (!genAI || !chat) {
-      addChatError("ไม่สามารถเริ่ม AI ได้ (โปรดตรวจสอบ API Key)");
-      return;
-    }
+
+    // 1. แสดง Bubble ของผู้ใช้ทันที
     addChatBubble(message, true);
     userInput.value = '';
     setThinking(true);
     sendBtn.disabled = true;
+
+    // 2. เพิ่มข้อความของผู้ใช้ลงในประวัติ (ที่หน้าบ้าน)
+    chatHistory.push({ role: "user", parts: [{ text: message }] });
+
     try {
-      const result = await chat.sendMessage(message);
-      const text = (await result.response).text();
-      addChatBubble(text, false);
-    } catch (err) {
-      console.error("AI Error:", err);
-      addChatError("สื่อสารกับ AI ไม่สำเร็จ (อาจเกิดจาก API Key ไม่ถูกต้อง หรือเนื้อหาไม่เหมาะสม)");
-    } finally {
+      // 3. ยิง "ประวัติทั้งหมด" ไปที่ "หลังบ้าน" (Replit)
+      const response = await fetch(BACKEND_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ history: chatHistory }) // ส่งประวัติทั้งหมด
+      });
+
+      if (!response.ok) {
+        // ถ้าเซิร์ฟเวอร์ Replit ตอบกลับมาว่ามีปัญหา
+        const errData = await response.json();
+        throw new Error(errData.error || `Server error: ${response.status}`);
+      }
+
+      // 4. รับคำตอบ (JSON) จากหลังบ้าน
+      const data = await response.json(); // { reply: "..." }
+      const aiReply = data.reply;
+
+      // 5. เพิ่มคำตอบของ AI ลงในประวัติ (ที่หน้าบ้าน)
+      chatHistory.push({ role: "model", parts: [{ text: aiReply }] });
+
+      // 6. แสดง Bubble ของ AI
       setThinking(false);
-      sendBtn.disabled = false;
+      addChatBubble(aiReply, false);
+
+    } catch (err) {
+      console.error("Fetch Error:", err);
+      setThinking(false);
+      addChatError(`เชื่อมต่อหลังบ้านไม่สำเร็จ: ${err.message}`);
+    } finally {
+      sendBtn.disabled = false; // เปิดปุ่มส่งกลับ
     }
   }
 
@@ -621,8 +669,12 @@ const BACKEND_URL = "https://pleasant-goldenrod-generics-tontakan.replit.dev/cha
       handleSend();
     }
   });
+
+  //
+  // ✅✅✅ แก้ไขฟังก์ชัน New Chat ✅✅✅
+  //
   newChatBtn.addEventListener('click', async () => {
-    chatHistory.innerHTML = `
+    chatHistoryEl.innerHTML = `
       <div class="flex items-start space-x-2">
         <span class="text-2xl">🤖</span>
         <div class="chat-bubble chat-bubble-model bg-gray-200 text-gray-800 p-3 rounded-lg max-w-lg relative">
@@ -631,11 +683,13 @@ const BACKEND_URL = "https://pleasant-goldenrod-generics-tontakan.replit.dev/cha
       </div>`;
     userInput.value = '';
     setThinking(false);
-    // เริ่ม session แชทใหม่ใน AI
-    if (model) chat = await model.startChat();
+    
+    // 7. แค่ล้างประวัติที่หน้าบ้าน (ไม่ต้องยุ่งกับ AI)
+    chatHistory = []; 
   });
 
   // --- ส่วนควบคุมการเปิด/ปิด (Glue) ---
+  // (โค้ดส่วนนี้เหมือนเดิม ไม่ต้องแก้)
   const fabToggle = document.getElementById('fab-chat-toggle');
   const chatModal = document.getElementById('chatbot-modal');
   const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
@@ -653,6 +707,7 @@ const BACKEND_URL = "https://pleasant-goldenrod-generics-tontakan.replit.dev/cha
 
 </body>
 </html>
+
 
 
 
