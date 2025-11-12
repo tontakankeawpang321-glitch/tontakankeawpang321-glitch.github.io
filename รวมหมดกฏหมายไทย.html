@@ -101,7 +101,7 @@
 
   @media (max-width:420px){ .catbar{grid-template-columns:1fr 1fr} }
 
-  /* ===== CSS ของ Chatbot ===== */
+  /* ===== CSS ของ Chatbot (ที่เหมือนกับ 3 ไฟล์นั้น) ===== */
   .chat-bubble::before {
     content: '';
     position: absolute;
@@ -280,7 +280,6 @@ async function loadJsonAndStart() {
       `<div class="empty">ไม่สามารถโหลดข้อมูลได้</div>`;
   }
 }
-
 /* * ==================================================================
  * ❗️❗️ จุดที่ปรับให้ตรงกับ lawsData.json ของคุณ ❗️❗️
  * ================================================================== 
@@ -294,7 +293,6 @@ const COLS = {
 };
 const col = k => COLS[k];
 
-/* หมวดคงที่ (ตามที่ผู้ใช้กำหนด) + ไอคอน */
 const FIXED_CATS = [
   {key:"ประมวลกฎหมาย",      label:"ประมวลกฎหมาย",      emoji:"📚"},
   {key:"รัฐธรรมนูญ",          label:"รัฐธรรมนูญ",          emoji:"📜"},
@@ -302,11 +300,7 @@ const FIXED_CATS = [
   {key:"พระราชกำหนด",       label:"พระราชกำหนด",       emoji:"📘"},
   {key:"พระราชบัญญัติ",      label:"พระราชบัญญัติ",      emoji:"📖"},
   {key:"ระเบียบคณะกรรมการ",        label:"กฎกระทรวง",          emoji:"🧷"}
-  // (หมายเหตุ: "กฎกระทรวง" ใน FIXED_CATS ไม่ตรงกับ "ระเบียบคณะกรรมการ" 
-  // ใน normalizeCatName แต่โค้ดของคุณเป็นแบบนี้อยู่แล้ว)
 ];
-
-/* รองรับสะกดหลากหลาย → แมปเป็นคีย์มาตรฐาน */
 function normalizeCatName(raw=""){
   const s = (raw||"").trim();
   const map = new Map([
@@ -319,16 +313,11 @@ function normalizeCatName(raw=""){
   ]);
   return map.get(s) || s;
 }
-
 const $ = (s,el=document)=>el.querySelector(s);
-
-/* ปลอดภัย URL */
 function sanitizeUrl(u=''){
   try{ const url=new URL(u, location.origin); if(url.protocol==='http:'||url.protocol==='https://') return url.href; }catch{}
   return '';
 }
-
-/* วันที่ไทย/พ.ศ. */
 const TH_MONTHS={'ม.ค.':1,'ก.พ.':2,'มี.ค.':3,'เม.ย.':4,'พ.ค.':5,'มิ.ย.':6,'ก.ค.':7,'ส.ค.':8,'ก.ย.':9,'ต.ค.':10,'พ.ย.':11,'ธ.ค.':12,'มกราคม':1,'กุมภาพันธ์':2,'มีนาคม':3,'เมษายน':4,'พฤษภาคม':5,'มิถุนายน':6,'กรกฎาคม':7,'สิงหาคม':8,'กันยายน':9,'ตุลาคม':10,'พฤศจิกายน':11,'ธันวาคม':12};
 function thDigitsToArabic(s=''){const m={'๐':'0','๑':'1','๒':'2','๓':'3','๔':'4','๕':'5','๖':'6','๗':'7','๘':'8','๙':'9'}; return s.replace(/[๐-๙]/g,ch=>m[ch]??ch);}
 function parseDateTS(s){
@@ -368,14 +357,8 @@ const CatState = {};
 let selectedCat = null;
 const allIndex = [];
 let LatestData = [];
-
-/* * ==================================================================
- * ❗️❗️ นี่คือฟังก์ชันที่สร้างปุ่ม "คลิกอ่าน" ❗️❗️
- * ================================================================== 
- */
 function escapeHtml(s){return (''+s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function renderCard(r){
-  // ดึงข้อมูลโดยใช้คีย์ที่ตั้งไว้ใน COLS (u = URL_Pdf, v = เล่มตอน)
   const t=r[col('title')]||'', d=r[col('date')]||'', v=r[col('volume')]||'', c=r[col('category')]||'', u=r[col('url')]||'';
   const safe = sanitizeUrl(u);
   return `<article class="card">
@@ -390,7 +373,6 @@ function renderCard(r){
     </div>
   </article>`;
 }
-
 function renderChips(){
   catbar.innerHTML = FIXED_CATS.map(c => `
     <button class="chip" type="button" role="tab" aria-selected="false" data-cat="${c.key}">
@@ -478,7 +460,7 @@ btnPrev.addEventListener('click', ()=>{
 const elQ = $("#q"), elBtnSearch=$("#btnSearch");
 elBtnSearch.addEventListener('click', doSearch);
 elQ.addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
-function normalizeThai(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim().normalize('NFC').replace(/[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/g,''); }
+function normalizeThai(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim().normalize('NFC').replace(/[\u0E31\uE0E34-\u0E3A\u0E47-\u0E4E]/g,''); }
 function doSearch(){
   const q=(elQ.value||'').trim();
   if(!q){ if(selectedCat) renderPage(selectedCat); return; }
@@ -539,7 +521,7 @@ loadJsonAndStart();
   // --- ส่วน API Key และการตั้งค่า AI ---
   
   // ❗️❗️❗️ ใส่ API Key ของคุณตรงนี้ ❗️❗️❗️
-  const API_KEY = "!!! 1. ใส่ API KEY ของคุณที่นี่ !!!"; 
+  const API_KEY = "AIzaSyDS2_5gYxFOJ4sGjNffFbqgSmPqQnweBTg"; 
   // ❗️❗️❗️ (ถ้าไม่ใส่ตรงนี้ AI จะไม่ทำงาน) ❗️❗️❗️
 
   // (นำเข้า SDK ที่เราโหลดใน <head>)
@@ -551,7 +533,7 @@ loadJsonAndStart();
 
   try {
     genAI = new GoogleGenerativeAI(API_KEY);
-    model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
     // เริ่มแชทใหม่ (เก็บประวัติการสนทนา)
     chat = model.startChat();
   } catch (e) {
