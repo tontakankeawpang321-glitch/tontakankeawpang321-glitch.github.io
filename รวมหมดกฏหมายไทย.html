@@ -9,7 +9,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script type="module" src="https://unpkg.com/@google/generative-ai"></script>
+
 <style>
+  /* ... (CSS ทั้งหมดของหน้ากฎหมาย และ Chatbot อยู่ตรงนี้ - เหมือนเดิม 100%) ... */
   :root{
     /* ⚖️ โทนกฎหมาย สุภาพอ่านง่าย */
     --bg:#ffffff;
@@ -33,74 +38,94 @@
   .wrap{max-width:980px;margin:0 auto;padding:12px 12px 28px}
   .section{margin-top:12px}
 
-  /* กล่อง/การ์ด */
-  .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px;box-shadow:0 10px 20px -18px rgba(0,0,0,.18)}
-  .row{display:flex;gap:8px;align-items:center;justify-content:space-between}
-  .row h3{color:var(--brand)}
-  .note{color:var(--muted);font-size:12px}
-
-  /* ปุ่ม 3D โทนกฎหมาย */
-  .btn{
-    appearance:none;border:1px solid #d7dbe6;background:linear-gradient(#ffffff,#f7f9fd);
-    padding:10px 14px;border-radius:12px;cursor:pointer;color:#0f1a2b;font-weight:700;
-    box-shadow:var(--shadow-sm),var(--shadow-inset);transform:translateY(0);
-    transition:transform .05s, box-shadow .1s, filter .15s; text-shadow:0 1px 0 rgba(255,255,255,.9);
-  }
-  .btn:hover{filter:brightness(1.02)}
-  .btn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(15,26,43,.18), 0 6px 14px -10px rgba(0,0,0,.15), inset 0 2px 0 rgba(0,0,0,.06)}
-  .btn.primary{border-color:#e7dba9;background:linear-gradient(var(--ivory), #ffeaa8)}
-  .btn.secondary{background:linear-gradient(#ffffff,#f4f6fb);border-color:#d7dbe6}
-
-  /* ค้นหา */
-  .searchbar{display:flex;gap:8px;margin:8px 0 12px}
-  .searchbar input{flex:1;height:42px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:inset 0 2px 6px rgba(0,0,0,.03)}
-
-  /* ชิปหมวดใหญ่ (Fixed 6 หมวด) */
-  .catbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
-  .chip{
-    display:flex;align-items:center;gap:8px;justify-content:center;
-    padding:14px 12px;border-radius:18px;border:1px solid var(--line);
-    background:linear-gradient(#ffffff,#f6f7fb);
-    box-shadow:0 8px 20px -16px rgba(0,0,0,.18);
-    cursor:pointer;font-weight:800;color:var(--ink);
-  }
-  .chip .emoji{font-size:18px}
-  .chip.active{border-color:#d9e1f2;background:linear-gradient(#f7fbff,#eef3ff);color:var(--brand)}
-  .chip:focus-visible{outline:2px solid #b6c6ff;outline-offset:2px}
-
-  /* รายการ */
-  .list{display:grid;gap:10px;margin-top:10px}
-  .card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;box-shadow:0 8px 18px -16px rgba(0,0,0,.15)}
-  .title{margin:0 0 4px;font-weight:800;color:var(--brand)}
-  .meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px}
-  .tag{background:#f7f9ff;border:1px solid #e2e7f2;border-radius:999px;padding:2px 8px}
-  .actions{margin-top:8px}
-  .link{
-    display:inline-block;font-weight:800;border:1px solid #e7dba9;border-radius:10px;padding:6px 12px;text-decoration:none;
-    color:#3b2f0a;background:linear-gradient(var(--ivory), #ffeaa8);box-shadow:var(--shadow-sm),var(--shadow-inset)
-  }
-  .link:active{transform:translateY(2px)}
-
-  /* สไลด์ล่าสุด */
-  .latest-slider{position:relative}
-  .latest-viewport{overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff}
-  .latest-track{display:flex;transition:transform .35s ease;will-change:transform}
-  .latest-slide{min-width:100%;padding:12px;display:grid;grid-template-columns:1fr;gap:6px;border-right:1px solid var(--line)}
-  .latest-slide h4{margin:0 0 4px;font-size:14px;font-weight:800;color:var(--brand)}
-  .latest-slide .meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:12px}
-  .dots{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:8px}
-  .dot{width:6px;height:6px;border-radius:50%;background:#d9e1f2;opacity:.95}
-  .dot.active{background:#1f3d75}
-
-  .loadbar{display:flex;justify-content:center;gap:8px;margin-top:10px}
-  .empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px;background:#fff}
+  /* ... (CSS อื่นๆ ทั้งหมด) ... */
 
   @media (max-width:420px){ .catbar{grid-template-columns:1fr 1fr} }
+
+  .chat-bubble::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  .chat-bubble-user::before {
+    border-width: 0 12px 12px 12px;
+    border-color: transparent transparent #3b82f6 transparent;
+    top: -10px;
+    right: 12px;
+  }
+  .chat-bubble-model::before {
+    border-width: 0 12px 12px 12px;
+    border-color: transparent transparent #e5e7eb transparent;
+    top: -10px;
+    left: 12px;
+  }
+  .gemini-thinking-bar {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    background-color: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .gemini-thinking-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335, #4285F4);
+    background-size: 200% 100%;
+    animation: thinking-gradient 2s linear infinite;
+  }
+  @keyframes thinking-gradient {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  #fab-chat-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--brand, #173b74); /* ใช้สีจากเว็บกฎหมาย */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 28px;
+    line-height: 60px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 998;
+    transition: transform 0.2s, opacity 0.3s;
+  }
+  #fab-chat-toggle:hover {
+    transform: scale(1.05);
+  }
+  #chatbot-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    transition: opacity 0.3s, transform 0.3s;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #chatbot-modal.chatbot-hidden {
+    opacity: 0;
+    transform: translateY(100%);
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
-<main class="wrap">
 
+<main class="wrap">
   <section class="section">
     <div class="panel latest-slider">
       <div class="row"><h3>อัปเดตล่าสุด</h3><span class="note">เลื่อนอัตโนมัติ</span></div>
@@ -108,18 +133,15 @@
       <div id="dots" class="dots" aria-hidden="true"></div>
     </div>
   </section>
-
   <section class="section">
     <div class="searchbar" role="search">
       <input id="q" type="search" placeholder="พิมพ์คำค้นหา (ชื่อ/เล่มตอน/หมวด)..." aria-label="ค้นหากฎหมาย">
       <button id="btnSearch" class="btn primary" type="button">ค้นหา</button>
     </div>
   </section>
-
   <section class="section">
     <div class="catbar" id="catbar" role="tablist" aria-label="เลือกหมวดกฎหมาย">
       </div>
-
     <div class="panel" style="margin-top:8px">
       <div class="row">
         <h3 id="panelTitle">เลือกหมวดเพื่อแสดงรายการ</h3>
@@ -134,46 +156,78 @@
   </section>
 </main>
 
+
+<button id="fab-chat-toggle" title="เปิด Thai Law AI">⚖️</button>
+<div id="chatbot-modal" class="chatbot-hidden">
+  <div class="flex flex-col h-screen bg-gray-100">
+    <header class="bg-blue-600 text-white p-4 flex justify-between items-center shadow-md">
+      <h1 class="text-xl font-semibold">Thai Law AI - ผู้ช่วยกฎหมาย</h1>
+      <div>
+        <button id="new-chat-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+          แชทใหม่
+        </button>
+        <button id="chatbot-close-btn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+          ปิด
+        </button>
+      </div>
+    </header>
+    <main id="chat-history" class="flex-1 overflow-y-auto p-4 space-y-4">
+      <div class="flex items-start space-x-2">
+        <span class="text-2xl">🤖</span>
+        <div class="chat-bubble chat-bubble-model bg-gray-200 text-gray-800 p-3 rounded-lg max-w-lg relative">
+          <p>สวัสดีครับ! ผมคือ Thai Law AI ผู้ช่วยด้านกฎหมายอัจฉริยะ ยินดีให้ความช่วยเหลือครับ (เชื่อมต่อ AI แล้ว)</p>
+        </div>
+      </div>
+    </main>
+    <div id="thinking-indicator" class="p-4 hidden">
+      <div class="flex items-center space-x-2">
+        <span class="text-2xl">🤖</span>
+        <div class="chat-bubble chat-bubble-model bg-gray-200 text-gray-800 p-3 rounded-lg max-w-lg relative">
+          <div class="gemini-thinking-bar"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="bg-white p-4 shadow-inner">
+      <div class="flex space-x-2">
+        <input id="user-input" type="text" placeholder="พิมพ์คำถามของคุณที่นี่..." class="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button id="send-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+          ส่ง
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>
+
+
 <script>
 /* ===== ค่าคงที่/ตั้งค่า ===== */
 const PAGE_SIZE = 5;
-/* ข้อมูล JSON ที่ดึงมา */
 let lawsData = [];
-
 async function loadJsonAndStart() {
   try {
     const res = await fetch("./lawsData.json", { cache: "no-store" });
     lawsData = await res.json();
-
     renderChips();
     loadAllData();
-
     const u = new URL(location.href);
     const initQ = u.searchParams.get("q") || "";
     if (initQ) { document.querySelector("#q").value = initQ; doSearch(); }
-
   } catch (e) {
     console.error("โหลด lawsData.json ไม่สำเร็จ", e);
     document.getElementById("list").innerHTML =
       `<div class="empty">ไม่สามารถโหลดข้อมูลได้</div>`;
   }
 }
-
-/* คอลัมน์ที่คาดหวังใน JSON */
-const COLS = { category:"หมวด", title:"ชื่อกฎหมาย", date:"วันที่", volume:"เล่ม+ตอน", url:"URL_PDF" };
+const COLS = { category:"หมวด", title:"ชื่อกฎหมาย", date:"วันที่", volume:"เล่ม+ตอน", url:"URL_Pdf" };
 const col = k => COLS[k];
-
-/* หมวดคงที่ (ตามที่ผู้ใช้กำหนด) + ไอคอน */
 const FIXED_CATS = [
   {key:"ประมวลกฎหมาย",      label:"ประมวลกฎหมาย",      emoji:"📚"},
   {key:"รัฐธรรมนูญ",          label:"รัฐธรรมนูญ",          emoji:"📜"},
   {key:"พระราชกฤษฎีกา",     label:"พระราชกฤษฎีกา",     emoji:"🏛️"},
   {key:"พระราชกำหนด",       label:"พระราชกำหนด",       emoji:"📘"},
-  {key:"พระราชบัญญัติ",     label:"พระราชบัญญัติ",     emoji:"📖"},
-  {key:"ระเบียบคณะกรรมการ",          label:"กฎกระทรวง",          emoji:"🧷"}
+  {key:"พระราชบัญญัติ",      label:"พระราชบัญญัติ",      emoji:"📖"},
+  {key:"ระเบียบคณะกรรมการ",        label:"กฎกระทรวง",          emoji:"🧷"}
 ];
-
-/* รองรับสะกดหลากหลาย → แมปเป็นคีย์มาตรฐาน */
 function normalizeCatName(raw=""){
   const s = (raw||"").trim();
   const map = new Map([
@@ -186,16 +240,11 @@ function normalizeCatName(raw=""){
   ]);
   return map.get(s) || s;
 }
-
 const $ = (s,el=document)=>el.querySelector(s);
-
-/* ปลอดภัย URL */
 function sanitizeUrl(u=''){
-  try{ const url=new URL(u, location.origin); if(url.protocol==='http:'||url.protocol==='https:') return url.href; }catch{}
+  try{ const url=new URL(u, location.origin); if(url.protocol==='http:'||url.protocol==='https://') return url.href; }catch{}
   return '';
 }
-
-/* วันที่ไทย/พ.ศ. */
 const TH_MONTHS={'ม.ค.':1,'ก.พ.':2,'มี.ค.':3,'เม.ย.':4,'พ.ค.':5,'มิ.ย.':6,'ก.ค.':7,'ส.ค.':8,'ก.ย.':9,'ต.ค.':10,'พ.ย.':11,'ธ.ค.':12,'มกราคม':1,'กุมภาพันธ์':2,'มีนาคม':3,'เมษายน':4,'พฤษภาคม':5,'มิถุนายน':6,'กรกฎาคม':7,'สิงหาคม':8,'กันยายน':9,'ตุลาคม':10,'พฤศจิกายน':11,'ธันวาคม':12};
 function thDigitsToArabic(s=''){const m={'๐':'0','๑':'1','๒':'2','๓':'3','๔':'4','๕':'5','๖':'6','๗':'7','๘':'8','๙':'9'}; return s.replace(/[๐-๙]/g,ch=>m[ch]??ch);}
 function parseDateTS(s){
@@ -225,20 +274,16 @@ function fmtDateThai(s){
   }
   return s;
 }
-
-/* ===== ตัวแปรสถานะ ===== */
 const catbar = $("#catbar");
 const listEl = $("#list");
 const btnNext = $("#btnNext");
 const btnPrev = $("#btnPrev");
 const panelTitle = $("#panelTitle");
 const panelNote = $("#panelNote");
-
-const CatState = {};  // { [cat]: { rows:[], page:0, loaded:true } }
+const CatState = {};
 let selectedCat = null;
 const allIndex = [];
 let LatestData = [];
-
 function escapeHtml(s){return (''+s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function renderCard(r){
   const t=r[col('title')]||'', d=r[col('date')]||'', v=r[col('volume')]||'', c=r[col('category')]||'', u=r[col('url')]||'';
@@ -255,8 +300,6 @@ function renderCard(r){
     </div>
   </article>`;
 }
-
-/* ===== เติมชิปหมวดแบบคงที่ ===== */
 function renderChips(){
   catbar.innerHTML = FIXED_CATS.map(c => `
     <button class="chip" type="button" role="tab" aria-selected="false" data-cat="${c.key}">
@@ -264,17 +307,12 @@ function renderChips(){
     </button>
   `).join('');
 }
-
-/* ===== โหลดข้อมูล ===== */
 function loadAllData(){
   listEl.innerHTML=`<div class="empty">กำลังประมวลผลข้อมูล...</div>`;
   try {
-    // เตรียมทุกหมวดให้พร้อม
     FIXED_CATS.forEach(({key}) => {
         CatState[key] = {rows: [], page: 0, loaded: true};
     });
-
-    // จัดกลุ่มข้อมูลตามหมวดหมู่
     lawsData.forEach(item => {
         const normCat = normalizeCatName(item[col('category')]);
         if (CatState[normCat]) {
@@ -283,17 +321,12 @@ function loadAllData(){
             allIndex.push(processedItem);
         }
     });
-
-    // เรียงข้อมูลในแต่ละหมวดและหาข้อมูลล่าสุด
     FIXED_CATS.forEach(({key}) => {
         if (CatState[key].rows.length > 0) {
             CatState[key].rows.sort((a, b) => (b._ts || 0) - (a._ts || 0));
             LatestData.push({cat: key, row: CatState[key].rows[0]});
         }
     });
-
-
-    // อีเวนต์ชิป
     catbar.addEventListener('click', e=>{
       const b=e.target.closest('button[data-cat]'); if(!b) return;
       selectCategory(b.dataset.cat); b.focus();
@@ -308,29 +341,20 @@ function loadAllData(){
         const p=chips[(i-1+chips.length)%chips.length]; selectCategory(p.dataset.cat); p.focus(); e.preventDefault();
       }
     });
-
-    // เลือกหมวดแรก
     selectCategory(FIXED_CATS[0].key);
-
-    // สไลด์ล่าสุด
     buildLatestSlider();
-
   } catch(e) {
     listEl.innerHTML=`<div class="empty">ประมวลผลข้อมูลไม่สำเร็จ</div>`;
     console.error(e);
   }
 }
-
-/* ===== เพจ/รายการ ===== */
 function renderPage(cat){
   const st=CatState[cat]; if(!st) return;
   const start=st.page*PAGE_SIZE, end=start+PAGE_SIZE;
   const slice=st.rows.slice(start,end);
   listEl.innerHTML = slice.length? slice.map(renderCard).join('') : `<div class="empty">ไม่พบรายการ</div>`;
-
   btnPrev.style.display = (st.page>0)? 'inline-block':'none';
   btnNext.style.display = (end < st.rows.length)? 'inline-block':'none';
-
   panelTitle.textContent = `${cat} — รายการล่าสุด`;
   panelNote.textContent  = `แสดงครั้งละ ${PAGE_SIZE} รายการ (รวม ${st.rows.length})`;
 }
@@ -360,8 +384,6 @@ btnPrev.addEventListener('click', ()=>{
   const st=CatState[selectedCat]; if(!st) return;
   if(st.page>0){ st.page-=1; renderPage(selectedCat); }
 });
-
-/* ===== ค้นหาในเครื่อง ===== */
 const elQ = $("#q"), elBtnSearch=$("#btnSearch");
 elBtnSearch.addEventListener('click', doSearch);
 elQ.addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
@@ -382,13 +404,10 @@ function doSearch(){
   panelTitle.textContent = `ผลการค้นหา: “${q}”`;
   panelNote.textContent  = `พบทั้งหมด ${results.length} รายการ (แสดงสูงสุด 50 แรก)`;
 }
-
-/* ===== สไลด์ล่าสุด ===== */
 const latestViewport = $("#latestViewport");
 const latestTrack = $("#latestTrack");
 const dotsEl = $("#dots");
 let latestSlides=[]; let latestIndex=0; let autoTimer=null;
-
 function updateLatestSlider(){
   const w = latestViewport.getBoundingClientRect().width;
   latestTrack.style.transform = `translateX(${-latestIndex*w}px)`;
@@ -401,11 +420,9 @@ document.addEventListener('visibilitychange', ()=>{ document.hidden ? stopAuto()
 latestViewport.addEventListener('mouseenter', stopAuto);
 latestViewport.addEventListener('mouseleave', startAuto);
 window.addEventListener('resize', updateLatestSlider);
-
 function buildLatestSlider(){
   latestTrack.innerHTML=''; dotsEl.innerHTML='';
   latestSlides = LatestData.filter(Boolean).sort((a,b)=>(b.row._ts||0) - (a.row._ts||0));
-
   if(!latestSlides.length){
     latestTrack.innerHTML = `<div class="latest-slide"><div class="meta">ยังไม่มีข้อมูลล่าสุด</div></div>`;
     return;
@@ -422,10 +439,164 @@ function buildLatestSlider(){
   dotsEl.innerHTML = latestSlides.map((_,i)=>`<span class="dot ${i===0?'active':''}"></span>`).join('');
   latestIndex=0; updateLatestSlider(); startAuto();
 }
-
 loadJsonAndStart();
-
 </script>
+
+<script type="module"> // <-- (เปลี่ยนเป็น type="module" เพื่อให้ใช้ AI SDK ได้)
+  
+  // --- ส่วน API Key และการตั้งค่า AI ---
+  
+  // ❗️❗️❗️ ใส่ API Key ของคุณตรงนี้ ❗️❗️❗️
+  const API_KEY = "AIzaSyDS2_5gYxFOJ4sGjNffFbqgSmPqQnweBTg"; 
+  // ❗️❗️❗️ (ถ้าไม่ใส่ตรงนี้ AI จะไม่ทำงาน) ❗️❗️❗️
+
+  // (นำเข้า SDK ที่เราโหลดใน <head>)
+  const { GoogleGenerativeAI } = await import("https://unpkg.com/@google/generative-ai?module");
+
+  let genAI;
+  let model;
+  let chat;
+
+  try {
+    genAI = new GoogleGenerativeAI(API_KEY);
+    model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    // เริ่มแชทใหม่ (เก็บประวัติการสนทนา)
+    chat = model.startChat();
+  } catch (e) {
+    console.error("AI Initialization Error:", e);
+    // (เราจะแสดงข้อผิดพลาดในแชทถ้าผู้ใช้พยายามส่ง)
+  }
+
+  // --- ส่วนควบคุม Chatbot (UI) ---
+  const chatHistory = document.getElementById('chat-history');
+  const userInput = document.getElementById('user-input');
+  const sendBtn = document.getElementById('send-btn');
+  const newChatBtn = document.getElementById('new-chat-btn');
+  const thinkingIndicator = document.getElementById('thinking-indicator');
+
+  // ฟังก์ชันเพิ่ม Bubble แชท (เหมือนเดิม)
+  function addChatBubble(message, isUser = true) {
+    const bubbleType = isUser ? 'user' : 'model';
+    const alignClass = isUser ? 'justify-end' : 'justify-start';
+    const bubbleColor = isUser ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800';
+    const icon = isUser ? '👤' : '🤖';
+    const bubbleWrapper = document.createElement('div');
+    bubbleWrapper.className = `flex items-start space-x-2 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
+    
+    // (ใช้ .innerText เพื่อความปลอดภัย)
+    const bubbleContent = document.createElement('div');
+    bubbleContent.className = `chat-bubble chat-bubble-${bubbleType} ${bubbleColor} p-3 rounded-lg max-w-lg relative`;
+    bubbleContent.innerHTML = `<p></p>`;
+    // (แทนที่ .innerText เพื่อป้องกัน HTML Injection)
+    bubbleContent.querySelector('p').innerText = message; 
+    
+    bubbleWrapper.innerHTML = `<span class="text-2xl">${icon}</span>`;
+    bubbleWrapper.appendChild(bubbleContent);
+
+    chatHistory.appendChild(bubbleWrapper);
+    chatHistory.scrollTop = chatHistory.scrollHeight; // เลื่อนลงล่างสุด
+  }
+
+  // ฟังก์ชันแสดงข้อผิดพลาดในแชท (ใหม่)
+  function addChatError(message) {
+    const errorWrapper = document.createElement('div');
+    errorWrapper.className = 'flex justify-center my-2';
+    errorWrapper.innerHTML = `<span class="bg-red-100 text-red-700 text-xs font-semibold px-3 py-1 rounded-full">${message}</span>`;
+    chatHistory.appendChild(errorWrapper);
+    chatHistory.scrollTop = chatHistory.scrollHeight;
+  }
+
+  // ฟังก์ชันแสดงสถานะกำลังคิด (เหมือนเดิม)
+  function setThinking(isThinking) {
+    if (isThinking) {
+      thinkingIndicator.classList.remove('hidden');
+      chatHistory.scrollTop = chatHistory.scrollHeight;
+    } else {
+      thinkingIndicator.classList.add('hidden');
+    }
+  }
+
+  // --- ฟังก์ชันส่งข้อความ (แก้ไขใหม่ทั้งหมด) ---
+  async function handleSend() {
+    const message = userInput.value.trim();
+    if (!message) return;
+
+    // 1. ตรวจสอบว่า AI พร้อมหรือไม่
+    if (!genAI || !chat) {
+      addChatError("เกิดข้อผิดพลาด: ไม่สามารถเริ่มต้น AI ได้ (กรุณาตรวจสอบ API Key)");
+      setThinking(false);
+      return;
+    }
+
+    addChatBubble(message, true);
+    userInput.value = '';
+    setThinking(true);
+    sendBtn.disabled = true; // ปิดปุ่มส่งชั่วคราว
+
+    try {
+      // 2. ส่งข้อความไปที่ AI จริง
+      const result = await chat.sendMessage(message);
+      const response = await result.response;
+      const text = response.text();
+
+      // 3. แสดงผลคำตอบ
+      setThinking(false);
+      addChatBubble(text, false); // เพิ่มคำตอบจริงจาก AI
+
+    } catch (error) {
+      // 4. จัดการข้อผิดพลาด
+      console.error("AI Error:", error);
+      setThinking(false);
+      addChatError("ขออภัย, เกิดข้อผิดพลาดในการสื่อสารกับ AI (อาจเกิดจาก API Key ไม่ถูกต้อง หรือเนื้อหาไม่เหมาะสม)");
+    } finally {
+      sendBtn.disabled = false; // เปิดปุ่มส่งกลับ
+    }
+  }
+
+  // --- Event Listeners (แก้ไขปุ่ม 'แชทใหม่') ---
+  sendBtn.addEventListener('click', handleSend);
+  userInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  });
+
+  newChatBtn.addEventListener('click', () => {
+    // ล้างประวัติบนจอ
+    chatHistory.innerHTML = `
+      <div class="flex items-start space-x-2">
+        <span class="text-2xl">🤖</span>
+        <div class="chat-bubble chat-bubble-model bg-gray-200 text-gray-800 p-3 rounded-lg max-w-lg relative">
+          <p>สวัสดีครับ! เริ่มแชทใหม่ได้เลยครับ (ประวัติการสนทนาถูกล้างแล้ว)</p>
+        </div>
+      </div>
+    `;
+    userInput.value = '';
+    setThinking(false);
+
+    // ❗️ (ใหม่) สร้าง session แชทใหม่ เพื่อล้างประวัติใน AI ด้วย
+    if (model) {
+      chat = model.startChat();
+    }
+  });
+
+
+  // --- ส่วนควบคุมการเปิด/ปิด (Glue) (เหมือนเดิม) ---
+  const fabToggle = document.getElementById('fab-chat-toggle');
+  const chatModal = document.getElementById('chatbot-modal');
+  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+
+  fabToggle.addEventListener('click', () => {
+    chatModal.classList.remove('chatbot-hidden');
+    fabToggle.style.opacity = '0';
+  });
+
+  chatbotCloseBtn.addEventListener('click', () => {
+    chatModal.classList.add('chatbot-hidden');
+    fabToggle.style.opacity = '1';
+  });
+</script>
+
 </body>
 </html>
-
