@@ -526,10 +526,8 @@ loadJsonAndStart();
 
 
 <script type="module">
-  // ✅✅✅ นี่คือ URL ของ "หลังบ้าน" (Replit) ของคุณ
-// (ตรวจสอบให้แน่ใจว่า URL นี้ถูกต้อง และมี /chat ต่อท้าย)
-// โค้ดใหม่ที่ถูกต้อง
-const response = await fetch('https://pleasant-goldenrod-generics--tontakan.repl.co/chat', 
+
+const BACKEND_URL = 'https://pleasant-goldenrod-generics--tontakan.repl.co/chat';
 
 
 // ✅ สร้างตัวแปรสำหรับเก็บประวัติแชท (แบบใหม่)
@@ -666,6 +664,7 @@ const fabToggle = document.getElementById('fab-chat-toggle');
 </script>
 </body>
 </html>
+
 
 
 
