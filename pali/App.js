@@ -20,7 +20,8 @@ const UserIcon = () =>
     })
   );
 
-const SparklesIcon = () =>
+// ⬇️ 1. เปลี่ยนไอคอน ⬇️
+const BookIcon = () =>
   React.createElement(
     'svg',
     {
@@ -34,9 +35,10 @@ const SparklesIcon = () =>
     React.createElement('path', {
       strokeLinecap: 'round',
       strokeLinejoin: 'round',
-      d: 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.293 2.293a1 1 0 010 1.414L13 12l-1.293-1.293a1 1 0 010-1.414L14 7m5 5l2.293 2.293a1 1 0 010 1.414L19 19l-1.293-1.293a1 1 0 010-1.414L20 14m-4-13h.01M17 21h.01'
+      d: 'M12 6.253v13.5m-6-13.5v13.5m6-13.5h-6m6 13.5h-6m6-13.5C10.343 6.253 9 7.596 9 9.253s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3zM6 6.253C4.343 6.253 3 7.596 3 9.253s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z'
     })
   );
+// ⬆️ 1. เปลี่ยนไอคอน ⬆️
 
 const PaperAirplaneIcon = () =>
   React.createElement(
@@ -106,14 +108,15 @@ export default function App() {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
-  // ⬇️ 1. เปลี่ยนแปลง System Instruction ⬇️
-  const systemInstruction = `คุณคือ "พุทธศาสนาสุภาษิต AI"
+  // ⬇️ 2. เปลี่ยนแปลง System Instruction ⬇️
+  const systemInstruction = `คุณคือ "ผู้ช่วยบาลีไวยากรณ์ AI"
 - ตอบเป็นภาษาไทยล้วน
-- อธิบายความหมายของสุภาษิต
-- หากทราบที่มา (เช่น จากพระไตรปิฏก คาถาธรรมบท) ให้อ้างอิง
+- อธิบายหลักไวยากรณ์บาลี เช่น สนธิ สมาส นาม กิริยา อาขยาต กิตก์
+- สามารถแจกแจงรูปศัพท์ หรือวิเคราะห์ศัพท์ได้
+- อ้างอิงจากคัมภีร์ไวยากรณ์หลักถ้าทำได้ (เช่น คัมภีร์อภิธานัปปทีปิกา, กัจจายนะ)
 - งดแสดงความเชื่อส่วนตัว หรือคำทำนาย
 `;
-  // ⬆️ 1. เปลี่ยนแปลง System Instruction ⬆️
+  // ⬆️ 2. เปลี่ยนแปลง System Instruction ⬆️
 
   async function handleSendMessage(e) {
     e.preventDefault();
@@ -176,7 +179,7 @@ export default function App() {
     'div',
     { className: 'flex flex-col h-screen bg-gray-100' },
 
-    // ⬇️ 2. เปลี่ยนแปลง HEADER ⬇️
+    // ⬇️ 3. เปลี่ยนแปลง HEADER ⬇️
     React.createElement(
       'header',
       { className: 'bg-white shadow-md p-4 z-10' },
@@ -186,7 +189,7 @@ export default function App() {
         React.createElement(
           'div',
           { className: 'bg-blue-600 p-2 rounded-full mr-3' },
-          React.createElement(SparklesIcon)
+          React.createElement(BookIcon) // ⭐️ เปลี่ยนไอคอน
         ),
         React.createElement(
           'div',
@@ -194,17 +197,17 @@ export default function App() {
           React.createElement(
             'h1',
             { className: 'text-xl font-bold text-gray-800' },
-            'พุทธศาสนาสุภาษิต AI'
+            'บาลีไวยากรณ์ AI' // ⭐️ เปลี่ยนข้อความ
           ),
           React.createElement(
             'p',
             { className: 'text-sm text-gray-500' },
-            'ค้นหาความหมายและที่มาของสุภาษิต'
+            'อธิบายหลักไวยากรณ์ วิเคราะห์ศัพท์' // ⭐️ เปลี่ยนข้อความ
           )
         )
       )
     ),
-    // ⬆️ 2. เปลี่ยนแปลง HEADER ⬆️
+    // ⬆️ 3. เปลี่ยนแปลง HEADER ⬆️
 
     // MAIN
     React.createElement(
@@ -214,7 +217,7 @@ export default function App() {
         'div',
         { className: 'max-w-4xl mx-auto space-y-6' },
 
-        // ⬇️ 3. เปลี่ยนแปลง Welcome Message ⬇️
+        // ⬇️ 4. เปลี่ยนแปลง Welcome Message ⬇️
         messages.length === 0 &&
           !isLoading &&
           React.createElement(
@@ -226,7 +229,7 @@ export default function App() {
                 className:
                   'inline-block bg-white p-4 rounded-full shadow-sm mb-4'
               },
-              React.createElement(SparklesIcon)
+              React.createElement(BookIcon) // ⭐️ เปลี่ยนไอคอน
             ),
             React.createElement(
               'h2',
@@ -236,15 +239,15 @@ export default function App() {
             React.createElement(
               'p',
               { className: 'text-gray-500' },
-              'คุณสามารถสอบถามความหมายของพุทธศาสนาสุภาษิตที่สนใจได้เลย'
+              'คุณสามารถสอบถามหลักไวยากรณ์บาลีที่นี่' // ⭐️ เปลี่ยนข้อความ
             ),
             React.createElement(
               'p',
               { className: 'text-xs text-gray-400 mt-4' },
-              'ตัวอย่าง: "อตฺตา หิ อตฺตโน นาโถ หมายความว่าอย่างไร?" หรือ "สุภาษิตเกี่ยวกับการไม่ประมาท"'
+              'ตัวอย่าง: "สนธิ คืออะไร?" หรือ "วิเคราะห์ศัพท์คำว่า ภิกฺขุ"' // ⭐️ เปลี่ยนข้อความ
             )
           ),
-        // ⬆️ 3. เปลี่ยนแปลง Welcome Message ⬆️
+        // ⬆️ 4. เปลี่ยนแปลง Welcome Message ⬆️
 
         ...messages.map(msg =>
           React.createElement(
@@ -260,7 +263,7 @@ export default function App() {
               React.createElement(
                 'div',
                 { className: 'bg-gray-200 p-2 rounded-full self-start' },
-                React.createElement(SparklesIcon)
+                React.createElement(BookIcon) // ⭐️ เปลี่ยนไอคอน
               ),
 
             React.createElement(
@@ -346,7 +349,7 @@ export default function App() {
         React.createElement(
           'div',
           { className: 'bg-gray-200 p-2 rounded-full self-start' },
-          React.createElement(SparklesIcon)
+          React.createElement(BookIcon) // ⭐️ เปลี่ยนไอคอน
         ),
         React.createElement(
           'div',
@@ -389,7 +392,9 @@ export default function App() {
             type: 'text',
             value: input,
             onChange: e => setInput(e.target.value),
-            placeholder: 'พิมพ์สุภาษิตที่นี่...',
+            // ⬇️ 5. เปลี่ยน Placeholder ⬇️
+            placeholder: 'พิมพ์คำถามไวยากรณ์ที่นี่...',
+            // ⬆️ 5. เปลี่ยน Placeholder ⬆️
             'aria-label': 'Chat input',
             disabled: isLoading,
             className:
