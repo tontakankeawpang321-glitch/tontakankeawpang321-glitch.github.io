@@ -106,10 +106,11 @@ export default function App() {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isLoading]);
 
-  const systemInstruction = `คุณคือ "ผู้ช่วยพระไตรปิฏก AI" ซึ่งเชี่ยวชาญพระไตรปิฏก อรรถกถา ฎีกา
-- ตอบเป็นภาษาไทยเสมอ
-- อ้างอิงเล่ม หน้า สูตร (ถ้ามี)
-- งดให้คำทำนาย/ความเชื่อผิดจากพระไตรปิฏก
+  const systemInstruction = `คุณคือ "ผู้ช่วยพระไตรปิฏก AI"
+- ตอบเป็นภาษาไทยล้วน
+- อ้างอิงเล่ม–หน้า–สูตร ทุกครั้งเมื่อมีข้อมูล
+- อธิบายตามพระไตรปิฏก อรรถกถา ฎีกา เท่านั้น
+- งดแสดงความเชื่อส่วนตัว คำทำนาย หรือสิ่งที่ไม่ปรากฏในพระไตรปิฏก
 `;
 
   async function handleSendMessage(e) {
@@ -191,12 +192,12 @@ export default function App() {
           React.createElement(
             'h1',
             { className: 'text-xl font-bold text-gray-800' },
-            'Thai Law AI'
+            'Tipitaka AI'
           ),
           React.createElement(
             'p',
             { className: 'text-sm text-gray-500' },
-            'ผู้ช่วยกฎหมายอัจฉริยะ พร้อมข้อมูลอัพเดท'
+            'ผู้ช่วยพระไตรปิฏก อ้างอิงเล่ม–หน้า–สูตร'
           )
         )
       )
@@ -231,12 +232,12 @@ export default function App() {
             React.createElement(
               'p',
               { className: 'text-gray-500' },
-              'คุณสามารถสอบถามเกี่ยวกับข้อกฎหมาย, ระเบียบ, หรือกระบวนการทางกฎหมายในประเทศไทยได้เลย'
+              'คุณสามารถสอบถามพระสูตร พระวินัย อภิธรรม หรือธรรมหมวดต่าง ๆ ได้เลย'
             ),
             React.createElement(
               'p',
               { className: 'text-xs text-gray-400 mt-4' },
-              'ตัวอย่าง: "การลาออกต้องแจ้งล่วงหน้ากี่วัน?" หรือ "PDPA คืออะไร?"'
+              'ตัวอย่าง: "ธัมมจักกัปปวัตตนสูตรกล่าวว่าอย่างไร?" หรือ "สติปัฏฐานมีข้อใดบ้าง?"'
             )
           ),
 
