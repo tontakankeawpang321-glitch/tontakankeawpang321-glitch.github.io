@@ -23,40 +23,7 @@
     line-height:1.6; 
     font-size: 14px;
   }
-	 .fab-chatbot {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 60px;
-    height: 60px;
-    background-color: var(--royal-blue);
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px; /* ปรับขนาดสำหรับ emoji */
-    text-decoration: none;
-    box-shadow: var(--shadow);
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    z-index: 1000;
-  }
-
-  .fab-chatbot:hover {
-    background-color: var(--blue-shadow);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: var(--shadow-hover);
-  }
-
-  .fab-chatbot:active {
-    transform: scale(0.98);
-  }
-
-  .fab-chatbot:focus-visible {
-    outline: 3px solid var(--royal-blue);
-    outline-offset: 3px;
-  }
-  /* === End FAB Chatbot Button === */
+	
   .wrap{max-width:1080px; margin:0 auto; padding:20px;}
   header{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
   .logo{ font-family:"Press Start 2P", monospace; font-size:14px; letter-spacing:1px; color:var(--brand); text-shadow:0 1px 0 #fff; }
@@ -96,6 +63,40 @@
   #pager .pbtn{border:1px solid var(--line); background:#fff; border-radius:10px; padding:6px 10px; cursor:pointer; box-shadow:var(--shadow-soft-2);}
   #pager .pbtn[disabled]{opacity:.5; cursor:not-allowed;}
   #pager .pcounter{color:var(--muted);}
+	 .fab-chatbot {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--royal-blue);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px; /* ปรับขนาดสำหรับ emoji */
+    text-decoration: none;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    z-index: 1000;
+  }
+
+  .fab-chatbot:hover {
+    background-color: var(--blue-shadow);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .fab-chatbot:active {
+    transform: scale(0.98);
+  }
+
+  .fab-chatbot:focus-visible {
+    outline: 3px solid var(--royal-blue);
+    outline-offset: 3px;
+  }
+  /* === End FAB Chatbot Button === */
 </style>
 </head>
 <body>
@@ -400,6 +401,7 @@ init();
 </a>
 </body>
 </html>
+
 
 
 
