@@ -1,410 +1,508 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<title>พุทธศาสนสุภาษิต – Live Data Version</title>
+<title>พุทธศาสนสุภาษิต AI (Gemini)</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Press+Start+2P&family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Kodchasan:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+
 <style>
   :root{
-    --bg:#f7f8fc; --ink:#0f172a; --muted:#4b5563; --line:#e7eaf0; --card:#ffffff;
-    --brand:#195fcb; --accent:#0ea5e9;
-    --radius:12px; --shadow-soft:0 10px 28px rgba(15,23,42,.08); --shadow-soft-2:0 2px 0 rgba(15,23,42,.06);
+    /* 🎨 ธีมพุทธศาสนา (ปรับจากธีมกฎหมาย) */
+    --bg:#fffdf5;         /* พื้นหลังสีครีมอ่อน */
+    --ink:#2d2a26;        /* สีตัวหนังสือดำเทา */
+    --muted:#6b655b;      /* สีเทาน้ำตาล */
+    --line:#eaddcf;       /* เส้นขอบสีครีมเข้ม */
+    --brand:#b45309;      /* สีส้มจีวร/ทองแดง (แทนสีน้ำเงินเดิม) */
+    --brand-light:#fff7ed;
+    --gold:#f59e0b;       /* สีทอง */
+    --radius:16px;
+    --shadow-sm:0 3px 0 rgba(180, 83, 9, 0.15), 0 8px 20px -12px rgba(0,0,0,.1);
+    --shadow-inset: inset 0 2px 0 rgba(255,255,255,.9);
   }
   *{box-sizing:border-box}
-  html,body{height:100%}
-  body{ 
-    margin:0; 
-    background:linear-gradient(180deg,#fbfcff 0%,#f3f6fb 100%); 
-    color:var(--ink); 
-    font-family:"Sarabun",system-ui; 
-    line-height:1.6; 
-    font-size: 14px;
+  html,body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Sarabun", system-ui, sans-serif;
+    font-size:15px; line-height: 1.6;
   }
-	
-  .wrap{max-width:1080px; margin:0 auto; padding:20px;}
-  header{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
-  .logo{ font-family:"Press Start 2P", monospace; font-size:14px; letter-spacing:1px; color:var(--brand); text-shadow:0 1px 0 #fff; }
-  .ghost-btn{ appearance:none; border:1px solid rgba(25,95,203,.35); background:rgba(255,255,255,.7); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); color:var(--ink); padding:10px 14px; font-weight:700; border-radius:12px; box-shadow:var(--shadow-soft-2); cursor:pointer; transition:transform .08s ease, box-shadow .12s ease, border-color .12s; }
-  .ghost-btn:hover{ box-shadow:0 6px 18px rgba(15,23,42,.08); border-color:rgba(25,95,203,.55); }
-  .ghost-btn:active{ transform:translateY(1px); }
-  .ghost-btn--brand{ border-color:rgba(25,95,203,.75); color:#0b4f9a; }
-  .chip-bar{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{ padding:8px 12px; background:#fff; border:1px solid var(--line); color:var(--ink); border-radius:999px; cursor:pointer; box-shadow:var(--shadow-soft-2); transition:background .12s, border-color .12s, transform .08s; }
-  .chip:hover{ transform:translateY(-1px); }
-  .chip.is-active{ background:#e8f2ff; border-color:#b7d3fb; color:#0b4f9a; }
-  .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
-  .spacer{flex:1}
-  .search,.select{ background:#fff; color:var(--ink); border:1px solid var(--line); padding:10px 12px; border-radius:12px; box-shadow:var(--shadow-soft-2); }
-  .search{ width:280px; max-width:100%; }
-  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px; margin-top:18px;}
-  .card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-soft); padding:16px; transition:transform .08s ease, box-shadow .12s ease; cursor: pointer; }
-  .card:hover{ transform:translateY(-1px); box-shadow:0 14px 34px rgba(15,23,42,.1); }
-  .from-sheet{ font-family:"Montserrat","Sarabun",system-ui; }
-  .meta{ color:var(--muted); display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-  .meta .tag{ background:#f1f5f9; border:1px solid #e2e8f0; padding:4px 8px; border-radius:999px; box-shadow:var(--shadow-soft-2); font-weight:600; }
-  .pali{ margin:6px 0 0; }
-  .trans{ background:#f8fafc; padding:10px; border:1px dashed #dbeafe; margin-top:10px; border-radius:8px; white-space:pre-wrap; }
-  dialog{ width:min(860px,96vw); border:1px solid var(--line); border-radius:18px; padding:0; background:#ffffff; color:var(--ink); box-shadow:0 28px 80px rgba(15,23,42,.2); }
-  dialog::backdrop{ background:rgba(0,0,0,.35); -webkit-backdrop-filter:blur(2px); backdrop-filter:blur(2px); }
-  .dlg-head{ padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; }
-  .dlg-head h2{ margin:0; font-family:"Press Start 2P"; font-size:13px; color:#0b4f9a; letter-spacing:.4px; }
-  .dlg-body{ max-height:min(70vh,560px); overflow:auto; padding:16px; }
-  .dlg-foot{ padding:12px 16px; border-top:1px solid var(--line); display:flex; justify-content:flex-end; gap:10px; }
-  .subgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-  @media (max-width:640px){ .subgrid{ grid-template-columns:repeat(2,1fr);} }
-  .subcat{ padding:10px; border:1px solid var(--line); background:#ffffff; cursor:pointer; text-align:center; border-radius:12px; box-shadow:var(--shadow-soft-2); transition:transform .08s, box-shadow .12s; }
-  .subcat:hover{ transform:translateY(-1px); box-shadow:0 10px 20px rgba(15,23,42,.08); }
-  .subcat.is-active{ outline:2px solid #b7d3fb; }
-  body.lock{ overflow:hidden; position:fixed; width:100%; }
-  #pager{display:flex; gap:8px; align-items:center; justify-content:flex-end; margin-top:8px;}
-  #pager .pbtn{border:1px solid var(--line); background:#fff; border-radius:10px; padding:6px 10px; cursor:pointer; box-shadow:var(--shadow-soft-2);}
-  #pager .pbtn[disabled]{opacity:.5; cursor:not-allowed;}
-  #pager .pcounter{color:var(--muted);}
-	 .fab-chatbot {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 40px;
-    height: 40px;
-    background-color: #000000;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 21px; /* ปรับขนาดสำหรับ emoji */
-    text-decoration: none;
-    box-shadow: var(--shadow);
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    z-index: 1000;
+  h1,h2,h3,h4{margin:0 0 8px; font-family: "Kodchasan", sans-serif;}
+  .wrap{max-width:980px;margin:0 auto;padding:12px 12px 80px;} /* padding-bottom เผื่อ FAB */
+  .section{margin-top:16px}
+
+  /* กล่อง/การ์ด */
+  .panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:0 10px 25px -20px rgba(0,0,0,.1)}
+  .row{display:flex;gap:8px;align-items:center;justify-content:space-between}
+  .row h3{color:var(--brand); font-weight:700;}
+  .note{color:var(--muted);font-size:13px}
+
+  /* ปุ่ม 3D */
+  .btn{
+    appearance:none;border:1px solid #d7dbe6;background:linear-gradient(#ffffff,#fbf7f0);
+    padding:10px 16px;border-radius:12px;cursor:pointer;color:var(--ink);font-weight:700;
+    box-shadow:var(--shadow-sm),var(--shadow-inset);transform:translateY(0);
+    transition:transform .05s, box-shadow .1s, filter .15s;
+    font-family: "Kodchasan", sans-serif;
+  }
+  .btn:hover{filter:brightness(0.98)}
+  .btn:active{transform:translateY(2px);box-shadow:inset 0 2px 0 rgba(0,0,0,.06)}
+  .btn.primary{border-color:#fbbf24;background:linear-gradient(#fffbeb, #fcd34d); color:#78350f;}
+  .btn.secondary{border-color:var(--line);}
+
+  /* ค้นหา */
+  .searchbar{display:flex;gap:8px;margin:8px 0 16px}
+  .searchbar input{
+    flex:1;height:48px;padding:0 16px;border:1px solid var(--line);border-radius:14px;
+    background:#fff;box-shadow:inset 0 2px 6px rgba(0,0,0,.02); font-size:16px; font-family:"Sarabun";
+  }
+  .searchbar input:focus{outline:2px solid var(--brand); border-color:transparent;}
+
+  /* ชิปหมวด (Tabs) */
+  .catbar{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px}
+  .chip{
+    display:flex;align-items:center;gap:6px;justify-content:center;
+    padding:12px 10px;border-radius:14px;border:1px solid var(--line);
+    background:linear-gradient(#ffffff,#fafafa);
+    box-shadow:0 4px 10px -8px rgba(0,0,0,.1);
+    cursor:pointer;font-weight:600;color:var(--muted);
+    font-family: "Kodchasan", sans-serif;
+  }
+  .chip.active{
+    border-color:#f59e0b; background:linear-gradient(#fffbeb,#fef3c7); 
+    color:#92400e; box-shadow:0 2px 0 rgba(245, 158, 11, 0.3);
   }
 
-  .fab-chatbot:hover {
-    background-color: var(--blue-shadow);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: var(--shadow-hover);
+  /* รายการการ์ด */
+  .list{display:grid;gap:12px;margin-top:12px}
+  .card{
+    border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff;
+    box-shadow:0 4px 12px -8px rgba(0,0,0,.08); transition: transform 0.2s;
+  }
+  .card:hover{transform:translateY(-2px); box-shadow:0 8px 20px -10px rgba(0,0,0,.15); border-color:var(--gold);}
+  .title{margin:0 0 6px;font-size:18px; font-weight:700;color:var(--brand); line-height:1.4;}
+  .sub-title{font-size: 16px; color: #444; margin-bottom: 8px;}
+  .meta{display:flex;gap:6px;flex-wrap:wrap;color:var(--muted);font-size:13px; margin-bottom:8px;}
+  .tag{background:#fff7ed;border:1px solid #ffedd5;border-radius:6px;padding:2px 8px; color:#9a3412;}
+
+  .loadbar{display:flex;justify-content:center;gap:8px;margin-top:16px}
+  .empty{padding:30px;text-align:center;color:var(--muted);border:2px dashed var(--line);border-radius:14px;background:rgba(255,255,255,0.5);}
+
+  /* สไลด์สุ่มพุทธศาสนสุภาษิต */
+  .highlight-box{
+    background: linear-gradient(135deg, #b45309, #78350f);
+    color: #fff; padding: 20px; border-radius: var(--radius);
+    text-align: center; position: relative; overflow: hidden;
+    box-shadow: 0 10px 30px -10px rgba(180, 83, 9, 0.4);
+  }
+  .highlight-pali{ font-size: 22px; font-weight: 700; margin-bottom: 8px; font-family: "Kodchasan"; }
+  .highlight-thai{ font-size: 16px; opacity: 0.9; }
+  .highlight-badge{
+    position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.2);
+    padding: 2px 8px; border-radius: 4px; font-size: 11px;
   }
 
-  .fab-chatbot:active {
-    transform: scale(0.98);
+  /* ===== CSS ของ Chatbot (Thai Law Style) ===== */
+  #fab-chat-toggle {
+    position: fixed; bottom: 24px; right: 24px;
+    width: 60px; height: 60px;
+    background: linear-gradient(135deg, #b45309, #d97706); /* สีส้มทอง */
+    color: white; border: none; border-radius: 50%;
+    font-size: 28px; box-shadow: 0 8px 20px rgba(180, 83, 9, 0.4);
+    cursor: pointer; z-index: 998;
+    transition: transform 0.2s, opacity 0.3s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #fab-chat-toggle:hover { transform: scale(1.1); }
+  
+  #chatbot-modal {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 1000; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    transition: opacity 0.3s; opacity: 1; pointer-events: auto;
+    display: flex; justify-content: center; align-items: flex-end; /* Mobile bottom sheet style */
+  }
+  @media (min-width: 640px) {
+    #chatbot-modal { align-items: center; }
+  }
+  #chatbot-modal.chatbot-hidden { opacity: 0; pointer-events: none; }
+  
+  .chat-window {
+    width: 100%; max-width: 500px; height: 90vh;
+    background: #fff; border-radius: 20px 20px 0 0;
+    display: flex; flex-direction: column; overflow: hidden;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+  }
+  @media (min-width: 640px) {
+    .chat-window { height: 80vh; border-radius: 20px; }
   }
 
-  .fab-chatbot:focus-visible {
-    outline: 3px solid var(--royal-blue);
-    outline-offset: 3px;
+  /* Chat Bubbles */
+  .chat-bubble { max-width: 80%; padding: 10px 14px; border-radius: 16px; position: relative; font-size: 15px; line-height: 1.5; }
+  .chat-bubble-user { background: #b45309; color: white; border-bottom-right-radius: 4px; margin-left: auto; }
+  .chat-bubble-model { background: #f3f4f6; color: #1f2937; border-bottom-left-radius: 4px; border: 1px solid #e5e7eb; }
+  
+  /* Thinking Animation */
+  .gemini-thinking-bar {
+    width: 40px; height: 4px; background: #e5e7eb; border-radius: 2px; overflow: hidden; position: relative;
   }
-  /* === End FAB Chatbot Button === */
+  .gemini-thinking-bar::after {
+    content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 50%;
+    background: #b45309; animation: slide 1s infinite ease-in-out alternate;
+  }
+  @keyframes slide { from { left: 0; } to { left: 50%; } }
+
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="logo">พุทธศาสนสุภาษิต</div>
-      <button id="openDlg" class="ghost-btn ghost-btn--brand">เลือกหมวด</button>
-      <div class="spacer"></div>
-      <div class="chip-bar" id="levelChips"></div>
+
+<main class="wrap">
+  <header style="text-align: center; margin-bottom: 20px;">
+    <h1 style="color:var(--brand); font-size: 24px;">🙏 พุทธศาสนสุภาษิต</h1>
+    <span class="note">แหล่งรวมสุภาษิต นักธรรมตรี-โท-เอก พร้อมระบบค้นหาอัจฉริยะ</span>
+  </header>
+
+  <section class="section">
+    <div class="highlight-box" id="highlightBox">
+      <span class="highlight-badge">สุ่มสุภาษิต</span>
+      <div class="highlight-pali" id="hl-pali">โหลดข้อมูล...</div>
+      <div class="highlight-thai" id="hl-thai">กำลังเชื่อมต่อฐานข้อมูลธรรมะ</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="searchbar">
+      <input id="q" type="search" placeholder="ค้นหา (เช่น จิต, ความโกรธ, ตน)...">
+      <button id="btnSearch" class="btn primary" type="button">ค้นหา</button>
+    </div>
+    
+    <div class="catbar" id="levelTabs">
+      </div>
+  </section>
+
+  <section class="section panel">
+    <div class="row" style="margin-bottom:12px;">
+      <h3 id="panelTitle">รายการสุภาษิต</h3>
+      <span id="resultCount" class="note"></span>
+    </div>
+    <div id="list" class="list"></div>
+    
+    <div class="loadbar" id="pagination">
+      <button id="btnPrev" class="btn secondary">ก่อนหน้า</button>
+      <span id="pageInfo" style="align-self:center; font-size:14px; color:var(--muted);"></span>
+      <button id="btnNext" class="btn primary">ถัดไป</button>
+    </div>
+  </section>
+</main>
+
+<button id="fab-chat-toggle" title="ถาม AI ธรรมะ">🤖</button>
+
+<div id="chatbot-modal" class="chatbot-hidden">
+  <div class="chat-window">
+    <header class="bg-orange-700 text-white p-4 flex justify-between items-center shadow-md">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">☸️</span>
+        <div>
+          <h1 class="text-lg font-bold m-0 text-white font-sans">AI สนทนาธรรม</h1>
+          <p class="text-xs text-orange-200 m-0">ตอบคำถามด้วยหลักพุทธศาสนา</p>
+        </div>
+      </div>
+      <div class="flex gap-2">
+        <button id="new-chat-btn" class="bg-orange-600 hover:bg-orange-800 text-white text-xs font-bold py-1 px-3 rounded">
+          เริ่มใหม่
+        </button>
+        <button id="chatbot-close-btn" class="text-white hover:text-orange-200 font-bold text-xl px-2">
+          &times;
+        </button>
+      </div>
     </header>
 
-    <div class="row" style="margin-top:12px;">
-      <input id="q" class="search" placeholder="ค้นหาเรื่อง/คำแปล…"/>
-      <select id="sorter" class="select">
-        <option value="no">เรียงตามลำดับ</option>
-        <option value="cat">เรียงตามหมวด</option>
-      </select>
-      <button id="btnSearch" class="ghost-btn" title="ค้นหา">ค้นหา</button>
+    <main id="chat-history" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
+      <div class="flex items-start space-x-2">
+        <span class="text-2xl">🤖</span>
+        <div class="chat-bubble chat-bubble-model">
+          <p>เจริญพรโยม... อาตมาคือ AI ผู้ช่วยค้นหาและอธิบายพุทธศาสนสุภาษิต หากโยมมีเรื่องทุกข์ใจ หรืออยากทราบหลักธรรมข้อใด สอบถามมาได้เลย</p>
+        </div>
+      </div>
+    </main>
+
+    <div id="thinking-indicator" class="p-4 hidden bg-gray-50">
+      <div class="flex items-center space-x-2">
+        <span class="text-2xl">🤖</span>
+        <div class="chat-bubble chat-bubble-model">
+          <div class="gemini-thinking-bar"></div>
+        </div>
+      </div>
     </div>
 
-    <section class="grid" id="list"></section>
-    <div id="pager" aria-label="ตัวแบ่งหน้า" hidden>
-      <button id="prevPage" class="pbtn">ก่อนหน้า</button>
-      <span class="pcounter" id="pageInfo"></span>
-      <button id="nextPage" class="pbtn">ถัดไป</button>
-    </div>
+    <footer class="bg-white p-3 border-t border-gray-200">
+      <div class="flex space-x-2">
+        <input id="user-input" type="text" placeholder="พิมพ์คำถามธรรมะ..." class="flex-1 p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 font-sans">
+        <button id="send-btn" class="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-xl shadow-sm transition-colors">
+          ส่ง
+        </button>
+      </div>
+    </footer>
   </div>
-
-  <dialog id="dlgCats">
-    <div class="dlg-head">
-      <h2>เลือกหมวด / หมวดย่อย</h2>
-      <button id="closeDlg" class="ghost-btn">ปิด</button>
-    </div>
-    <div class="dlg-body">
-      <div class="row" style="margin-bottom:12px;"><div style="font-weight:700;">ระดับ:</div><div class="chip-bar" id="dlgLevelChips"></div></div>
-      <div class="row" style="margin-bottom:6px;"><div style="font-weight:700;">หมวด:</div></div>
-      <div id="cats" class="subgrid"></div>
-      <div class="row" style="margin:16px 0 6px;"><div style="font-weight:700;">หมวดย่อย:</div></div>
-      <div id="subcats" class="subgrid"></div>
-    </div>
-    <div class="dlg-foot">
-      <button class="ghost-btn" id="clearFilter">ล้างตัวกรอง</button>
-      <button class="ghost-btn ghost-btn--brand" id="applyFilter">นำไปใช้</button>
-    </div>
-  </dialog>
-
-  <dialog id="dlgInfo" aria-modal="true">
-    <div class="dlg-head">
-      <h2>รายละเอียด</h2>
-      <button id="closeInfo" class="ghost-btn">ปิด</button>
-    </div>
-    <div class="dlg-body"><div id="infoContent" class="from-sheet"></div></div>
-    <div class="dlg-foot"><button id="okInfo" class="ghost-btn ghost-btn--brand">โอเค</button></div>
-  </dialog>
+</div>
 
 <script>
-// === CONFIG ===
-const DATA_FILES = {
+/* =========================================
+   1. ส่วนจัดการข้อมูล (DATA HANDLER)
+   ========================================= */
+const DATA_URLS = {
   'นักธรรมตรี': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_tri.json',
   'นักธรรมโท': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_to.json',
   'นักธรรมเอก': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_ek.json'
 };
 
-// === STATE & REFS ===
-let ALL_DATA = {};
-let state = { level:'นักธรรมตรี', category:'', subcategory:'', q:'', sort:'no' };
-let currentLevelData = [];
-let filteredItems = [];
-let page = 1;
-const pageSize = 5;
+let allProverbs = [];
+let currentFilter = [];
+let currentPage = 1;
+const PAGE_SIZE = 10;
+let currentLevel = 'นักธรรมตรี';
 
-const listEl   = document.getElementById('list');
-const qEl      = document.getElementById('q');
-const sorterEl = document.getElementById('sorter');
-const pagerEl  = document.getElementById('pager');
-const prevBtn  = document.getElementById('prevPage');
-const nextBtn  = document.getElementById('nextPage');
-const pageInfo = document.getElementById('pageInfo');
-const dlg      = document.getElementById('dlgCats');
-const dlgInfo  = document.getElementById('dlgInfo');
-const infoContent = document.getElementById('infoContent');
-const dlgLevelChips = document.getElementById('dlgLevelChips');
-const catsEl   = document.getElementById('cats');
-const subcatsEl= document.getElementById('subcats');
-
-// === UTILS ===
-const escapeHtml = s => String(s ?? '').replace(/[&<>\"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
-const pixelTag   = t => `<span class="tag from-sheet">${escapeHtml(t)}</span>`;
-
-const NKMAP = {
-  'ลำดับ':'ลำดับ', 'หมวด':'หมวด', 'เรื่อง':'เรื่อง', 'คำแปล':'คำแปล', 'ที่มา':'ที่มา'
-};
+// ฟังก์ชันแปลง Key ให้เป็นมาตรฐาน
 function normalizeKeys(obj){
-  const out = {};
-  for(const k in obj){
-    const clean = k.replace(/^\uFEFF|\s+$/g,'');
-    const mapped = NKMAP[clean] ?? clean;
-    out[mapped] = obj[k];
+  const map = {'เรื่อง':'pali', 'คำแปล':'thai', 'หมวด':'cat', 'ลำดับ':'id'};
+  const newObj = {};
+  for(let k in obj){
+    let key = k.trim();
+    if(map[key]) newObj[map[key]] = obj[k];
+    else newObj[key] = obj[k];
   }
-  out['ลำดับ'] = out['ลำดับ'] != null ? String(out['ลำดับ']) : '';
-  out['หมวด']  = out['หมวด']  != null ? String(out['หมวด'])  : '';
-  out['เรื่อง'] = out['เรื่อง'] != null ? String(out['เรื่อง']) : '';
-  out['คำแปล'] = out['คำแปล'] != null ? String(out['คำแปล']) : '';
-  return out;
+  return newObj;
 }
 
-// === LOADERS ===
-async function loadAllDataFromFiles(){
-  if (Object.keys(ALL_DATA).length) return;
-  listEl.innerHTML = '<div class="card from-sheet">กำลังโหลดข้อมูล…</div>';
-  const entries = Object.entries(DATA_FILES);
-  try{
-    const results = await Promise.all(entries.map(async ([level, url])=>{
-      const res = await fetch(url, {cache:'no-store'});
-      if(!res.ok) throw new Error(`โหลดไม่ได้: ${url} (HTTP ${res.status})`);
-      const raw = await res.json();
-      const arr = Array.isArray(raw) ? raw : (Array.isArray(raw?.data) ? raw.data : []);
-      if(!Array.isArray(arr)) throw new Error(`รูปแบบ JSON ของ ${level} ไม่ใช่อาร์เรย์`);
-      const norm = arr.map(normalizeKeys);
-      return [level, norm];
-    }));
-    ALL_DATA = Object.fromEntries(results);
-  }catch(err){
-    console.error(err);
-    listEl.innerHTML = `<div class="card from-sheet" style="background:#fff1f2;border-color:#fca5a5;">เกิดข้อผิดพลาด: ${escapeHtml(err.message)}</div>`;
-    throw err;
-  }
-}
-
-// === RENDERERS ===
-function buildFullDetail(item){
-  const เรื่อง = (item['เรื่อง'] || '').trim();
-  const คำแปล = (item['คำแปล'] || '').trim();
-  const หมวด = (item['หมวด'] || '').trim();
-  const ลำดับ = (item['ลำดับ'] || '').trim();
-
-  let content = '<div class="from-sheet" style="line-height: 1.8;">';
-  if (ลำดับ) content += `<p style="margin:0 0 10px;"><b>ลำดับ:</b> ${escapeHtml(ลำดับ)}</p>`;
-  if (หมวด) content += `<p style="margin:0 0 10px;"><b>หมวด:</b> ${escapeHtml(หมวด)}</p>`;
-  if (เรื่อง) content += `<p style="margin:0 0 10px;"><b>สุภาษิต:</b><br>${escapeHtml(เรื่อง)}</p>`;
-  if (คำแปล) content += `<p style="margin:0 0 10px;"><b>คำแปล:</b><br><span style="white-space: pre-wrap;">${escapeHtml(คำแปล)}</span></p>`;
-  content += '</div>';
-  return content;
-}
-
-function cardTemplate(it, idx){
-  return `<article class="card" data-idx="${idx}" role="button" tabindex="0" title="คลิกเพื่อดูรายละเอียด">
-    <div class="meta from-sheet">
-      ${pixelTag('ลำดับ '+escapeHtml(it['ลำดับ']||''))}
-      ${pixelTag('หมวด '+escapeHtml(it['หมวด']||''))}
-    </div>
-    <div class="pali from-sheet">${escapeHtml(it['เรื่อง']||'')}</div>
-    <div class="trans from-sheet">${escapeHtml(it['คำแปล']||'')}</div>
-  </article>`;
-}
-
-function renderPage(){
-  const total = filteredItems.length;
-  if (!total){
-    listEl.innerHTML = '<div class="card from-sheet">ไม่พบข้อมูลที่ตรงกับเงื่อนไข</div>';
-    pagerEl.hidden = true; return;
-  }
-  const totalPages = Math.max(1, Math.ceil(total / pageSize));
-  if (page > totalPages) page = totalPages;
-  const start = (page-1)*pageSize, end = Math.min(start+pageSize, total);
-
-  const frag = document.createDocumentFragment();
-  for(let i=start; i<end; i++){
-    const it = filteredItems[i];
-    const idx = currentLevelData.indexOf(it);
-    const wrap = document.createElement('div');
-    wrap.innerHTML = cardTemplate(it, idx);
-    frag.appendChild(wrap.firstChild);
-  }
-  listEl.innerHTML = '';
-  listEl.appendChild(frag);
-
-  pagerEl.hidden = total <= pageSize;
-  pageInfo.textContent = `หน้า ${page} / ${totalPages}`;
-  prevBtn.disabled = page <= 1;
-  nextBtn.disabled = page >= totalPages;
-}
-
-function refreshList(){
-  try{
-    listEl.innerHTML = '<div class="card from-sheet">กำลังประมวลผล…</div>';
-    pagerEl.hidden = true;
-
-    currentLevelData = ALL_DATA[state.level] || [];
-
-    const q = (state.q||'').toLowerCase();
-    filteredItems = currentLevelData.filter(item=>{
-      const catOK = !state.category || item['หมวด'] === state.category;
-      const qOK = !q ||
-        (item['เรื่อง'] && item['เรื่อง'].toLowerCase().includes(q)) ||
-        (item['คำแปล'] && item['คำแปล'].toLowerCase().includes(q));
-      return catOK && qOK;
+async function loadData() {
+  const highlightEl = document.getElementById('hl-pali');
+  const highlightThaiEl = document.getElementById('hl-thai');
+  
+  try {
+    const promises = Object.entries(DATA_URLS).map(async ([level, url]) => {
+      const res = await fetch(url);
+      const json = await res.json();
+      const list = Array.isArray(json) ? json : (json.data || []);
+      return list.map(item => ({ ...normalizeKeys(item), level }));
     });
 
-    if (state.sort === 'cat'){
-      filteredItems.sort((a,b)=>
-        (a['หมวด']||'').localeCompare(b['หมวด']||'', 'th') ||
-        (parseInt(a['ลำดับ'])||0) - (parseInt(b['ลำดับ'])||0)
-      );
-    }else{
-      filteredItems.sort((a,b)=>
-        (parseInt(a['ลำดับ'])||0) - (parseInt(b['ลำดับ'])||0)
-      );
-    }
+    const results = await Promise.all(promises);
+    allProverbs = results.flat();
+    
+    // เริ่มต้นแสดงผล
+    renderChips();
+    filterAndRender();
+    showRandomHighlight();
 
-    page = 1;
-    renderPage();
-  }catch(err){
+  } catch (err) {
     console.error(err);
-    listEl.innerHTML = `<div class="card from-sheet" style="background:#fff1f2;border-color:#fca5a5;">ประมวลผลล้มเหลว: ${escapeHtml(err.message)}</div>`;
+    highlightEl.textContent = "เกิดข้อผิดพลาด";
+    highlightThaiEl.textContent = "ไม่สามารถโหลดข้อมูลได้";
+    document.getElementById('list').innerHTML = `<div class="empty">โหลดข้อมูลไม่สำเร็จ กรุณารีเฟรช</div>`;
   }
 }
 
-// === DIALOGS / FILTER UI ===
-function getUniqueValues(data, key){
-  const values = data.map(x=>x[key]).filter(Boolean);
-  return Array.from(new Set(values)).sort((a,b)=>String(a).localeCompare(String(b),'th'));
-}
-let temp = null;
-function renderLevelChips(){
-  const lv = ['นักธรรมตรี','นักธรรมโท','นักธรรมเอก'];
-  document.getElementById('levelChips').innerHTML =
-    lv.map(l=>`<button class="chip ${l===state.level?'is-active':''}" data-level="${l}">${l}</button>`).join('');
-}
-function renderDlgLevelChips(){
-  const lv = ['นักธรรมตรี','นักธรรมโท','นักธรรมเอก'];
-  dlgLevelChips.innerHTML =
-    lv.map(l=>`<button class="chip ${l===(temp?.level||state.level)?'is-active':''}" data-dlg-level="${l}">${l}</button>`).join('');
-}
-function renderCats(){
-  catsEl.innerHTML = (temp?.cats||[]).map(c=>`<div class="subcat ${c===temp.category?'is-active':''}" data-cat="${c}">${escapeHtml(c)}</div>`).join('');
-}
-function renderSubcats(){ subcatsEl.innerHTML = ''; }
-function loadCats(){
-  temp.cats = getUniqueValues(ALL_DATA[temp.level]||[], 'หมวด');
-  temp.subcats = [];
-  renderCats(); renderSubcats();
+/* =========================================
+   2. ส่วนแสดงผล (UI RENDERER)
+   ========================================= */
+const listEl = document.getElementById('list');
+const pageInfo = document.getElementById('pageInfo');
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+
+function renderChips() {
+  const tabs = document.getElementById('levelTabs');
+  tabs.innerHTML = Object.keys(DATA_URLS).map(lvl => `
+    <button class="chip ${lvl===currentLevel?'active':''}" onclick="switchLevel('${lvl}')">
+      📚 ${lvl}
+    </button>
+  `).join('');
 }
 
-// === EVENTS ===
-document.getElementById('openDlg').onclick = ()=>{ temp = JSON.parse(JSON.stringify(state)); renderDlgLevelChips(); loadCats(); dlg.showModal(); document.body.classList.add('lock'); };
-document.getElementById('closeDlg').onclick= ()=>{ dlg.close(); document.body.classList.remove('lock'); };
-document.getElementById('applyFilter').onclick= ()=>{ state = JSON.parse(JSON.stringify(temp)); dlg.close(); renderLevelChips(); refreshList(); };
-document.getElementById('clearFilter').onclick= ()=>{ temp.category=''; temp.subcategory=''; renderCats(); renderSubcats(); };
+function switchLevel(lvl) {
+  currentLevel = lvl;
+  currentPage = 1;
+  document.getElementById('q').value = ''; // ล้างค้นหาเมื่อเปลี่ยนชั้น
+  renderChips();
+  filterAndRender();
+}
 
-document.addEventListener('click', (ev)=>{
-  const l = ev.target.closest('.chip[data-level]');
-  if(l){ state.level=l.dataset.level; state.category=''; state.subcategory=''; renderLevelChips(); refreshList(); return; }
-
-  const dchip = ev.target.closest('.chip[data-dlg-level]');
-  if(dchip){ if(temp.level !== dchip.dataset.dlgLevel){ temp.level=dchip.dataset.dlgLevel; temp.category=''; temp.subcategory=''; renderDlgLevelChips(); loadCats(); } return; }
-
-  const c = ev.target.closest('.subcat[data-cat]');
-  if(c){ temp.category=c.dataset.cat; renderCats(); return; }
-
-  const card = ev.target.closest('.card[data-idx]');
-  if(card){
-    const idx = Number(card.dataset.idx);
-    if(currentLevelData[idx]){ 
-      infoContent.innerHTML = buildFullDetail(currentLevelData[idx]);
-      dlgInfo.showModal(); 
-      document.body.classList.add('lock'); 
-    }
+function filterAndRender() {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  
+  // Logic: ถ้ามีการค้นหา -> ค้นหาจากทั้งหมด, ถ้าไม่มี -> กรองตามชั้น
+  if (q) {
+    currentFilter = allProverbs.filter(item => 
+      (item.pali && item.pali.toLowerCase().includes(q)) || 
+      (item.thai && item.thai.toLowerCase().includes(q)) ||
+      (item.cat && item.cat.toLowerCase().includes(q))
+    );
+    document.getElementById('panelTitle').textContent = `ผลการค้นหา "${q}"`;
+  } else {
+    currentFilter = allProverbs.filter(item => item.level === currentLevel);
+    document.getElementById('panelTitle').textContent = `รายการ ${currentLevel}`;
   }
-});
 
-document.getElementById('closeInfo').onclick = ()=>{ dlgInfo.close(); document.body.classList.remove('lock'); };
-document.getElementById('okInfo').onclick    = ()=>{ dlgInfo.close(); document.body.classList.remove('lock'); };
-
-// [ปรับปรุง] เปลี่ยน Event ของปุ่ม
-document.getElementById('btnSearch').onclick = ()=>{ state.q = qEl.value.trim(); refreshList(); };
-qEl.onkeydown = (e)=>{ if(e.key==='Enter'){ state.q = qEl.value.trim(); refreshList(); } };
-sorterEl.onchange = ()=>{ state.sort = sorterEl.value; refreshList(); };
-prevBtn.onclick = ()=>{ if(page>1){ page--; renderPage(); window.scrollTo(0,0); } };
-nextBtn.onclick = ()=>{ const totalPages = Math.max(1, Math.ceil(filteredItems.length/pageSize)); if(page<totalPages){ page++; renderPage(); window.scrollTo(0,0); } };
-window.addEventListener('keydown',(e)=>{ if(e.key==='Escape' && dlg.open){ dlg.close(); document.body.classList.remove('lock'); } if(e.key==='Escape' && dlgInfo.open){ dlgInfo.close(); document.body.classList.remove('lock'); } });
-
-// === INIT ===
-async function init(){
-  renderLevelChips();
-  try{
-    await loadAllDataFromFiles();
-    refreshList();
-  }catch(e){ /* แสดงแล้วในหน้าจอ */ }
+  document.getElementById('resultCount').textContent = `${currentFilter.length} รายการ`;
+  renderPagination();
 }
-init();
+
+function renderPagination() {
+  const totalPages = Math.ceil(currentFilter.length / PAGE_SIZE) || 1;
+  if (currentPage > totalPages) currentPage = totalPages;
+  
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const end = start + PAGE_SIZE;
+  const itemsToShow = currentFilter.slice(start, end);
+
+  if (itemsToShow.length === 0) {
+    listEl.innerHTML = `<div class="empty">ไม่พบข้อมูล</div>`;
+    pageInfo.textContent = "";
+    btnPrev.style.display = 'none';
+    btnNext.style.display = 'none';
+    return;
+  }
+
+  listEl.innerHTML = itemsToShow.map(item => `
+    <article class="card">
+      <h4 class="title">${item.pali || '-'}</h4>
+      <div class="sub-title">${item.thai || '-'}</div>
+      <div class="meta">
+        ${item.level ? `<span class="tag" style="background:#e0f2fe; border-color:#bae6fd; color:#0369a1;">${item.level}</span>` : ''}
+        ${item.cat ? `<span class="tag">หมวด: ${item.cat}</span>` : ''}
+        ${item.id ? `<span class="tag" style="background:#f3f4f6; border-color:#e5e7eb; color:#4b5563;">ลำดับ: ${item.id}</span>` : ''}
+      </div>
+    </article>
+  `).join('');
+
+  pageInfo.textContent = `หน้า ${currentPage} / ${totalPages}`;
+  btnPrev.style.display = currentPage > 1 ? 'inline-block' : 'none';
+  btnNext.style.display = currentPage < totalPages ? 'inline-block' : 'none';
+}
+
+function showRandomHighlight() {
+  if(!allProverbs.length) return;
+  const r = allProverbs[Math.floor(Math.random() * allProverbs.length)];
+  document.getElementById('hl-pali').textContent = r.pali || '';
+  document.getElementById('hl-thai').textContent = r.thai || '';
+}
+
+// Event Listeners UI
+document.getElementById('btnSearch').onclick = filterAndRender;
+document.getElementById('q').onkeyup = (e) => { if(e.key === 'Enter') filterAndRender(); };
+btnPrev.onclick = () => { if(currentPage > 1) { currentPage--; renderPagination(); window.scrollTo(0,300); }};
+btnNext.onclick = () => { currentPage++; renderPagination(); window.scrollTo(0,300); };
+
+
+/* =========================================
+   3. ส่วน Chatbot AI (Backend เดียวกับ Law AI)
+   ========================================= */
+// 🔒 ใช้ Backend ตัวเดิมตามที่ระบุ
+const BACKEND_URL = 'https://us-central1-law-ai-14740.cloudfunctions.net/api/chat';
+
+// สร้าง System Prompt เพื่อ Override บุคลิก (Client-Side Injection)
+const SYSTEM_CONTEXT = {
+  role: "user",
+  parts: [{ text: "System Instruction: คุณคือ 'AI สนทนาธรรม' หรือ 'พระอาจารย์ AI' มีหน้าที่ให้ความรู้เกี่ยวกับพุทธศาสนสุภาษิต หลักธรรม และการนำไปใช้ในชีวิตประจำวัน ตอบคำถามด้วยภาษาสุภาพ นุ่มนวล มีเมตตา (อาจใช้คำว่า 'เจริญพร' แทนสวัสดี) ห้ามตอบเรื่องกฎหมาย ถ้าถามเรื่องอื่นที่ไม่ใช่ธรรมะ ให้วกกลับมาเรื่องธรรมะเสมอ" }]
+};
+
+const ACK_CONTEXT = {
+  role: "model",
+  parts: [{ text: "รับทราบ เจริญพร อาตมาพร้อมให้คำแนะนำด้านหลักธรรมแล้ว" }]
+};
+
+let chatHistory = [SYSTEM_CONTEXT, ACK_CONTEXT];
+
+const chatHistoryEl = document.getElementById('chat-history');
+const userInput = document.getElementById('user-input');
+const sendBtn = document.getElementById('send-btn');
+const thinkingIndicator = document.getElementById('thinking-indicator');
+
+function addChatBubble(text, isUser) {
+  const div = document.createElement('div');
+  div.className = `flex items-start space-x-2 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
+  div.innerHTML = `
+    <span class="text-2xl">${isUser ? '👤' : '🤖'}</span>
+    <div class="chat-bubble ${isUser ? 'chat-bubble-user' : 'chat-bubble-model'}">
+      ${text.replace(/\n/g, '<br>')}
+    </div>
+  `;
+  chatHistoryEl.appendChild(div);
+  chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
+}
+
+async function handleSend() {
+  const text = userInput.value.trim();
+  if (!text) return;
+
+  userInput.value = '';
+  addChatBubble(text, true);
+  
+  thinkingIndicator.classList.remove('hidden');
+  chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
+  sendBtn.disabled = true;
+
+  // เพิ่มข้อความล่าสุด
+  chatHistory.push({ role: "user", parts: [{ text: text }] });
+
+  try {
+    const res = await fetch(BACKEND_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ history: chatHistory }) // ส่งประวัติที่มี System Prompt แฝงไปด้วย
+    });
+
+    if (!res.ok) throw new Error("Server Error");
+
+    const data = await res.json();
+    const reply = data.reply;
+
+    thinkingIndicator.classList.add('hidden');
+    addChatBubble(reply, false);
+    chatHistory.push({ role: "model", parts: [{ text: reply }] });
+
+  } catch (err) {
+    console.error(err);
+    thinkingIndicator.classList.add('hidden');
+    addChatBubble("ขออภัย อาตมาเชื่อมต่อสัญญาณไม่ค่อยดี ลองใหม่อีกครั้งนะโยม", false);
+    // ลบข้อความล่าสุดออกเพื่อให้ลองใหม่ได้
+    chatHistory.pop();
+  } finally {
+    sendBtn.disabled = false;
+  }
+}
+
+// Chat UI Controls
+const modal = document.getElementById('chatbot-modal');
+const fab = document.getElementById('fab-chat-toggle');
+
+fab.onclick = () => {
+  modal.classList.remove('chatbot-hidden');
+  fab.style.opacity = '0';
+};
+document.getElementById('chatbot-close-btn').onclick = () => {
+  modal.classList.add('chatbot-hidden');
+  fab.style.opacity = '1';
+};
+document.getElementById('new-chat-btn').onclick = () => {
+  chatHistory = [SYSTEM_CONTEXT, ACK_CONTEXT]; // Reset พร้อม System Prompt เดิม
+  chatHistoryEl.innerHTML = `
+      <div class="flex items-start space-x-2">
+        <span class="text-2xl">🤖</span>
+        <div class="chat-bubble chat-bubble-model">
+          <p>เจริญพร เริ่มสนทนาธรรมบทใหม่ได้เลย</p>
+        </div>
+      </div>
+  `;
+};
+sendBtn.onclick = handleSend;
+userInput.onkeydown = (e) => { if(e.key === 'Enter') handleSend(); };
+
+// เริ่มทำงาน
+loadData();
+
 </script>
-	<footer>
-  <p class="footer-links">
-    © 2025 Crow Studio |
-    <a href="https://sites.google.com/view/privacy-policy-pdpa-crow-studi/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81">นโยบายความเป็นส่วนตัว</a> |
-    <a href="ลิงก์ข้อตกลง">ข้อตกลงการใช้งาน</a>
-  </p>
-</footer>
-	<a href="https://raw.githack.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/phathasupachit/index.html" class="fab-chatbot" title="แชทบอทพระไตรปิฎก" aria-label="แชทบอทพระไตรปิฎก">
-  Ai
-</a>
 </body>
 </html>
-
-
-
-
-
-
-
