@@ -1,273 +1,684 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>โปรแกรมเปลี่ยนชื่อไฟล์เรียงลำดับ (รองรับทุกนามสกุล)</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Thai Charity Hub | ศูนย์รวมการแบ่งปันน้ำใจ</title>
+    
+    <!-- Fonts: Sarabun & Prompt -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Settings */
+        body { 
+            font-family: 'Sarabun', sans-serif; 
+            background-color: #fff1f2; /* Rose-50 */
+            -webkit-tap-highlight-color: transparent; 
+            color: #4c0519; /* Rose-950 */
+            overscroll-behavior-y: none;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #fff1f2; }
+        ::-webkit-scrollbar-thumb { background: #fb7185; border-radius: 2px; }
 
-<style>
-:root{
-  --bg:#f5f5f5;
-  --surface:#ffffff;
-  --ink:#000;
-  --muted:#444;
-  --line:#ddd;
-  --brand:#2563eb;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:"IBM Plex Sans Thai",sans-serif;
-  background:var(--bg);
-  padding:20px;
-}
-.wrap{max-width:1100px;margin:auto}
-h1{font-size:20px;margin:0}
-.sub{font-size:13px;color:var(--muted)}
+        /* Fonts */
+        h1, h2, h3, .font-heading { font-family: 'Prompt', sans-serif; }
+        
+        /* Modal */
+        dialog {
+            transition: opacity 0.15s ease-out, transform 0.15s ease-out;
+            opacity: 0;
+            transform: scale(0.98);
+        }
+        dialog[open] { opacity: 1; transform: scale(1); }
+        dialog::backdrop { background: rgba(88, 28, 135, 0.2); backdrop-filter: blur(3px); }
+        
+        /* Utilities */
+        .line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-.grid{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:14px;
-}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
+        /* Map */
+        #map, #viewMap { border: 1px solid #fda4af; border-radius: 8px; z-index: 1; }
 
-.card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-}
-.card-h{
-  padding:14px;
-  border-bottom:1px solid var(--line);
-  font-weight:700;
-}
-.card-b{padding:14px}
+        /* Card Design (Charity Theme) */
+        .charity-card {
+            background: white;
+            border: 1px solid #fecdd3; /* Rose-200 */
+            border-radius: 8px;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .charity-card:active { transform: scale(0.98); }
+        
+        /* Quantity Tag */
+        .qty-tag {
+            color: #be123c; /* Rose-700 */
+            font-family: 'Prompt', sans-serif;
+            font-weight: 600;
+        }
 
-.btn{
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:12px;
-  padding:8px 12px;
-  cursor:pointer;
-  font-weight:600;
-}
-.btn.primary{
-  background:var(--brand);
-  color:#fff;
-  border:none;
-}
-.btn.danger{background:#fee;border-color:#f99}
+        /* Status Badge */
+        .status-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: #e11d48; /* Rose-600 */
+            color: white;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-weight: bold;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-.drop{
-  border:2px dashed #ccc;
-  border-radius:14px;
-  padding:16px;
-  text-align:center;
-  margin-bottom:12px;
-}
-.list{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-@media(max-width:600px){.list{grid-template-columns:repeat(2,1fr)}}
-
-.item{
-  border:1px solid var(--line);
-  border-radius:12px;
-  overflow:hidden;
-  position:relative;
-}
-.thumb{
-  height:120px;
-  background:#f0f0f0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:13px;
-  color:#555;
-}
-.thumb img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-}
-.meta{padding:8px}
-.old{font-size:12px;color:#666;word-break:break-all}
-.new{font-size:13px;font-weight:700;word-break:break-all}
-.idx{
-  position:absolute;
-  top:6px;right:6px;
-  background:#0008;
-  color:#fff;
-  font-size:11px;
-  padding:4px 6px;
-  border-radius:8px;
-}
-.form{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-@media(max-width:500px){.form{grid-template-columns:1fr}}
-.field{
-  width:100%;
-  padding:8px;
-  border-radius:10px;
-  border:1px solid var(--line);
-}
-.status{font-size:12px;color:#555;margin-top:8px}
-</style>
+        /* Mobile Grid */
+        @media (max-width: 640px) {
+            .mobile-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr)); 
+            }
+            @media (min-width: 380px) {
+                .mobile-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            }
+            @media (min-width: 450px) {
+                .mobile-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            }
+            .text-xxs { font-size: 10px; line-height: 1.2; }
+            .compact-padding { padding: 0.4rem; }
+        }
+    </style>
 </head>
+<body class="min-h-screen flex flex-col text-slate-800">
 
-<body>
-<div class="wrap">
-
-  <h1>โปรแกรมเปลี่ยนชื่อไฟล์เรียงลำดับ</h1>
-  <div class="sub">รองรับทุกนามสกุล • Export ZIP • ลากเรียงลำดับได้</div>
-
-  <div style="height:12px"></div>
-
-  <div class="grid">
-    <!-- LEFT -->
-    <div class="card">
-      <div class="card-h">1) เลือกไฟล์</div>
-      <div class="card-b">
-
-        <div class="drop" id="dropZone">
-          ลากไฟล์ทุกชนิดมาวางที่นี่<br>
-          หรือ <label class="btn" for="fileInput">เลือกไฟล์</label>
-          <input id="fileInput" type="file" multiple hidden>
+<!-- 1. Header (Warm & Friendly) -->
+<nav class="bg-rose-600 text-white shadow-lg sticky top-0 z-40 h-14 flex items-center justify-between px-3">
+    <div class="flex items-center gap-2" onclick="refreshApp()">
+        <div class="bg-white/20 w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm">
+            <i class="fa-solid fa-hand-holding-heart text-white text-sm"></i>
         </div>
-
-        <div class="list" id="list"></div>
-
-      </div>
-    </div>
-
-    <!-- RIGHT -->
-    <div class="card">
-      <div class="card-h">2) ตั้งชื่อไฟล์</div>
-      <div class="card-b">
-
-        <div class="form">
-          <div>
-            <label>Prefix</label>
-            <input class="field" id="prefix" placeholder="file_">
-          </div>
-          <div>
-            <label>เลขเริ่มต้น</label>
-            <input class="field" id="startNum" type="number" value="1">
-          </div>
-          <div>
-            <label>จำนวนหลัก</label>
-            <select class="field" id="pad">
-              <option value="2">2 (01)</option>
-              <option value="3" selected>3 (001)</option>
-              <option value="4">4 (0001)</option>
-              <option value="5">5 (00001)</option>
-            </select>
-          </div>
-          <div>
-            <label>นามสกุลไฟล์</label>
-            <select class="field" id="extMode">
-              <option value="keep" selected>คงเดิม</option>
-              <option value="jpg">.jpg</option>
-              <option value="png">.png</option>
-              <option value="pdf">.pdf</option>
-              <option value="zip">.zip</option>
-            </select>
-          </div>
+        <div>
+            <h1 class="text-sm font-bold leading-none tracking-wide">Thai Charity</h1>
+            <p class="text-[9px] text-rose-100 opacity-90">พื้นที่แบ่งปันและส่งต่อ</p>
         </div>
-
-        <div style="height:10px"></div>
-
-        <button class="btn primary" id="zipBtn">ดาวน์โหลด ZIP</button>
-        <button class="btn danger" id="clearBtn">ล้างทั้งหมด</button>
-
-        <div class="status" id="status">ยังไม่เลือกไฟล์</div>
-      </div>
     </div>
-  </div>
+    
+    <div class="flex items-center gap-2">
+        <button onclick="openNewPostModal()" class="bg-white text-rose-600 hover:bg-rose-50 text-xs font-bold py-1.5 px-3 rounded-full shadow-sm border border-rose-100 transition-colors flex items-center gap-1">
+            <i class="fa-solid fa-heart-circle-plus"></i> <span class="hidden xs:inline">บริจาคของ</span>
+        </button>
+    </div>
+</nav>
+
+<!-- 2. Search & Filter Bar -->
+<div class="bg-white border-b border-rose-100 sticky top-14 z-30 px-2 py-2 shadow-sm">
+    <div class="flex gap-2 max-w-5xl mx-auto">
+        <div class="relative flex-grow">
+            <input id="searchInput" type="text" placeholder="ค้นหา: เสื้อผ้า, หนังสือ, วีลแชร์..." class="w-full bg-rose-50 border border-rose-200 rounded-full px-9 py-1.5 text-xs focus:ring-1 focus:ring-rose-400 focus:border-rose-400 outline-none text-slate-700 placeholder-rose-300">
+            <i class="fa-solid fa-search absolute left-3 top-2 text-rose-300 text-xs"></i>
+        </div>
+        <select id="provinceFilter" class="bg-rose-50 border border-rose-200 rounded-full px-3 py-1.5 text-xs text-slate-700 outline-none w-28 truncate">
+            <option value="all">ทุกพื้นที่</option>
+        </select>
+    </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<!-- 3. Main Board -->
+<main class="flex-grow px-2 py-3 w-full max-w-6xl mx-auto">
+    
+    <!-- Loading State -->
+    <div id="loading" class="hidden flex-col items-center justify-center py-12">
+        <div class="relative">
+            <div class="w-10 h-10 border-4 border-rose-100 border-t-rose-500 rounded-full animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <i class="fa-solid fa-heart text-[10px] text-rose-500"></i>
+            </div>
+        </div>
+        <p class="text-xs text-rose-400 mt-2 font-medium">กำลังโหลดรายการแบ่งปัน...</p>
+    </div>
+
+    <!-- Data Grid -->
+    <div id="board" class="grid mobile-grid sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-4">
+        <!-- Cards injected via JS -->
+    </div>
+
+    <!-- Pagination -->
+    <div id="pagination" class="flex justify-center items-center gap-3 mt-8 pb-8 text-xs text-slate-500">
+        <button id="btnPrev" onclick="changePage(-1)" class="w-8 h-8 flex items-center justify-center bg-white border border-rose-200 rounded-full disabled:opacity-50 hover:bg-rose-50 shadow-sm"><i class="fa-solid fa-chevron-left"></i></button>
+        <span id="pageIndicator" class="font-medium bg-white px-3 py-1 rounded-full border border-rose-100 text-rose-600 shadow-sm">1 / 1</span>
+        <button id="btnNext" onclick="changePage(1)" class="w-8 h-8 flex items-center justify-center bg-white border border-rose-200 rounded-full disabled:opacity-50 hover:bg-rose-50 shadow-sm"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+</main>
+
+<!-- 4. Post View Modal -->
+<dialog id="viewDlg" class="bg-white w-full max-w-md h-[90vh] sm:h-auto sm:rounded-2xl p-0 m-auto backdrop:bg-rose-900/40 shadow-2xl overflow-hidden flex flex-col border border-rose-100">
+    <!-- Header -->
+    <div class="flex justify-between items-center px-4 py-3 border-b border-rose-100 bg-white sticky top-0 z-10">
+        <h3 class="font-bold text-rose-800 text-sm truncate pr-2" id="viewTitle"></h3>
+        <button onclick="closeViewModal()" class="w-7 h-7 bg-rose-50 text-rose-400 rounded-full flex items-center justify-center hover:bg-rose-100"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Scrollable Content -->
+    <div class="overflow-y-auto flex-grow bg-white">
+        <!-- Images -->
+        <div class="relative bg-rose-50 h-64 w-full">
+            <div id="viewImagesContainer" class="flex h-full overflow-x-auto snap-x snap-mandatory no-scrollbar"></div>
+            <div class="absolute bottom-3 right-3 bg-black/60 text-white text-[10px] px-2.5 py-1 rounded-full pointer-events-none backdrop-blur-sm">
+                <i class="fa-regular fa-images"></i> <span id="imgCount">0</span>
+            </div>
+        </div>
+
+        <!-- Info -->
+        <div class="p-5 border-b border-rose-50">
+            <div class="flex justify-between items-start mb-3">
+                <div class="text-xl font-bold text-rose-700 font-heading flex items-center gap-2">
+                    <i class="fa-solid fa-box-open text-sm"></i>
+                    <span id="viewPrice"></span>
+                </div>
+                <div class="text-[10px] bg-rose-100 text-rose-600 px-2 py-1 rounded-md font-bold">แจกฟรี / บริจาค</div>
+            </div>
+            
+            <div class="text-xs text-slate-500 mb-5 flex items-center gap-2">
+                <i class="fa-solid fa-location-dot text-rose-400"></i> <span id="viewLocation"></span>
+            </div>
+            
+            <div class="bg-rose-50/50 p-4 rounded-xl border border-rose-100">
+                <p class="text-xs font-bold text-rose-800 mb-2 uppercase tracking-wide">ผู้ส่งต่อ / ติดต่อ</p>
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center text-rose-600"><i class="fa-solid fa-user"></i></div>
+                    <p class="text-sm text-slate-800 font-medium" id="viewContact"></p>
+                </div>
+                <a id="telLink" href="#" class="block bg-gradient-to-r from-rose-500 to-pink-500 text-white text-xs py-2.5 rounded-lg font-bold hover:shadow-md transition-all text-center">
+                    <i class="fa-solid fa-phone mr-1"></i> ติดต่อขอรับบริจาค
+                </a>
+            </div>
+        </div>
+
+        <!-- Details -->
+        <div class="p-5">
+            <h4 class="text-xs font-bold text-slate-400 uppercase mb-3 tracking-wide">รายละเอียดสิ่งของ</h4>
+            <p id="viewBody" class="text-sm text-slate-600 leading-relaxed whitespace-pre-line bg-slate-50 p-3 rounded-lg border border-slate-100"></p>
+        </div>
+
+        <!-- Map -->
+        <div class="px-5 pb-8">
+            <h4 class="text-xs font-bold text-slate-400 uppercase mb-3 tracking-wide">จุดนัดรับ</h4>
+            <div id="viewMap" class="w-full h-40 bg-rose-50 rounded-lg"></div>
+        </div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="p-3 bg-white border-t border-rose-100 flex justify-between items-center sticky bottom-0 z-10">
+        <button id="btnDelete" class="text-slate-400 text-xs hover:text-red-500 flex items-center gap-1 transition-colors"><i class="fa-regular fa-trash-can"></i> ลบรายการ</button>
+        <button onclick="closeViewModal()" class="bg-slate-100 text-slate-600 text-xs font-bold px-5 py-2 rounded-lg hover:bg-slate-200 transition-colors">ปิดหน้าต่าง</button>
+    </div>
+</dialog>
+
+<!-- 5. Add/Edit Modal (Form) -->
+<dialog id="formDlg" class="bg-white w-full max-w-lg rounded-xl shadow-2xl overflow-hidden backdrop:bg-rose-900/30">
+    <div class="bg-gradient-to-r from-rose-600 to-pink-600 text-white px-5 py-4 flex justify-between items-center">
+        <h3 class="font-bold text-sm flex items-center gap-2"><i class="fa-solid fa-hand-holding-heart"></i> ลงประกาศบริจาค</h3>
+        <button onclick="closeFormModal()" class="text-white/80 hover:text-white transition-transform hover:rotate-90"><i class="fa-solid fa-xmark text-lg"></i></button>
+    </div>
+    
+    <div class="p-5 max-h-[80vh] overflow-y-auto custom-scrollbar">
+        <form id="postForm" onsubmit="event.preventDefault(); savePost();" class="space-y-5">
+            <input type="hidden" id="postId">
+            <input type="hidden" id="lat">
+            <input type="hidden" id="lng">
+
+            <div class="bg-rose-50 p-3 rounded-lg border border-rose-100 text-xs text-rose-700 mb-4 flex items-start gap-2">
+                <i class="fa-solid fa-circle-info mt-0.5"></i>
+                <span>กรุณาระบุรายละเอียดให้ชัดเจน เพื่อประโยชน์ของผู้รับบริจาค และป้องกันการเข้าใจผิด</span>
+            </div>
+
+            <!-- Group 1: Basics -->
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">ชื่อสิ่งของบริจาค <span class="text-rose-500">*</span></label>
+                    <input type="text" id="title" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:border-rose-500 focus:ring-1 focus:ring-rose-500 outline-none transition-all" placeholder="เช่น เสื้อผ้าเด็ก, เตียงผู้ป่วย, หนังสือเรียน" required>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                     <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">จำนวน (ชิ้น/ชุด) <span class="text-rose-500">*</span></label>
+                        <input type="number" id="price" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:border-rose-500 outline-none" placeholder="1" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">จังหวัด <span class="text-rose-500">*</span></label>
+                        <select id="province" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:border-rose-500 outline-none bg-white" required>
+                            <option value="">--เลือกจังหวัด--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">ชื่อผู้ให้ / เบอร์ติดต่อ <span class="text-rose-500">*</span></label>
+                    <input type="text" id="contact" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:border-rose-500 outline-none" placeholder="ชื่อเล่น หรือ ชื่อองค์กร (เบอร์โทร)" required>
+                </div>
+            </div>
+
+            <!-- Group 3: Map -->
+            <div class="bg-white rounded-lg border border-slate-200 overflow-hidden">
+                <div class="p-2 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                    <label class="text-xs font-bold text-slate-700">พิกัดจุดนัดรับ (ถ้ามี)</label>
+                    <button type="button" onclick="getCurrentLocation()" class="text-[10px] text-rose-600 font-bold hover:underline flex items-center gap-1"><i class="fa-solid fa-location-crosshairs"></i> ใช้ตำแหน่งปัจจุบัน</button>
+                </div>
+                <div id="map" class="h-36 w-full bg-slate-100"></div>
+            </div>
+
+            <!-- Group 4: Details -->
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-1.5">รายละเอียดสภาพของ / เงื่อนไข</label>
+                <textarea id="body" rows="3" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:border-rose-500 outline-none resize-none" placeholder="เช่น สภาพ 90% ใช้งานได้ปกติ, ต้องมารับเองเท่านั้น..."></textarea>
+            </div>
+
+            <!-- Group 5: Images -->
+            <div>
+                <label class="block text-xs font-bold text-slate-700 mb-2">รูปภาพประกอบ (สูงสุด 3 รูป)</label>
+                <div class="flex gap-3">
+                    <label class="w-20 h-20 border-2 border-dashed border-slate-300 rounded-lg flex flex-col items-center justify-center text-slate-400 cursor-pointer hover:border-rose-400 hover:text-rose-500 hover:bg-rose-50 transition-all bg-white">
+                        <i class="fa-solid fa-camera mb-1"></i>
+                        <span class="text-[9px]">เพิ่มรูป</span>
+                        <input type="file" id="imgInput" class="hidden" accept="image/*" multiple onchange="handleImageUpload(this)">
+                    </label>
+                    <div id="previewList" class="flex gap-2 overflow-x-auto py-1"></div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex gap-3 pt-4 border-t border-slate-100">
+                <button type="button" onclick="closeFormModal()" class="flex-1 bg-white border border-slate-200 text-slate-600 py-2.5 rounded-lg text-sm font-bold hover:bg-slate-50 transition-colors">ยกเลิก</button>
+                <button type="submit" id="btnSave" class="flex-[2] bg-rose-600 text-white py-2.5 rounded-lg text-sm font-bold hover:bg-rose-700 shadow-md shadow-rose-200 transition-all flex items-center justify-center gap-2">
+                    <span>ยืนยันการบริจาค</span> <i class="fa-solid fa-check"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</dialog>
+
+<!-- Image Fullscreen Slider -->
+<div id="fullScreenSlider" class="fixed inset-0 z-[60] bg-black/95 hidden flex items-center justify-center backdrop-blur-sm">
+    <button onclick="document.getElementById('fullScreenSlider').classList.add('hidden')" class="absolute top-4 right-4 text-white/70 hover:text-white p-2 transition-colors"><i class="fa-solid fa-xmark text-3xl"></i></button>
+    <img id="fullScreenImg" src="" class="max-w-[95%] max-h-[85%] object-contain shadow-2xl rounded-sm">
+</div>
 
 <script>
-const fileInput=document.getElementById('fileInput');
-const dropZone=document.getElementById('dropZone');
-const listEl=document.getElementById('list');
-const prefixEl=document.getElementById('prefix');
-const startNumEl=document.getElementById('startNum');
-const padEl=document.getElementById('pad');
-const extModeEl=document.getElementById('extMode');
-const zipBtn=document.getElementById('zipBtn');
-const clearBtn=document.getElementById('clearBtn');
-const statusEl=document.getElementById('status');
+// --- Configuration ---
+const API_URL = "https://script.google.com/macros/s/AKfycbxOu6r5PDpH8PV3C6hEQ7FNexZG_OO7MH6yI9JxhJfOIdi5pU-o0r7RxED7rzaFJ-H7/exec";
+const PROVINCES = ["กรุงเทพมหานคร","กระบี่","กาญจนบุรี","กาฬสินธุ์","กำแพงเพชร","ขอนแก่น","จันทบุรี","ฉะเชิงเทรา","ชลบุรี","ชัยนาท","ชัยภูมิ","ชุมพร","เชียงราย","เชียงใหม่","ตรัง","ตราด","ตาก","นครนายก","นครปฐม","นครพนม","นครราชสีมา","นครศรีธรรมราช","นครสวรรค์","นนทบุรี","นราธิวาส","น่าน","บึงกาฬ","บุรีรัมย์","ปทุมธานี","ประจวบคีรีขันธ์","ปราจีนบุรี","ปัตตานี","พระนครศรีอยุธยา","พะเยา","พังงา","พัทลุง","พิจิตร","พิษณุโลก","เพชรบุรี","เพชรบูรณ์","แพร่","ภูเก็ต","มหาสารคาม","มุกดาหาร","แม่ฮ่องสอน","ยโสธร","ยะลา","ร้อยเอ็ด","ระนอง","ระยอง","ราชบุรี","ลพบุรี","ลำปาง","ลำพูน","เลย","ศรีสะเกษ","สกลนคร","สงขลา","สตูล","สมุทรปราการ","สมุทรสงคราม","สมุทรสาคร","สระแก้ว","สระบุรี","สิงห์บุรี","สุโขทัย","สุพรรณบุรี","สุราษฎร์ธานี","สุรินทร์","หนองคาย","หนองบัวลำภู","อ่างทอง","อำนาจเจริญ","อุดรธานี","อุตรดิตถ์","อุทัยธานี","อุบลราชธานี"].sort();
 
-let items=[];
+// --- State ---
+let posts = [];
+let filteredPosts = [];
+let currentPage = 1;
+const ITEMS_PER_PAGE = 24;
+let uploadImages = [];
+let map, marker, viewMap, viewMarker;
 
-const padNum=(n,w)=>String(n).padStart(w,'0');
-const getExt=(n)=>n.includes('.')?n.split('.').pop():'';
+// --- Mock Data (Charity Theme) ---
+const MOCK_DATA = [
+    { id: 'm1', title: 'เสื้อผ้าเด็กสภาพดี (3-5 ขวบ)', price: 10, province: 'กรุงเทพมหานคร', contact_name: 'คุณแม่น้องบีม 081-xxx', images: ['https://images.unsplash.com/photo-1519457431-44ccd64a579b?w=300'], body: 'เสื้อผ้าลูกชาย ใส่ไม่ได้แล้ว สภาพดี ซักสะอาด พร้อมส่งต่อครับ' },
+    { id: 'm2', title: 'หนังสือเรียน ม.ปลาย', price: 1, province: 'ขอนแก่น', contact_name: 'พี่ตูน 089-xxx', images: ['https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=300'], body: 'หนังสือเตรียมสอบเข้ามหาวิทยาลัย ไม่ได้ใช้แล้วครับ' },
+    { id: 'm3', title: 'วีลแชร์ผู้สูงอายุ', price: 1, province: 'เชียงใหม่', contact_name: 'มูลนิธิใจใส', images: ['https://images.unsplash.com/photo-1584515933487-779824d29309?w=300'], body: 'วีลแชร์พับได้ สภาพใช้งานได้ปกติ มารับเองที่มูลนิธิครับ' },
+    { id: 'm4', title: 'ตุ๊กตาหมีตัวใหญ่', price: 1, province: 'นนทบุรี', contact_name: 'น้องมายด์', images: ['https://images.unsplash.com/photo-1559454403-b8fb88521f11?w=300'], body: 'น้องหมีตัวใหญ่มาก ไม่มีที่วาง อยากส่งต่อให้น้องๆ' }
+];
 
-function computeNames(){
-  const start=+startNumEl.value;
-  const pad=+padEl.value;
-  items.forEach((it,i)=>{
-    const ext=extModeEl.value==='keep'?getExt(it.file.name):extModeEl.value;
-    it.newName=`${prefixEl.value}${padNum(start+i,pad)}${ext?'.'+ext:''}`;
-  });
+// --- Initialization ---
+document.addEventListener('DOMContentLoaded', () => {
+    initProvinces();
+    initMaps();
+    fetchData();
+    
+    // Listeners
+    document.getElementById('searchInput').addEventListener('input', debounce(filterAndRender, 300));
+    document.getElementById('provinceFilter').addEventListener('change', filterAndRender);
+});
+
+function initProvinces() {
+    const selector = document.getElementById('province');
+    const filterSelector = document.getElementById('provinceFilter');
+    const options = PROVINCES.map(p => `<option value="${p}">${p}</option>`).join('');
+    selector.innerHTML += options;
+    filterSelector.innerHTML += options;
 }
 
-function render(){
-  computeNames();
-  listEl.innerHTML='';
-  items.forEach((it,i)=>{
-    const isImg=it.file.type.startsWith('image/');
-    const div=document.createElement('div');
-    div.className='item';
-    div.innerHTML=`
-      <div class="idx">#${i+1}</div>
-      <div class="thumb">
-        ${isImg?`<img src="${it.url}">`:`📄 ${it.file.name}`}
-      </div>
-      <div class="meta">
-        <div class="old">${it.file.name}</div>
-        <div class="new">${it.newName}</div>
-      </div>`;
-    listEl.appendChild(div);
-  });
-  statusEl.textContent=items.length?`ไฟล์ทั้งหมด ${items.length}`:'ยังไม่เลือกไฟล์';
+function initMaps() {
+    // Edit Map
+    map = L.map('map', { zoomControl: false }).setView([13.7563, 100.5018], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    map.on('click', e => setMarker(e.latlng.lat, e.latlng.lng));
+
+    // View Map
+    viewMap = L.map('viewMap', { zoomControl: false, dragging: false, scrollWheelZoom: false }).setView([13.7563, 100.5018], 5);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(viewMap);
 }
 
-function addFiles(files){
-  [...files].forEach(f=>{
-    items.push({file:f,url:URL.createObjectURL(f),newName:''});
-  });
-  render();
+function setMarker(lat, lng) {
+    if(marker) marker.setLatLng([lat, lng]);
+    else marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+    
+    document.getElementById('lat').value = lat;
+    document.getElementById('lng').value = lng;
+    marker.on('dragend', function(e) {
+        const coord = e.target.getLatLng();
+        document.getElementById('lat').value = coord.lat;
+        document.getElementById('lng').value = coord.lng;
+    });
 }
 
-dropZone.ondragover=e=>{e.preventDefault()};
-dropZone.ondrop=e=>{e.preventDefault();addFiles(e.dataTransfer.files)};
-fileInput.onchange=e=>addFiles(e.target.files);
+function getCurrentLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+            const { latitude, longitude } = pos.coords;
+            map.setView([latitude, longitude], 13);
+            setMarker(latitude, longitude);
+        });
+    } else {
+        Swal.fire('แจ้งเตือน', 'เบราว์เซอร์ไม่รองรับการระบุตำแหน่ง', 'error');
+    }
+}
 
-clearBtn.onclick=()=>{items=[];render()};
+// --- Data Operations ---
+async function fetchData() {
+    const loading = document.getElementById('loading');
+    const board = document.getElementById('board');
+    loading.classList.replace('hidden', 'flex');
+    board.innerHTML = '';
 
-zipBtn.onclick=async()=>{
-  if(!items.length)return alert('ไม่มีไฟล์');
-  const zip=new JSZip();
-  const folder=zip.folder('renamed-files');
-  for(const it of items){
-    folder.file(it.newName, await it.file.arrayBuffer());
-  }
-  const blob=await zip.generateAsync({type:'blob'});
-  saveAs(blob,'renamed_files.zip');
-};
+    try {
+        const res = await fetch(API_URL);
+        const json = await res.json();
+        let data = json.data || json;
+        
+        posts = Array.isArray(data) ? data.map(normalizePost) : [];
+        if(posts.length === 0) posts = MOCK_DATA.map(normalizePost);
+
+    } catch (err) {
+        console.error(err);
+        posts = MOCK_DATA.map(normalizePost);
+    } finally {
+        loading.classList.replace('flex', 'hidden');
+        filterAndRender();
+    }
+}
+
+function normalizePost(p) {
+    let imgs = [];
+    try {
+        imgs = typeof p.images === 'string' ? JSON.parse(p.images) : (Array.isArray(p.images) ? p.images : []);
+    } catch { imgs = [p.images].filter(Boolean); }
+    
+    return {
+        id: p.id || 'temp_' + Math.random(),
+        title: p.title || 'ไม่ระบุชื่อ',
+        price: Number(p.price) || 1, // Reuse price field as quantity
+        province: p.province || 'ไม่ระบุ',
+        contact: p.contact_name || '-',
+        body: p.body || '',
+        lat: p.lat,
+        lng: p.lng,
+        images: imgs.length ? imgs : ['https://placehold.co/150x150/ffe4e6/be123c?text=Charity']
+    };
+}
+
+function filterAndRender() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const prov = document.getElementById('provinceFilter').value;
+
+    filteredPosts = posts.filter(p => {
+        const matchText = (p.title + p.contact + p.body).toLowerCase().includes(q);
+        const matchProv = prov === 'all' || p.province === prov;
+        return matchText && matchProv;
+    });
+
+    currentPage = 1;
+    renderBoard();
+}
+
+function renderBoard() {
+    const container = document.getElementById('board');
+    container.innerHTML = '';
+    
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const end = start + ITEMS_PER_PAGE;
+    const pageData = filteredPosts.slice(start, end);
+
+    if(pageData.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-10 text-rose-300 text-sm flex flex-col items-center"><i class="fa-regular fa-folder-open text-3xl mb-2"></i><br>ยังไม่มีรายการบริจาคในขณะนี้</div>`;
+        document.getElementById('pagination').classList.add('hidden');
+        return;
+    }
+
+    document.getElementById('pagination').classList.remove('hidden');
+
+    pageData.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'charity-card cursor-pointer group flex flex-col h-full';
+        div.onclick = () => openViewModal(p.id);
+        
+        div.innerHTML = `
+            <div class="aspect-square bg-rose-100 relative">
+                <img src="${p.images[0]}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+                <div class="status-badge shadow-sm"><i class="fa-solid fa-gift text-[8px]"></i> แจก</div>
+            </div>
+            <div class="p-2 flex flex-col flex-grow compact-padding">
+                <div class="line-clamp-2 text-xxs font-bold text-slate-800 leading-tight mb-1 flex-grow" style="font-size: 11px;">${p.title}</div>
+                <div class="mt-auto pt-1 border-t border-rose-50">
+                    <div class="text-[9px] text-slate-500 truncate mb-0.5"><i class="fa-solid fa-location-dot text-rose-400"></i> ${p.province}</div>
+                    <div class="qty-tag text-[10px] flex items-center gap-1">
+                        <i class="fa-solid fa-layer-group"></i> <span>${p.price} ชิ้น</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+
+    updatePagination();
+}
+
+function updatePagination() {
+    const totalPages = Math.ceil(filteredPosts.length / ITEMS_PER_PAGE) || 1;
+    document.getElementById('pageIndicator').textContent = `${currentPage} / ${totalPages}`;
+    document.getElementById('btnPrev').disabled = currentPage === 1;
+    document.getElementById('btnNext').disabled = currentPage === totalPages;
+}
+
+function changePage(delta) {
+    currentPage += delta;
+    renderBoard();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// --- Modals ---
+function openNewPostModal() {
+    document.getElementById('postForm').reset();
+    document.getElementById('postId').value = '';
+    uploadImages = [];
+    renderPreview();
+    document.getElementById('formDlg').showModal();
+    setTimeout(() => map.invalidateSize(), 200);
+}
+
+function closeFormModal() {
+    document.getElementById('formDlg').close();
+}
+
+function openViewModal(id) {
+    const p = posts.find(x => x.id === id);
+    if(!p) return;
+
+    document.getElementById('viewTitle').textContent = p.title;
+    document.getElementById('viewPrice').textContent = `${p.price} ชิ้น`;
+    document.getElementById('viewLocation').textContent = p.province;
+    document.getElementById('viewContact').textContent = p.contact;
+    document.getElementById('telLink').href = `tel:${p.contact.replace(/[^0-9]/g,'')}`;
+    document.getElementById('viewBody').textContent = p.body || '-';
+    document.getElementById('imgCount').textContent = p.images.length;
+    document.getElementById('btnDelete').onclick = () => deletePost(id);
+
+    // Images
+    const imgContainer = document.getElementById('viewImagesContainer');
+    imgContainer.innerHTML = p.images.map(src => 
+        `<img src="${src}" class="h-full w-auto object-contain bg-slate-900 snap-center cursor-pointer border-r border-slate-700" onclick="showFullScreen('${src}')">`
+    ).join('');
+
+    // Map
+    if(p.lat && p.lng) {
+        document.getElementById('viewMap').classList.remove('hidden');
+        setTimeout(() => {
+            viewMap.invalidateSize();
+            viewMap.setView([p.lat, p.lng], 13);
+            if(viewMarker) viewMap.removeLayer(viewMarker);
+            viewMarker = L.marker([p.lat, p.lng]).addTo(viewMap);
+        }, 200);
+    } else {
+        document.getElementById('viewMap').classList.add('hidden');
+    }
+
+    document.getElementById('viewDlg').showModal();
+}
+
+function closeViewModal() {
+    document.getElementById('viewDlg').close();
+}
+
+function showFullScreen(src) {
+    document.getElementById('fullScreenImg').src = src;
+    document.getElementById('fullScreenSlider').classList.remove('hidden');
+}
+
+// --- CRUD Actions ---
+async function savePost() {
+    const btn = document.getElementById('btnSave');
+    const originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> กำลังบันทึก`;
+
+    const payload = {
+        action: 'add',
+        title: document.getElementById('title').value,
+        price: document.getElementById('price').value, // Used as Quantity
+        province: document.getElementById('province').value,
+        contact_name: document.getElementById('contact').value,
+        body: document.getElementById('body').value,
+        lat: document.getElementById('lat').value,
+        lng: document.getElementById('lng').value,
+        images: uploadImages
+    };
+
+    try {
+        await fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) });
+        Swal.fire({
+            icon: 'success', 
+            title: 'ลงประกาศสำเร็จ',
+            text: 'ขอขอบคุณสำหรับการแบ่งปัน',
+            confirmButtonColor: '#e11d48',
+            timer: 1500
+        });
+        closeFormModal();
+        fetchData();
+    } catch(e) {
+        // Fallback demo
+        payload.id = 'temp_' + Date.now();
+        payload.images = payload.images.length ? payload.images : ['https://placehold.co/150x150/ffe4e6/be123c?text=New+Item'];
+        posts.unshift(normalizePost(payload));
+        filterAndRender();
+        closeFormModal();
+        Swal.fire({ icon: 'success', title: 'บันทึกตัวอย่างแล้ว', confirmButtonColor: '#e11d48', timer: 1000 });
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+    }
+}
+
+async function deletePost(id) {
+    const result = await Swal.fire({
+        title: 'ลบรายการ?',
+        text: 'คุณต้องการลบรายการบริจาคนี้ใช่หรือไม่',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'ใช่, ลบเลย',
+        cancelButtonText: 'ยกเลิก',
+        confirmButtonColor: '#e11d48'
+    });
+
+    if(result.isConfirmed) {
+        try {
+            fetch(API_URL, { method: 'POST', body: JSON.stringify({ action: 'delete', id: id }) });
+        } catch(e) {}
+        
+        posts = posts.filter(p => p.id !== id);
+        filterAndRender();
+        closeViewModal();
+        Swal.fire({ title: 'ลบเรียบร้อย', icon: 'success', confirmButtonColor: '#e11d48', timer: 1000 });
+    }
+}
+
+// --- Image Handling ---
+function handleImageUpload(input) {
+    const files = Array.from(input.files);
+    if(uploadImages.length + files.length > 3) return Swal.fire('แจ้งเตือน', 'ลงรูปได้สูงสุด 3 รูป', 'warning');
+    
+    files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            uploadImages.push(e.target.result);
+            renderPreview();
+        };
+        reader.readAsDataURL(file);
+    });
+}
+
+function renderPreview() {
+    const div = document.getElementById('previewList');
+    div.innerHTML = uploadImages.map((src, i) => `
+        <div class="relative w-20 h-20 flex-shrink-0 border border-slate-200 rounded-lg overflow-hidden group">
+            <img src="${src}" class="w-full h-full object-cover">
+            <button onclick="removeImg(${i})" class="absolute top-1 right-1 bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] shadow-sm"><i class="fa-solid fa-times"></i></button>
+        </div>
+    `).join('');
+}
+
+function removeImg(idx) {
+    uploadImages.splice(idx, 1);
+    renderPreview();
+}
+
+function refreshApp() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('provinceFilter').value = 'all';
+    fetchData();
+}
+
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), wait);
+    };
+}
 </script>
 </body>
 </html>
