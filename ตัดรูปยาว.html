@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Exact 100% Divider Split</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+body { font-family:sans-serif; background:#f5f5f5; padding:20px }
+#container { position:relative; display:inline-block; border:1px solid #ccc; background:#fff }
+#container img { display:block; max-width:100% }
+.divider {
+  position:absolute;
+  left:0; right:0;
+  height:3px;
+  background:#e53935;
+  cursor:ns-resize;
+}
+.controls { margin-bottom:15px }
+.page canvas { display:block; margin:20px auto; border:1px solid #ccc }
+</style>
+</head>
+<body>
+
+<h2>ตัดภาพตรงเส้นที่ขีดไว้ 100%</h2>
+
+<div class="controls">
+  <input type="file" id="upload" accept="image/*">
+  <button onclick="splitImage()">Split ตามเส้น</button>
+  <button onclick="downloadZip()">Download ZIP</button>
+</div>
+
+<div id="container"></div>
+<div id="output"></div>
+
+<script>
+let img = new Image();
+let dividers = [];
+let canvases = [];
+const container = document.getElementById("container");
+
+document.getElementById("upload").addEventListener("change", e => {
+  img.src = URL.createObjectURL(e.target.files[0]);
+  img.onload = () => {
+    container.innerHTML = "";
+    container.appendChild(img);
+    dividers = [];
+    canvases = [];
+    document.getElementById("output").innerHTML = "";
+  };
+});
+
+// คลิกเพิ่มเส้น
+container.addEventListener("click", e => {
+  if (e.target.tagName === "IMG") {
+    addDivider(e.offsetY);
+  }
+});
+
+function addDivider(y) {
+  const d = document.createElement("div");
+  d.className = "divider";
+  d.style.top = y + "px";
+  makeDraggable(d);
+  container.appendChild(d);
+  dividers.push(d);
+}
+
+// ลากเส้น
+function makeDraggable(div) {
+  div.onmousedown = e => {
+    const startY = e.clientY;
+    const startTop = parseFloat(div.style.top);
+    document.onmousemove = ev => {
+      div.style.top = (startTop + ev.clientY - startY) + "px";
+    };
+    document.onmouseup = () => document.onmousemove = null;
+  };
+}
+
+// 🔥 ตัดตามเส้นแบบ 100%
+function splitImage() {
+  const output = document.getElementById("output");
+  output.innerHTML = "";
+  canvases = [];
+
+  const scaleY = img.naturalHeight / img.clientHeight;
+
+  let cuts = dividers
+    .map(d => Math.round(parseFloat(d.style.top) * scaleY))
+    .filter(y => y > 0 && y < img.naturalHeight)
+    .sort((a,b)=>a-b);
+
+  cuts = [0, ...cuts, img.naturalHeight];
+
+  for (let i = 0; i < cuts.length - 1; i++) {
+    const y = cuts[i];
+    const h = cuts[i+1] - cuts[i];
+    if (h <= 0) continue;
+
+    const canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = h;
+
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(
+      img,
+      0, y,
+      img.naturalWidth, h,
+      0, 0,
+      img.naturalWidth, h
+    );
+
+    canvases.push(canvas);
+
+    const div = document.createElement("div");
+    div.className = "page";
+    div.innerHTML = `<p>หน้า ${i+1}</p>`;
+    div.appendChild(canvas);
+    output.appendChild(div);
+  }
+}
+
+// ZIP
+function downloadZip() {
+  if (!canvases.length) return alert("ยังไม่ได้ตัดภาพ");
+  const zip = new JSZip();
+
+  canvases.forEach((c,i)=>{
+    zip.file(
+      `page_${String(i+1).padStart(2,"0")}.png`,
+      c.toDataURL("image/png").split(",")[1],
+      {base64:true}
+    );
+  });
+
+  zip.generateAsync({type:"blob"}).then(blob=>{
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "split_exact_100percent.zip";
+    a.click();
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>โปรแกรมเปลี่ยนชื่อไฟล์เรียงลำดับ (รองรับทุกนามสกุล)</title>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f5f5f5;
+  --surface:#ffffff;
+  --ink:#000;
+  --muted:#444;
+  --line:#ddd;
+  --brand:#2563eb;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"IBM Plex Sans Thai",sans-serif;
+  background:var(--bg);
+  padding:20px;
+}
+.wrap{max-width:1100px;margin:auto}
+h1{font-size:20px;margin:0}
+.sub{font-size:13px;color:var(--muted)}
+
+.grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:14px;
+}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+}
+.card-h{
+  padding:14px;
+  border-bottom:1px solid var(--line);
+  font-weight:700;
+}
+.card-b{padding:14px}
+
+.btn{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  padding:8px 12px;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn.primary{
+  background:var(--brand);
+  color:#fff;
+  border:none;
+}
+.btn.danger{background:#fee;border-color:#f99}
+
+.drop{
+  border:2px dashed #ccc;
+  border-radius:14px;
+  padding:16px;
+  text-align:center;
+  margin-bottom:12px;
+}
+.list{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+@media(max-width:600px){.list{grid-template-columns:repeat(2,1fr)}}
+
+.item{
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  position:relative;
+}
+.thumb{
+  height:120px;
+  background:#f0f0f0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  color:#555;
+}
+.thumb img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+.meta{padding:8px}
+.old{font-size:12px;color:#666;word-break:break-all}
+.new{font-size:13px;font-weight:700;word-break:break-all}
+.idx{
+  position:absolute;
+  top:6px;right:6px;
+  background:#0008;
+  color:#fff;
+  font-size:11px;
+  padding:4px 6px;
+  border-radius:8px;
+}
+.form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+@media(max-width:500px){.form{grid-template-columns:1fr}}
+.field{
+  width:100%;
+  padding:8px;
+  border-radius:10px;
+  border:1px solid var(--line);
+}
+.status{font-size:12px;color:#555;margin-top:8px}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <h1>โปรแกรมเปลี่ยนชื่อไฟล์เรียงลำดับ</h1>
+  <div class="sub">รองรับทุกนามสกุล • Export ZIP • ลากเรียงลำดับได้</div>
+
+  <div style="height:12px"></div>
+
+  <div class="grid">
+    <!-- LEFT -->
+    <div class="card">
+      <div class="card-h">1) เลือกไฟล์</div>
+      <div class="card-b">
+
+        <div class="drop" id="dropZone">
+          ลากไฟล์ทุกชนิดมาวางที่นี่<br>
+          หรือ <label class="btn" for="fileInput">เลือกไฟล์</label>
+          <input id="fileInput" type="file" multiple hidden>
+        </div>
+
+        <div class="list" id="list"></div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="card">
+      <div class="card-h">2) ตั้งชื่อไฟล์</div>
+      <div class="card-b">
+
+        <div class="form">
+          <div>
+            <label>Prefix</label>
+            <input class="field" id="prefix" placeholder="file_">
+          </div>
+          <div>
+            <label>เลขเริ่มต้น</label>
+            <input class="field" id="startNum" type="number" value="1">
+          </div>
+          <div>
+            <label>จำนวนหลัก</label>
+            <select class="field" id="pad">
+              <option value="2">2 (01)</option>
+              <option value="3" selected>3 (001)</option>
+              <option value="4">4 (0001)</option>
+              <option value="5">5 (00001)</option>
+            </select>
+          </div>
+          <div>
+            <label>นามสกุลไฟล์</label>
+            <select class="field" id="extMode">
+              <option value="keep" selected>คงเดิม</option>
+              <option value="jpg">.jpg</option>
+              <option value="png">.png</option>
+              <option value="pdf">.pdf</option>
+              <option value="zip">.zip</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <button class="btn primary" id="zipBtn">ดาวน์โหลด ZIP</button>
+        <button class="btn danger" id="clearBtn">ล้างทั้งหมด</button>
+
+        <div class="status" id="status">ยังไม่เลือกไฟล์</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+
+<script>
+const fileInput=document.getElementById('fileInput');
+const dropZone=document.getElementById('dropZone');
+const listEl=document.getElementById('list');
+const prefixEl=document.getElementById('prefix');
+const startNumEl=document.getElementById('startNum');
+const padEl=document.getElementById('pad');
+const extModeEl=document.getElementById('extMode');
+const zipBtn=document.getElementById('zipBtn');
+const clearBtn=document.getElementById('clearBtn');
+const statusEl=document.getElementById('status');
+
+let items=[];
+
+const padNum=(n,w)=>String(n).padStart(w,'0');
+const getExt=(n)=>n.includes('.')?n.split('.').pop():'';
+
+function computeNames(){
+  const start=+startNumEl.value;
+  const pad=+padEl.value;
+  items.forEach((it,i)=>{
+    const ext=extModeEl.value==='keep'?getExt(it.file.name):extModeEl.value;
+    it.newName=`${prefixEl.value}${padNum(start+i,pad)}${ext?'.'+ext:''}`;
+  });
+}
+
+function render(){
+  computeNames();
+  listEl.innerHTML='';
+  items.forEach((it,i)=>{
+    const isImg=it.file.type.startsWith('image/');
+    const div=document.createElement('div');
+    div.className='item';
+    div.innerHTML=`
+      <div class="idx">#${i+1}</div>
+      <div class="thumb">
+        ${isImg?`<img src="${it.url}">`:`📄 ${it.file.name}`}
+      </div>
+      <div class="meta">
+        <div class="old">${it.file.name}</div>
+        <div class="new">${it.newName}</div>
+      </div>`;
+    listEl.appendChild(div);
+  });
+  statusEl.textContent=items.length?`ไฟล์ทั้งหมด ${items.length}`:'ยังไม่เลือกไฟล์';
+}
+
+function addFiles(files){
+  [...files].forEach(f=>{
+    items.push({file:f,url:URL.createObjectURL(f),newName:''});
+  });
+  render();
+}
+
+dropZone.ondragover=e=>{e.preventDefault()};
+dropZone.ondrop=e=>{e.preventDefault();addFiles(e.dataTransfer.files)};
+fileInput.onchange=e=>addFiles(e.target.files);
+
+clearBtn.onclick=()=>{items=[];render()};
+
+zipBtn.onclick=async()=>{
+  if(!items.length)return alert('ไม่มีไฟล์');
+  const zip=new JSZip();
+  const folder=zip.folder('renamed-files');
+  for(const it of items){
+    folder.file(it.newName, await it.file.arrayBuffer());
+  }
+  const blob=await zip.generateAsync({type:'blob'});
+  saveAs(blob,'renamed_files.zip');
+};
+</script>
+</body>
+</html>
