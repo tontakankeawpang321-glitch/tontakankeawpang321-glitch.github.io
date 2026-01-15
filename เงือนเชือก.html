@@ -1,942 +1,834 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-<title>กฎหมายไทยฉบับล่าสุด (Thai Law Lite)</title>
+import React, { useState, useMemo, useEffect } from 'react';
+import { 
+  Search, Anchor, Mountain, Fish, Tent, Package, 
+  Info, X, Zap, Bookmark, ChevronRight, Book, Star, Filter, Hash, Globe, Play, Image as ImageIcon, ExternalLink 
+} from 'lucide-react';
 
-<!-- Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Icons (Material Symbols) -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
-
-<style>
-  :root {
-    /* 🎨 Official Law Palette */
-    --primary: #1e3a8a;      /* Deep Navy Blue */
-    --primary-dark: #172554; /* Darker Navy */
-    --accent: #d97706;       /* Official Gold */
-    --bg-app: #f3f4f6;       /* Light Gray Background */
-    --bg-card: #ffffff;
-    --text-main: #1f2937;
-    --text-muted: #6b7280;
-    --border: #e5e7eb;
-    
-    --radius-card: 16px;
-    --radius-btn: 12px;
-    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
-    --shadow-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+// --- DATA (เพิ่มฟิลด์สำหรับรูปและวิดีโอ) ---
+const KNOTS_DATA = [
+  // --- หมวดพื้นฐาน (Basic) ---
+  {
+    id: 1,
+    name: "เงื่อนพิรอด (Square Knot)",
+    category: "Basic",
+    usage: "ต่อเชือกขนาดเท่ากัน, ผูกผ้าพันแผล, มัดของทั่วไป",
+    difficulty: "Easy",
+    imageUrl: "https://placehold.co/600x400/EEE/31343C?font=roboto&text=Square+Knot", // ตัวอย่าง URL รูป
+    youtubeId: "abc", // ตัวอย่าง ID Youtube (ในที่นี้จะใช้ Default ถ้าไม่มี)
+    steps: [
+      "ถือปลายเชือกทั้งสองข้าง (ซ้ายและขวา)",
+      "นำเชือกขวาทับซ้าย แล้วพันสอดลงล่าง",
+      "นำเชือกซ้ายทับขวา (สำคัญ: ต้องสลับด้านกับข้อ 2)",
+      "พันสอดลงล่าง ดึงปลายทั้งสองให้แน่น เงื่อนจะขยับตัวได้เล็กน้อย"
+    ]
+  },
+  {
+    id: 2,
+    name: "เงื่อนขัดสมาธิ (Sheet Bend)",
+    category: "Basic",
+    usage: "ต่อเชือกต่างขนาด, ต่อเชือกกับขอหรือห่วง",
+    difficulty: "Easy",
+    steps: [
+      "ทำเชือกเส้นใหญ่ให้เป็นบ่วง (Loop)",
+      "สอดเชือกเส้นเล็กขึ้นมาจากด้านล่างของบ่วง",
+      "พันเชือกเล็กอ้อมหลังเส้นใหญ่ทั้งสองเส้น",
+      "สอดปลายเชือกเล็กขัดกับตัวเอง (ไม่ต้องมุดกลับลงบ่วงเดิม)",
+      "ดึงให้แน่น"
+    ]
+  },
+  {
+    id: 3,
+    name: "เงื่อนบ่วงสายธนู (Bowline)",
+    category: "Basic",
+    usage: "ทำบ่วงคล้องเสา, ช่วยคนตกน้ำ (ไม่รัดคอ), ผูกสมอเรือ",
+    difficulty: "Medium",
+    steps: [
+      "ทำบ่วงเล็กๆ บนเชือกหลัก (ให้ปลายเชือกอยู่ด้านบน)",
+      "สอดปลายเชือกขึ้นมาจากรูบ่วง (เหมือนงูขึ้นจากบ่อ)",
+      "พันอ้อมหลังเชือกหลัก (งูอ้อมต้นไม้)",
+      "มุดกลับลงไปในรูบ่วงเดิม (งูลงบ่อ)",
+      "ดึงปลายและเชือกหลักให้แน่น"
+    ]
+  },
+  {
+    id: 4,
+    name: "เงื่อนตะกรุดเบ็ด (Clove Hitch)",
+    category: "Basic",
+    usage: "ผูกกับเสาหรือหลัก, เริ่มต้นและจบงานมัดเชือก",
+    difficulty: "Easy",
+    steps: [
+      "พันเชือกรอบเสา 1 รอบ ให้เชือกทับกันเป็นกากบาท",
+      "พันรอบเสาอีก 1 รอบ",
+      "สอดปลายเชือกลอดใต้เชือกตัวเองที่พาดอยู่",
+      "ดึงปลายทั้งสองข้างให้แน่น"
+    ]
+  },
+  {
+    id: 5,
+    name: "เงื่อนประมง (Fisherman's Knot)",
+    category: "Basic",
+    usage: "ต่อเชือกเอ็น, ต่อเชือกขนาดเดียวกันที่ลื่น",
+    difficulty: "Easy",
+    steps: [
+      "วางเชือกสองเส้นสวนทางกัน",
+      "ใช้ปลายเชือก A มัดรอบเชือก B (มัดเงื่อนตายชั้นเดียว)",
+      "ใช้ปลายเชือก B มัดรอบเชือก A",
+      "ดึงเชือกหลักทั้งสองเส้นให้ปมเลื่อนเข้ามาชนกัน"
+    ]
+  },
+  {
+    id: 6,
+    name: "เงื่อนเลข 8 (Figure Eight)",
+    category: "Basic",
+    usage: "ทำปมหยุดเชือกไม่ให้หลุดจากรอก",
+    difficulty: "Very Easy",
+    steps: [
+      "ทำบ่วงเลข 8 โดยอ้อมหลังเชือกหลัก",
+      "ตวัดปลายเชือกมาด้านหน้า",
+      "สอดปลายเชือกลงในบ่วงด้านบน",
+      "ดึงให้แน่น ปมจะมีลักษณะเหมือนเลข 8"
+    ]
+  },
+  {
+    id: 7,
+    name: "เงื่อนขัดสมาธิ 2 ชั้น (Double Sheet Bend)",
+    category: "Basic",
+    usage: "ต่อเชือกต่างขนาดมาก หรือเชือกเปียก/ลื่น",
+    difficulty: "Medium",
+    steps: [
+      "ทำเหมือนเงื่อนขัดสมาธิปกติ",
+      "ในจังหวะสุดท้าย ให้พันรอบบ่วงเชือกใหญ่อีก 1 รอบ",
+      "สอดปลายขัดไว้เหมือนเดิม",
+      "จัดระเบียบเงื่อนให้เรียบร้อย"
+    ]
+  },
+  {
+    id: 8,
+    name: "เงื่อนผูกรั้ง (Taut-Line Hitch)",
+    category: "Camping",
+    usage: "ขึงสมอบกเต็นท์ (ปรับความตึงได้), ผูกราวตากผ้า",
+    difficulty: "Medium",
+    steps: [
+      "พันปลายเชือกรอบเชือกหลัก 2 รอบ (พันเข้าหาตัวบ่วง)",
+      "พันรอบที่ 3 โดยข้ามปมเดิมไปด้านบน",
+      "สอดปลายเชือกผูกมัดให้แน่น",
+      "สามารถเลื่อนปมขึ้นลงเพื่อปรับความตึงได้"
+    ]
+  },
+  {
+    id: 9,
+    name: "เงื่อนผูกซุง (Timber Hitch)",
+    category: "Camping",
+    usage: "ลากท่อนไม้, เริ่มต้นการผูกทแยง",
+    difficulty: "Easy",
+    steps: [
+      "พันเชือกรอบท่อนไม้",
+      "นำปลายเชือกพันอ้อมเชือกหลัก",
+      "พันปลายเชือกเกลียวรอบตัวมันเอง 3-4 รอบ",
+      "ดึงให้แน่น ยิ่งดึงยิ่งแน่น"
+    ]
+  },
+  {
+    id: 10,
+    name: "เงื่อนสิเรียน (Siberian Hitch)",
+    category: "Camping",
+    usage: "ผูกเชือกกับต้นไม้ได้รวดเร็ว (ใส่ถุงมือก็ผูกได้)",
+    difficulty: "Medium",
+    steps: [
+      "พาดเชือกผ่านต้นไม้ เอาปลายเชือกพันรอบนิ้วมือ",
+      "ตวัดปลายเชือกรอบเชือกหลัก",
+      "ดึงบ่วงเชือกผ่านห่วงที่นิ้ว",
+      "กระตุกให้แน่น (มีเงื่อนกระตุกแก้ได้เร็ว)"
+    ]
+  },
+  {
+    id: 11,
+    name: "เงื่อนผูกรั้งรถบรรทุก (Trucker's Hitch)",
+    category: "Camping",
+    usage: "รัดของท้ายรถกระบะ, ขึงผ้าใบให้ตึงจัดๆ",
+    difficulty: "Hard",
+    steps: [
+      "ผูกปลายด้านหนึ่งกับจุดยึด",
+      "ทำบ่วงเงื่อนลื่น (Slip knot) หรือบ่วงสายธนูตรงกลางเชือก",
+      "อ้อมปลายเชือกอีกด้านกับจุดยึดที่สอง",
+      "ร้อยปลายเชือกกลับมาผ่านบ่วงที่ทำไว้",
+      "ดึงงัดเชือกเพื่อทดแรงให้ตึงสุดๆ แล้วมัดล็อคด้วยเงื่อนตะกรุดเบ็ด"
+    ]
+  },
+  {
+    id: 12,
+    name: "เงื่อนกระหวัดไม้ 2 ชั้น (Two Half Hitches)",
+    category: "Camping",
+    usage: "ผูกเชือกกับหลัก สมอบก แบบง่ายและเร็ว",
+    difficulty: "Easy",
+    steps: [
+      "พันเชือกรอบหลัก",
+      "นำปลายเชือกพันรอบเชือกหลักแล้วสอดเข้าบ่วง (1 ครั้ง)",
+      "ทำซ้ำอีกครั้งในทิศทางเดิม (2 ครั้ง)",
+      "รูดปมให้ชิดหลัก"
+    ]
+  },
+  {
+    id: 13,
+    name: "เงื่อนผีเสื้อ (Alpine Butterfly Loop)",
+    category: "Climbing",
+    usage: "ทำบ่วงกลางเชือก รับน้ำหนักได้ 3 ทิศทาง",
+    difficulty: "Hard",
+    steps: [
+      "พันเชือกบนฝ่ามือ 3 รอบ",
+      "จับเส้นที่ 1 (ซ้ายสุด) ดึงมาทับเส้นที่ 2",
+      "ดึงเส้นที่ 1 (ที่เพิ่งย้ายมากลาง) ลอดใต้เส้นอื่นๆ ทั้งหมดไปทางซ้าย",
+      "ดึงเส้นนั้นให้กลายเป็นบ่วง แล้วรูดเชือกให้แน่น"
+    ]
+  },
+  {
+    id: 14,
+    name: "เงื่อนพรูสิค (Prusik Knot)",
+    category: "Climbing",
+    usage: "ไต่เชือก (จับเชือกเมื่อรับน้ำหนัก เลื่อนได้เมื่อผ่อน)",
+    difficulty: "Medium",
+    steps: [
+      "ใช้เชือกวงกลม (Loop) พันรอบเชือกหลัก",
+      "สอดปลายบ่วงผ่านรูตัวเอง 2-3 รอบ",
+      "จัดเรียงปมให้เรียบร้อยสวยงาม",
+      "ทดสอบการจับเชือกโดยการดึง"
+    ]
+  },
+  {
+    id: 15,
+    name: "เงื่อนเลข 8 คู่ (Figure 8 Loop)",
+    category: "Climbing",
+    usage: "ทำบ่วงที่แข็งแรงมาก ปลอดภัยสูง สำหรับปีนเขา",
+    difficulty: "Medium",
+    steps: [
+      "ทบเชือกเป็น 2 เส้น",
+      "ผูกเงื่อนเลข 8 ด้วยเชือกคู่",
+      "จะได้บ่วงที่ปลายเชือกที่มีปมเลข 8",
+      "จัดระเบียบเชือกไม่ให้ซ้อนทับกัน"
+    ]
+  },
+  {
+    id: 16,
+    name: "เงื่อนประมงคู่ (Double Fisherman's)",
+    category: "Climbing",
+    usage: "ต่อเชือกปีนเขา ทำเชือกวงกลม (Prusik Loop)",
+    difficulty: "Medium",
+    steps: [
+      "เหมือนเงื่อนประมง แต่พันรอบเชือกอีกเส้น 2 รอบก่อนสอด",
+      "ทำทั้งสองด้าน (สองปลาย)",
+      "ดึงปมทั้งสองให้เข้ามาชนกัน จะแน่นมาก"
+    ]
+  },
+  {
+    id: 17,
+    name: "เงื่อนเก้าอี้ (Fireman's Chair)",
+    category: "Climbing",
+    usage: "ทำที่นั่งกู้ภัยฉุกเฉิน มี 2 บ่วงสวมขาและไหล่",
+    difficulty: "Hard",
+    steps: [
+      "ทำบ่วง 2 บ่วงซ้อนกัน (เหมือนเงื่อนตะกรุดเบ็ดแต่ไม่สอด)",
+      "ดึงส่วนที่ตัดกันของบ่วงซ้ายและขวาออกมาผ่านกัน",
+      "ล็อคปมด้วยการทำ Half Hitch ที่ปลายบ่วงทั้งสอง",
+      "ปรับขนาดบ่วงให้พอดี"
+    ]
+  },
+  {
+    id: 18,
+    name: "เงื่อนสมอเรือ (Anchor Bend)",
+    category: "Boating",
+    usage: "ผูกเชือกกับห่วงสมอ หรือห่วงโลหะ ทนแรงเสียดสี",
+    difficulty: "Medium",
+    steps: [
+      "สอดเชือกผ่านห่วง 2 รอบ (เกิดบ่วงคล้องห่วง)",
+      "นำปลายเชือกพันรอบเชือกหลักแล้วสอดผ่านบ่วงที่ทำไว้ตอนแรก",
+      "ดึงให้แน่น แล้วผูก Half Hitch ล็อคอีกชั้น"
+    ]
+  },
+  {
+    id: 19,
+    name: "เงื่อนปาโลมา (Palomar Knot)",
+    category: "Boating",
+    usage: "ผูกลูกหมุน เบ็ดตกปลา (แข็งแรงมากสำหรับสาย PE/Mono)",
+    difficulty: "Easy",
+    steps: [
+      "ทบสายเอ็นสอดผ่านรูเบ็ด",
+      "ผูกเงื่อนตายหลวมๆ เหนือตัวเบ็ด",
+      "นำบ่วงที่เหลือคล้องผ่านตัวเบ็ดทั้งหมด",
+      "ดึงสายให้แน่น ตัดปลายที่เหลือ"
+    ]
+  },
+  {
+    id: 20,
+    name: "เงื่อนคลินช์ (Improved Clinch)",
+    category: "Boating",
+    usage: "ผูกเบ็ด ยอดนิยม แข็งแรง",
+    difficulty: "Easy",
+    steps: [
+      "สอดสายผ่านตาเบ็ด",
+      "พันสายรอบตัวเอง 5-7 รอบ",
+      "สอดปลายกลับมาที่รูแรกใกล้ตาเบ็ด",
+      "สอดปลายกลับเข้าไปในบ่วงใหญ่ที่เพิ่งเกิดขึ้น",
+      "ทำให้เปียกน้ำลายเล็กน้อยแล้วดึงให้แน่น"
+    ]
+  },
+  {
+    id: 21,
+    name: "เงื่อนผูกรอก (Cleat Hitch)",
+    category: "Boating",
+    usage: "ผูกเชือกเรือกับสมอบกรูปตัว T (Cleat)",
+    difficulty: "Easy",
+    steps: [
+      "พันรอบฐาน Cleat 1 รอบ",
+      "พันไขว้เป็นรูปเลข 8",
+      "รอบสุดท้ายบิดเชือกให้เกิดบ่วงคว่ำแล้วคล้องล็อค",
+      "ปลายเชือกจะขนานกับเส้นเดิม"
+    ]
+  },
+  {
+    id: 22,
+    name: "เงื่อนรัดปากถุง (Miller's Knot)",
+    category: "Binding",
+    usage: "มัดปากถุงข้าวสาร ถุงปูน แน่นหนา",
+    difficulty: "Medium",
+    steps: [
+      "พันเชือกรอบปากถุง 2 รอบ",
+      "สอดปลายเชือกกลับเข้าไปใต้เชือกที่พันรอบที่ 2",
+      "ดึงแยกร่างซ้ายขวาให้แน่น"
+    ]
+  },
+  {
+    id: 23,
+    name: "เงื่อนงูเหลือม (Constrictor Knot)",
+    category: "Binding",
+    usage: "มัดแน่นถาวร มัดปากถุง ยิ่งดิ้นยิ่งแน่น",
+    difficulty: "Medium",
+    steps: [
+      "พันเชือกข้ามวัตถุ",
+      "พันข้ามเชือกเส้นแรกเป็นกากบาท",
+      "สอดปลายเชือกลอดใต้จุดตัดกากบาท",
+      "ดึงให้แน่น (แก้ยากมาก)"
+    ]
+  },
+  {
+    id: 24,
+    name: "เงื่อนผูกประกบ (Square Lashing)",
+    category: "Binding",
+    usage: "ผูกไม้ 2 ท่อนตั้งฉากกัน ทำนั่งร้าน",
+    difficulty: "Hard",
+    steps: [
+      "เริ่มด้วยเงื่อนตะกรุดเบ็ดที่ไม้ตั้ง",
+      "พันเชือกอ้อมไม้ทั้งสองแบบ ทับ-ลอด-ทับ-ลอด 3-4 รอบ",
+      "หักคอไก่ (Frapping) พันระหว่างไม้เพื่อดึงเชือกให้ตึง",
+      "จบด้วยเงื่อนตะกรุดเบ็ดที่ไม้นอน"
+    ]
+  },
+  {
+    id: 25,
+    name: "เงื่อนผูกทแยง (Diagonal Lashing)",
+    category: "Binding",
+    usage: "ผูกไม้กากบาทที่ไม่ได้ตั้งฉาก หรือต้องการดึงให้ชิดกัน",
+    difficulty: "Hard",
+    steps: [
+      "เริ่มด้วยเงื่อนผูกซุงมัดไม้ทั้งสองเข้าด้วยกัน",
+      "พันทแยงมุมคู่แรก 3-4 รอบ",
+      "พันทแยงมุมคู่ที่สอง 3-4 รอบ",
+      "หักคอไก่ (Frapping) ตรงกลาง",
+      "จบด้วยเงื่อนตะกรุดเบ็ด"
+    ]
+  },
+  {
+    id: 26,
+    name: "เงื่อนขันชะเนาะ (Tourniquet)",
+    category: "Binding",
+    usage: "ห้ามเลือด (เฉพาะกิจ), รัดของให้แน่นโดยใช้ไม้ขัน",
+    difficulty: "Easy",
+    steps: [
+      "พันเชือกรอบแขน/ของ เงื่อนตาย",
+      "วางแท่งไม้บนปม แล้วมัดเงื่อนตายทับ",
+      "หมุนไม้เกลียวจนแน่น",
+      "มัดปลายไม้ติดกับแขน/ของ ไม่ให้คลายตัว"
+    ]
+  },
+  {
+    id: 27,
+    name: "เงื่อนขโมย (Thief Knot)",
+    category: "General",
+    usage: "มัดของเพื่อจับผิดคนมาแอบเปิด (ดูเหมือนเงื่อนพิรอด)",
+    difficulty: "Medium",
+    steps: [
+      "ดูภายนอกเหมือนเงื่อนพิรอดทุกอย่าง",
+      "แต่ปลายเชือกสั้น (Playa) จะอยู่คนละฝั่ง (บน-ล่าง)",
+      "ถ้าคนแก้แล้วผูกใหม่มักจะเผลอผูกเป็นเงื่อนพิรอดเจ้าของจะรู้ทันที"
+    ]
+  },
+  {
+    id: 28,
+    name: "เงื่อนยายแก่ (Granny Knot)",
+    category: "General",
+    usage: "มักเกิดจากการผูกเงื่อนพิรอดผิด ไม่ควรใช้รับน้ำหนัก",
+    difficulty: "Easy",
+    steps: [
+      "ทับเชือก ขวาบนซ้าย",
+      "แล้วทับอีกที ขวาบนซ้าย (ซ้ำด้านเดิม)",
+      "เงื่อนจะรูดและหลุดง่าย ใช้เรียนรู้ว่า 'อย่าทำ'"
+    ]
+  },
+  {
+    id: 29,
+    name: "เงื่อนกระตุก (Slip Knot)",
+    category: "Basic",
+    usage: "ผูกชั่วคราว ดึงปลายแล้วหลุดทันที",
+    difficulty: "Very Easy",
+    steps: [
+      "ทำบ่วง",
+      "ดึงเชือกส่วนกลางผ่านบ่วงขึ้นมา",
+      "ดึงให้แน่น ใช้มัดของเบาๆ ที่ต้องการแก้ง่าย"
+    ]
+  },
+  {
+    id: 30,
+    name: "เงื่อนผูกรั้ง (Rolling Hitch)",
+    category: "Boating",
+    usage: "ผูกเชือกเล็กกับเชือกใหญ่ หรือผูกกับเสาไม่ให้รูด",
+    difficulty: "Medium",
+    steps: [
+      "พันเชือกรอบหลัก 2 รอบ (พันทับกันเพื่อกันลื่น)",
+      "พันอีก 1 รอบเหนือเกลียวเดิม",
+      "สอดปลายลอดใต้เกลียวสุดท้าย",
+      "ใช้รับแรงดึงในทิศทางขนานกับหลัก"
+    ]
+  },
+  {
+    id: 31,
+    name: "เงื่อนเก้าอี้กู้ภัย (Bowline on a Bight)",
+    category: "Rescue",
+    usage: "ทำบ่วงคู่กลางเชือกสำหรับหย่อนคนลงหลุม",
+    difficulty: "Hard",
+    steps: [
+      "ทบเชือกกลางเส้น",
+      "ทำท่าเริ่มต้นเหมือนบ่วงสายธนูด้วยเชือกคู่",
+      "นำห่วงปลายสุด อ้อมย้อนกลับมาคลุมปมทั้งหมด",
+      "จัดระเบียบจะได้ 2 บ่วงที่ปรับขนาดได้"
+    ]
+  },
+  {
+    id: 32,
+    name: "เงื่อนสายยู (Carrick Bend)",
+    category: "Decorative",
+    usage: "ต่อเชือกขนาดใหญ่ แบนสวยงาม ใช้ตกแต่งได้",
+    difficulty: "Hard",
+    steps: [
+      "ทำบ่วงเชือก A ปลายทับ",
+      "สอดเชือก B ผ่านบ่วง A แบบ สานขัดสาน (Interweave)",
+      "จัดรูปทรงให้สมมาตร สวยงาม",
+      "รับแรงดึงได้ดีมากและแก้ง่ายแม้รับแรงมาหนัก"
+    ]
+  },
+  {
+    id: 33,
+    name: "เงื่อนหัวล้านชนกัน (Square Knot Variation)",
+    category: "Basic",
+    usage: "ชื่อเล่นของเงื่อนพิรอด",
+    difficulty: "Easy",
+    steps: ["ดูเงื่อนพิรอด"]
+  },
+  {
+    id: 34,
+    name: "เงื่อนผูกกากบาท (Japanese Square Lashing)",
+    category: "Binding",
+    usage: "ผูกไม้แบบญี่ปุ่น สวยงามและแข็งแรง",
+    difficulty: "Hard",
+    steps: [
+      "ทบเชือกคล้องไม้ตั้ง",
+      "พันทแยงสลับไปมาดึงให้แน่น",
+      "จบด้วยการมัดเงื่อนพิรอดที่ปลายเชือก"
+    ]
+  },
+  {
+    id: 35,
+    name: "เงื่อนผูกคอขวด (Bottle Sling)",
+    category: "Camping",
+    usage: "ทำหูหิ้วขวดน้ำ หรือกระป๋อง",
+    difficulty: "Medium",
+    steps: [
+      "ทำเงื่อนตะกรุดเบ็ดหลวมๆ",
+      "แหวกเชือกกลางบ่วง",
+      "สอดบ่วงสลับกันเพื่อล็อคคอขวด",
+      "ดึงขึ้นเพื่อหิ้ว"
+    ]
+  },
+  {
+    id: 36,
+    name: "เงื่อนบ่วงเลื่อน (Running Bowline)",
+    category: "Boating",
+    usage: "ทำบ่วงดักสัตว์ หรือคล้องวัตถุระยะไกล",
+    difficulty: "Medium",
+    steps: [
+      "นำปลายเชือกอ้อมรอบเชือกหลัก",
+      "ผูกเงื่อนบ่วงสายธนูรอบเชือกหลักนั้น",
+      "บ่วงจะสามารถรูดไปตามเชือกหลักได้"
+    ]
+  },
+  {
+    id: 37,
+    name: "เงื่อนผูกถังตั้ง (Barrel Hitch)",
+    category: "Boating",
+    usage: "ยกถังน้ำ ถังน้ำมัน ในแนวดิ่ง",
+    difficulty: "Medium",
+    steps: [
+      "วางเชือกบนพื้น วางถังทับ",
+      "ผูกเงื่อน Overhand ด้านบนถัง",
+      "แหวกเงื่อนออกให้กว้างแล้วดึงลงมาโอบข้างถัง",
+      "ดึงปลายเชือกขึ้นแล้วผูกเงื่อนบ่วงสายธนู"
+    ]
+  },
+  {
+    id: 38,
+    name: "เงื่อนผูกกระสอบ (Bag Knot)",
+    category: "Binding",
+    usage: "มัดปากถุงแบบง่าย",
+    difficulty: "Easy",
+    steps: [
+      "พันรอบปากถุง",
+      "สอดปลายลอดเชือกดึงให้แน่น"
+    ]
+  },
+  {
+    id: 39,
+    name: "เงื่อนสนับมือ (Monkey's Fist)",
+    category: "Decorative",
+    usage: "ถ่วงปลายเชือกให้หนักเพื่อขว้าง, ตกแต่งพวงกุญแจ",
+    difficulty: "Very Hard",
+    steps: [
+      "พันเชือกรอบนิ้ว 3 รอบ (แกน X)",
+      "พันขวาง 3 รอบ (แกน Y)",
+      "พันลอดช่องกลาง 3 รอบ (แกน Z)",
+      "ค่อยๆ ไล่ดึงสายให้ปมกระชับเข้าหากัน ใส่ลูกหินข้างในได้"
+    ]
+  },
+  {
+    id: 40,
+    name: "เงื่อนโซ่ (Chain Sinnet)",
+    category: "Decorative",
+    usage: "เก็บเชือกให้สั้นลงแต่ไม่พันกัน, ทำสร้อยข้อมือ",
+    difficulty: "Medium",
+    steps: [
+      "ทำบ่วง Slip knot",
+      "ดึงเชือกผ่านบ่วงเกิดบ่วงใหม่",
+      "ดึงเชือกผ่านบ่วงใหม่ไปเรื่อยๆ เหมือนถักโครเชต์"
+    ]
   }
-
-  body {
-    background-color: var(--bg-app);
-    color: var(--text-main);
-    font-family: "Sarabun", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    padding-bottom: 80px; /* Space for FAB */
-  }
-
-  /* --- App Header --- */
-  .app-header {
-    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-    color: white;
-    padding: 20px 16px 30px;
-    border-radius: 0 0 24px 24px;
-    box-shadow: 0 4px 20px rgba(30, 58, 138, 0.2);
-    margin-bottom: -20px;
-    position: relative;
-    z-index: 10;
-  }
-  .app-title {
-    font-size: 22px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .app-subtitle {
-    font-size: 14px;
-    opacity: 0.85;
-    margin-top: 4px;
-    font-weight: 300;
-  }
-
-  /* --- Container & Sections --- */
-  .wrap {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 16px;
-  }
-  .section {
-    margin-bottom: 24px;
-  }
-
-  /* --- Search Bar (Floating) --- */
-  .search-container {
-    background: white;
-    border-radius: 16px;
-    padding: 6px;
-    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
-    display: flex;
-    gap: 8px;
-    margin-top: 0;
-    position: relative;
-    z-index: 20;
-    border: 1px solid rgba(0,0,0,0.03);
-  }
-  .search-input {
-    flex: 1;
-    border: none;
-    outline: none;
-    padding: 0 16px;
-    font-family: "Sarabun";
-    font-size: 16px;
-    color: var(--text-main);
-    background: transparent;
-  }
-  .search-btn {
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .search-btn:active { transform: scale(0.95); }
-
-  /* --- Latest Slider (Card Style) --- */
-  .slider-card {
-    background: white;
-    border-radius: var(--radius-card);
-    padding: 16px;
-    box-shadow: var(--shadow-soft);
-    border: 1px solid var(--border);
-    overflow: hidden;
-  }
-  .slider-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #f3f4f6;
-  }
-  .slider-title {
-    font-weight: 700;
-    color: var(--primary);
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .latest-viewport { overflow: hidden; }
-  .latest-track { display: flex; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
-  .latest-slide {
-    min-width: 100%;
-    padding: 4px;
-  }
-  .slide-title {
-    font-weight: 600;
-    font-size: 15px;
-    line-height: 1.5;
-    margin-bottom: 8px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .dots { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
-  .dot { width: 6px; height: 6px; border-radius: 50%; background: #e5e7eb; transition: 0.3s; }
-  .dot.active { background: var(--primary); width: 18px; border-radius: 4px; }
-
-  /* --- Category Chips (Scrollable) --- */
-  .catbar-scroll {
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 4px 4px 12px 4px; /* Space for shadow */
-    margin: 0 -16px; /* Bleed to edge on mobile */
-    padding-left: 16px;
-    padding-right: 16px;
-    scrollbar-width: none;
-  }
-  .catbar-scroll::-webkit-scrollbar { display: none; }
-  
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 16px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 50px; /* Pill shape */
-    margin-right: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text-muted);
-    transition: all 0.2s;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-  }
-  .chip.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
-  }
-  .chip:active { transform: scale(0.96); }
-
-  /* --- List Cards --- */
-  .section-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-main);
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-  }
-  .list-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .law-card {
-    background: var(--bg-card);
-    border-radius: var(--radius-card);
-    padding: 16px;
-    border: 1px solid rgba(229, 231, 235, 0.5);
-    box-shadow: var(--shadow-soft);
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .law-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-    border-color: var(--primary);
-  }
-  .law-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 4px;
-    background: var(--primary);
-    opacity: 0;
-    transition: 0.2s;
-  }
-  .law-card:hover::before { opacity: 1; }
-
-  .law-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-main);
-    margin-bottom: 8px;
-    line-height: 1.5;
-  }
-  .law-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-  }
-  .tag {
-    background: #f3f4f6;
-    padding: 2px 8px;
-    border-radius: 4px;
-    border: 1px solid #e5e7eb;
-    display: inline-flex;
-    align-items: center;
-  }
-  .action-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    padding: 8px 16px;
-    background: #eff6ff;
-    color: var(--primary);
-    font-weight: 600;
-    font-size: 13px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: 0.2s;
-  }
-  .action-btn:hover { background: #dbeafe; }
-
-  /* --- Pagination --- */
-  .loadbar {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 20px;
-  }
-  .btn-nav {
-    padding: 10px 20px;
-    border-radius: var(--radius-btn);
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    transition: 0.2s;
-  }
-  .btn-nav.next { background: var(--primary); color: white; box-shadow: 0 4px 10px rgba(30,58,138,0.2); }
-  .btn-nav.prev { background: white; color: var(--text-muted); border: 1px solid var(--border); }
-  .btn-nav:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  /* --- Chat FAB & Modal --- */
-  #fab-chat-toggle {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(135deg, var(--accent), #b45309);
-    color: white;
-    border: none;
-    border-radius: 20px; /* Squircle */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 24px rgba(217, 119, 6, 0.4);
-    cursor: pointer;
-    z-index: 100;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  #fab-chat-toggle:hover { transform: scale(1.1) rotate(-5deg); }
-  #fab-chat-toggle .material-symbols-rounded { font-size: 28px; }
-
-  #chatbot-modal {
-    background: rgba(0,0,0,0.5); /* Dim background */
-    backdrop-filter: blur(2px);
-  }
-  .chat-window {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: white;
-    font-family: "Sarabun", sans-serif;
-  }
-  @media (min-width: 640px) {
-    .chat-window {
-      height: 600px;
-      width: 400px;
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      border-radius: 24px;
-      overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-    }
-  }
-
-  .chat-header {
-    background: var(--primary);
-    padding: 16px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .chat-bubble { font-size: 15px; line-height: 1.5; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-  .chat-bubble-user { background: var(--primary); color: white; border-radius: 16px 16px 2px 16px; }
-  .chat-bubble-model { background: #f3f4f6; color: #1f2937; border-radius: 16px 16px 16px 2px; }
-
-  /* Gemini Animation Bar */
-  .gemini-thinking-bar {
-    height: 3px;
-    background: #e5e7eb;
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
-    width: 60px;
-  }
-  .gemini-thinking-bar::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; height: 100%; width: 50%;
-    background: var(--accent);
-    animation: thinking 1.5s infinite ease-in-out;
-  }
-  @keyframes thinking {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(250%); }
-  }
-
-  /* Utilities */
-  .empty { padding: 40px; text-align: center; color: var(--text-muted); background: white; border-radius: 16px; border: 1px dashed var(--border); }
-  .material-symbols-rounded { vertical-align: middle; }
-</style>
-</head>
-<body>
-
-<!-- Header ส่วนหัวแอพ -->
-<header class="app-header">
-  <div class="wrap">
-    <div class="app-title">
-      <span class="material-symbols-rounded" style="font-size: 32px;">balance</span>
-      <span>Thai Law Lite</span>
-    </div>
-    <div class="app-subtitle">คลังกฎหมายไทยฉบับพกพา อัพเดทล่าสุด</div>
-  </div>
-</header>
-
-<!-- Main Content -->
-<main class="wrap" style="position: relative;">
-  
-  <!-- Search Bar (Lifts up into header space slightly) -->
-  <section class="section" style="margin-top: -24px;">
-    <div class="search-container" role="search">
-      <input id="q" class="search-input" type="search" placeholder="ค้นหาชื่อกฎหมาย, มาตรา, หรือคำสำคัญ..." aria-label="ค้นหากฎหมาย">
-      <button id="btnSearch" class="search-btn" type="button">
-        <span class="material-symbols-rounded">search</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- Slider -->
-  <section class="section">
-    <div class="slider-card">
-      <div class="slider-header">
-        <div class="slider-title">
-          <span class="material-symbols-rounded" style="color:var(--accent)">campaign</span>
-          ประกาศล่าสุด
-        </div>
-        <span class="text-xs text-gray-400">Auto Slide</span>
-      </div>
-      <div class="latest-viewport" id="latestViewport">
-        <div id="latestTrack" class="latest-track" aria-live="polite"></div>
-      </div>
-      <div id="dots" class="dots" aria-hidden="true"></div>
-    </div>
-  </section>
-
-  <!-- Categories (Scrollable Pills) -->
-  <section class="section">
-    <div class="catbar-scroll" id="catbar" role="tablist" aria-label="เลือกหมวดกฎหมาย">
-      <!-- Generated via JS -->
-    </div>
-  </section>
-
-  <!-- List Data -->
-  <section class="section">
-    <div class="section-title">
-      <span id="panelTitle">รายการกฎหมาย</span>
-      <span id="panelNote" class="text-xs font-normal text-gray-500">แสดงผล</span>
-    </div>
-    
-    <div id="list" class="list-container">
-      <!-- Cards go here -->
-    </div>
-
-    <div class="loadbar">
-      <button id="btnPrev" class="btn-nav prev" type="button" style="display:none">
-        <span class="material-symbols-rounded">arrow_back</span> ย้อนกลับ
-      </button>
-      <button id="btnNext" class="btn-nav next" type="button" style="display:none">
-        ถัดไป <span class="material-symbols-rounded">arrow_forward</span>
-      </button>
-    </div>
-  </section>
-
-</main>
-
-<!-- Floating Action Button for AI -->
-<button id="fab-chat-toggle" title="ปรึกษา Thai Law AI">
-  <span class="material-symbols-rounded">smart_toy</span>
-</button>
-
-<!-- Chat Modal -->
-<div id="chatbot-modal" class="chatbot-hidden fixed inset-0 z-50 flex items-end sm:items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-  <div class="chat-window w-full bg-gray-50 flex flex-col transform transition-transform duration-300 translate-y-full sm:translate-y-0 sm:scale-95" id="chat-window-inner">
-    
-    <!-- Chat Header -->
-    <header class="chat-header shadow-md shrink-0">
-      <div class="flex items-center gap-2">
-        <span class="material-symbols-rounded">smart_toy</span>
-        <div>
-          <h1 class="text-lg font-bold">Thai Law AI</h1>
-          <p class="text-xs opacity-80">ผู้ช่วยค้นหากฎหมายอัจฉริยะ</p>
-        </div>
-      </div>
-      <div class="flex gap-2">
-        <button id="new-chat-btn" class="text-xs bg-white/20 hover:bg-white/30 text-white py-1 px-3 rounded-lg transition">
-          ล้างแชท
-        </button>
-        <button id="chatbot-close-btn" class="text-white hover:text-red-200 transition">
-          <span class="material-symbols-rounded">close</span>
-        </button>
-      </div>
-    </header>
-
-    <!-- Chat History -->
-    <main id="chat-history" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-      <div class="flex items-start space-x-2">
-        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-          <span class="material-symbols-rounded text-blue-600 text-lg">smart_toy</span>
-        </div>
-        <div class="chat-bubble chat-bubble-model p-3 max-w-[85%] relative bg-white border border-gray-100 shadow-sm">
-          <p>สวัสดีครับ! ผมคือ AI ผู้ช่วยด้านกฎหมาย ยินดีให้ความช่วยเหลือครับ สอบถามเรื่องข้อกฎหมายหรือการสืบค้นได้เลยครับ</p>
-        </div>
-      </div>
-    </main>
-
-    <!-- Thinking Indicator -->
-    <div id="thinking-indicator" class="px-4 pb-2 hidden">
-      <div class="flex items-center space-x-2">
-        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-          <span class="material-symbols-rounded text-blue-600 text-lg">smart_toy</span>
-        </div>
-        <div class="bg-white p-3 rounded-2xl border border-gray-100 shadow-sm">
-          <div class="gemini-thinking-bar"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Input Area -->
-    <footer class="p-3 bg-white border-t border-gray-200 shrink-0">
-      <div class="flex items-center gap-2 bg-gray-100 rounded-full px-4 py-2 border border-gray-200 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-all">
-        <input id="user-input" type="text" placeholder="พิมพ์คำถามที่นี่..." class="flex-1 bg-transparent outline-none text-sm py-1">
-        <button id="send-btn" class="text-blue-600 hover:text-blue-800 transition p-1">
-          <span class="material-symbols-rounded">send</span>
-        </button>
-      </div>
-    </footer>
-
-  </div>
-</div>
-
-<!-- ========================================================================================= -->
-<!-- JAVASCRIPT LOGIC (KEPT EXACTLY AS ORIGINAL LOGIC, ONLY RENDER FUNCTIONS UPDATED FOR UI) -->
-<!-- ========================================================================================= -->
-
-<script>
-/* ===== ค่าคงที่/ตั้งค่า ===== */
-const PAGE_SIZE = 5;
-let lawsData = [];
-async function loadJsonAndStart() {
-  try {
-    const res = await fetch("./lawsData.json", { cache: "no-store" });
-    lawsData = await res.json();
-    renderChips();
-    loadAllData();
-    const u = new URL(location.href);
-    const initQ = u.searchParams.get("q") || "";
-    if (initQ) { document.querySelector("#q").value = initQ; doSearch(); }
-  } catch (e) {
-    console.error("โหลด lawsData.json ไม่สำเร็จ", e);
-    document.getElementById("list").innerHTML =
-      `<div class="empty">ไม่สามารถโหลดข้อมูลได้</div>`;
-  }
-}
-
-const COLS = { 
-  category: "หมวด", 
-  title: "ชื่อกฎหมาย", 
-  date: "วันที่", 
-  volume: "เล่มตอน", 
-  url: "URL_PD"
-};
-const col = k => COLS[k];
-
-const FIXED_CATS = [
-  {key:"ประมวลกฎหมาย",     label:"ประมวลกฎหมาย",     emoji:"book_2"},
-  {key:"รัฐธรรมนูญ",        label:"รัฐธรรมนูญ",        emoji:"gavel"},
-  {key:"พระราชกฤษฎีกา",   label:"พระราชกฤษฎีกา",   emoji:"account_balance"},
-  {key:"พระราชกำหนด",      label:"พระราชกำหนด",      emoji:"assignment_late"},
-  {key:"พระราชบัญญัติ",    label:"พระราชบัญญัติ",    emoji:"menu_book"},
-  {key:"ระเบียบคณะกรรมการ",      label:"กฎกระทรวง",        emoji:"policy"}
 ];
 
-function normalizeCatName(raw=""){
-  const s = (raw||"").trim();
-  const map = new Map([
-    ["ประมวลกฎหมาย","ประมวลกฎหมาย"], ["ประมวลกฏหมาย","ประมวลกฎหมาย"],
-    ["รัฐธรรมนูญ","รัฐธรรมนูญ"],
-    ["พระราชกฤษฎีกา","พระราชกฤษฎีกา"], ["พระรากฎีกา","พระราชกฤษฎีกา"], ["พระราชกฎีกา","พระราชกฤษฎีกา"],
-    ["พระราชกำหนด","พระราชกำหนด"],
-    ["พระราชบัญญัติ","พระราชบัญญัติ"],
-    ["ระเบียบคณะกรรมการ","ระเบียบคณะกรรมการ"], ["ระเบียบคณะกรรมการ","ระเบียบคณะกรรมการ"]
-  ]);
-  return map.get(s) || s;
-}
-const $ = (s,el=document)=>el.querySelector(s);
+// แปลหมวดหมู่เป็นไทย
+const CATEGORIES = [
+  { id: 'All', label: 'ทั้งหมด', icon: Book },
+  { id: 'Basic', label: 'พื้นฐาน', icon: Anchor },
+  { id: 'Camping', label: 'แคมป์', icon: Tent },
+  { id: 'Boating', label: 'ทางน้ำ', icon: Fish },
+  { id: 'Climbing', label: 'กู้ภัย', icon: Mountain },
+  { id: 'Binding', label: 'ผูกมัด', icon: Package },
+  { id: 'Decorative', label: 'อื่นๆ', icon: Zap },
+];
 
-function sanitizeUrl(u=''){
-  try{ 
-    const url=new URL(u, location.origin); 
-    if(url.protocol==='http:'||url.protocol==='https:') return url.href; 
-  }catch{}
-  return '';
-}
+// --- COMPONENTS (RAW HTML / BRUTALIST STYLE) ---
 
-const TH_MONTHS={'ม.ค.':1,'ก.พ.':2,'มี.ค.':3,'เม.ย.':4,'พ.ค.':5,'มิ.ย.':6,'ก.ค.':7,'ส.ค.':8,'ก.ย.':9,'ต.ค.':10,'พ.ย.':11,'ธ.ค.':12,'มกราคม':1,'กุมภาพันธ์':2,'มีนาคม':3,'เมษายน':4,'พฤษภาคม':5,'มิถุนายน':6,'กรกฎาคม':7,'สิงหาคม':8,'กันยายน':9,'ตุลาคม':10,'พฤศจิกายน':11,'ธันวาคม':12};
-function thDigitsToArabic(s=''){const m={'๐':'0','๑':'1','๒':'2','๓':'3','๔':'4','๕':'5','๖':'6','๗':'7','๘':'8','๙':'9'}; return s.replace(/[๐-๙]/g,ch=>m[ch]??ch);}
-function parseDateTS(s){
-  if(!s) return 0; s=s.trim();
-  const onlyBuddhist = s.match(/^พ\.ศ\.?\s*([0-9๐-๙]{4})$/);
-  if(onlyBuddhist){ let y=parseInt(thDigitsToArabic(onlyBuddhist[1]),10)-543; return new Date(y,0,1).getTime(); }
-  const th = s.match(/^([0-9๐-๙]{1,2})\s+([ก-๙\.]+)\s+([0-๙0-9]{4})$/);
-  if(th){
-    const d=parseInt(thDigitsToArabic(th[1]),10);
-    const m=TH_MONTHS[th[2]]||0;
-    let y=parseInt(thDigitsToArabic(th[3]),10);
-    if(y>2400) y-=543;
-    return (m&&d&&y)? new Date(y,m-1,d).getTime():0;
-  }
-  if(/^\d{4}-\d{2}-\d{2}$/.test(s)){ let [y,m,d]=s.split('-').map(n=>+n); if(y>2400) y-=543; return new Date(y,(m||1)-1,(d||1)).getTime(); }
-  if(/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(s)){ let [d,m,y]=s.split('/').map(n=>+n); if(y>2400) y-=543; return new Date(y,(m||1)-1,(d||1)).getTime(); }
-  return 0;
-}
-function fmtDateThai(s){
-  if(!s) return '';
-  if(/^[0-9]{4}-/.test(s)||/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(s)){
-    let y,m,d;
-    if(s.includes('-')){[y,m,d]=s.split('-').map(n=>+n);} else{[d,m,y]=s.split('/').map(n=>+n);}
-    if(y<2400) y+=543;
-    const mm=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-    return `${d} ${mm[(m||1)-1]} ${y}`;
-  }
-  return s;
-}
-
-const catbar = $("#catbar");
-const listEl = $("#list");
-const btnNext = $("#btnNext");
-const btnPrev = $("#btnPrev");
-const panelTitle = $("#panelTitle");
-const panelNote = $("#panelNote");
-const CatState = {};
-let selectedCat = null;
-const allIndex = [];
-let LatestData = [];
-
-function escapeHtml(s){return (''+s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-
-// Updated Render Card function for new UI
-function renderCard(r){
-  const t=r[col('title')]||'', d=r[col('date')]||'', v=r[col('volume')]||'', c=r[col('category')]||'', u=r[col('url')]||'';
-  const safe = sanitizeUrl(u);
-  // UI Design: Card like a Law Document
-  return `<article class="law-card">
-    <div class="law-title">${escapeHtml(t)||'(ไม่มีชื่อเรื่อง)'}</div>
-    <div class="law-meta">
-      ${c?`<span class="tag"><span class="material-symbols-rounded" style="font-size:14px;margin-right:2px">folder</span> ${escapeHtml(c)}</span>`:''}
-      ${d?`<span class="tag"><span class="material-symbols-rounded" style="font-size:14px;margin-right:2px">calendar_today</span> ${escapeHtml(fmtDateThai(d))}</span>`:''}
-      ${v?`<span class="tag"><span class="material-symbols-rounded" style="font-size:14px;margin-right:2px">book</span> ${escapeHtml(v)}</span>`:''}
+const HtmlLayout = ({ children }) => (
+  <div className="min-h-screen bg-white text-black font-mono text-sm leading-relaxed p-0 md:p-4">
+    {/* Layout แบบ Flex Col เพื่อรองรับเมนูบน และเนื้อหาล่าง */}
+    <div className="w-full md:w-[98%] lg:w-[99%] mx-auto border-2 border-black h-[90vh] flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+      {children}
     </div>
-    <div class="actions">
-      ${safe?`<a class="action-btn" href="${safe}" target="_blank" rel="noopener noreferrer">
-        <span class="material-symbols-rounded" style="font-size:18px">visibility</span> อ่านฉบับเต็ม
-      </a>`:`<span class="text-xs text-gray-400">ไม่มีไฟล์แนบ</span>`}
+  </div>
+);
+
+// MenuBar: เปลี่ยนจาก Sidebar เป็นแถบแนวนอนด้านบน
+const TopMenu = ({ activeCategory, setActiveCategory, searchTerm, setSearchTerm }) => (
+  <div className="w-full bg-gray-100 border-b-2 border-black flex flex-col flex-shrink-0">
+    {/* แถวบน: Logo + Search */}
+    <div className="flex flex-col md:flex-row border-b border-black md:border-b-0">
+        <div className="p-3 bg-yellow-200 border-b border-black md:border-b-0 md:border-r-2 md:w-56 flex-shrink-0 flex items-center justify-between md:block">
+            <h1 className="font-bold text-base uppercase flex items-center gap-2">
+                <Globe size={14} /> KNOTS_DB.HTML
+            </h1>
+            <p className="text-[10px] mt-0.5 hidden md:block">Ver 1.0 // THAI</p>
+        </div>
+
+        <div className="flex-1 p-2 flex items-center gap-3 overflow-x-auto">
+             <div className="flex items-center gap-2 w-full md:w-auto flex-1 md:flex-none">
+                <label className="text-[10px] font-bold uppercase whitespace-nowrap hidden md:block">[SEARCH]:</label>
+                <div className="flex flex-1 md:w-64">
+                    <input
+                        type="text"
+                        className="w-full border-2 border-black p-1 bg-white text-black focus:outline-none focus:bg-blue-50 text-xs h-8"
+                        placeholder="keyword..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <button className="bg-black text-white px-3 flex items-center justify-center border-2 border-black border-l-0 hover:bg-gray-800 h-8">
+                        <Search size={12} />
+                    </button>
+                </div>
+            </div>
+             
+             {/* Stats (Desktop Only) */}
+             <div className="hidden md:flex border border-black p-1.5 bg-white text-[10px] ml-auto gap-4 whitespace-nowrap h-8 items-center">
+               <span>STATUS: ONLINE</span>
+               <span>SERVER: READY</span>
+            </div>
+        </div>
     </div>
-  </article>`;
-}
 
-// Updated Render Chips
-function renderChips(){
-  catbar.innerHTML = FIXED_CATS.map(c => `
-    <button class="chip" type="button" role="tab" aria-selected="false" data-cat="${c.key}">
-      <span class="material-symbols-rounded" style="font-size:18px">${c.emoji}</span><span>${c.label}</span>
-    </button>
-  `).join('');
-}
+    {/* แถวล่าง: Categories (Horizontal Scroll) */}
+    <div className="bg-white border-t-2 border-black md:border-t-2 overflow-x-auto">
+        <div className="flex p-2 gap-2 min-w-max">
+            <span className="text-[10px] font-bold uppercase py-1 self-center mr-2">[DIR]:</span>
+            {CATEGORIES.map((cat) => (
+                <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`
+                        px-3 py-1 text-xs border border-black flex items-center gap-2 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none whitespace-nowrap
+                        ${activeCategory === cat.id
+                            ? 'bg-blue-700 text-white font-bold hover:text-white'
+                            : 'bg-white text-blue-700 hover:bg-blue-50'}
+                    `}
+                >
+                    {activeCategory === cat.id ? '▶' : ''} {cat.label}
+                </button>
+            ))}
+        </div>
+    </div>
+  </div>
+);
 
-function loadAllData(){
-  listEl.innerHTML=`<div class="empty">กำลังโหลดฐานข้อมูลกฎหมาย...</div>`;
-  try {
-    FIXED_CATS.forEach(({key}) => {
-        CatState[key] = {rows: [], page: 0, loaded: true};
-    });
-    lawsData.forEach(item => {
-        const normCat = normalizeCatName(item[col('category')]);
-        if (CatState[normCat]) {
-            const processedItem = {...item, _ts: parseDateTS(item[col('date')])};
-            CatState[normCat].rows.push(processedItem);
-            allIndex.push(processedItem);
-        }
-    });
-    FIXED_CATS.forEach(({key}) => {
-        if (CatState[key].rows.length > 0) {
-            CatState[key].rows.sort((a, b) => (b._ts || 0) - (a._ts || 0));
-            LatestData.push({cat: key, row: CatState[key].rows[0]});
-        }
-    });
-    catbar.addEventListener('click', e=>{
-      const b=e.target.closest('button[data-cat]'); if(!b) return;
-      selectCategory(b.dataset.cat); 
-      // Scroll chip into view
-      b.scrollIntoView({behavior: 'smooth', block: 'nearest', inline: 'center'});
-    });
-    selectCategory(FIXED_CATS[0].key);
-    buildLatestSlider();
-  } catch(e) {
-    listEl.innerHTML=`<div class="empty">เกิดข้อผิดพลาดในการประมวลผล</div>`;
-    console.error(e);
-  }
-}
+const DifficultyBadge = ({ level }) => {
+  const thaiLevel = {
+    'Very Easy': 'ง่ายมาก',
+    'Easy': 'ง่าย',
+    'Medium': 'ปานกลาง',
+    'Hard': 'ยาก',
+    'Very Hard': 'ยากมาก'
+  }[level] || level;
 
-function renderPage(cat){
-  const st=CatState[cat]; if(!st) return;
-  const start=st.page*PAGE_SIZE, end=start+PAGE_SIZE;
-  const slice=st.rows.slice(start,end);
-  listEl.innerHTML = slice.length? slice.map(renderCard).join('') : `<div class="empty">ไม่พบรายการในหมวดนี้</div>`;
-  btnPrev.style.display = (st.page>0)? 'inline-flex':'none';
-  btnNext.style.display = (end < st.rows.length)? 'inline-flex':'none';
-  panelTitle.textContent = `${cat}`;
-  panelNote.textContent  = `แสดง ${start+1}-${Math.min(end, st.rows.length)} จาก ${st.rows.length}`;
-}
+  return (
+    <span className="text-[10px] uppercase border border-black px-1 bg-gray-200 text-black">
+      [{thaiLevel}]
+    </span>
+  );
+};
 
-function selectCategory(cat){
-  if(selectedCat===cat) return;
-  selectedCat=cat;
-  [...catbar.querySelectorAll('.chip')].forEach(b=>{
-    const on = b.dataset.cat===cat;
-    b.classList.toggle('active', on);
-    b.setAttribute('aria-selected', on?'true':'false');
-  });
-  if(CatState[cat]){
-    CatState[cat].page=0;
-    renderPage(cat);
-  } else {
-    listEl.innerHTML = `<div class="empty">ไม่พบหมวดหมู่ "${cat}"</div>`;
-  }
-}
+const KnotEntry = ({ knot, onClick }) => (
+  <div 
+    onClick={() => onClick(knot)}
+    className="border border-black p-3 cursor-pointer hover:bg-yellow-50 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none bg-white h-full flex flex-col"
+  >
+    <div className="flex justify-between items-start mb-2 border-b border-black border-dotted pb-2">
+      <span className="font-bold text-blue-700 underline text-sm line-clamp-1 mr-2">
+        #{knot.id} {knot.name.split('(')[0]}
+      </span>
+      <DifficultyBadge level={knot.difficulty} />
+    </div>
 
-btnNext.addEventListener('click', ()=>{
-  if(!selectedCat) return;
-  const st=CatState[selectedCat]; if(!st) return;
-  st.page+=1; renderPage(selectedCat);
-  listEl.scrollIntoView({behavior:'smooth', block:'start'});
-});
-btnPrev.addEventListener('click', ()=>{
-  if(!selectedCat) return;
-  const st=CatState[selectedCat]; if(!st) return;
-  if(st.page>0){ st.page-=1; renderPage(selectedCat); }
-  listEl.scrollIntoView({behavior:'smooth', block:'start'});
-});
+    <div className="text-xs space-y-2 flex-1">
+      <p className="font-bold truncate">{knot.name.split('(')[1]?.replace(')', '') || 'N/A'}</p>
+      <p className="text-gray-600 line-clamp-2">
+        <span className="text-black font-bold">&gt; USE:</span> {knot.usage}
+      </p>
+    </div>
+  </div>
+);
 
-const elQ = $("#q"), elBtnSearch=$("#btnSearch");
-elBtnSearch.addEventListener('click', doSearch);
-elQ.addEventListener('keydown', e=>{ if(e.key==='Enter') doSearch(); });
-
-function normalizeThai(s){ return (s||'').toLowerCase().replace(/\s+/g,' ').trim().normalize('NFC').replace(/[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/g,''); }
-function doSearch(){
-  const q=(elQ.value||'').trim();
-  if(!q){ if(selectedCat) renderPage(selectedCat); return; }
-  const nq=normalizeThai(q);
-  const results = allIndex.filter(o=>{
-    const t=normalizeThai(o[col('title')]||''),
-          v=normalizeThai(o[col('volume')]||''),
-          c=normalizeThai(o[col('category')]||'');
-    return t.includes(nq)||v.includes(nq)||c.includes(nq);
-  }).sort((a,b)=>(b._ts||0)-(a._ts||0));
-  
-  listEl.innerHTML = results.slice(0,50).map(renderCard).join('') || `<div class="empty">ไม่พบข้อมูลที่ค้นหา</div>`;
-  btnNext.style.display='none';
-  btnPrev.style.display='none';
-  panelTitle.textContent = `ผลการค้นหา: “${q}”`;
-  panelNote.textContent  = `พบ ${results.length} รายการ`;
-}
-
-const latestViewport = $("#latestViewport");
-const latestTrack = $("#latestTrack");
-const dotsEl = $("#dots");
-let latestSlides=[]; let latestIndex=0; let autoTimer=null;
-
-function updateLatestSlider(){
-  const w = latestViewport.getBoundingClientRect().width;
-  latestTrack.style.transform = `translateX(${-latestIndex*w}px)`;
-  [...dotsEl.children].forEach((d,i)=>d.classList.toggle('active', i===latestIndex));
-}
-function nextLatest(){ if(!latestSlides.length) return; latestIndex = (latestIndex + 1) % latestSlides.length; updateLatestSlider(); }
-function startAuto(){ stopAuto(); autoTimer = setInterval(nextLatest, 5000); }
-function stopAuto(){ if(autoTimer){ clearInterval(autoTimer); autoTimer=null; } }
-
-document.addEventListener('visibilitychange', ()=>{ document.hidden ? stopAuto() : startAuto(); });
-latestViewport.addEventListener('mouseenter', stopAuto);
-latestViewport.addEventListener('mouseleave', startAuto);
-window.addEventListener('resize', updateLatestSlider);
-
-function buildLatestSlider(){
-  latestTrack.innerHTML=''; dotsEl.innerHTML='';
-  latestSlides = LatestData.filter(Boolean).sort((a,b)=>(b.row._ts||0) - (a.row._ts||0));
-  if(!latestSlides.length){
-    latestTrack.innerHTML = `<div class="latest-slide"><div class="text-gray-400 text-center py-4">ยังไม่มีข้อมูลอัปเดต</div></div>`;
-    return;
-  }
-  latestTrack.innerHTML = latestSlides.map(({cat,row})=>{
-    const t=row[col('title')]||'', d=row[col('date')]||'', u=row[col('url')]||'#';
-    const safe = sanitizeUrl(u);
-    return `<div class="latest-slide">
-      <div class="slide-title">${escapeHtml(t)}</div>
-      <div class="flex items-center gap-2 text-xs text-gray-500 mb-2">
-        <span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded border border-blue-100">${escapeHtml(cat)}</span>
-        <span>${escapeHtml(fmtDateThai(d))}</span>
+const PageContent = ({ children, title, subtitle }) => (
+  <main className="flex-1 flex flex-col h-full bg-white overflow-hidden relative">
+    {/* Header Bar */}
+    <header className="p-2 md:p-4 border-b-2 border-black flex justify-between items-center bg-gray-50">
+      <div>
+         <h2 className="text-lg md:text-xl font-bold uppercase font-sans tracking-tighter">{title}</h2>
+         <p className="text-[10px] md:text-xs text-gray-500 font-mono">path: /root/{subtitle}</p>
       </div>
-      ${safe?`<a class="text-sm font-semibold text-blue-700 hover:underline flex items-center gap-1" href="${safe}" target="_blank">อ่านต่อ <span class="material-symbols-rounded" style="font-size:14px">arrow_forward</span></a>`:''}
-    </div>`;
-  }).join('');
-  dotsEl.innerHTML = latestSlides.map((_,i)=>`<span class="dot ${i===0?'active':''}"></span>`).join('');
-  latestIndex=0; updateLatestSlider(); startAuto();
-}
+      <div className="hidden md:block text-xs border border-black px-2 py-1 bg-white">
+        {new Date().toLocaleDateString()}
+      </div>
+    </header>
+    
+    {/* Content Area */}
+    <div className="flex-1 overflow-y-auto p-4 md:p-6 custom-scrollbar bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
+       {children}
+    </div>
+  </main>
+);
 
-loadJsonAndStart();
-</script>
-
-
-<script type="module">
-/* =========================================
-   CHATBOT LOGIC (Keep Functional)
-   ========================================= */
-const BACKEND_URL = 'https://us-central1-law-ai-14740.cloudfunctions.net/api/chat';
-let chatHistory = [];
-
-const chatHistoryEl = document.getElementById('chat-history');
-const userInput   = document.getElementById('user-input');
-const sendBtn     = document.getElementById('send-btn');
-const newChatBtn  = document.getElementById('new-chat-btn');
-const thinkingIndicator = document.getElementById('thinking-indicator');
-
-function addChatBubble(message, isUser = true) {
-  const bubbleType = isUser ? 'user' : 'model';
-  const iconBg = isUser ? 'bg-blue-600' : 'bg-blue-100';
-  const iconColor = isUser ? 'text-white' : 'text-blue-600';
-  const iconName = isUser ? 'person' : 'smart_toy';
+const HtmlDialog = ({ knot, onClose }) => {
+  if (!knot) return null;
+  const [showVideo, setShowVideo] = useState(false);
   
-  const wrap = document.createElement('div');
-  wrap.className = `flex items-start space-x-2 ${isUser ? 'flex-row-reverse space-x-reverse' : ''}`;
-  
-  const iconDiv = document.createElement('div');
-  iconDiv.className = `w-8 h-8 rounded-full ${iconBg} flex items-center justify-center shrink-0`;
-  iconDiv.innerHTML = `<span class="material-symbols-rounded ${iconColor} text-lg">${iconName}</span>`;
-  
-  const bubble = document.createElement('div');
-  bubble.className = `chat-bubble chat-bubble-${bubbleType} p-3 max-w-[85%] relative ${isUser ? '' : 'bg-white border border-gray-100 shadow-sm'}`;
-  bubble.innerHTML = `<p></p>`;
-  bubble.querySelector('p').innerText = message; 
-  
-  wrap.appendChild(iconDiv);
-  wrap.appendChild(bubble);
-  chatHistoryEl.appendChild(wrap);
-  chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
-}
+  // Use knot.imageUrl if available, otherwise generate placeholder
+  const imageUrl = knot.imageUrl || `https://placehold.co/600x400/EEE/31343C?font=roboto&text=${encodeURIComponent(knot.name.split('(')[0])}`;
+  // Generic Youtube Search or specific ID
+  const videoId = knot.youtubeId || "V7_GzJp2j2U"; // Default to a common knot video if null
 
-function addChatError(message) {
-  const w = document.createElement('div');
-  w.className = 'flex justify-center my-2';
-  w.innerHTML = `<span class="bg-red-50 text-red-600 text-xs px-3 py-1 rounded-full border border-red-100">${message}</span>`;
-  chatHistoryEl.appendChild(w);
-  chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
-}
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/80 backdrop-grayscale">
+      <div className="bg-white w-full max-w-md border-2 border-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col max-h-[90vh]">
+        
+        {/* Title Bar */}
+        <div className="bg-blue-700 text-white p-2 flex justify-between items-center border-b-2 border-black flex-shrink-0">
+           <span className="font-bold text-sm flex items-center gap-2">
+             <Info size={14} className="inline" /> properties_view.exe
+           </span>
+           <button onClick={onClose} className="bg-gray-300 text-black px-2 border border-white border-b-black border-r-black active:border-t-black active:border-l-black hover:bg-red-600 hover:text-white font-bold text-xs">
+             X
+           </button>
+        </div>
 
-function setThinking(on) {
-  thinkingIndicator.classList.toggle('hidden', !on);
-  if (on) chatHistoryEl.scrollTop = chatHistoryEl.scrollHeight;
-}
+        {/* Content (Vertical Scrollable) */}
+        <div className="p-4 overflow-y-auto font-mono text-sm">
+           <h2 className="text-xl font-bold border-b-4 border-black mb-4 pb-2 text-center">
+             {knot.name}
+           </h2>
 
-async function handleSend() {
-  const message = (userInput.value || '').trim();
-  if (!message) return;
+           {/* Media Section: Image or Video */}
+           <div className="mb-4 border-2 border-black bg-black">
+              {showVideo ? (
+                <div className="relative pt-[56.25%] w-full">
+                  <iframe 
+                    className="absolute inset-0 w-full h-full"
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              ) : (
+                <div className="relative group">
+                  <img src={imageUrl} alt={knot.name} className="w-full h-auto object-cover block" />
+                  <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-[10px] p-1 truncate">
+                     IMG_SRC: {imageUrl.substring(0, 30)}...
+                  </div>
+                </div>
+              )}
+           </div>
 
-  addChatBubble(message, true);
-  userInput.value = '';
-  setThinking(true);
-  sendBtn.disabled = true;
+           {/* Controls */}
+           <div className="flex gap-2 mb-6 justify-center">
+              {!showVideo ? (
+                <button 
+                  onClick={() => setShowVideo(true)}
+                  className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all"
+                >
+                  <Play size={14} fill="currentColor" /> ดูวิดีโอสาธิต
+                </button>
+              ) : (
+                <button 
+                  onClick={() => setShowVideo(false)}
+                  className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-black font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all"
+                >
+                  <ImageIcon size={14} /> กลับไปดูรูปภาพ
+                </button>
+              )}
+           </div>
+           
+           {/* Details Table */}
+           <table className="w-full border-2 border-black mb-6 text-xs">
+             <tbody>
+               <tr className="border-b border-black">
+                 <td className="bg-gray-200 p-2 border-r border-black w-1/3 font-bold">หมวดหมู่</td>
+                 <td className="p-2">{knot.category}</td>
+               </tr>
+               <tr className="border-b border-black">
+                 <td className="bg-gray-200 p-2 border-r border-black font-bold">ความยาก</td>
+                 <td className="p-2">{knot.difficulty}</td>
+               </tr>
+               <tr>
+                 <td className="bg-gray-200 p-2 border-r border-black font-bold">การใช้งาน</td>
+                 <td className="p-2">{knot.usage}</td>
+               </tr>
+             </tbody>
+           </table>
 
-  chatHistory.push({ role: "user", parts: [{ text: message }] });
+           <fieldset className="border-2 border-black p-4 mb-4">
+             <legend className="px-2 font-bold bg-white border border-black ml-2 text-xs">ขั้นตอน (STEPS)</legend>
+             <ol className="list-decimal list-inside space-y-2">
+               {knot.steps.map((step, idx) => (
+                 <li key={idx} className="pl-2">
+                   {step}
+                 </li>
+               ))}
+             </ol>
+           </fieldset>
+        </div>
 
-  try {
-    const response = await fetch(BACKEND_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ history: chatHistory }) 
+        {/* Footer */}
+        <div className="p-2 border-t-2 border-black bg-gray-100 flex justify-end flex-shrink-0">
+           <button onClick={onClose} className="px-6 py-1 bg-gray-200 border-2 border-white border-b-black border-r-black active:border-t-black active:border-l-black active:bg-gray-300 text-sm font-bold">
+             ปิด (CLOSE)
+           </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedKnot, setSelectedKnot] = useState(null);
+
+  const filteredKnots = useMemo(() => {
+    return KNOTS_DATA.filter(knot => {
+      const lowerSearch = searchTerm.toLowerCase();
+      const lowerName = knot.name.toLowerCase();
+      const matchesSearch = lowerName.includes(lowerSearch) || knot.usage.toLowerCase().includes(lowerSearch);
+      
+      const categoryMatch = activeCategory === "All" 
+        ? true 
+        : activeCategory === "Decorative" 
+            ? (knot.category === "Decorative" || knot.category === "General")
+            : knot.category === activeCategory;
+      
+      return matchesSearch && categoryMatch;
     });
+  }, [searchTerm, activeCategory]);
 
-    if (!response.ok) {
-      const errData = await response.json();
-      throw new Error(errData.error || `Server error: ${response.status}`);
-    }
+  return (
+    <HtmlLayout>
+      <TopMenu 
+        activeCategory={activeCategory} 
+        setActiveCategory={setActiveCategory}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
+      
+      <PageContent 
+        title={activeCategory === 'All' ? 'Index' : activeCategory} 
+        subtitle={activeCategory === 'All' ? 'all_items' : 'filtered'}
+      >
+        <div className="w-full">
+          <div className="mb-4 text-xs font-bold border-b-2 border-black pb-1 flex justify-between">
+             <span>QUERY_RESULTS: {filteredKnots.length} ITEM(S)</span>
+             <span>[VIEW: GRID]</span>
+          </div>
 
-    const data = await response.json();
-    const aiReply = data.reply;
+          {filteredKnots.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {filteredKnots.map((knot) => (
+                <KnotEntry key={knot.id} knot={knot} onClick={setSelectedKnot} />
+              ))}
+            </div>
+          ) : (
+            <div className="p-8 border-2 border-black border-dashed text-center bg-gray-50">
+              <p className="font-bold text-red-600 mb-2">ERROR 404: KNOT NOT FOUND</p>
+              <p className="text-xs">Please refine your search parameters.</p>
+            </div>
+          )}
+        </div>
+      </PageContent>
 
-    chatHistory.push({ role: "model", parts: [{ text: aiReply }] });
-    setThinking(false);
-    addChatBubble(aiReply, false);
-
-  } catch (err) {
-    console.error("Fetch Error:", err);
-    setThinking(false);
-    addChatError(`ขออภัย ระบบขัดข้อง: ${err.message}`);
-  } finally {
-    sendBtn.disabled = false;
-  }
+      {selectedKnot && (
+        <HtmlDialog knot={selectedKnot} onClose={() => setSelectedKnot(null)} />
+      )}
+    </HtmlLayout>
+  );
 }
-
-sendBtn.addEventListener('click', handleSend);
-userInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    handleSend();
-  }
-});
-
-newChatBtn.addEventListener('click', async () => {
-  chatHistoryEl.innerHTML = `
-    <div class="flex items-start space-x-2">
-      <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center shrink-0">
-        <span class="material-symbols-rounded text-blue-600 text-lg">smart_toy</span>
-      </div>
-      <div class="chat-bubble chat-bubble-model p-3 max-w-[85%] relative bg-white border border-gray-100 shadow-sm">
-        <p>เริ่มสนทนาใหม่เรียบร้อยครับ ถามผมได้เลย!</p>
-      </div>
-    </div>`;
-  userInput.value = '';
-  setThinking(false);
-  chatHistory = []; 
-});
-
-/* Modal Logic */
-const fabToggle = document.getElementById('fab-chat-toggle');
-const chatModal = document.getElementById('chatbot-modal');
-const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
-const chatWindowInner = document.getElementById('chat-window-inner');
-
-if (fabToggle && chatModal && chatbotCloseBtn) {
-  fabToggle.addEventListener('click', () => {
-    chatModal.classList.remove('chatbot-hidden');
-    chatModal.classList.remove('opacity-0', 'pointer-events-none');
-    
-    // Animation in
-    chatWindowInner.classList.remove('translate-y-full', 'scale-95');
-    
-    fabToggle.style.transform = 'scale(0)';
-    setTimeout(() => { document.getElementById('user-input').focus(); }, 300);
-  });
-  
-  chatbotCloseBtn.addEventListener('click', () => {
-    // Animation out
-    chatWindowInner.classList.add('translate-y-full', 'scale-95');
-    
-    setTimeout(() => {
-        chatModal.classList.add('opacity-0', 'pointer-events-none');
-        chatModal.classList.add('chatbot-hidden');
-        fabToggle.style.transform = 'scale(1)';
-    }, 300);
-  });
-}
-</script>
-</body>
-</html>
