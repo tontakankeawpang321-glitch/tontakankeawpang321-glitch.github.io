@@ -4,22 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>นักธรรม</title>
-<!-- Import Fonts: Maitree สำหรับหัวข้อ (ดูขลัง/ทางการ) + Sarabun สำหรับเนื้อหา -->
+<!-- Import Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Maitree:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --primary: #92400E; /* สีน้ำตาลทองเข้ม */
+    --primary: #854D0E; /* สีทองแก่/น้ำตาลไหม้ */
     --primary-light: #B45309; 
     --accent: #F59E0B; /* สีทองสว่าง */
     --gold-gradient: linear-gradient(135deg, #B45309 0%, #F59E0B 100%);
     --bg-page: #FDFBF7;
     --text-main: #1F2937;
     --text-sub: #6B7280;
-    --shadow-card: 0 4px 20px rgba(146, 64, 14, 0.08);
-    --shadow-hover: 0 10px 25px rgba(245, 158, 11, 0.25);
+    --shadow-card: 0 4px 15px rgba(133, 77, 14, 0.08);
+    --shadow-hover: 0 10px 25px rgba(245, 158, 11, 0.2);
   }
 
   * {
@@ -32,7 +32,6 @@
   body {
     font-family: "Sarabun", sans-serif;
     background-color: var(--bg-page);
-    /* ลายไทยพื้นหลังแบบจางมากๆ */
     background-image: radial-gradient(#F59E0B 0.5px, transparent 0.5px), radial-gradient(#F59E0B 0.5px, var(--bg-page) 0.5px);
     background-size: 30px 30px;
     background-position: 0 0, 15px 15px;
@@ -47,58 +46,57 @@
   /* Header Design */
   header {
     width: 100%;
-    padding: 40px 20px 20px;
+    padding: 30px 20px 20px;
     text-align: center;
     background: linear-gradient(to bottom, #FFFFFF, rgba(255,255,255,0));
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
   }
 
   .logo-icon {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     background: var(--gold-gradient);
-    border-radius: 20px;
+    border-radius: 50%; /* เปลี่ยนเป็นวงกลมให้ดูเหมือนธรรมจักร/เหรียญ */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 15px;
-    box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4);
+    margin: 0 auto 10px;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
     color: white;
-    transform: rotate(-5deg); /* เอียงนิดๆ ให้ดูมีลูกเล่น */
   }
   
   .logo-icon svg {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     fill: currentColor;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
   }
 
   header h1 {
     font-family: "Maitree", serif;
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--primary);
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     letter-spacing: -0.5px;
   }
 
   header p {
     font-family: "Maitree", serif;
     color: var(--text-sub);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
   }
 
   /* Container */
   .container {
     width: 100%;
-    max-width: 600px; /* บีบให้แคบลงเพื่อความสวยงามบนจอคอม */
-    padding: 0 20px;
+    max-width: 600px;
+    padding: 0 16px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
   }
 
   /* Facebook Section */
@@ -117,159 +115,123 @@
     width: 100% !important;
   }
 
-  /* Menu List */
+  /* --- Grid Layout 2 Columns --- */
   .menu-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* แบ่งเป็น 2 คอลัมน์เท่ากัน */
+    gap: 12px;
   }
 
-  /* --- NEW CARD DESIGN --- */
+  /* Card Design ปรับเป็นแนวตั้ง */
   .doc-card {
     position: relative;
     display: flex;
+    flex-direction: column; /* เรียงไอคอนไว้บน ข้อความไว้ล่าง */
     align-items: center;
+    justify-content: center;
+    text-align: center;
     background: #FFFFFF;
-    border-radius: 24px; /* มุมโค้งมนมากขึ้น */
-    padding: 18px 20px;
+    border-radius: 20px;
+    padding: 20px 10px;
     text-decoration: none;
     transition: all 0.3s ease;
-    /* เงาซ้อนกันเพื่อให้ดูลอยตัว */
-    box-shadow: 
-      0 10px 20px -5px rgba(0, 0, 0, 0.05),
-      0 2px 6px -1px rgba(0, 0, 0, 0.02);
-    border: 1px solid rgba(245, 158, 11, 0.15); /* ขอบทองจางๆ */
-    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(245, 158, 11, 0.1);
+    height: 100%; /* ให้การ์ดสูงเท่ากัน */
   }
 
-  /* Gradient Overlay (Effect แสง) */
-  .doc-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 70%);
-    background-size: 200% 100%;
-    transition: background-position 0.5s;
-    opacity: 0;
-  }
-
-  /* Interaction States */
   .doc-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-hover);
-    border-color: rgba(245, 158, 11, 0.6); /* ขอบทองเข้มขึ้นเมื่อชี้ */
-  }
-
-  .doc-card:hover::before {
-    opacity: 1;
-    background-position: 100% 0; /* แสงวิ่งผ่าน */
+    border-color: rgba(245, 158, 11, 0.5);
   }
 
   .doc-card:active {
-    transform: scale(0.98);
+    transform: scale(0.96);
   }
 
-  /* New Icon Box Design */
+  /* Icon Box Styles */
   .icon-box {
-    width: 56px;
-    height: 56px;
-    border-radius: 18px;
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 18px;
-    flex-shrink: 0;
-    /* ไล่เฉดสีพื้นหลังไอคอนให้นุ่ม */
-    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    margin-right: 0; /* เอา margin ขวาออก */
+    margin-bottom: 12px; /* เพิ่มระยะห่างด้านล่างแทน */
+    background: linear-gradient(135deg, #FFF7ED 0%, #FEF3C7 100%);
     color: var(--primary);
-    box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.1), 0 4px 6px -2px rgba(245, 158, 11, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.15);
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .doc-card:hover .icon-box {
-    background: var(--gold-gradient); /* เปลี่ยนเป็นสีทองเข้มเมื่อชี้ */
+    background: var(--gold-gradient);
     color: white;
-    transform: scale(1.1) rotate(-5deg);
+    transform: scale(1.1);
     box-shadow: 0 8px 12px -3px rgba(245, 158, 11, 0.4);
   }
 
   .icon-box svg {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     fill: currentColor;
-    transition: all 0.3s;
   }
 
   /* Text Styling */
   .card-content {
-    flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
   }
 
   .card-title {
     font-family: "Maitree", serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--text-main);
     line-height: 1.3;
+    margin-bottom: 4px;
   }
 
   .card-desc {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--text-sub);
     font-weight: 400;
-    margin-top: 2px;
+    display: block; /* แสดงคำอธิบาย */
   }
 
-  /* Chevron Arrow Styling */
+  /* ซ่อนลูกศรในโหมด Grid เพื่อความสะอาดตา */
   .arrow-wrapper {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #F3F4F6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-  
-  .arrow-icon {
-    width: 18px;
-    height: 18px;
-    fill: #9CA3AF;
-    transition: all 0.3s ease;
-  }
-
-  .doc-card:hover .arrow-wrapper {
-    background: #FFF7ED;
-  }
-
-  .doc-card:hover .arrow-icon {
-    fill: var(--primary);
-    transform: translateX(2px);
+    display: none;
   }
 
   /* Footer */
   .footer {
     width: 100%;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 30px;
   }
   
   .footer a {
     color: var(--text-sub);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-family: "Maitree", serif;
     opacity: 0.7;
-    transition: 0.2s;
   }
 
-  .footer a:hover {
-    opacity: 1;
-    color: var(--primary);
+  /* Media Query: หน้าจอใหญ่ปรับ Grid กว้างขึ้น */
+  @media (min-width: 640px) {
+    .menu-list {
+      grid-template-columns: repeat(3, 1fr); /* Tablet/PC เป็น 3 คอลัมน์ */
+      gap: 20px;
+    }
+    .doc-card {
+      padding: 24px 16px;
+    }
   }
 
 </style>
@@ -284,8 +246,8 @@
 
 <header>
   <div class="logo-icon">
-    <!-- Icon: Dhamma Wheel / Lotus abstract -->
-    <svg viewBox="0 0 24 24"><path d="M12,2C12,2 6,8 6,13C6,16.31 8.69,19 12,19C15.31,19 18,16.31 18,13C18,8 12,2 12,2M12,22C9.5,22 8,20.5 8,20.5L12,18L16,20.5C16,20.5 14.5,22 12,22Z" /></svg>
+    <!-- Icon: Dhamma Wheel -->
+    <svg viewBox="0 0 24 24"><path d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6C8.69,6 6,8.69 6,12C6,15.31 8.69,18 12,18C15.31,18 18,15.31 18,12C18,8.69 15.31,6 12,6M12,8C14.21,8 16,9.79 16,12C16,14.21 14.21,16 12,16C9.79,16 8,14.21 8,12C8,9.79 9.79,8 12,8Z"/></svg>
   </div>
   <h1>นักธรรม</h1>
   <p>ปัญญาบารมี ธรรมศึกษาเพื่อชีวิต</p>
@@ -307,76 +269,61 @@
     </div>
   </div>
 
-  <!-- Menu List -->
+  <!-- Menu List Grid -->
   <div class="menu-list">
     
-    <!-- นักธรรมตรี : หนังสือ/คัมภีร์ -->
+    <!-- นักธรรมตรี : ดอกบัว (Lotus) สื่อถึงการเริ่มต้นเบ่งบาน -->
     <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%95%E0%B8%A3" class="doc-card" target="_blank">
       <div class="icon-box">
-        <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12,2C12,2 6,8 6,13C6,16.31 8.69,19 12,19C15.31,19 18,16.31 18,13C18,8 12,2 12,2M12,22C9.5,22 8,20.5 8,20.5L12,18L16,20.5C16,20.5 14.5,22 12,22Z"/></svg>
       </div>
       <div class="card-content">
         <span class="card-title">นักธรรมตรี</span>
         <span class="card-desc">หลักสูตรพื้นฐาน</span>
       </div>
-      <div class="arrow-wrapper">
-        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
-      </div>
     </a>
 
-    <!-- นักธรรมโท : ธรรมจักร -->
+    <!-- นักธรรมโท : ธรรมจักร (Dhamma Wheel) สื่อถึงการหมุนกงล้อแห่งธรรม -->
     <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1-%E0%B9%82%E0%B8%97" class="doc-card" target="_blank">
       <div class="icon-box">
-         <svg viewBox="0 0 24 24"><path d="M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M12,6C8.69,6 6,8.69 6,12C6,15.31 8.69,18 12,18C15.31,18 18,15.31 18,12C18,8.69 15.31,6 12,6M12,8C14.21,8 16,9.79 16,12C16,14.21 14.21,16 12,16C9.79,16 8,14.21 8,12C8,9.79 9.79,8 12,8Z"/></svg>
+         <svg viewBox="0 0 24 24"><path d="M11,6V9L13.5,7.5L11,6M13,9V6L15.5,7.5L13,9M7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17C9.24,17 7,14.76 7,12M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"/></svg>
       </div>
       <div class="card-content">
         <span class="card-title">นักธรรมโท</span>
         <span class="card-desc">หลักสูตรชั้นกลาง</span>
       </div>
-      <div class="arrow-wrapper">
-        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
-      </div>
     </a>
 
-    <!-- นักธรรมเอก : เจดีย์ -->
+    <!-- นักธรรมเอก : เจดีย์ (Chedi) สื่อถึงยอดแห่งธรรม -->
     <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%AD%E0%B8%81" class="doc-card" target="_blank">
       <div class="icon-box">
-        <svg viewBox="0 0 24 24"><path d="M12,2L3,18H21L12,2M12,5L18,16H6L12,5M12,11V13H14V11H12Z"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M12,2L5,14H19L12,2M12,5.27L16.27,12.5H7.73L12,5.27M6,15V17H18V15H6M4,18V20H20V18H4Z"/></svg>
       </div>
       <div class="card-content">
         <span class="card-title">นักธรรมเอก</span>
         <span class="card-desc">หลักสูตรชั้นสูง</span>
       </div>
-      <div class="arrow-wrapper">
-        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
-      </div>
     </a>
 
-    <!-- ข้อสอบย้อนหลัง : นาฬิกาย้อนเวลา -->
+    <!-- ข้อสอบย้อนหลัง : คัมภีร์ใบลาน/หนังสือ (Scripture) สื่อถึงการทบทวน -->
     <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%82%E0%B8%AD%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%A2%E0%B8%AD%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%87" class="doc-card" target="_blank">
       <div class="icon-box">
-        <svg viewBox="0 0 24 24"><path d="M13,3A9,9 0 0,0 4,12H1L4.89,15.89L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3M12,8V13L16.28,15.54L17,14.29L13.5,12.25V8H12Z" /></svg>
+        <svg viewBox="0 0 24 24"><path d="M19,2L14,6.5V17.5L19,13V2M6.5,5C4.55,5 2.45,5.4 1,6.5V21.16C1,21.41 1.25,21.66 1.5,21.66C1.6,21.66 1.65,21.59 1.75,21.59C3.1,20.94 5.05,20.5 6.5,20.5C8.45,20.5 10.55,20.9 12,22C13.35,21.15 15.8,20.5 17.5,20.5C19.15,20.5 20.85,20.81 22.25,21.56C22.35,21.61 22.4,21.59 22.5,21.59C22.75,21.59 23,21.34 23,21.09V6.5C22.4,5.9 21.5,5.4 20.5,5C19,4.5 17.5,4.5 16,5C14.8,5.4 13.55,5.9 12.5,6.5L12,6.5L11.5,6.5C10.45,5.9 9.2,5.4 8,5C7.5,4.8 7,4.8 6.5,5Z"/></svg>
       </div>
       <div class="card-content">
-        <span class="card-title">ข้อสอบย้อนหลัง</span>
-        <span class="card-desc">คลังข้อสอบเก่า</span>
-      </div>
-      <div class="arrow-wrapper">
-        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+        <span class="card-title">ข้อสอบเก่า</span>
+        <span class="card-desc">คลังความรู้</span>
       </div>
     </a>
 
-    <!-- แบบทดสอบ 100 ข้อ : กระดาษสอบ -->
+    <!-- แบบทดสอบ 100 ข้อ : แสงเทียน (Candle/Light) สื่อถึงปัญญา -->
     <a href="https://sites.google.com/view/nakthamtee/%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A-100-%E0%B8%82%E0%B8%AD?authuser=0" class="doc-card" target="_blank">
       <div class="icon-box">
-        <svg viewBox="0 0 24 24"><path d="M14,10H2V12H14V10M14,6H2V8H14V6M2,16H10V14H2V16M21.5,11.5L23,13L16,20L11.5,15.5L13,14L16,17L21.5,11.5Z" /></svg>
+        <svg viewBox="0 0 24 24"><path d="M12,2A2,2 0 0,1 14,4C14,5.1 13.1,6 12,6A2,2 0 0,1 10,4C10,2.9 10.9,2 12,2M10,8H14C15.1,8 16,8.9 16,10V20C16,21.1 15.1,22 14,22H10C8.9,22 8,21.1 8,20V10C8,8.9 8.9,8 10,8M10,10V20H14V10H10Z"/></svg>
       </div>
       <div class="card-content">
-        <span class="card-title">แบบทดสอบ 100 ข้อ</span>
-        <span class="card-desc">ทดสอบความรู้</span>
-      </div>
-      <div class="arrow-wrapper">
-        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+        <span class="card-title">ทดสอบ 100 ข้อ</span>
+        <span class="card-desc">วัดผลปัญญา</span>
       </div>
     </a>
 
