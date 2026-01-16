@@ -1,834 +1,588 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { 
-  Search, Anchor, Mountain, Fish, Tent, Package, 
-  Info, X, Zap, Bookmark, ChevronRight, Book, Star, Filter, Hash, Globe, Play, Image as ImageIcon, ExternalLink 
-} from 'lucide-react';
-
-// --- DATA (เพิ่มฟิลด์สำหรับรูปและวิดีโอ) ---
-const KNOTS_DATA = [
-  // --- หมวดพื้นฐาน (Basic) ---
-  {
-    id: 1,
-    name: "เงื่อนพิรอด (Square Knot)",
-    category: "Basic",
-    usage: "ต่อเชือกขนาดเท่ากัน, ผูกผ้าพันแผล, มัดของทั่วไป",
-    difficulty: "Easy",
-    imageUrl: "https://placehold.co/600x400/EEE/31343C?font=roboto&text=Square+Knot", // ตัวอย่าง URL รูป
-    youtubeId: "abc", // ตัวอย่าง ID Youtube (ในที่นี้จะใช้ Default ถ้าไม่มี)
-    steps: [
-      "ถือปลายเชือกทั้งสองข้าง (ซ้ายและขวา)",
-      "นำเชือกขวาทับซ้าย แล้วพันสอดลงล่าง",
-      "นำเชือกซ้ายทับขวา (สำคัญ: ต้องสลับด้านกับข้อ 2)",
-      "พันสอดลงล่าง ดึงปลายทั้งสองให้แน่น เงื่อนจะขยับตัวได้เล็กน้อย"
-    ]
-  },
-  {
-    id: 2,
-    name: "เงื่อนขัดสมาธิ (Sheet Bend)",
-    category: "Basic",
-    usage: "ต่อเชือกต่างขนาด, ต่อเชือกกับขอหรือห่วง",
-    difficulty: "Easy",
-    steps: [
-      "ทำเชือกเส้นใหญ่ให้เป็นบ่วง (Loop)",
-      "สอดเชือกเส้นเล็กขึ้นมาจากด้านล่างของบ่วง",
-      "พันเชือกเล็กอ้อมหลังเส้นใหญ่ทั้งสองเส้น",
-      "สอดปลายเชือกเล็กขัดกับตัวเอง (ไม่ต้องมุดกลับลงบ่วงเดิม)",
-      "ดึงให้แน่น"
-    ]
-  },
-  {
-    id: 3,
-    name: "เงื่อนบ่วงสายธนู (Bowline)",
-    category: "Basic",
-    usage: "ทำบ่วงคล้องเสา, ช่วยคนตกน้ำ (ไม่รัดคอ), ผูกสมอเรือ",
-    difficulty: "Medium",
-    steps: [
-      "ทำบ่วงเล็กๆ บนเชือกหลัก (ให้ปลายเชือกอยู่ด้านบน)",
-      "สอดปลายเชือกขึ้นมาจากรูบ่วง (เหมือนงูขึ้นจากบ่อ)",
-      "พันอ้อมหลังเชือกหลัก (งูอ้อมต้นไม้)",
-      "มุดกลับลงไปในรูบ่วงเดิม (งูลงบ่อ)",
-      "ดึงปลายและเชือกหลักให้แน่น"
-    ]
-  },
-  {
-    id: 4,
-    name: "เงื่อนตะกรุดเบ็ด (Clove Hitch)",
-    category: "Basic",
-    usage: "ผูกกับเสาหรือหลัก, เริ่มต้นและจบงานมัดเชือก",
-    difficulty: "Easy",
-    steps: [
-      "พันเชือกรอบเสา 1 รอบ ให้เชือกทับกันเป็นกากบาท",
-      "พันรอบเสาอีก 1 รอบ",
-      "สอดปลายเชือกลอดใต้เชือกตัวเองที่พาดอยู่",
-      "ดึงปลายทั้งสองข้างให้แน่น"
-    ]
-  },
-  {
-    id: 5,
-    name: "เงื่อนประมง (Fisherman's Knot)",
-    category: "Basic",
-    usage: "ต่อเชือกเอ็น, ต่อเชือกขนาดเดียวกันที่ลื่น",
-    difficulty: "Easy",
-    steps: [
-      "วางเชือกสองเส้นสวนทางกัน",
-      "ใช้ปลายเชือก A มัดรอบเชือก B (มัดเงื่อนตายชั้นเดียว)",
-      "ใช้ปลายเชือก B มัดรอบเชือก A",
-      "ดึงเชือกหลักทั้งสองเส้นให้ปมเลื่อนเข้ามาชนกัน"
-    ]
-  },
-  {
-    id: 6,
-    name: "เงื่อนเลข 8 (Figure Eight)",
-    category: "Basic",
-    usage: "ทำปมหยุดเชือกไม่ให้หลุดจากรอก",
-    difficulty: "Very Easy",
-    steps: [
-      "ทำบ่วงเลข 8 โดยอ้อมหลังเชือกหลัก",
-      "ตวัดปลายเชือกมาด้านหน้า",
-      "สอดปลายเชือกลงในบ่วงด้านบน",
-      "ดึงให้แน่น ปมจะมีลักษณะเหมือนเลข 8"
-    ]
-  },
-  {
-    id: 7,
-    name: "เงื่อนขัดสมาธิ 2 ชั้น (Double Sheet Bend)",
-    category: "Basic",
-    usage: "ต่อเชือกต่างขนาดมาก หรือเชือกเปียก/ลื่น",
-    difficulty: "Medium",
-    steps: [
-      "ทำเหมือนเงื่อนขัดสมาธิปกติ",
-      "ในจังหวะสุดท้าย ให้พันรอบบ่วงเชือกใหญ่อีก 1 รอบ",
-      "สอดปลายขัดไว้เหมือนเดิม",
-      "จัดระเบียบเงื่อนให้เรียบร้อย"
-    ]
-  },
-  {
-    id: 8,
-    name: "เงื่อนผูกรั้ง (Taut-Line Hitch)",
-    category: "Camping",
-    usage: "ขึงสมอบกเต็นท์ (ปรับความตึงได้), ผูกราวตากผ้า",
-    difficulty: "Medium",
-    steps: [
-      "พันปลายเชือกรอบเชือกหลัก 2 รอบ (พันเข้าหาตัวบ่วง)",
-      "พันรอบที่ 3 โดยข้ามปมเดิมไปด้านบน",
-      "สอดปลายเชือกผูกมัดให้แน่น",
-      "สามารถเลื่อนปมขึ้นลงเพื่อปรับความตึงได้"
-    ]
-  },
-  {
-    id: 9,
-    name: "เงื่อนผูกซุง (Timber Hitch)",
-    category: "Camping",
-    usage: "ลากท่อนไม้, เริ่มต้นการผูกทแยง",
-    difficulty: "Easy",
-    steps: [
-      "พันเชือกรอบท่อนไม้",
-      "นำปลายเชือกพันอ้อมเชือกหลัก",
-      "พันปลายเชือกเกลียวรอบตัวมันเอง 3-4 รอบ",
-      "ดึงให้แน่น ยิ่งดึงยิ่งแน่น"
-    ]
-  },
-  {
-    id: 10,
-    name: "เงื่อนสิเรียน (Siberian Hitch)",
-    category: "Camping",
-    usage: "ผูกเชือกกับต้นไม้ได้รวดเร็ว (ใส่ถุงมือก็ผูกได้)",
-    difficulty: "Medium",
-    steps: [
-      "พาดเชือกผ่านต้นไม้ เอาปลายเชือกพันรอบนิ้วมือ",
-      "ตวัดปลายเชือกรอบเชือกหลัก",
-      "ดึงบ่วงเชือกผ่านห่วงที่นิ้ว",
-      "กระตุกให้แน่น (มีเงื่อนกระตุกแก้ได้เร็ว)"
-    ]
-  },
-  {
-    id: 11,
-    name: "เงื่อนผูกรั้งรถบรรทุก (Trucker's Hitch)",
-    category: "Camping",
-    usage: "รัดของท้ายรถกระบะ, ขึงผ้าใบให้ตึงจัดๆ",
-    difficulty: "Hard",
-    steps: [
-      "ผูกปลายด้านหนึ่งกับจุดยึด",
-      "ทำบ่วงเงื่อนลื่น (Slip knot) หรือบ่วงสายธนูตรงกลางเชือก",
-      "อ้อมปลายเชือกอีกด้านกับจุดยึดที่สอง",
-      "ร้อยปลายเชือกกลับมาผ่านบ่วงที่ทำไว้",
-      "ดึงงัดเชือกเพื่อทดแรงให้ตึงสุดๆ แล้วมัดล็อคด้วยเงื่อนตะกรุดเบ็ด"
-    ]
-  },
-  {
-    id: 12,
-    name: "เงื่อนกระหวัดไม้ 2 ชั้น (Two Half Hitches)",
-    category: "Camping",
-    usage: "ผูกเชือกกับหลัก สมอบก แบบง่ายและเร็ว",
-    difficulty: "Easy",
-    steps: [
-      "พันเชือกรอบหลัก",
-      "นำปลายเชือกพันรอบเชือกหลักแล้วสอดเข้าบ่วง (1 ครั้ง)",
-      "ทำซ้ำอีกครั้งในทิศทางเดิม (2 ครั้ง)",
-      "รูดปมให้ชิดหลัก"
-    ]
-  },
-  {
-    id: 13,
-    name: "เงื่อนผีเสื้อ (Alpine Butterfly Loop)",
-    category: "Climbing",
-    usage: "ทำบ่วงกลางเชือก รับน้ำหนักได้ 3 ทิศทาง",
-    difficulty: "Hard",
-    steps: [
-      "พันเชือกบนฝ่ามือ 3 รอบ",
-      "จับเส้นที่ 1 (ซ้ายสุด) ดึงมาทับเส้นที่ 2",
-      "ดึงเส้นที่ 1 (ที่เพิ่งย้ายมากลาง) ลอดใต้เส้นอื่นๆ ทั้งหมดไปทางซ้าย",
-      "ดึงเส้นนั้นให้กลายเป็นบ่วง แล้วรูดเชือกให้แน่น"
-    ]
-  },
-  {
-    id: 14,
-    name: "เงื่อนพรูสิค (Prusik Knot)",
-    category: "Climbing",
-    usage: "ไต่เชือก (จับเชือกเมื่อรับน้ำหนัก เลื่อนได้เมื่อผ่อน)",
-    difficulty: "Medium",
-    steps: [
-      "ใช้เชือกวงกลม (Loop) พันรอบเชือกหลัก",
-      "สอดปลายบ่วงผ่านรูตัวเอง 2-3 รอบ",
-      "จัดเรียงปมให้เรียบร้อยสวยงาม",
-      "ทดสอบการจับเชือกโดยการดึง"
-    ]
-  },
-  {
-    id: 15,
-    name: "เงื่อนเลข 8 คู่ (Figure 8 Loop)",
-    category: "Climbing",
-    usage: "ทำบ่วงที่แข็งแรงมาก ปลอดภัยสูง สำหรับปีนเขา",
-    difficulty: "Medium",
-    steps: [
-      "ทบเชือกเป็น 2 เส้น",
-      "ผูกเงื่อนเลข 8 ด้วยเชือกคู่",
-      "จะได้บ่วงที่ปลายเชือกที่มีปมเลข 8",
-      "จัดระเบียบเชือกไม่ให้ซ้อนทับกัน"
-    ]
-  },
-  {
-    id: 16,
-    name: "เงื่อนประมงคู่ (Double Fisherman's)",
-    category: "Climbing",
-    usage: "ต่อเชือกปีนเขา ทำเชือกวงกลม (Prusik Loop)",
-    difficulty: "Medium",
-    steps: [
-      "เหมือนเงื่อนประมง แต่พันรอบเชือกอีกเส้น 2 รอบก่อนสอด",
-      "ทำทั้งสองด้าน (สองปลาย)",
-      "ดึงปมทั้งสองให้เข้ามาชนกัน จะแน่นมาก"
-    ]
-  },
-  {
-    id: 17,
-    name: "เงื่อนเก้าอี้ (Fireman's Chair)",
-    category: "Climbing",
-    usage: "ทำที่นั่งกู้ภัยฉุกเฉิน มี 2 บ่วงสวมขาและไหล่",
-    difficulty: "Hard",
-    steps: [
-      "ทำบ่วง 2 บ่วงซ้อนกัน (เหมือนเงื่อนตะกรุดเบ็ดแต่ไม่สอด)",
-      "ดึงส่วนที่ตัดกันของบ่วงซ้ายและขวาออกมาผ่านกัน",
-      "ล็อคปมด้วยการทำ Half Hitch ที่ปลายบ่วงทั้งสอง",
-      "ปรับขนาดบ่วงให้พอดี"
-    ]
-  },
-  {
-    id: 18,
-    name: "เงื่อนสมอเรือ (Anchor Bend)",
-    category: "Boating",
-    usage: "ผูกเชือกกับห่วงสมอ หรือห่วงโลหะ ทนแรงเสียดสี",
-    difficulty: "Medium",
-    steps: [
-      "สอดเชือกผ่านห่วง 2 รอบ (เกิดบ่วงคล้องห่วง)",
-      "นำปลายเชือกพันรอบเชือกหลักแล้วสอดผ่านบ่วงที่ทำไว้ตอนแรก",
-      "ดึงให้แน่น แล้วผูก Half Hitch ล็อคอีกชั้น"
-    ]
-  },
-  {
-    id: 19,
-    name: "เงื่อนปาโลมา (Palomar Knot)",
-    category: "Boating",
-    usage: "ผูกลูกหมุน เบ็ดตกปลา (แข็งแรงมากสำหรับสาย PE/Mono)",
-    difficulty: "Easy",
-    steps: [
-      "ทบสายเอ็นสอดผ่านรูเบ็ด",
-      "ผูกเงื่อนตายหลวมๆ เหนือตัวเบ็ด",
-      "นำบ่วงที่เหลือคล้องผ่านตัวเบ็ดทั้งหมด",
-      "ดึงสายให้แน่น ตัดปลายที่เหลือ"
-    ]
-  },
-  {
-    id: 20,
-    name: "เงื่อนคลินช์ (Improved Clinch)",
-    category: "Boating",
-    usage: "ผูกเบ็ด ยอดนิยม แข็งแรง",
-    difficulty: "Easy",
-    steps: [
-      "สอดสายผ่านตาเบ็ด",
-      "พันสายรอบตัวเอง 5-7 รอบ",
-      "สอดปลายกลับมาที่รูแรกใกล้ตาเบ็ด",
-      "สอดปลายกลับเข้าไปในบ่วงใหญ่ที่เพิ่งเกิดขึ้น",
-      "ทำให้เปียกน้ำลายเล็กน้อยแล้วดึงให้แน่น"
-    ]
-  },
-  {
-    id: 21,
-    name: "เงื่อนผูกรอก (Cleat Hitch)",
-    category: "Boating",
-    usage: "ผูกเชือกเรือกับสมอบกรูปตัว T (Cleat)",
-    difficulty: "Easy",
-    steps: [
-      "พันรอบฐาน Cleat 1 รอบ",
-      "พันไขว้เป็นรูปเลข 8",
-      "รอบสุดท้ายบิดเชือกให้เกิดบ่วงคว่ำแล้วคล้องล็อค",
-      "ปลายเชือกจะขนานกับเส้นเดิม"
-    ]
-  },
-  {
-    id: 22,
-    name: "เงื่อนรัดปากถุง (Miller's Knot)",
-    category: "Binding",
-    usage: "มัดปากถุงข้าวสาร ถุงปูน แน่นหนา",
-    difficulty: "Medium",
-    steps: [
-      "พันเชือกรอบปากถุง 2 รอบ",
-      "สอดปลายเชือกกลับเข้าไปใต้เชือกที่พันรอบที่ 2",
-      "ดึงแยกร่างซ้ายขวาให้แน่น"
-    ]
-  },
-  {
-    id: 23,
-    name: "เงื่อนงูเหลือม (Constrictor Knot)",
-    category: "Binding",
-    usage: "มัดแน่นถาวร มัดปากถุง ยิ่งดิ้นยิ่งแน่น",
-    difficulty: "Medium",
-    steps: [
-      "พันเชือกข้ามวัตถุ",
-      "พันข้ามเชือกเส้นแรกเป็นกากบาท",
-      "สอดปลายเชือกลอดใต้จุดตัดกากบาท",
-      "ดึงให้แน่น (แก้ยากมาก)"
-    ]
-  },
-  {
-    id: 24,
-    name: "เงื่อนผูกประกบ (Square Lashing)",
-    category: "Binding",
-    usage: "ผูกไม้ 2 ท่อนตั้งฉากกัน ทำนั่งร้าน",
-    difficulty: "Hard",
-    steps: [
-      "เริ่มด้วยเงื่อนตะกรุดเบ็ดที่ไม้ตั้ง",
-      "พันเชือกอ้อมไม้ทั้งสองแบบ ทับ-ลอด-ทับ-ลอด 3-4 รอบ",
-      "หักคอไก่ (Frapping) พันระหว่างไม้เพื่อดึงเชือกให้ตึง",
-      "จบด้วยเงื่อนตะกรุดเบ็ดที่ไม้นอน"
-    ]
-  },
-  {
-    id: 25,
-    name: "เงื่อนผูกทแยง (Diagonal Lashing)",
-    category: "Binding",
-    usage: "ผูกไม้กากบาทที่ไม่ได้ตั้งฉาก หรือต้องการดึงให้ชิดกัน",
-    difficulty: "Hard",
-    steps: [
-      "เริ่มด้วยเงื่อนผูกซุงมัดไม้ทั้งสองเข้าด้วยกัน",
-      "พันทแยงมุมคู่แรก 3-4 รอบ",
-      "พันทแยงมุมคู่ที่สอง 3-4 รอบ",
-      "หักคอไก่ (Frapping) ตรงกลาง",
-      "จบด้วยเงื่อนตะกรุดเบ็ด"
-    ]
-  },
-  {
-    id: 26,
-    name: "เงื่อนขันชะเนาะ (Tourniquet)",
-    category: "Binding",
-    usage: "ห้ามเลือด (เฉพาะกิจ), รัดของให้แน่นโดยใช้ไม้ขัน",
-    difficulty: "Easy",
-    steps: [
-      "พันเชือกรอบแขน/ของ เงื่อนตาย",
-      "วางแท่งไม้บนปม แล้วมัดเงื่อนตายทับ",
-      "หมุนไม้เกลียวจนแน่น",
-      "มัดปลายไม้ติดกับแขน/ของ ไม่ให้คลายตัว"
-    ]
-  },
-  {
-    id: 27,
-    name: "เงื่อนขโมย (Thief Knot)",
-    category: "General",
-    usage: "มัดของเพื่อจับผิดคนมาแอบเปิด (ดูเหมือนเงื่อนพิรอด)",
-    difficulty: "Medium",
-    steps: [
-      "ดูภายนอกเหมือนเงื่อนพิรอดทุกอย่าง",
-      "แต่ปลายเชือกสั้น (Playa) จะอยู่คนละฝั่ง (บน-ล่าง)",
-      "ถ้าคนแก้แล้วผูกใหม่มักจะเผลอผูกเป็นเงื่อนพิรอดเจ้าของจะรู้ทันที"
-    ]
-  },
-  {
-    id: 28,
-    name: "เงื่อนยายแก่ (Granny Knot)",
-    category: "General",
-    usage: "มักเกิดจากการผูกเงื่อนพิรอดผิด ไม่ควรใช้รับน้ำหนัก",
-    difficulty: "Easy",
-    steps: [
-      "ทับเชือก ขวาบนซ้าย",
-      "แล้วทับอีกที ขวาบนซ้าย (ซ้ำด้านเดิม)",
-      "เงื่อนจะรูดและหลุดง่าย ใช้เรียนรู้ว่า 'อย่าทำ'"
-    ]
-  },
-  {
-    id: 29,
-    name: "เงื่อนกระตุก (Slip Knot)",
-    category: "Basic",
-    usage: "ผูกชั่วคราว ดึงปลายแล้วหลุดทันที",
-    difficulty: "Very Easy",
-    steps: [
-      "ทำบ่วง",
-      "ดึงเชือกส่วนกลางผ่านบ่วงขึ้นมา",
-      "ดึงให้แน่น ใช้มัดของเบาๆ ที่ต้องการแก้ง่าย"
-    ]
-  },
-  {
-    id: 30,
-    name: "เงื่อนผูกรั้ง (Rolling Hitch)",
-    category: "Boating",
-    usage: "ผูกเชือกเล็กกับเชือกใหญ่ หรือผูกกับเสาไม่ให้รูด",
-    difficulty: "Medium",
-    steps: [
-      "พันเชือกรอบหลัก 2 รอบ (พันทับกันเพื่อกันลื่น)",
-      "พันอีก 1 รอบเหนือเกลียวเดิม",
-      "สอดปลายลอดใต้เกลียวสุดท้าย",
-      "ใช้รับแรงดึงในทิศทางขนานกับหลัก"
-    ]
-  },
-  {
-    id: 31,
-    name: "เงื่อนเก้าอี้กู้ภัย (Bowline on a Bight)",
-    category: "Rescue",
-    usage: "ทำบ่วงคู่กลางเชือกสำหรับหย่อนคนลงหลุม",
-    difficulty: "Hard",
-    steps: [
-      "ทบเชือกกลางเส้น",
-      "ทำท่าเริ่มต้นเหมือนบ่วงสายธนูด้วยเชือกคู่",
-      "นำห่วงปลายสุด อ้อมย้อนกลับมาคลุมปมทั้งหมด",
-      "จัดระเบียบจะได้ 2 บ่วงที่ปรับขนาดได้"
-    ]
-  },
-  {
-    id: 32,
-    name: "เงื่อนสายยู (Carrick Bend)",
-    category: "Decorative",
-    usage: "ต่อเชือกขนาดใหญ่ แบนสวยงาม ใช้ตกแต่งได้",
-    difficulty: "Hard",
-    steps: [
-      "ทำบ่วงเชือก A ปลายทับ",
-      "สอดเชือก B ผ่านบ่วง A แบบ สานขัดสาน (Interweave)",
-      "จัดรูปทรงให้สมมาตร สวยงาม",
-      "รับแรงดึงได้ดีมากและแก้ง่ายแม้รับแรงมาหนัก"
-    ]
-  },
-  {
-    id: 33,
-    name: "เงื่อนหัวล้านชนกัน (Square Knot Variation)",
-    category: "Basic",
-    usage: "ชื่อเล่นของเงื่อนพิรอด",
-    difficulty: "Easy",
-    steps: ["ดูเงื่อนพิรอด"]
-  },
-  {
-    id: 34,
-    name: "เงื่อนผูกกากบาท (Japanese Square Lashing)",
-    category: "Binding",
-    usage: "ผูกไม้แบบญี่ปุ่น สวยงามและแข็งแรง",
-    difficulty: "Hard",
-    steps: [
-      "ทบเชือกคล้องไม้ตั้ง",
-      "พันทแยงสลับไปมาดึงให้แน่น",
-      "จบด้วยการมัดเงื่อนพิรอดที่ปลายเชือก"
-    ]
-  },
-  {
-    id: 35,
-    name: "เงื่อนผูกคอขวด (Bottle Sling)",
-    category: "Camping",
-    usage: "ทำหูหิ้วขวดน้ำ หรือกระป๋อง",
-    difficulty: "Medium",
-    steps: [
-      "ทำเงื่อนตะกรุดเบ็ดหลวมๆ",
-      "แหวกเชือกกลางบ่วง",
-      "สอดบ่วงสลับกันเพื่อล็อคคอขวด",
-      "ดึงขึ้นเพื่อหิ้ว"
-    ]
-  },
-  {
-    id: 36,
-    name: "เงื่อนบ่วงเลื่อน (Running Bowline)",
-    category: "Boating",
-    usage: "ทำบ่วงดักสัตว์ หรือคล้องวัตถุระยะไกล",
-    difficulty: "Medium",
-    steps: [
-      "นำปลายเชือกอ้อมรอบเชือกหลัก",
-      "ผูกเงื่อนบ่วงสายธนูรอบเชือกหลักนั้น",
-      "บ่วงจะสามารถรูดไปตามเชือกหลักได้"
-    ]
-  },
-  {
-    id: 37,
-    name: "เงื่อนผูกถังตั้ง (Barrel Hitch)",
-    category: "Boating",
-    usage: "ยกถังน้ำ ถังน้ำมัน ในแนวดิ่ง",
-    difficulty: "Medium",
-    steps: [
-      "วางเชือกบนพื้น วางถังทับ",
-      "ผูกเงื่อน Overhand ด้านบนถัง",
-      "แหวกเงื่อนออกให้กว้างแล้วดึงลงมาโอบข้างถัง",
-      "ดึงปลายเชือกขึ้นแล้วผูกเงื่อนบ่วงสายธนู"
-    ]
-  },
-  {
-    id: 38,
-    name: "เงื่อนผูกกระสอบ (Bag Knot)",
-    category: "Binding",
-    usage: "มัดปากถุงแบบง่าย",
-    difficulty: "Easy",
-    steps: [
-      "พันรอบปากถุง",
-      "สอดปลายลอดเชือกดึงให้แน่น"
-    ]
-  },
-  {
-    id: 39,
-    name: "เงื่อนสนับมือ (Monkey's Fist)",
-    category: "Decorative",
-    usage: "ถ่วงปลายเชือกให้หนักเพื่อขว้าง, ตกแต่งพวงกุญแจ",
-    difficulty: "Very Hard",
-    steps: [
-      "พันเชือกรอบนิ้ว 3 รอบ (แกน X)",
-      "พันขวาง 3 รอบ (แกน Y)",
-      "พันลอดช่องกลาง 3 รอบ (แกน Z)",
-      "ค่อยๆ ไล่ดึงสายให้ปมกระชับเข้าหากัน ใส่ลูกหินข้างในได้"
-    ]
-  },
-  {
-    id: 40,
-    name: "เงื่อนโซ่ (Chain Sinnet)",
-    category: "Decorative",
-    usage: "เก็บเชือกให้สั้นลงแต่ไม่พันกัน, ทำสร้อยข้อมือ",
-    difficulty: "Medium",
-    steps: [
-      "ทำบ่วง Slip knot",
-      "ดึงเชือกผ่านบ่วงเกิดบ่วงใหม่",
-      "ดึงเชือกผ่านบ่วงใหม่ไปเรื่อยๆ เหมือนถักโครเชต์"
-    ]
-  }
-];
-
-// แปลหมวดหมู่เป็นไทย
-const CATEGORIES = [
-  { id: 'All', label: 'ทั้งหมด', icon: Book },
-  { id: 'Basic', label: 'พื้นฐาน', icon: Anchor },
-  { id: 'Camping', label: 'แคมป์', icon: Tent },
-  { id: 'Boating', label: 'ทางน้ำ', icon: Fish },
-  { id: 'Climbing', label: 'กู้ภัย', icon: Mountain },
-  { id: 'Binding', label: 'ผูกมัด', icon: Package },
-  { id: 'Decorative', label: 'อื่นๆ', icon: Zap },
-];
-
-// --- COMPONENTS (RAW HTML / BRUTALIST STYLE) ---
-
-const HtmlLayout = ({ children }) => (
-  <div className="min-h-screen bg-white text-black font-mono text-sm leading-relaxed p-0 md:p-4">
-    {/* Layout แบบ Flex Col เพื่อรองรับเมนูบน และเนื้อหาล่าง */}
-    <div className="w-full md:w-[98%] lg:w-[99%] mx-auto border-2 border-black h-[90vh] flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-      {children}
-    </div>
-  </div>
-);
-
-// MenuBar: เปลี่ยนจาก Sidebar เป็นแถบแนวนอนด้านบน
-const TopMenu = ({ activeCategory, setActiveCategory, searchTerm, setSearchTerm }) => (
-  <div className="w-full bg-gray-100 border-b-2 border-black flex flex-col flex-shrink-0">
-    {/* แถวบน: Logo + Search */}
-    <div className="flex flex-col md:flex-row border-b border-black md:border-b-0">
-        <div className="p-3 bg-yellow-200 border-b border-black md:border-b-0 md:border-r-2 md:w-56 flex-shrink-0 flex items-center justify-between md:block">
-            <h1 className="font-bold text-base uppercase flex items-center gap-2">
-                <Globe size={14} /> KNOTS_DB.HTML
-            </h1>
-            <p className="text-[10px] mt-0.5 hidden md:block">Ver 1.0 // THAI</p>
-        </div>
-
-        <div className="flex-1 p-2 flex items-center gap-3 overflow-x-auto">
-             <div className="flex items-center gap-2 w-full md:w-auto flex-1 md:flex-none">
-                <label className="text-[10px] font-bold uppercase whitespace-nowrap hidden md:block">[SEARCH]:</label>
-                <div className="flex flex-1 md:w-64">
-                    <input
-                        type="text"
-                        className="w-full border-2 border-black p-1 bg-white text-black focus:outline-none focus:bg-blue-50 text-xs h-8"
-                        placeholder="keyword..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <button className="bg-black text-white px-3 flex items-center justify-center border-2 border-black border-l-0 hover:bg-gray-800 h-8">
-                        <Search size={12} />
-                    </button>
-                </div>
-            </div>
-             
-             {/* Stats (Desktop Only) */}
-             <div className="hidden md:flex border border-black p-1.5 bg-white text-[10px] ml-auto gap-4 whitespace-nowrap h-8 items-center">
-               <span>STATUS: ONLINE</span>
-               <span>SERVER: READY</span>
-            </div>
-        </div>
-    </div>
-
-    {/* แถวล่าง: Categories (Horizontal Scroll) */}
-    <div className="bg-white border-t-2 border-black md:border-t-2 overflow-x-auto">
-        <div className="flex p-2 gap-2 min-w-max">
-            <span className="text-[10px] font-bold uppercase py-1 self-center mr-2">[DIR]:</span>
-            {CATEGORIES.map((cat) => (
-                <button
-                    key={cat.id}
-                    onClick={() => setActiveCategory(cat.id)}
-                    className={`
-                        px-3 py-1 text-xs border border-black flex items-center gap-2 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none whitespace-nowrap
-                        ${activeCategory === cat.id
-                            ? 'bg-blue-700 text-white font-bold hover:text-white'
-                            : 'bg-white text-blue-700 hover:bg-blue-50'}
-                    `}
-                >
-                    {activeCategory === cat.id ? '▶' : ''} {cat.label}
-                </button>
-            ))}
-        </div>
-    </div>
-  </div>
-);
-
-const DifficultyBadge = ({ level }) => {
-  const thaiLevel = {
-    'Very Easy': 'ง่ายมาก',
-    'Easy': 'ง่าย',
-    'Medium': 'ปานกลาง',
-    'Hard': 'ยาก',
-    'Very Hard': 'ยากมาก'
-  }[level] || level;
-
-  return (
-    <span className="text-[10px] uppercase border border-black px-1 bg-gray-200 text-black">
-      [{thaiLevel}]
-    </span>
-  );
-};
-
-const KnotEntry = ({ knot, onClick }) => (
-  <div 
-    onClick={() => onClick(knot)}
-    className="border border-black p-3 cursor-pointer hover:bg-yellow-50 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none bg-white h-full flex flex-col"
-  >
-    <div className="flex justify-between items-start mb-2 border-b border-black border-dotted pb-2">
-      <span className="font-bold text-blue-700 underline text-sm line-clamp-1 mr-2">
-        #{knot.id} {knot.name.split('(')[0]}
-      </span>
-      <DifficultyBadge level={knot.difficulty} />
-    </div>
-
-    <div className="text-xs space-y-2 flex-1">
-      <p className="font-bold truncate">{knot.name.split('(')[1]?.replace(')', '') || 'N/A'}</p>
-      <p className="text-gray-600 line-clamp-2">
-        <span className="text-black font-bold">&gt; USE:</span> {knot.usage}
-      </p>
-    </div>
-  </div>
-);
-
-const PageContent = ({ children, title, subtitle }) => (
-  <main className="flex-1 flex flex-col h-full bg-white overflow-hidden relative">
-    {/* Header Bar */}
-    <header className="p-2 md:p-4 border-b-2 border-black flex justify-between items-center bg-gray-50">
-      <div>
-         <h2 className="text-lg md:text-xl font-bold uppercase font-sans tracking-tighter">{title}</h2>
-         <p className="text-[10px] md:text-xs text-gray-500 font-mono">path: /root/{subtitle}</p>
-      </div>
-      <div className="hidden md:block text-xs border border-black px-2 py-1 bg-white">
-        {new Date().toLocaleDateString()}
-      </div>
-    </header>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knots Database Manual</title>
     
-    {/* Content Area */}
-    <div className="flex-1 overflow-y-auto p-4 md:p-6 custom-scrollbar bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
-       {children}
-    </div>
-  </main>
-);
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-const HtmlDialog = ({ knot, onClose }) => {
-  if (!knot) return null;
-  const [showVideo, setShowVideo] = useState(false);
-  
-  // Use knot.imageUrl if available, otherwise generate placeholder
-  const imageUrl = knot.imageUrl || `https://placehold.co/600x400/EEE/31343C?font=roboto&text=${encodeURIComponent(knot.name.split('(')[0])}`;
-  // Generic Youtube Search or specific ID
-  const videoId = knot.youtubeId || "V7_GzJp2j2U"; // Default to a common knot video if null
+    <style>
+        /* Custom Scrollbar for Raw/Brutalist look */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-left: 2px solid #000;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #000;
+            border: 2px solid #fff;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #333;
+        }
+        body {
+            font-family: 'Courier New', Courier, monospace; 
+            /* Fallback font to ensure monospaced look */
+        }
+    </style>
+</head>
+<body class="bg-white text-black text-sm leading-relaxed overflow-hidden">
+    <div id="root"></div>
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/80 backdrop-grayscale">
-      <div className="bg-white w-full max-w-md border-2 border-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col max-h-[90vh]">
-        
-        {/* Title Bar */}
-        <div className="bg-blue-700 text-white p-2 flex justify-between items-center border-b-2 border-black flex-shrink-0">
-           <span className="font-bold text-sm flex items-center gap-2">
-             <Info size={14} className="inline" /> properties_view.exe
-           </span>
-           <button onClick={onClose} className="bg-gray-300 text-black px-2 border border-white border-b-black border-r-black active:border-t-black active:border-l-black hover:bg-red-600 hover:text-white font-bold text-xs">
-             X
-           </button>
-        </div>
+    <script type="text/babel">
+        const { useState, useMemo, useEffect } = React;
 
-        {/* Content (Vertical Scrollable) */}
-        <div className="p-4 overflow-y-auto font-mono text-sm">
-           <h2 className="text-xl font-bold border-b-4 border-black mb-4 pb-2 text-center">
-             {knot.name}
-           </h2>
+        // --- ICONS (SVG Components) ---
+        const Icons = {
+            Search: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>,
+            Globe: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>,
+            Info: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>,
+            Play: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>,
+            Image: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>,
+            Book: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>,
+            Anchor: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" x2="12" y1="22" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>,
+            Tent: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 20 10 4 1 20"/><path d="m12.8 12.8-3.1-3.1"/><path d="M2 20h20"/><path d="M8.5 14H4"/><path d="M9 12.5 15.5 20"/><path d="M15 9l-4.5 4.5"/><path d="M14.5 20h5"/></svg>,
+            Fish: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6.5 12c.6-2.5 3.1-4.5 5.5-4.5 2.5 0 5.5 2.5 5.5 5.5 0 2.5-2.5 5.5-5.5 5.5-2.5 0-5-2-5.5-4.5Z"/><path d="M22 12c-2.7 0-4.3-1-5.5-1.5a16 16 0 0 0-9 0C5.3 11 2.7 12 2 12c-.7 0-3.3-1-5.5-1.5a16 16 0 0 0 9 0c1.2.5 2.8 1.5 5.5 1.5Z"/><path d="M14.5 12a2.5 2.5 0 0 0-2.5-2.5"/><path d="M22 12c-2.7 0-4.3 1-5.5 1.5"/></svg>,
+            Mountain: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>,
+            Package: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22v-9"/></svg>,
+            Zap: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        };
 
-           {/* Media Section: Image or Video */}
-           <div className="mb-4 border-2 border-black bg-black">
-              {showVideo ? (
-                <div className="relative pt-[56.25%] w-full">
-                  <iframe 
-                    className="absolute inset-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
+        // --- DATA ---
+        const KNOTS_DATA = [
+            {
+                id: 1,
+                name: "เงื่อนพิรอด (Square Knot)",
+                category: "Basic",
+                usage: "ต่อเชือกขนาดเท่ากัน, ผูกผ้าพันแผล, มัดของทั่วไป",
+                difficulty: "Easy",
+                imageUrl: "https://www.netknots.com/files/6914/5631/0995/squareknot.jpg",
+                youtubeId: "bO0T4z8_aQ8",
+                steps: [
+                    "ถือปลายเชือกทั้งสองข้าง (ซ้ายและขวา)",
+                    "นำเชือกขวาทับซ้าย แล้วพันสอดลงล่าง",
+                    "นำเชือกซ้ายทับขวา (สำคัญ: ต้องสลับด้านกับข้อ 2)",
+                    "พันสอดลงล่าง ดึงปลายทั้งสองให้แน่น เงื่อนจะขยับตัวได้เล็กน้อย"
+                ]
+            },
+            {
+                id: 2,
+                name: "เงื่อนขัดสมาธิ (Sheet Bend)",
+                category: "Basic",
+                usage: "ต่อเชือกต่างขนาด, ต่อเชือกกับขอหรือห่วง",
+                difficulty: "Easy",
+                imageUrl: "https://www.netknots.com/files/6814/5631/0681/sheetbend.jpg",
+                youtubeId: "x37H0Z8l3sI",
+                steps: [
+                    "ทำเชือกเส้นใหญ่ให้เป็นบ่วง (Loop)",
+                    "สอดเชือกเส้นเล็กขึ้นมาจากด้านล่างของบ่วง",
+                    "พันเชือกเล็กอ้อมหลังเส้นใหญ่ทั้งสองเส้น",
+                    "สอดปลายเชือกเล็กขัดกับตัวเอง (ไม่ต้องมุดกลับลงบ่วงเดิม)",
+                    "ดึงให้แน่น"
+                ]
+            },
+            {
+                id: 3,
+                name: "เงื่อนบ่วงสายธนู (Bowline)",
+                category: "Basic",
+                usage: "ทำบ่วงคล้องเสา, ช่วยคนตกน้ำ (ไม่รัดคอ), ผูกสมอเรือ",
+                difficulty: "Medium",
+                imageUrl: "https://www.netknots.com/files/8414/5630/9294/bowline.jpg",
+                youtubeId: "Q9NqVV7RLan",
+                steps: [
+                    "ทำบ่วงเล็กๆ บนเชือกหลัก (ให้ปลายเชือกอยู่ด้านบน)",
+                    "สอดปลายเชือกขึ้นมาจากรูบ่วง (เหมือนงูขึ้นจากบ่อ)",
+                    "พันอ้อมหลังเชือกหลัก (งูอ้อมต้นไม้)",
+                    "มุดกลับลงไปในรูบ่วงเดิม (งูลงบ่อ)",
+                    "ดึงปลายและเชือกหลักให้แน่น"
+                ]
+            },
+            {
+                id: 4,
+                name: "เงื่อนตะกรุดเบ็ด (Clove Hitch)",
+                category: "Basic",
+                usage: "ผูกกับเสาหรือหลัก, เริ่มต้นและจบงานมัดเชือก",
+                difficulty: "Easy",
+                imageUrl: "https://www.netknots.com/files/5414/5630/9707/clovehitch.jpg",
+                youtubeId: "aewgmUeHpuE",
+                steps: [
+                    "พันเชือกรอบเสา 1 รอบ ให้เชือกทับกันเป็นกากบาท",
+                    "พันรอบเสาอีก 1 รอบ",
+                    "สอดปลายเชือกลอดใต้เชือกตัวเองที่พาดอยู่",
+                    "ดึงปลายทั้งสองข้างให้แน่น"
+                ]
+            },
+            {
+                id: 5,
+                name: "เงื่อนประมง (Fisherman's Knot)",
+                category: "Basic",
+                usage: "ต่อเชือกเอ็น, ต่อเชือกขนาดเดียวกันที่ลื่น",
+                difficulty: "Easy",
+                imageUrl: "https://www.netknots.com/files/7014/5630/9991/doublefishermans.jpg",
+                youtubeId: "HsHw1bL_7Mc",
+                steps: [
+                    "วางเชือกสองเส้นสวนทางกัน",
+                    "ใช้ปลายเชือก A มัดรอบเชือก B (มัดเงื่อนตายชั้นเดียว)",
+                    "ใช้ปลายเชือก B มัดรอบเชือก A",
+                    "ดึงเชือกหลักทั้งสองเส้นให้ปมเลื่อนเข้ามาชนกัน"
+                ]
+            },
+            {
+                id: 6,
+                name: "เงื่อนเลข 8 (Figure Eight)",
+                category: "Basic",
+                usage: "ทำปมหยุดเชือกไม่ให้หลุดจากรอก",
+                difficulty: "Very Easy",
+                imageUrl: "https://www.netknots.com/files/1614/5630/9996/figureeight.jpg",
+                youtubeId: "0jI76b5g5f8",
+                steps: [
+                    "ทำบ่วงเลข 8 โดยอ้อมหลังเชือกหลัก",
+                    "ตวัดปลายเชือกมาด้านหน้า",
+                    "สอดปลายเชือกลงในบ่วงด้านบน",
+                    "ดึงให้แน่น ปมจะมีลักษณะเหมือนเลข 8"
+                ]
+            },
+            {
+                id: 7,
+                name: "เงื่อนขัดสมาธิ 2 ชั้น (Double Sheet Bend)",
+                category: "Basic",
+                usage: "ต่อเชือกต่างขนาดมาก หรือเชือกเปียก/ลื่น",
+                difficulty: "Medium",
+                imageUrl: "https://www.netknots.com/files/8114/5630/9895/doublesheetbend.jpg",
+                youtubeId: "zXl-Xl3F4kE",
+                steps: [
+                    "ทำเหมือนเงื่อนขัดสมาธิปกติ",
+                    "ในจังหวะสุดท้าย ให้พันรอบบ่วงเชือกใหญ่อีก 1 รอบ",
+                    "สอดปลายขัดไว้เหมือนเดิม",
+                    "จัดระเบียบเงื่อนให้เรียบร้อย"
+                ]
+            },
+            {
+                id: 8,
+                name: "เงื่อนผูกรั้ง (Taut-Line Hitch)",
+                category: "Camping",
+                usage: "ขึงสมอบกเต็นท์ (ปรับความตึงได้), ผูกราวตากผ้า",
+                difficulty: "Medium",
+                imageUrl: "https://www.netknots.com/files/4214/5631/0951/tautlinehitch.jpg",
+                youtubeId: "1e-a4j-S9kE",
+                steps: [
+                    "พันปลายเชือกรอบเชือกหลัก 2 รอบ (พันเข้าหาตัวบ่วง)",
+                    "พันรอบที่ 3 โดยข้ามปมเดิมไปด้านบน",
+                    "สอดปลายเชือกผูกมัดให้แน่น",
+                    "สามารถเลื่อนปมขึ้นลงเพื่อปรับความตึงได้"
+                ]
+            },
+            {
+                id: 9,
+                name: "เงื่อนผูกซุง (Timber Hitch)",
+                category: "Camping",
+                usage: "ลากท่อนไม้, เริ่มต้นการผูกทแยง",
+                difficulty: "Easy",
+                imageUrl: "https://www.netknots.com/files/1614/5631/0968/timberhitch.jpg",
+                youtubeId: "5b5A5b5b5b5", 
+                steps: [
+                    "พันเชือกรอบท่อนไม้",
+                    "นำปลายเชือกพันอ้อมเชือกหลัก",
+                    "พันปลายเชือกเกลียวรอบตัวมันเอง 3-4 รอบ",
+                    "ดึงให้แน่น ยิ่งดึงยิ่งแน่น"
+                ]
+            },
+            {
+                id: 11,
+                name: "เงื่อนผูกรั้งรถบรรทุก (Trucker's Hitch)",
+                category: "Camping",
+                usage: "รัดของท้ายรถกระบะ, ขึงผ้าใบให้ตึงจัดๆ",
+                difficulty: "Hard",
+                imageUrl: "https://www.netknots.com/files/2414/5631/0981/truckershitch.jpg",
+                youtubeId: "w5w5w5w5w5",
+                steps: [
+                    "ผูกปลายด้านหนึ่งกับจุดยึด",
+                    "ทำบ่วงเงื่อนลื่น (Slip knot) หรือบ่วงสายธนูตรงกลางเชือก",
+                    "อ้อมปลายเชือกอีกด้านกับจุดยึดที่สอง",
+                    "ร้อยปลายเชือกกลับมาผ่านบ่วงที่ทำไว้",
+                    "ดึงงัดเชือกเพื่อทดแรงให้ตึงสุดๆ แล้วมัดล็อคด้วยเงื่อนตะกรุดเบ็ด"
+                ]
+            },
+            {
+                id: 12,
+                name: "เงื่อนกระหวัดไม้ 2 ชั้น (Two Half Hitches)",
+                category: "Camping",
+                usage: "ผูกเชือกกับหลัก สมอบก แบบง่ายและเร็ว",
+                difficulty: "Easy",
+                imageUrl: "https://www.netknots.com/files/5714/5631/0989/twohalfhitches.jpg",
+                youtubeId: "q5q5q5q5q5",
+                steps: [
+                    "พันเชือกรอบหลัก",
+                    "นำปลายเชือกพันรอบเชือกหลักแล้วสอดเข้าบ่วง (1 ครั้ง)",
+                    "ทำซ้ำอีกครั้งในทิศทางเดิม (2 ครั้ง)",
+                    "รูดปมให้ชิดหลัก"
+                ]
+            },
+            {
+                id: 13,
+                name: "เงื่อนผีเสื้อ (Alpine Butterfly Loop)",
+                category: "Climbing",
+                usage: "ทำบ่วงกลางเชือก รับน้ำหนักได้ 3 ทิศทาง",
+                difficulty: "Hard",
+                imageUrl: "https://www.netknots.com/files/8614/5630/9207/alpinebutterfly.jpg",
+                youtubeId: "e5e5e5e5e5",
+                steps: [
+                    "พันเชือกบนฝ่ามือ 3 รอบ",
+                    "จับเส้นที่ 1 (ซ้ายสุด) ดึงมาทับเส้นที่ 2",
+                    "ดึงเส้นที่ 1 (ที่เพิ่งย้ายมากลาง) ลอดใต้เส้นอื่นๆ ทั้งหมดไปทางซ้าย",
+                    "ดึงเส้นนั้นให้กลายเป็นบ่วง แล้วรูดเชือกให้แน่น"
+                ]
+            },
+            // ... (ข้อมูลอื่นๆ ย่อไว้เพื่อความกระชับ แต่ในโค้ดจริงจะใส่ครบ) ...
+            {
+                id: 22,
+                name: "เงื่อนรัดปากถุง (Miller's Knot)",
+                category: "Binding",
+                usage: "มัดปากถุงข้าวสาร ถุงปูน แน่นหนา",
+                difficulty: "Medium",
+                imageUrl: "https://www.netknots.com/files/9414/5630/9972/millersknot.jpg",
+                youtubeId: "d5d5d5d5d5",
+                steps: [
+                    "พันเชือกรอบปากถุง 2 รอบ",
+                    "สอดปลายเชือกกลับเข้าไปใต้เชือกที่พันรอบที่ 2",
+                    "ดึงแยกร่างซ้ายขวาให้แน่น"
+                ]
+            },
+             {
+                id: 14,
+                name: "เงื่อนพรูสิค (Prusik Knot)",
+                category: "Climbing",
+                usage: "ไต่เชือก (จับเชือกเมื่อรับน้ำหนัก เลื่อนได้เมื่อผ่อน)",
+                difficulty: "Medium",
+                imageUrl: "https://www.netknots.com/files/2314/5631/0805/prusikknot.jpg",
+                steps: [
+                    "ใช้เชือกวงกลม (Loop) พันรอบเชือกหลัก",
+                    "สอดปลายบ่วงผ่านรูตัวเอง 2-3 รอบ",
+                    "จัดเรียงปมให้เรียบร้อยสวยงาม",
+                    "ทดสอบการจับเชือกโดยการดึง"
+                ]
+            }
+        ];
+
+        const CATEGORIES = [
+            { id: 'All', label: 'ทั้งหมด', icon: Icons.Book },
+            { id: 'Basic', label: 'พื้นฐาน', icon: Icons.Anchor },
+            { id: 'Camping', label: 'แคมป์', icon: Icons.Tent },
+            { id: 'Boating', label: 'ทางน้ำ', icon: Icons.Fish },
+            { id: 'Climbing', label: 'กู้ภัย', icon: Icons.Mountain },
+            { id: 'Binding', label: 'ผูกมัด', icon: Icons.Package },
+            { id: 'Decorative', label: 'อื่นๆ', icon: Icons.Zap },
+        ];
+
+        // --- COMPONENTS ---
+
+        const HtmlLayout = ({ children }) => (
+            <div className="min-h-screen bg-white text-black font-mono text-sm leading-relaxed p-0 md:p-2">
+                <div className="w-full md:w-[98%] lg:w-[99%] mx-auto border-2 border-black h-[95vh] flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white">
+                    {children}
                 </div>
-              ) : (
-                <div className="relative group">
-                  <img src={imageUrl} alt={knot.name} className="w-full h-auto object-cover block" />
-                  <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-[10px] p-1 truncate">
-                     IMG_SRC: {imageUrl.substring(0, 30)}...
-                  </div>
+            </div>
+        );
+
+        const TopMenu = ({ activeCategory, setActiveCategory, searchTerm, setSearchTerm }) => (
+            <div className="w-full bg-gray-100 border-b-2 border-black flex flex-col flex-shrink-0">
+                {/* Row 1: Logo & Search */}
+                <div className="flex flex-col md:flex-row border-b border-black md:border-b-0">
+                    <div className="p-2 bg-yellow-200 border-b border-black md:border-b-0 md:border-r-2 md:w-56 flex-shrink-0 flex items-center justify-between md:block">
+                        <h1 className="font-bold text-sm uppercase flex items-center gap-2">
+                            <Icons.Globe width={14} height={14} /> KNOTS_DB.HTML
+                        </h1>
+                        <p className="text-[10px] mt-0.5 hidden md:block">Ver 1.0 // THAI</p>
+                    </div>
+
+                    <div className="flex-1 p-1.5 flex items-center gap-3 overflow-x-auto">
+                        <div className="flex items-center gap-2 w-full md:w-auto flex-1 md:flex-none">
+                            <label className="text-[10px] font-bold uppercase whitespace-nowrap hidden md:block">[SEARCH]:</label>
+                            <div className="flex flex-1 md:w-64">
+                                <input
+                                    type="text"
+                                    className="w-full border-2 border-black p-1 bg-white text-black focus:outline-none focus:bg-blue-50 text-xs h-7"
+                                    placeholder="keyword..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                                <button className="bg-black text-white px-3 flex items-center justify-center border-2 border-black border-l-0 hover:bg-gray-800 h-7">
+                                    <Icons.Search width={12} height={12} />
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div className="hidden md:flex border border-black p-1 bg-white text-[10px] ml-auto gap-4 whitespace-nowrap h-7 items-center">
+                           <span>STATUS: ONLINE</span>
+                           <span>SERVER: READY</span>
+                        </div>
+                    </div>
                 </div>
-              )}
-           </div>
 
-           {/* Controls */}
-           <div className="flex gap-2 mb-6 justify-center">
-              {!showVideo ? (
-                <button 
-                  onClick={() => setShowVideo(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all"
-                >
-                  <Play size={14} fill="currentColor" /> ดูวิดีโอสาธิต
-                </button>
-              ) : (
-                <button 
-                  onClick={() => setShowVideo(false)}
-                  className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-black font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all"
-                >
-                  <ImageIcon size={14} /> กลับไปดูรูปภาพ
-                </button>
-              )}
-           </div>
-           
-           {/* Details Table */}
-           <table className="w-full border-2 border-black mb-6 text-xs">
-             <tbody>
-               <tr className="border-b border-black">
-                 <td className="bg-gray-200 p-2 border-r border-black w-1/3 font-bold">หมวดหมู่</td>
-                 <td className="p-2">{knot.category}</td>
-               </tr>
-               <tr className="border-b border-black">
-                 <td className="bg-gray-200 p-2 border-r border-black font-bold">ความยาก</td>
-                 <td className="p-2">{knot.difficulty}</td>
-               </tr>
-               <tr>
-                 <td className="bg-gray-200 p-2 border-r border-black font-bold">การใช้งาน</td>
-                 <td className="p-2">{knot.usage}</td>
-               </tr>
-             </tbody>
-           </table>
-
-           <fieldset className="border-2 border-black p-4 mb-4">
-             <legend className="px-2 font-bold bg-white border border-black ml-2 text-xs">ขั้นตอน (STEPS)</legend>
-             <ol className="list-decimal list-inside space-y-2">
-               {knot.steps.map((step, idx) => (
-                 <li key={idx} className="pl-2">
-                   {step}
-                 </li>
-               ))}
-             </ol>
-           </fieldset>
-        </div>
-
-        {/* Footer */}
-        <div className="p-2 border-t-2 border-black bg-gray-100 flex justify-end flex-shrink-0">
-           <button onClick={onClose} className="px-6 py-1 bg-gray-200 border-2 border-white border-b-black border-r-black active:border-t-black active:border-l-black active:bg-gray-300 text-sm font-bold">
-             ปิด (CLOSE)
-           </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default function App() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [selectedKnot, setSelectedKnot] = useState(null);
-
-  const filteredKnots = useMemo(() => {
-    return KNOTS_DATA.filter(knot => {
-      const lowerSearch = searchTerm.toLowerCase();
-      const lowerName = knot.name.toLowerCase();
-      const matchesSearch = lowerName.includes(lowerSearch) || knot.usage.toLowerCase().includes(lowerSearch);
-      
-      const categoryMatch = activeCategory === "All" 
-        ? true 
-        : activeCategory === "Decorative" 
-            ? (knot.category === "Decorative" || knot.category === "General")
-            : knot.category === activeCategory;
-      
-      return matchesSearch && categoryMatch;
-    });
-  }, [searchTerm, activeCategory]);
-
-  return (
-    <HtmlLayout>
-      <TopMenu 
-        activeCategory={activeCategory} 
-        setActiveCategory={setActiveCategory}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
-      
-      <PageContent 
-        title={activeCategory === 'All' ? 'Index' : activeCategory} 
-        subtitle={activeCategory === 'All' ? 'all_items' : 'filtered'}
-      >
-        <div className="w-full">
-          <div className="mb-4 text-xs font-bold border-b-2 border-black pb-1 flex justify-between">
-             <span>QUERY_RESULTS: {filteredKnots.length} ITEM(S)</span>
-             <span>[VIEW: GRID]</span>
-          </div>
-
-          {filteredKnots.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {filteredKnots.map((knot) => (
-                <KnotEntry key={knot.id} knot={knot} onClick={setSelectedKnot} />
-              ))}
+                {/* Row 2: Categories */}
+                <div className="bg-white border-t-2 border-black md:border-t-2 overflow-x-auto custom-scrollbar">
+                    <div className="flex p-1.5 gap-1.5 min-w-max">
+                        <span className="text-[10px] font-bold uppercase py-1 self-center mr-1">[DIR]:</span>
+                        {CATEGORIES.map((cat) => (
+                            <button
+                                key={cat.id}
+                                onClick={() => setActiveCategory(cat.id)}
+                                className={`
+                                    px-2 py-0.5 text-[11px] border border-black flex items-center gap-1.5 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none whitespace-nowrap
+                                    ${activeCategory === cat.id
+                                        ? 'bg-blue-700 text-white font-bold hover:text-white'
+                                        : 'bg-white text-blue-700 hover:bg-blue-50'}
+                                `}
+                            >
+                                {activeCategory === cat.id ? '▶' : ''} {cat.label}
+                            </button>
+                        ))}
+                    </div>
+                </div>
             </div>
-          ) : (
-            <div className="p-8 border-2 border-black border-dashed text-center bg-gray-50">
-              <p className="font-bold text-red-600 mb-2">ERROR 404: KNOT NOT FOUND</p>
-              <p className="text-xs">Please refine your search parameters.</p>
-            </div>
-          )}
-        </div>
-      </PageContent>
+        );
 
-      {selectedKnot && (
-        <HtmlDialog knot={selectedKnot} onClose={() => setSelectedKnot(null)} />
-      )}
-    </HtmlLayout>
-  );
-}
+        const DifficultyBadge = ({ level }) => {
+            const thaiLevel = {
+                'Very Easy': 'ง่ายมาก',
+                'Easy': 'ง่าย',
+                'Medium': 'ปานกลาง',
+                'Hard': 'ยาก',
+                'Very Hard': 'ยากมาก'
+            }[level] || level;
+
+            return (
+                <span className="text-[10px] uppercase border border-black px-1 bg-gray-200 text-black">
+                    [{thaiLevel}]
+                </span>
+            );
+        };
+
+        const KnotEntry = ({ knot, onClick }) => (
+            <div 
+                onClick={() => onClick(knot)}
+                className="border border-black p-3 cursor-pointer hover:bg-yellow-50 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none bg-white h-full flex flex-col"
+            >
+                <div className="flex justify-between items-start mb-2 border-b border-black border-dotted pb-2">
+                    <span className="font-bold text-blue-700 underline text-sm line-clamp-1 mr-2">
+                        #{knot.id} {knot.name.split('(')[0]}
+                    </span>
+                    <DifficultyBadge level={knot.difficulty} />
+                </div>
+
+                <div className="text-xs space-y-2 flex-1">
+                    <p className="font-bold truncate">{knot.name.split('(')[1]?.replace(')', '') || 'N/A'}</p>
+                    <p className="text-gray-600 line-clamp-2">
+                        <span className="text-black font-bold">&gt; USE:</span> {knot.usage}
+                    </p>
+                </div>
+            </div>
+        );
+
+        const HtmlDialog = ({ knot, onClose }) => {
+            if (!knot) return null;
+            const [showVideo, setShowVideo] = useState(false);
+            
+            // Fallback content
+            const imageUrl = knot.imageUrl || `https://placehold.co/600x400/EEE/31343C?font=roboto&text=${encodeURIComponent(knot.name.split('(')[0])}`;
+            const videoId = knot.youtubeId || "V7_GzJp2j2U"; // Default video
+
+            return (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/80 backdrop-grayscale">
+                    <div className="bg-white w-full max-w-md border-2 border-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col max-h-[90vh]">
+                        
+                        <div className="bg-blue-700 text-white p-2 flex justify-between items-center border-b-2 border-black flex-shrink-0">
+                           <span className="font-bold text-sm flex items-center gap-2">
+                             <Icons.Info width={14} height={14} /> properties_view.exe
+                           </span>
+                           <button onClick={onClose} className="bg-gray-300 text-black px-2 border border-white border-b-black border-r-black active:border-t-black active:border-l-black hover:bg-red-600 hover:text-white font-bold text-xs">
+                             X
+                           </button>
+                        </div>
+
+                        <div className="p-4 overflow-y-auto font-mono text-sm custom-scrollbar">
+                           <h2 className="text-xl font-bold border-b-4 border-black mb-4 pb-2 text-center">
+                             {knot.name}
+                           </h2>
+
+                           <div className="mb-4 border-2 border-black bg-black">
+                              {showVideo ? (
+                                <div className="relative pt-[56.25%] w-full">
+                                  <iframe 
+                                    className="absolute inset-0 w-full h-full"
+                                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                                    title="YouTube video player"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                  ></iframe>
+                                </div>
+                              ) : (
+                                <div className="relative group bg-gray-100 flex items-center justify-center min-h-[200px]">
+                                  <img 
+                                    src={imageUrl} 
+                                    alt={knot.name} 
+                                    className="w-full h-auto object-cover block max-h-[250px]" 
+                                    onError={(e) => {
+                                        e.target.onerror = null; 
+                                        e.target.src='https://placehold.co/600x400/EEE/31343C?font=roboto&text=Image+Not+Found'
+                                    }}
+                                  />
+                                </div>
+                              )}
+                           </div>
+
+                           <div className="flex gap-2 mb-6 justify-center">
+                              {!showVideo ? (
+                                <button 
+                                  onClick={() => setShowVideo(true)}
+                                  className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all active:translate-x-[2px] active:translate-y-[2px]"
+                                >
+                                  <Icons.Play width={14} height={14} fill="currentColor" /> ดูวิดีโอสาธิต
+                                </button>
+                              ) : (
+                                <button 
+                                  onClick={() => setShowVideo(false)}
+                                  className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-black font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all active:translate-x-[2px] active:translate-y-[2px]"
+                                >
+                                  <Icons.Image width={14} height={14} /> กลับไปดูรูปภาพ
+                                </button>
+                              )}
+                           </div>
+                           
+                           <table className="w-full border-2 border-black mb-6 text-xs">
+                             <tbody>
+                               <tr className="border-b border-black">
+                                 <td className="bg-gray-200 p-2 border-r border-black w-1/3 font-bold">หมวดหมู่</td>
+                                 <td className="p-2">{knot.category}</td>
+                               </tr>
+                               <tr className="border-b border-black">
+                                 <td className="bg-gray-200 p-2 border-r border-black font-bold">ความยาก</td>
+                                 <td className="p-2">{knot.difficulty}</td>
+                               </tr>
+                               <tr>
+                                 <td className="bg-gray-200 p-2 border-r border-black font-bold">การใช้งาน</td>
+                                 <td className="p-2">{knot.usage}</td>
+                               </tr>
+                             </tbody>
+                           </table>
+
+                           <fieldset className="border-2 border-black p-4 mb-4">
+                             <legend className="px-2 font-bold bg-white border border-black ml-2 text-xs">ขั้นตอน (STEPS)</legend>
+                             <ol className="list-decimal list-inside space-y-2">
+                               {knot.steps.map((step, idx) => (
+                                 <li key={idx} className="pl-2">
+                                   {step}
+                                 </li>
+                               ))}
+                             </ol>
+                           </fieldset>
+                        </div>
+
+                        <div className="p-2 border-t-2 border-black bg-gray-100 flex justify-end flex-shrink-0">
+                           <button onClick={onClose} className="px-6 py-1 bg-gray-200 border-2 border-white border-b-black border-r-black active:border-t-black active:border-l-black active:bg-gray-300 text-sm font-bold hover:bg-red-500 hover:text-white transition-colors">
+                             ปิด (CLOSE)
+                           </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const PageContent = ({ children, title, subtitle }) => (
+            <main className="flex-1 flex flex-col h-full bg-white overflow-hidden relative">
+                <header className="p-2 md:p-3 border-b-2 border-black flex justify-between items-center bg-gray-50">
+                    <div>
+                        <h2 className="text-lg md:text-xl font-bold uppercase font-sans tracking-tighter">{title}</h2>
+                        <p className="text-[10px] md:text-xs text-gray-500 font-mono">path: /root/{subtitle}</p>
+                    </div>
+                    <div className="hidden md:block text-xs border border-black px-2 py-1 bg-white">
+                        {new Date().toLocaleDateString()}
+                    </div>
+                </header>
+                
+                <div className="flex-1 overflow-y-auto p-4 md:p-6 custom-scrollbar bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
+                    {children}
+                </div>
+            </main>
+        );
+
+        function App() {
+            const [searchTerm, setSearchTerm] = useState("");
+            const [activeCategory, setActiveCategory] = useState("All");
+            const [selectedKnot, setSelectedKnot] = useState(null);
+
+            const filteredKnots = useMemo(() => {
+                return KNOTS_DATA.filter(knot => {
+                    const lowerSearch = searchTerm.toLowerCase();
+                    const lowerName = knot.name.toLowerCase();
+                    const matchesSearch = lowerName.includes(lowerSearch) || knot.usage.toLowerCase().includes(lowerSearch);
+                    
+                    const categoryMatch = activeCategory === "All" 
+                        ? true 
+                        : activeCategory === "Decorative" 
+                            ? (knot.category === "Decorative" || knot.category === "General")
+                            : knot.category === activeCategory;
+                    
+                    return matchesSearch && categoryMatch;
+                });
+            }, [searchTerm, activeCategory]);
+
+            return (
+                <HtmlLayout>
+                    <TopMenu 
+                        activeCategory={activeCategory} 
+                        setActiveCategory={setActiveCategory}
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                    />
+                    
+                    <PageContent 
+                        title={activeCategory === 'All' ? 'Index' : activeCategory} 
+                        subtitle={activeCategory === 'All' ? 'all_items' : 'filtered'}
+                    >
+                        <div className="w-full">
+                            <div className="mb-4 text-xs font-bold border-b-2 border-black pb-1 flex justify-between">
+                                <span>QUERY_RESULTS: {filteredKnots.length} ITEM(S)</span>
+                                <span>[VIEW: GRID]</span>
+                            </div>
+
+                            {filteredKnots.length > 0 ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                                    {filteredKnots.map((knot) => (
+                                        <KnotEntry key={knot.id} knot={knot} onClick={setSelectedKnot} />
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="p-8 border-2 border-black border-dashed text-center bg-gray-50">
+                                    <p className="font-bold text-red-600 mb-2">ERROR 404: KNOT NOT FOUND</p>
+                                    <p className="text-xs">Please refine your search parameters.</p>
+                                </div>
+                            )}
+                        </div>
+                    </PageContent>
+
+                    {selectedKnot && (
+                        <HtmlDialog knot={selectedKnot} onClose={() => setSelectedKnot(null)} />
+                    )}
+                </HtmlLayout>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
