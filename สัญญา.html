@@ -29,11 +29,12 @@
 
       .container {
         max-width: 1000px;
+        padding: 0; /* ลด padding ของ container */
       }
 
       /* Title Section */
       .app-header {
-        margin-bottom: 40px;
+        margin-bottom: 30px;
         border-bottom: 2px solid var(--primary-color);
         padding-bottom: 20px;
         display: flex;
@@ -57,7 +58,7 @@
 
       /* Search Box */
       .search-wrapper {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
       }
       
       .search-input {
@@ -143,6 +144,7 @@
         border-radius: 4px;
         transition: all 0.2s;
         font-weight: 500;
+        white-space: nowrap;
       }
 
       .btn-open:hover {
@@ -157,6 +159,8 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 10px;
+        flex-wrap: wrap; /* ให้ปุ่มตกบรรทัดได้ถ้ายาวเกิน */
+        gap: 10px;
       }
 
       .page-btn {
@@ -179,6 +183,57 @@
         color: #999;
         font-weight: 300;
       }
+
+      /* Mobile Responsiveness Styles */
+      @media (max-width: 768px) {
+        body {
+          padding: 20px 15px; /* ลดขอบหน้าจอ */
+        }
+
+        .app-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 15px;
+          margin-bottom: 20px;
+        }
+
+        .app-title {
+          font-size: 1.6rem;
+        }
+
+        .app-subtitle {
+          font-size: 0.85rem;
+        }
+
+        /* ปรับตารางให้เล็กลง */
+        .custom-table th, 
+        .custom-table td {
+          padding: 12px 10px;
+          font-size: 0.85rem;
+        }
+
+        /* ซ่อนคอลัมน์ลำดับบนมือถือเพื่อประหยัดที่ */
+        .col-index {
+          display: none;
+        }
+
+        .category-badge {
+          font-size: 0.7rem;
+          padding: 2px 6px;
+          min-width: auto;
+        }
+
+        .btn-open {
+          padding: 4px 12px;
+          font-size: 0.8rem;
+        }
+        
+        /* ปรับ pagination */
+        .pagination-container {
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -191,13 +246,13 @@
           <div class="app-subtitle">Data Directory System</div>
         </div>
         <button onclick="loadData()" class="btn-open" style="border: 1px solid #ccc; font-weight: 400;">
-          รีโหลดข้อมูล
+          รีโหลด
         </button>
       </div>
 
       <!-- Search -->
       <div class="search-wrapper">
-        <input type="text" id="searchInput" class="search-input" placeholder="พิมพ์เพื่อค้นหาชื่อเอกสาร หรือหมวดหมู่..." onkeyup="filterData()">
+        <input type="text" id="searchInput" class="search-input" placeholder="พิมพ์เพื่อค้นหา..." onkeyup="filterData()">
       </div>
 
       <!-- Content -->
@@ -207,11 +262,11 @@
             <thead>
               <tr id="tableHeaderRow">
                 <!-- Headers จะถูกสร้างโดย JavaScript -->
-                <th>ลำดับ</th>
+                <th class="col-index">ลำดับ</th>
                 <th>ชื่อเอกสาร</th>
                 <th>หมวดหมู่</th>
                 <!-- ลบคอลัมน์ข้อมูลอื่นๆ ออก -->
-                <th style="text-align: right;">การกระทำ</th>
+                <th style="text-align: right;">เปิด</th>
               </tr>
             </thead>
             <tbody id="fileTableBody">
@@ -284,22 +339,17 @@
         headers = headerRow.map(h => h.trim());
 
         // 2. หา Index ของคอลัมน์สำคัญ
-        // พยายามหาคำว่า 'name', 'ชื่อ' สำหรับชื่อ
         nameIdx = headers.findIndex(h => h.toLowerCase().includes('name') || h.includes('ชื่อ'));
         if (nameIdx === -1) nameIdx = 0; // Default
 
-        // พยายามหาคำว่า 'url', 'link', 'ลิงก์'
         urlIdx = headers.findIndex(h => h.toLowerCase().includes('url') || h.toLowerCase().includes('link') || h.includes('ลิงก์'));
         if (urlIdx === -1) urlIdx = 1; // Default
 
-        // พยายามหาคำว่า 'category', 'หมวด', 'group', 'type'
         categoryIdx = headers.findIndex(h => h.toLowerCase().includes('category') || h.includes('หมวด') || h.toLowerCase().includes('type'));
         
         // 3. อ่านข้อมูล
         allData = [];
         for (let i = 1; i < rows.length; i++) {
-            // รองรับ CSV ที่มีเครื่องหมาย " (Quote) ได้เบื้องต้น
-            // แต่เพื่อความง่ายจะใช้ split(',') ธรรมดาตามตัวอย่างเดิม
             const cols = rows[i].split(',').map(c => c.trim());
             
             if (cols.length < 2) continue;
@@ -312,7 +362,6 @@
             if (categoryIdx !== -1 && cols[categoryIdx]) {
                 category = cols[categoryIdx];
             } else {
-                // ถ้าไม่มีคอลัมน์หมวด ให้สร้างจากนามสกุลไฟล์
                 if (!name.includes('.')) {
                     category = 'FOLDER';
                 } else {
@@ -346,21 +395,18 @@
         emptyState.style.display = 'none';
         paginationFooter.style.display = 'flex';
 
-        // คำนวณ Pagination
         const start = (currentPage - 1) * itemsPerPage;
         const end = Math.min(start + itemsPerPage, filteredData.length);
         const pageData = filteredData.slice(start, end);
 
-        // สร้าง Row
         let html = '';
         pageData.forEach((item, index) => {
             const realIndex = start + index + 1;
             html += `
             <tr>
-                <td style="color: #999; width: 50px;">${realIndex}</td>
-                <td style="font-weight: 500; color: #000;">${item.name}</td>
+                <td class="col-index" style="color: #999; width: 50px;">${realIndex}</td>
+                <td style="font-weight: 500; color: #000; min-width: 120px;">${item.name}</td>
                 <td><span class="category-badge">${item.category}</span></td>
-                <!-- ลบการแสดงผลคอลัมน์ข้อมูลอื่นๆ -->
                 <td style="text-align: right;">
                     <a href="${item.url}" target="_blank" class="btn-open">เปิด</a>
                 </td>
@@ -370,7 +416,6 @@
         
         tbody.innerHTML = html;
 
-        // Update Footer Text
         document.getElementById('startItem').innerText = start + 1;
         document.getElementById('endItem').innerText = end;
         document.getElementById('totalItems').innerText = filteredData.length;
@@ -385,25 +430,22 @@
 
         if (totalPages <= 1) return;
 
-        // ปุ่ม Previous
         const prevBtn = document.createElement('button');
-        prevBtn.innerText = '< ก่อนหน้า';
+        prevBtn.innerText = '<';
         prevBtn.className = 'page-btn';
         prevBtn.disabled = currentPage === 1;
         prevBtn.onclick = () => changePage(currentPage - 1);
         controls.appendChild(prevBtn);
 
-        // แสดงหน้าปัจจุบัน / ทั้งหมด
         const span = document.createElement('span');
-        span.innerText = ` หน้า ${currentPage} / ${totalPages} `;
+        span.innerText = ` ${currentPage} / ${totalPages} `;
         span.style.color = '#888';
         span.style.fontSize = '0.9rem';
         span.style.margin = '0 10px';
         controls.appendChild(span);
 
-        // ปุ่ม Next
         const nextBtn = document.createElement('button');
-        nextBtn.innerText = 'ถัดไป >';
+        nextBtn.innerText = '>';
         nextBtn.className = 'page-btn';
         nextBtn.disabled = currentPage === totalPages;
         nextBtn.onclick = () => changePage(currentPage + 1);
