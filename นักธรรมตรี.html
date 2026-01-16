@@ -1,273 +1,391 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>โปรแกรมเปลี่ยนชื่อไฟล์เรียงลำดับ (รองรับทุกนามสกุล)</title>
-
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>นักธรรม</title>
+<!-- Import Fonts: Maitree สำหรับหัวข้อ (ดูขลัง/ทางการ) + Sarabun สำหรับเนื้อหา -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Maitree:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#f5f5f5;
-  --surface:#ffffff;
-  --ink:#000;
-  --muted:#444;
-  --line:#ddd;
-  --brand:#2563eb;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:"IBM Plex Sans Thai",sans-serif;
-  background:var(--bg);
-  padding:20px;
-}
-.wrap{max-width:1100px;margin:auto}
-h1{font-size:20px;margin:0}
-.sub{font-size:13px;color:var(--muted)}
+  :root {
+    --primary: #92400E; /* สีน้ำตาลทองเข้ม */
+    --primary-light: #B45309; 
+    --accent: #F59E0B; /* สีทองสว่าง */
+    --gold-gradient: linear-gradient(135deg, #B45309 0%, #F59E0B 100%);
+    --bg-page: #FDFBF7;
+    --text-main: #1F2937;
+    --text-sub: #6B7280;
+    --shadow-card: 0 4px 20px rgba(146, 64, 14, 0.08);
+    --shadow-hover: 0 10px 25px rgba(245, 158, 11, 0.25);
+  }
 
-.grid{
-  display:grid;
-  grid-template-columns:1.2fr .8fr;
-  gap:14px;
-}
-@media(max-width:900px){.grid{grid-template-columns:1fr}}
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-.card{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:14px;
-  overflow:hidden;
-}
-.card-h{
-  padding:14px;
-  border-bottom:1px solid var(--line);
-  font-weight:700;
-}
-.card-b{padding:14px}
+  body {
+    font-family: "Sarabun", sans-serif;
+    background-color: var(--bg-page);
+    /* ลายไทยพื้นหลังแบบจางมากๆ */
+    background-image: radial-gradient(#F59E0B 0.5px, transparent 0.5px), radial-gradient(#F59E0B 0.5px, var(--bg-page) 0.5px);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 60px;
+  }
 
-.btn{
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:12px;
-  padding:8px 12px;
-  cursor:pointer;
-  font-weight:600;
-}
-.btn.primary{
-  background:var(--brand);
-  color:#fff;
-  border:none;
-}
-.btn.danger{background:#fee;border-color:#f99}
+  /* Header Design */
+  header {
+    width: 100%;
+    padding: 40px 20px 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, #FFFFFF, rgba(255,255,255,0));
+    margin-bottom: 20px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
 
-.drop{
-  border:2px dashed #ccc;
-  border-radius:14px;
-  padding:16px;
-  text-align:center;
-  margin-bottom:12px;
-}
-.list{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-@media(max-width:600px){.list{grid-template-columns:repeat(2,1fr)}}
+  .logo-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--gold-gradient);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    box-shadow: 0 8px 15px rgba(245, 158, 11, 0.4);
+    color: white;
+    transform: rotate(-5deg); /* เอียงนิดๆ ให้ดูมีลูกเล่น */
+  }
+  
+  .logo-icon svg {
+    width: 36px;
+    height: 36px;
+    fill: currentColor;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  }
 
-.item{
-  border:1px solid var(--line);
-  border-radius:12px;
-  overflow:hidden;
-  position:relative;
-}
-.thumb{
-  height:120px;
-  background:#f0f0f0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:13px;
-  color:#555;
-}
-.thumb img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-}
-.meta{padding:8px}
-.old{font-size:12px;color:#666;word-break:break-all}
-.new{font-size:13px;font-weight:700;word-break:break-all}
-.idx{
-  position:absolute;
-  top:6px;right:6px;
-  background:#0008;
-  color:#fff;
-  font-size:11px;
-  padding:4px 6px;
-  border-radius:8px;
-}
-.form{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-@media(max-width:500px){.form{grid-template-columns:1fr}}
-.field{
-  width:100%;
-  padding:8px;
-  border-radius:10px;
-  border:1px solid var(--line);
-}
-.status{font-size:12px;color:#555;margin-top:8px}
+  header h1 {
+    font-family: "Maitree", serif;
+    font-size: 2rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 5px;
+    letter-spacing: -0.5px;
+  }
+
+  header p {
+    font-family: "Maitree", serif;
+    color: var(--text-sub);
+    font-size: 0.95rem;
+  }
+
+  /* Container */
+  .container {
+    width: 100%;
+    max-width: 600px; /* บีบให้แคบลงเพื่อความสวยงามบนจอคอม */
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Facebook Section */
+  .fb-wrapper {
+    background: white;
+    border-radius: 16px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  
+  .fb-page, .fb-page span, .fb-page iframe {
+    width: 100% !important;
+  }
+
+  /* Menu List */
+  .menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* --- NEW CARD DESIGN --- */
+  .doc-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 24px; /* มุมโค้งมนมากขึ้น */
+    padding: 18px 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    /* เงาซ้อนกันเพื่อให้ดูลอยตัว */
+    box-shadow: 
+      0 10px 20px -5px rgba(0, 0, 0, 0.05),
+      0 2px 6px -1px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(245, 158, 11, 0.15); /* ขอบทองจางๆ */
+    overflow: hidden;
+  }
+
+  /* Gradient Overlay (Effect แสง) */
+  .doc-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 30%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 70%);
+    background-size: 200% 100%;
+    transition: background-position 0.5s;
+    opacity: 0;
+  }
+
+  /* Interaction States */
+  .doc-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(245, 158, 11, 0.6); /* ขอบทองเข้มขึ้นเมื่อชี้ */
+  }
+
+  .doc-card:hover::before {
+    opacity: 1;
+    background-position: 100% 0; /* แสงวิ่งผ่าน */
+  }
+
+  .doc-card:active {
+    transform: scale(0.98);
+  }
+
+  /* New Icon Box Design */
+  .icon-box {
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 18px;
+    flex-shrink: 0;
+    /* ไล่เฉดสีพื้นหลังไอคอนให้นุ่ม */
+    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    color: var(--primary);
+    box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.1), 0 4px 6px -2px rgba(245, 158, 11, 0.1);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .doc-card:hover .icon-box {
+    background: var(--gold-gradient); /* เปลี่ยนเป็นสีทองเข้มเมื่อชี้ */
+    color: white;
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 8px 12px -3px rgba(245, 158, 11, 0.4);
+  }
+
+  .icon-box svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+    transition: all 0.3s;
+  }
+
+  /* Text Styling */
+  .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .card-title {
+    font-family: "Maitree", serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+
+  /* Chevron Arrow Styling */
+  .arrow-wrapper {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #F3F4F6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .arrow-icon {
+    width: 18px;
+    height: 18px;
+    fill: #9CA3AF;
+    transition: all 0.3s ease;
+  }
+
+  .doc-card:hover .arrow-wrapper {
+    background: #FFF7ED;
+  }
+
+  .doc-card:hover .arrow-icon {
+    fill: var(--primary);
+    transform: translateX(2px);
+  }
+
+  /* Footer */
+  .footer {
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+  }
+  
+  .footer a {
+    color: var(--text-sub);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-family: "Maitree", serif;
+    opacity: 0.7;
+    transition: 0.2s;
+  }
+
+  .footer a:hover {
+    opacity: 1;
+    color: var(--primary);
+  }
+
 </style>
 </head>
-
 <body>
-<div class="wrap">
 
-  <h1>โปรแกรมเปลี่ยนชื่อไฟล์เรียงลำดับ</h1>
-  <div class="sub">รองรับทุกนามสกุล • Export ZIP • ลากเรียงลำดับได้</div>
+<!-- โหลด SDK ของ Facebook -->
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" 
+  src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v19.0" nonce="abc123">
+</script>
 
-  <div style="height:12px"></div>
+<header>
+  <div class="logo-icon">
+    <!-- Icon: Dhamma Wheel / Lotus abstract -->
+    <svg viewBox="0 0 24 24"><path d="M12,2C12,2 6,8 6,13C6,16.31 8.69,19 12,19C15.31,19 18,16.31 18,13C18,8 12,2 12,2M12,22C9.5,22 8,20.5 8,20.5L12,18L16,20.5C16,20.5 14.5,22 12,22Z" /></svg>
+  </div>
+  <h1>นักธรรม</h1>
+  <p>ปัญญาบารมี ธรรมศึกษาเพื่อชีวิต</p>
+</header>
 
-  <div class="grid">
-    <!-- LEFT -->
-    <div class="card">
-      <div class="card-h">1) เลือกไฟล์</div>
-      <div class="card-b">
+<div class="container">
 
-        <div class="drop" id="dropZone">
-          ลากไฟล์ทุกชนิดมาวางที่นี่<br>
-          หรือ <label class="btn" for="fileInput">เลือกไฟล์</label>
-          <input id="fileInput" type="file" multiple hidden>
-        </div>
-
-        <div class="list" id="list"></div>
-
-      </div>
+  <!-- Facebook Page Section -->
+  <div class="fb-wrapper">
+    <div class="fb-page" 
+      data-href="https://www.facebook.com/p/%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%AA%E0%B8%99%E0%B8%B2%E0%B8%A1%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87-Royal-Dhamma-Studies-Office-61568725258865/" 
+      data-tabs="timeline" 
+      data-width="500" 
+      data-height="" 
+      data-small-header="false" 
+      data-adapt-container-width="true" 
+      data-hide-cover="false" 
+      data-show-facepile="true">
     </div>
+  </div>
 
-    <!-- RIGHT -->
-    <div class="card">
-      <div class="card-h">2) ตั้งชื่อไฟล์</div>
-      <div class="card-b">
-
-        <div class="form">
-          <div>
-            <label>Prefix</label>
-            <input class="field" id="prefix" placeholder="file_">
-          </div>
-          <div>
-            <label>เลขเริ่มต้น</label>
-            <input class="field" id="startNum" type="number" value="1">
-          </div>
-          <div>
-            <label>จำนวนหลัก</label>
-            <select class="field" id="pad">
-              <option value="2">2 (01)</option>
-              <option value="3" selected>3 (001)</option>
-              <option value="4">4 (0001)</option>
-              <option value="5">5 (00001)</option>
-            </select>
-          </div>
-          <div>
-            <label>นามสกุลไฟล์</label>
-            <select class="field" id="extMode">
-              <option value="keep" selected>คงเดิม</option>
-              <option value="jpg">.jpg</option>
-              <option value="png">.png</option>
-              <option value="pdf">.pdf</option>
-              <option value="zip">.zip</option>
-            </select>
-          </div>
-        </div>
-
-        <div style="height:10px"></div>
-
-        <button class="btn primary" id="zipBtn">ดาวน์โหลด ZIP</button>
-        <button class="btn danger" id="clearBtn">ล้างทั้งหมด</button>
-
-        <div class="status" id="status">ยังไม่เลือกไฟล์</div>
+  <!-- Menu List -->
+  <div class="menu-list">
+    
+    <!-- นักธรรมตรี : หนังสือ/คัมภีร์ -->
+    <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%95%E0%B8%A3" class="doc-card" target="_blank">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/></svg>
       </div>
-    </div>
+      <div class="card-content">
+        <span class="card-title">นักธรรมตรี</span>
+        <span class="card-desc">หลักสูตรพื้นฐาน</span>
+      </div>
+      <div class="arrow-wrapper">
+        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </div>
+    </a>
+
+    <!-- นักธรรมโท : ธรรมจักร -->
+    <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1-%E0%B9%82%E0%B8%97" class="doc-card" target="_blank">
+      <div class="icon-box">
+         <svg viewBox="0 0 24 24"><path d="M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4M12,6C8.69,6 6,8.69 6,12C6,15.31 8.69,18 12,18C15.31,18 18,15.31 18,12C18,8.69 15.31,6 12,6M12,8C14.21,8 16,9.79 16,12C16,14.21 14.21,16 12,16C9.79,16 8,14.21 8,12C8,9.79 9.79,8 12,8Z"/></svg>
+      </div>
+      <div class="card-content">
+        <span class="card-title">นักธรรมโท</span>
+        <span class="card-desc">หลักสูตรชั้นกลาง</span>
+      </div>
+      <div class="arrow-wrapper">
+        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </div>
+    </a>
+
+    <!-- นักธรรมเอก : เจดีย์ -->
+    <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%AD%E0%B8%81" class="doc-card" target="_blank">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M12,2L3,18H21L12,2M12,5L18,16H6L12,5M12,11V13H14V11H12Z"/></svg>
+      </div>
+      <div class="card-content">
+        <span class="card-title">นักธรรมเอก</span>
+        <span class="card-desc">หลักสูตรชั้นสูง</span>
+      </div>
+      <div class="arrow-wrapper">
+        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </div>
+    </a>
+
+    <!-- ข้อสอบย้อนหลัง : นาฬิกาย้อนเวลา -->
+    <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%82%E0%B8%AD%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%A2%E0%B8%AD%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%87" class="doc-card" target="_blank">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M13,3A9,9 0 0,0 4,12H1L4.89,15.89L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3M12,8V13L16.28,15.54L17,14.29L13.5,12.25V8H12Z" /></svg>
+      </div>
+      <div class="card-content">
+        <span class="card-title">ข้อสอบย้อนหลัง</span>
+        <span class="card-desc">คลังข้อสอบเก่า</span>
+      </div>
+      <div class="arrow-wrapper">
+        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </div>
+    </a>
+
+    <!-- แบบทดสอบ 100 ข้อ : กระดาษสอบ -->
+    <a href="https://sites.google.com/view/nakthamtee/%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A-100-%E0%B8%82%E0%B8%AD?authuser=0" class="doc-card" target="_blank">
+      <div class="icon-box">
+        <svg viewBox="0 0 24 24"><path d="M14,10H2V12H14V10M14,6H2V8H14V6M2,16H10V14H2V16M21.5,11.5L23,13L16,20L11.5,15.5L13,14L16,17L21.5,11.5Z" /></svg>
+      </div>
+      <div class="card-content">
+        <span class="card-title">แบบทดสอบ 100 ข้อ</span>
+        <span class="card-desc">ทดสอบความรู้</span>
+      </div>
+      <div class="arrow-wrapper">
+        <svg class="arrow-icon" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" /></svg>
+      </div>
+    </a>
+
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+<footer class="footer">
+  <a href="#">นโยบายความเป็นส่วนตัว</a>
+</footer>
 
-<script>
-const fileInput=document.getElementById('fileInput');
-const dropZone=document.getElementById('dropZone');
-const listEl=document.getElementById('list');
-const prefixEl=document.getElementById('prefix');
-const startNumEl=document.getElementById('startNum');
-const padEl=document.getElementById('pad');
-const extModeEl=document.getElementById('extMode');
-const zipBtn=document.getElementById('zipBtn');
-const clearBtn=document.getElementById('clearBtn');
-const statusEl=document.getElementById('status');
-
-let items=[];
-
-const padNum=(n,w)=>String(n).padStart(w,'0');
-const getExt=(n)=>n.includes('.')?n.split('.').pop():'';
-
-function computeNames(){
-  const start=+startNumEl.value;
-  const pad=+padEl.value;
-  items.forEach((it,i)=>{
-    const ext=extModeEl.value==='keep'?getExt(it.file.name):extModeEl.value;
-    it.newName=`${prefixEl.value}${padNum(start+i,pad)}${ext?'.'+ext:''}`;
-  });
-}
-
-function render(){
-  computeNames();
-  listEl.innerHTML='';
-  items.forEach((it,i)=>{
-    const isImg=it.file.type.startsWith('image/');
-    const div=document.createElement('div');
-    div.className='item';
-    div.innerHTML=`
-      <div class="idx">#${i+1}</div>
-      <div class="thumb">
-        ${isImg?`<img src="${it.url}">`:`📄 ${it.file.name}`}
-      </div>
-      <div class="meta">
-        <div class="old">${it.file.name}</div>
-        <div class="new">${it.newName}</div>
-      </div>`;
-    listEl.appendChild(div);
-  });
-  statusEl.textContent=items.length?`ไฟล์ทั้งหมด ${items.length}`:'ยังไม่เลือกไฟล์';
-}
-
-function addFiles(files){
-  [...files].forEach(f=>{
-    items.push({file:f,url:URL.createObjectURL(f),newName:''});
-  });
-  render();
-}
-
-dropZone.ondragover=e=>{e.preventDefault()};
-dropZone.ondrop=e=>{e.preventDefault();addFiles(e.dataTransfer.files)};
-fileInput.onchange=e=>addFiles(e.target.files);
-
-clearBtn.onclick=()=>{items=[];render()};
-
-zipBtn.onclick=async()=>{
-  if(!items.length)return alert('ไม่มีไฟล์');
-  const zip=new JSZip();
-  const folder=zip.folder('renamed-files');
-  for(const it of items){
-    folder.file(it.newName, await it.file.arrayBuffer());
-  }
-  const blob=await zip.generateAsync({type:'blob'});
-  saveAs(blob,'renamed_files.zip');
-};
-</script>
 </body>
 </html>
