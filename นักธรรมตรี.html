@@ -15,6 +15,7 @@
     --primary-light: #B45309; 
     --accent: #F59E0B; /* สีทองสว่าง */
     --gold-gradient: linear-gradient(135deg, #B45309 0%, #F59E0B 100%);
+    --ai-gradient: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%); /* สีม่วง AI */
     --bg-page: #FDFBF7;
     --text-main: #1F2937;
     --text-sub: #6B7280;
@@ -40,7 +41,7 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    padding-bottom: 60px;
+    padding-bottom: 120px; /* เพิ่มพื้นที่ด้านล่างกันปุ่มบัง */
   }
 
   /* Header Design */
@@ -58,7 +59,7 @@
     width: 60px;
     height: 60px;
     background: var(--gold-gradient);
-    border-radius: 50%; /* เปลี่ยนเป็นวงกลมให้ดูเหมือนธรรมจักร/เหรียญ */
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -99,6 +100,347 @@
     gap: 16px;
   }
 
+  /* --- Floating Actions Container --- */
+  .floating-actions {
+    position: fixed;
+    bottom: 24px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* ชิดขวา */
+    gap: 12px;
+    z-index: 900;
+  }
+
+  /* Floating Button Style */
+  .fab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 50px;
+    color: white;
+    font-family: "Maitree", serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .fab-btn:active {
+    transform: scale(0.95);
+  }
+
+  .fab-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+  }
+
+  /* Check-in Specific Style */
+  .fab-checkin {
+    background: var(--gold-gradient);
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* AI Chatbot Specific Style */
+  .fab-chatbot {
+    background: var(--ai-gradient);
+    padding: 12px 18px;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* --- Chatbot Window Styles --- */
+  .chat-window {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .chat-window.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* Mobile Chat Window */
+  @media (max-width: 480px) {
+    .chat-window {
+      right: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 70vh;
+      border-radius: 20px 20px 0 0;
+      margin: 0;
+    }
+  }
+
+  .chat-header {
+    background: var(--ai-gradient);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+
+  .chat-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-family: "Maitree", serif;
+  }
+
+  .close-chat {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.8;
+  }
+
+  .chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #F9FAFB;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .message {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+  }
+
+  .message.bot {
+    align-self: flex-start;
+  }
+
+  .message.user {
+    align-self: flex-end;
+    align-items: flex-end;
+  }
+
+  .msg-bubble {
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    word-wrap: break-word;
+  }
+
+  .message.bot .msg-bubble {
+    background: white;
+    color: var(--text-main);
+    border-top-left-radius: 4px;
+    border: 1px solid #E5E7EB;
+  }
+
+  .message.user .msg-bubble {
+    background: var(--primary);
+    color: white;
+    border-top-right-radius: 4px;
+    background: var(--ai-gradient);
+  }
+
+  .msg-time {
+    font-size: 0.7rem;
+    color: #9CA3AF;
+    margin-top: 4px;
+  }
+
+  .chat-input-area {
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #E5E7EB;
+    display: flex;
+    gap: 10px;
+  }
+
+  .chat-input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #E5E7EB;
+    border-radius: 25px;
+    font-family: "Sarabun", sans-serif;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .chat-input:focus {
+    border-color: #7C3AED;
+  }
+
+  .send-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--ai-gradient);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .send-btn:active {
+    transform: scale(0.9);
+  }
+
+  /* Typing Indicator */
+  .typing {
+    display: flex;
+    gap: 4px;
+    padding: 5px 0;
+  }
+  .typing span {
+    width: 6px;
+    height: 6px;
+    background: #9CA3AF;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+  }
+  .typing span:nth-child(1) { animation-delay: -0.32s; }
+  .typing span:nth-child(2) { animation-delay: -0.16s; }
+  @keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+  }
+
+
+  /* --- Modal (Popup) Styles --- */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .modal-content {
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+    position: relative;
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .modal-overlay.active .modal-content {
+    transform: scale(1);
+  }
+
+  .modal-icon {
+    width: 80px;
+    height: 80px;
+    background: #FEF3C7;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: #D97706;
+  }
+
+  .modal-icon svg { width: 48px; height: 48px; }
+
+  .modal-title {
+    font-family: "Maitree", serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+
+  .modal-desc {
+    color: var(--text-sub);
+    font-size: 1rem;
+    margin-bottom: 25px;
+    line-height: 1.5;
+  }
+
+  .modal-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  /* Special Reward Modal Style */
+  .modal-content.reward {
+    background: linear-gradient(135deg, #FFFBEB 0%, #FFFFFF 100%);
+    border: 2px solid #F59E0B;
+  }
+  .modal-content.reward .modal-icon {
+    background: linear-gradient(135deg, #F59E0B 0%, #B45309 100%);
+    color: white;
+    box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);
+  }
+  .secret-code {
+    background: #F3F4F6;
+    padding: 15px;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: #111;
+    margin: 15px 0;
+    border: 1px dashed #9CA3AF;
+  }
+
   /* Facebook Section */
   .fb-wrapper {
     background: white;
@@ -118,15 +460,15 @@
   /* --- Grid Layout 2 Columns --- */
   .menu-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* แบ่งเป็น 2 คอลัมน์เท่ากัน */
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
-  /* Card Design ปรับเป็นแนวตั้ง */
+  /* Card Design */
   .doc-card {
     position: relative;
     display: flex;
-    flex-direction: column; /* เรียงไอคอนไว้บน ข้อความไว้ล่าง */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -137,7 +479,7 @@
     transition: all 0.3s ease;
     box-shadow: var(--shadow-card);
     border: 1px solid rgba(245, 158, 11, 0.1);
-    height: 100%; /* ให้การ์ดสูงเท่ากัน */
+    height: 100%;
   }
 
   .doc-card:hover {
@@ -158,8 +500,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 0; /* เอา margin ขวาออก */
-    margin-bottom: 12px; /* เพิ่มระยะห่างด้านล่างแทน */
+    margin-right: 0;
+    margin-bottom: 12px;
     background: linear-gradient(135deg, #FFF7ED 0%, #FEF3C7 100%);
     color: var(--primary);
     box-shadow: inset 0 0 0 1px rgba(245, 158, 11, 0.15);
@@ -200,12 +542,7 @@
     font-size: 0.75rem;
     color: var(--text-sub);
     font-weight: 400;
-    display: block; /* แสดงคำอธิบาย */
-  }
-
-  /* ซ่อนลูกศรในโหมด Grid เพื่อความสะอาดตา */
-  .arrow-wrapper {
-    display: none;
+    display: block;
   }
 
   /* Footer */
@@ -223,14 +560,17 @@
     opacity: 0.7;
   }
 
-  /* Media Query: หน้าจอใหญ่ปรับ Grid กว้างขึ้น */
+  /* Media Query */
   @media (min-width: 640px) {
     .menu-list {
-      grid-template-columns: repeat(3, 1fr); /* Tablet/PC เป็น 3 คอลัมน์ */
+      grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
     .doc-card {
       padding: 24px 16px;
+    }
+    .chat-window {
+        width: 380px;
     }
   }
 
@@ -272,7 +612,7 @@
   <!-- Menu List Grid -->
   <div class="menu-list">
     
-    <!-- นักธรรมตรี : ดอกบัว (Lotus) สื่อถึงการเริ่มต้นเบ่งบาน -->
+    <!-- นักธรรมตรี -->
     <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%95%E0%B8%A3" class="doc-card" target="_blank">
       <div class="icon-box">
         <svg viewBox="0 0 24 24"><path d="M12,2C12,2 6,8 6,13C6,16.31 8.69,19 12,19C15.31,19 18,16.31 18,13C18,8 12,2 12,2M12,22C9.5,22 8,20.5 8,20.5L12,18L16,20.5C16,20.5 14.5,22 12,22Z"/></svg>
@@ -283,7 +623,7 @@
       </div>
     </a>
 
-    <!-- นักธรรมโท : ธรรมจักร (Dhamma Wheel) สื่อถึงการหมุนกงล้อแห่งธรรม -->
+    <!-- นักธรรมโท -->
     <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1-%E0%B9%82%E0%B8%97" class="doc-card" target="_blank">
       <div class="icon-box">
          <svg viewBox="0 0 24 24"><path d="M11,6V9L13.5,7.5L11,6M13,9V6L15.5,7.5L13,9M7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17C9.24,17 7,14.76 7,12M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"/></svg>
@@ -294,7 +634,7 @@
       </div>
     </a>
 
-    <!-- นักธรรมเอก : เจดีย์ (Chedi) สื่อถึงยอดแห่งธรรม -->
+    <!-- นักธรรมเอก -->
     <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%AD%E0%B8%81" class="doc-card" target="_blank">
       <div class="icon-box">
         <svg viewBox="0 0 24 24"><path d="M12,2L5,14H19L12,2M12,5.27L16.27,12.5H7.73L12,5.27M6,15V17H18V15H6M4,18V20H20V18H4Z"/></svg>
@@ -305,7 +645,7 @@
       </div>
     </a>
 
-    <!-- ข้อสอบย้อนหลัง : คัมภีร์ใบลาน/หนังสือ (Scripture) สื่อถึงการทบทวน -->
+    <!-- ข้อสอบย้อนหลัง -->
     <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%82%E0%B8%AD%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%A2%E0%B8%AD%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%87" class="doc-card" target="_blank">
       <div class="icon-box">
         <svg viewBox="0 0 24 24"><path d="M19,2L14,6.5V17.5L19,13V2M6.5,5C4.55,5 2.45,5.4 1,6.5V21.16C1,21.41 1.25,21.66 1.5,21.66C1.6,21.66 1.65,21.59 1.75,21.59C3.1,20.94 5.05,20.5 6.5,20.5C8.45,20.5 10.55,20.9 12,22C13.35,21.15 15.8,20.5 17.5,20.5C19.15,20.5 20.85,20.81 22.25,21.56C22.35,21.61 22.4,21.59 22.5,21.59C22.75,21.59 23,21.34 23,21.09V6.5C22.4,5.9 21.5,5.4 20.5,5C19,4.5 17.5,4.5 16,5C14.8,5.4 13.55,5.9 12.5,6.5L12,6.5L11.5,6.5C10.45,5.9 9.2,5.4 8,5C7.5,4.8 7,4.8 6.5,5Z"/></svg>
@@ -316,7 +656,7 @@
       </div>
     </a>
 
-    <!-- แบบทดสอบ 100 ข้อ : แสงเทียน (Candle/Light) สื่อถึงปัญญา -->
+    <!-- แบบทดสอบ 100 ข้อ -->
     <a href="https://sites.google.com/view/nakthamtee/%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A-100-%E0%B8%82%E0%B8%AD?authuser=0" class="doc-card" target="_blank">
       <div class="icon-box">
         <svg viewBox="0 0 24 24"><path d="M12,2A2,2 0 0,1 14,4C14,5.1 13.1,6 12,6A2,2 0 0,1 10,4C10,2.9 10.9,2 12,2M10,8H14C15.1,8 16,8.9 16,10V20C16,21.1 15.1,22 14,22H10C8.9,22 8,21.1 8,20V10C8,8.9 8.9,8 10,8M10,10V20H14V10H10Z"/></svg>
@@ -333,6 +673,223 @@
 <footer class="footer">
   <a href="#">นโยบายความเป็นส่วนตัว</a>
 </footer>
+
+<!-- Floating Actions (Bottom Right) -->
+<div class="floating-actions">
+  <!-- Check-in Button -->
+  <button class="fab-btn fab-checkin" onclick="handleCheckIn()">
+    <svg viewBox="0 0 24 24"><path d="M19,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V5H19V19M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8L10,17Z"/></svg>
+    เช็คชื่อ
+  </button>
+  
+  <!-- AI Chatbot Button -->
+  <button class="fab-btn fab-chatbot" onclick="toggleChatbot()">
+    <svg viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12C4,16.1 7.1,19.45 11.1,19.95L10.5,17.5L12,17L13.5,17.5L12.9,19.95C16.9,19.45 20,16.1 20,12A8,8 0 0,0 12,4M10.5,8A1.5,1.5 0 0,1 12,9.5A1.5,1.5 0 0,1 10.5,11A1.5,1.5 0 0,1 9,9.5A1.5,1.5 0 0,1 10.5,8M15,9.5A1.5,1.5 0 0,1 16.5,11A1.5,1.5 0 0,1 15,12.5A1.5,1.5 0 0,1 13.5,11A1.5,1.5 0 0,1 15,9.5Z"/></svg>
+    AI Chatbot
+  </button>
+</div>
+
+<!-- Chatbot Window -->
+<div id="chatbot-window" class="chat-window">
+  <div class="chat-header">
+    <div class="chat-title">
+        <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:white;"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12C4,16.1 7.1,19.45 11.1,19.95L10.5,17.5L12,17L13.5,17.5L12.9,19.95C16.9,19.45 20,16.1 20,12A8,8 0 0,0 12,4M10.5,8A1.5,1.5 0 0,1 12,9.5A1.5,1.5 0 0,1 10.5,11A1.5,1.5 0 0,1 9,9.5A1.5,1.5 0 0,1 10.5,8M15,9.5A1.5,1.5 0 0,1 16.5,11A1.5,1.5 0 0,1 15,12.5A1.5,1.5 0 0,1 13.5,11A1.5,1.5 0 0,1 15,9.5Z"/></svg>
+        AI Backend Worker
+    </div>
+    <button class="close-chat" onclick="toggleChatbot()">×</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <!-- Default Welcome Message -->
+    <div class="message bot">
+        <div class="msg-bubble">เจริญพร ถามปัญหาธรรมะหรือข้อมูลการสอบได้เลย</div>
+        <div class="msg-time">ตอนนี้</div>
+    </div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chat-input" class="chat-input" placeholder="พิมพ์คำถาม..." onkeypress="handleEnter(event)">
+    <button class="send-btn" onclick="sendMessage()">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:white;margin-left:2px;"><path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- Modals -->
+<!-- 1. Normal Check-in Success -->
+<div id="modal-success" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24"><path d="M9,16.17L4.83,12L3.41,13.41L9,19L21,7L19.59,5.59L9,16.17Z"/></svg>
+    </div>
+    <h3 class="modal-title">เช็คชื่อสำเร็จ!</h3>
+    <p class="modal-desc">คุณได้สะสมแต้มบุญวันนี้แล้ว<br>จำนวนวันสะสม: <b id="streak-count" style="color:#D97706">0</b> วัน</p>
+    <button class="modal-btn" onclick="closeModal('modal-success')">ตกลง</button>
+  </div>
+</div>
+
+<!-- 2. Already Checked-in -->
+<div id="modal-error" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-icon" style="background:#FEE2E2; color:#DC2626;">
+      <svg viewBox="0 0 24 24"><path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M11,7H13V13H11V7M11,15H13V17H11V15Z"/></svg>
+    </div>
+    <h3 class="modal-title" style="color:#DC2626;">วันนี้เช็คชื่อไปแล้ว</h3>
+    <p class="modal-desc">คุณสามารถเช็คชื่อได้วันละ 1 ครั้ง ครบ 100 วัน รับลบโฆษณาฟรีถาวร<br>โปรดกลับมาใหม่พรุ่งนี้</p>
+    <button class="modal-btn" onclick="closeModal('modal-error')" style="background:#DC2626;">ตกลง</button>
+  </div>
+</div>
+
+<!-- 3. Reward (100 Days) -->
+<div id="modal-reward" class="modal-overlay">
+  <div class="modal-content reward">
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24"><path d="M12,1L9,9L1,12L9,15L12,23L15,15L23,12L15,9L12,1Z"/></svg>
+    </div>
+    <h3 class="modal-title">ยินดีด้วย! ครบ 100 วัน</h3>
+    <p class="modal-desc">ความเพียรของคุณสัมฤทธิ์ผลแล้ว<br>นี่คือรหัสลับพิเศษสำหรับคุณ:</p>
+    <div class="secret-code">no-ads-2025</div>
+    <button class="modal-btn" onclick="closeModal('modal-reward')">รับรางวัล</button>
+  </div>
+</div>
+
+<script>
+  // Helper to open/close modals
+  function showModal(id) {
+    document.getElementById(id).classList.add('active');
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+  }
+
+  // Check-in Logic
+  function handleCheckIn() {
+    const today = new Date().toDateString(); // e.g. "Mon Jan 01 2024"
+    const lastCheckIn = localStorage.getItem('naktham_last_checkin');
+    let streak = parseInt(localStorage.getItem('naktham_streak') || '0');
+
+    // Case 1: Already checked in today
+    if (lastCheckIn === today) {
+      showModal('modal-error');
+      return;
+    }
+
+    // Case 2: New Check-in
+    streak++;
+    
+    // Save to storage
+    localStorage.setItem('naktham_last_checkin', today);
+    localStorage.setItem('naktham_streak', streak);
+
+    // Update UI
+    document.getElementById('streak-count').innerText = streak;
+
+    // Check Reward Condition
+    if (streak === 100) {
+      showModal('modal-reward');
+    } else {
+      showModal('modal-success');
+    }
+  }
+
+  // --- AI Chatbot Logic ---
+  const chatWindow = document.getElementById('chatbot-window');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatInput = document.getElementById('chat-input');
+  
+  // Backend URL (Cloudflare Worker)
+  const BACKEND_URL = 'https://spring-bush-acec.tontakankeawpang321.workers.dev';
+
+  function toggleChatbot() {
+    chatWindow.classList.toggle('active');
+    if(chatWindow.classList.contains('active')) {
+      setTimeout(() => chatInput.focus(), 300);
+    }
+  }
+
+  function handleEnter(e) {
+    if (e.key === 'Enter') {
+      sendMessage();
+    }
+  }
+
+  async function sendMessage() {
+    const text = chatInput.value.trim();
+    if (!text) return;
+
+    // 1. Add User Message
+    addMessage(text, 'user');
+    chatInput.value = '';
+
+    // 2. Add Typing Indicator
+    const typingId = addTypingIndicator();
+
+    try {
+        // 3. Call Backend
+        const response = await fetch(BACKEND_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: text })
+        });
+
+        if (!response.ok) throw new Error('Network response was not ok');
+
+        // Try to parse JSON, if fails, use text
+        const contentType = response.headers.get("content-type");
+        let botReply = "";
+
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+             const data = await response.json();
+             // Adjust this based on your actual worker response structure
+             botReply = data.reply || data.response || data.message || JSON.stringify(data);
+        } else {
+             botReply = await response.text();
+        }
+
+        removeTypingIndicator(typingId);
+        addMessage(botReply, 'bot');
+
+    } catch (error) {
+        console.error('Error:', error);
+        removeTypingIndicator(typingId);
+        addMessage("ขออภัย ระบบ AI กำลังประมวลผลหนักเกินไป หรือการเชื่อมต่อขัดข้อง (กรุณาลองใหม่)", 'bot');
+    }
+  }
+
+  function addMessage(text, sender) {
+    const div = document.createElement('div');
+    div.className = `message ${sender}`;
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    
+    div.innerHTML = `
+      <div class="msg-bubble">${text}</div>
+      <div class="msg-time">${time}</div>
+    `;
+    
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function addTypingIndicator() {
+    const div = document.createElement('div');
+    div.className = 'message bot';
+    div.id = 'typing-' + Date.now();
+    div.innerHTML = `
+      <div class="msg-bubble">
+        <div class="typing"><span></span><span></span><span></span></div>
+      </div>
+    `;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return div.id;
+  }
+
+  function removeTypingIndicator(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  }
+
+</script>
 
 </body>
 </html>
