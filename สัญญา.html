@@ -4,10 +4,10 @@
     <base target="_top">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Smart Data Directory</title>
+    <title>Corporate Data Directory</title>
     
-    <!-- Google Fonts: Prompt -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Sarabun (ทางการกว่า Prompt นิดหน่อย) หรือ Prompt เหมือนเดิมก็ได้ -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -15,59 +15,75 @@
     
     <style>
         :root {
-            --primary-color: #444;       /* สีหลักเข้มขึ้นแบบ Minimal */
-            --accent-color: #0d6efd;     /* สีฟ้าสำหรับปุ่ม */
-            --bg-color: #ffffff;         /* พื้นหลังขาวสะอาด */
-            --text-color: #333;
-            --border-color: #eee;
+            /* Palette: Professional Corporate */
+            --header-bg: #1e293b;        /* สีน้ำเงินเข้มเกือบดำ */
+            --header-text: #ffffff;
+            --primary-color: #2563eb;    /* สีน้ำเงินสดสำหรับปุ่ม */
+            --primary-hover: #1d4ed8;
+            --bg-color: #f1f5f9;         /* สีพื้นหลังเทาอ่อน */
+            --card-bg: #ffffff;
+            --text-main: #334155;        /* สีตัวหนังสือเทาเข้ม */
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
         }
 
         body {
-            background-color: #f8f9fa;
-            color: var(--text-color);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Prompt', sans-serif;
             font-weight: 300;
-            padding-bottom: 40px;
+            padding-bottom: 60px;
         }
 
-        /* --- Header Minimal --- */
+        /* --- Header Design --- */
         .app-header {
-            background: #fff;
-            border-bottom: 1px solid #ddd;
-            padding: 15px 0;
-            margin-bottom: 20px;
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            padding: 20px 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
 
         .app-title {
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: #000;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
             margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        /* --- Search Box Clean --- */
-        .search-wrapper {
+        .app-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            font-weight: 300;
+            margin-top: 2px;
+        }
+
+        /* --- Search Box --- */
+        .search-container {
+            max-width: 700px;
+            margin: 0 auto 30px auto;
             position: relative;
-            margin-bottom: 20px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .search-input {
-            border: 1px solid #ddd;
-            border-radius: 50px;
-            padding: 10px 20px 10px 45px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 14px 20px 14px 50px;
             width: 100%;
-            background: #fff;
-            font-size: 0.95rem;
-            transition: all 0.2s;
+            background: var(--card-bg);
+            font-size: 1rem;
+            color: var(--text-main);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
         .search-icon {
@@ -75,286 +91,216 @@
             left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: #999;
+            color: var(--text-muted);
+            font-size: 1.1rem;
         }
 
-        /* --- Table Clean Design --- */
-        .table-container {
-            background: #fff;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            overflow: hidden; /* มุมมน */
+        /* --- Table Design --- */
+        .table-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
         }
 
-        .clean-table {
-            margin-bottom: 0;
+        .custom-table {
             width: 100%;
-            /* white-space: nowrap; เอาออกเพื่อให้ชื่อยาวๆ ตัดบรรทัดได้บนมือถือ */
+            margin-bottom: 0;
+            border-collapse: collapse;
         }
 
-        .clean-table th {
-            background-color: #fcfcfc;
-            color: #666;
-            font-weight: 500;
-            border-bottom: 2px solid #eee;
-            padding: 12px 15px;
-            font-size: 0.9rem;
+        .custom-table th {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            padding: 16px 20px;
+            border-bottom: 2px solid var(--border-color);
             white-space: nowrap;
         }
 
-        .clean-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #f0f0f0;
+        .custom-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
             vertical-align: middle;
-            color: #444;
+            color: var(--text-main);
+            font-size: 0.95rem;
         }
 
-        .clean-table tr:hover td {
-            background-color: #f8faff;
+        .custom-table tr:hover td {
+            background-color: #f8fafc;
         }
 
-        .clean-table tr:last-child td {
+        .custom-table tr:last-child td {
             border-bottom: none;
         }
 
-        /* --- Mobile Optimization --- */
-        @media (max-width: 768px) {
-            .app-title { font-size: 1.2rem; }
-            
-            /* ลดระยะห่างในตารางเมื่อเป็นมือถือ */
-            .clean-table th, .clean-table td {
-                padding: 10px 8px; 
-                font-size: 0.85rem;
-            }
-
-            /* ปรับ Modal ให้เต็มจอ 100% บนมือถือ */
-            .modal-fullscreen-custom {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-            }
-            .modal-content {
-                height: 100%;
-                border-radius: 0;
-            }
-            .modal-header-custom {
-                border-radius: 0;
-            }
-            .modal-body-custom {
-                height: calc(100vh - 50px);
-            }
-            iframe {
-                border-radius: 0;
-            }
-        }
-
-        /* Buttons */
-        .btn-view {
-            color: var(--accent-color);
-            border: 1px solid var(--accent-color);
-            background: transparent;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            transition: all 0.2s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .btn-view:hover {
-            background: var(--accent-color);
+        /* --- Buttons --- */
+        .btn-open-link {
+            background-color: var(--primary-color);
             color: #fff;
-        }
-
-        .btn-link-ext {
-            color: #666;
-            border: 1px solid #ddd;
-            background: transparent;
-            padding: 4px 8px; /* Square-ish */
-            border-radius: 4px;
-            font-size: 0.85rem;
-            transition: all 0.2s;
             text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            margin-left: 5px;
-        }
-        
-        .btn-link-ext:hover {
-            border-color: #999;
-            color: #333;
-            background: #f1f1f1;
+            gap: 8px;
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            border: 1px solid transparent;
         }
 
-        /* --- Modal Fullscreen --- */
-        .modal-fullscreen-custom {
-            width: 98%;
-            max-width: 1400px;
-            height: 95vh;
-            margin: 10px auto;
-        }
-        
-        .modal-body-custom {
-            padding: 0;
-            background: #000;
-            height: calc(95vh - 50px); /* หักความสูง Header */
-            display: flex;
-            flex-direction: column;
-            position: relative;
+        .btn-open-link:hover {
+            background-color: var(--primary-hover);
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
         }
 
-        .modal-header-custom {
-            height: 50px;
-            padding: 0 15px;
-            background: white;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 8px 8px 0 0;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: #fff;
-            border-radius: 0 0 8px 8px;
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            .custom-table th, .custom-table td {
+                padding: 12px 15px;
+            }
+            .app-title {
+                font-size: 1.25rem;
+            }
+            /* ให้ตารางเลื่อนแนวนอนได้ถ้าจอเล็กมาก */
+            .table-responsive {
+                overflow-x: auto;
+            }
+            .btn-open-link {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
         }
 
         /* Pagination */
-        .pagination-simple {
+        .pagination-container {
+            margin-top: 25px;
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+            justify-content: flex-end;
             align-items: center;
-            font-size: 0.9rem;
-            color: #777;
+            gap: 15px;
+            padding: 0 10px;
         }
-        
-        .btn-page {
-            border: none;
-            background: none;
-            color: #333;
-            font-weight: 500;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        .btn-page:disabled { color: #ccc; cursor: default; }
-        .btn-page:hover:not(:disabled) { color: var(--accent-color); }
 
-        /* Loading */
-        #loading { text-align: center; padding: 40px; color: #999; }
+        .page-info {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .btn-page {
+            background: white;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-page:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-page:disabled {
+            opacity: 0.5;
+            cursor: default;
+        }
+
+        #loading { text-align: center; padding: 60px; color: var(--text-muted); }
     </style>
 </head>
 <body>
 
+    <!-- Professional Header -->
     <header class="app-header">
-        <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center">
-            <h1 class="app-title">สารบัญข้อมูล</h1>
-            <button onclick="loadData()" class="btn btn-sm btn-outline-secondary" style="border: 1px solid #ddd;">
-                <i class="bi bi-arrow-clockwise"></i>
-            </button>
+        <div class="container-fluid px-4 px-lg-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="app-title">
+                        <i class="bi bi-database-fill-gear"></i> สารบัญข้อมูลองค์กร
+                    </h1>
+                    <div class="app-subtitle">Centralized Data Directory System</div>
+                </div>
+                <button onclick="loadData()" class="btn btn-outline-light btn-sm opacity-75">
+                    <i class="bi bi-arrow-clockwise"></i> อัปเดตข้อมูล
+                </button>
+            </div>
         </div>
     </header>
 
-    <div class="container-fluid px-3 px-md-4">
-        <!-- Search -->
-        <div class="search-wrapper">
+    <div class="container-fluid px-4 px-lg-5">
+        
+        <!-- Search Area -->
+        <div class="search-container">
             <i class="bi bi-search search-icon"></i>
-            <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเอกสาร..." onkeyup="filterData()">
+            <input type="text" id="searchInput" class="search-input" placeholder="ค้นหารายการเอกสาร..." onkeyup="filterData()">
         </div>
 
-        <!-- Data Area -->
+        <!-- Content Area -->
         <div id="loading">
-            <div class="spinner-border text-secondary" role="status" style="width: 2rem; height: 2rem;"></div>
+            <div class="spinner-border text-secondary" role="status"></div>
+            <div class="mt-3 font-weight-light">กำลังเชื่อมต่อฐานข้อมูล...</div>
         </div>
 
         <div id="dataContainer" style="display: none;">
-            <!-- ใช้ table-responsive เพื่อให้เลื่อนซ้ายขวาได้ในมือถือ เหมือนตารางเดิม -->
-            <div class="table-container table-responsive">
-                <table class="clean-table">
+            <div class="table-card table-responsive">
+                <table class="custom-table">
                     <thead>
                         <tr>
-                            <th style="width: 40px; text-align: center;">#</th>
-                            <th>ชื่อเอกสาร</th>
-                            <!-- ตัดคอลัมน์หมวดหมู่ออก -->
-                            <th style="width: 120px; text-align: right;">การกระทำ</th>
+                            <th style="width: 60px; text-align: center;">ลำดับ</th>
+                            <th>รายการเอกสาร</th>
+                            <th style="width: 150px; text-align: right;">การเข้าถึง</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <!-- Data Rows -->
+                        <!-- Data Rows Generated via JS -->
                     </tbody>
                 </table>
             </div>
 
-            <div id="emptyState" style="display: none; text-align: center; padding: 40px; color: #aaa;">
-                ไม่พบข้อมูล
+            <div id="emptyState" style="display: none; text-align: center; padding: 60px; color: #94a3b8;">
+                <i class="bi bi-inbox" style="font-size: 2.5rem; display: block; margin-bottom: 10px;"></i>
+                ไม่พบข้อมูลที่ค้นหา
             </div>
 
-            <!-- Simple Pagination -->
-            <div id="paginationFooter" class="pagination-simple" style="display: none;">
-                <button class="btn-page" id="prevBtn" onclick="changePage(currentPage - 1)">ก่อนหน้า</button>
-                <span>หน้า <span id="curPageDisplay" style="color:#000;">1</span> / <span id="totalPageDisplay">1</span></span>
-                <button class="btn-page" id="nextBtn" onclick="changePage(currentPage + 1)">ถัดไป</button>
+            <div id="paginationFooter" class="pagination-container" style="display: none;">
+                <span class="page-info">
+                    แสดงหน้า <strong id="curPageDisplay">1</strong> จาก <span id="totalPageDisplay">1</span>
+                </span>
+                <div>
+                    <button class="btn-page" id="prevBtn" onclick="changePage(currentPage - 1)">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button class="btn-page" id="nextBtn" onclick="changePage(currentPage + 1)">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
             </div>
         </div>
+
     </div>
 
-    <!-- Preview Modal -->
-    <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
-        <div class="modal-dialog modal-fullscreen-custom">
-            <div class="modal-content" style="background: transparent; border: none;">
-                
-                <!-- Header ของ Modal: มีปุ่มกลับหน้าหลัก แต่ไม่มีปุ่มไป Drive -->
-                <div class="modal-header-custom">
-                    <div class="d-flex align-items-center overflow-hidden">
-                        <button type="button" class="btn btn-outline-dark btn-sm me-3" data-bs-dismiss="modal" style="min-width: 80px;">
-                            <i class="bi bi-arrow-left"></i> กลับ
-                        </button>
-                        <span id="previewTitle" class="text-truncate fw-normal" style="max-width: 300px; font-size: 0.95rem;">
-                            ตัวอย่างเอกสาร
-                        </span>
-                    </div>
-                </div>
-
-                <div class="modal-body-custom">
-                    <iframe id="previewFrame" src="" allow="autoplay"></iframe>
-                    
-                    <div id="iframeFallback" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #f9f9f9; flex-direction: column; justify-content: center; align-items: center; z-index: 10;">
-                        <i class="bi bi-file-earmark-lock" style="font-size: 3rem; color: #ccc;"></i>
-                        <p class="mt-3 text-secondary">ไม่สามารถแสดงตัวอย่างได้</p>
-                        <a id="fallbackLinkBtn" href="#" target="_blank" class="btn btn-outline-primary btn-sm">
-                            เปิดในหน้าต่างใหม่
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
+    <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         const CSV_DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTItiReSbPwa0Fz_Afzmi8BrcUdpzdOINQiV7xFkiKWvl_x1KzmEKItpJjQNjtz1SgheZYdL3s4cSiy/pub?output=csv';
-        const ITEMS_PER_PAGE = 15; // แสดงเยอะขึ้นเพราะตารางแน่นขึ้น
+        const ITEMS_PER_PAGE = 15;
 
         let allData = [];
         let filteredData = [];
         let currentPage = 1;
-        let previewModal;
 
-        window.onload = function() {
-            previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
-            loadData();
-        };
+        window.onload = loadData;
 
         function loadData() {
             toggleLoading(true);
@@ -367,7 +313,11 @@
                 })
                 .catch(err => {
                     console.error(err);
-                    document.getElementById('loading').innerHTML = '<span class="text-danger">Error loading data</span>';
+                    document.getElementById('loading').innerHTML = `
+                        <div class="text-danger">
+                            <i class="bi bi-exclamation-triangle"></i> ไม่สามารถโหลดข้อมูลได้
+                        </div>
+                    `;
                 });
         }
 
@@ -378,8 +328,7 @@
             const header = rows[0].split(',').map(h => h.trim().toLowerCase());
             let nameIdx = header.findIndex(h => h.includes('name') || h.includes('ชื่อ'));
             let urlIdx = header.findIndex(h => h.includes('url') || h.includes('link'));
-            // ยังคงอ่าน category ไว้สำหรับการค้นหา แต่จะไม่แสดงผล
-            let catIdx = header.findIndex(h => h.includes('category') || h.includes('หมวด'));
+            let catIdx = header.findIndex(h => h.includes('category') || h.includes('หมวด')); // Keep for search
 
             if (nameIdx === -1) nameIdx = 0;
             if (urlIdx === -1) urlIdx = 1;
@@ -392,39 +341,21 @@
                 const name = cols[nameIdx]?.trim() || 'No Name';
                 const rawUrl = cols[urlIdx]?.trim() || '#';
                 
-                // Format URL for Preview Mode (Google Drive Magic)
-                const finalUrl = formatUrlForPreview(rawUrl);
-
+                // สำหรับ search เท่านั้น ไม่แสดงผล
                 let cat = 'General';
                 if (catIdx !== -1 && cols[catIdx]) cat = cols[catIdx].trim();
 
-                allData.push({ name, url: finalUrl, originalUrl: rawUrl, category: cat });
+                allData.push({ name, url: rawUrl, category: cat });
             }
             filteredData = [...allData];
         }
 
-        // ฟังก์ชันหัวใจสำคัญ: แปลงลิงก์ Google Drive ให้เป็นโหมด Preview
-        function formatUrlForPreview(url) {
-            if (!url) return '';
-            
-            // กรณีเป็น Google Drive File / View
-            // เปลี่ยนจาก /view หรือ /view?usp=sharing เป็น /preview
-            if (url.includes('drive.google.com') && url.includes('/view')) {
-                return url.replace(/\/view.*/, '/preview');
-            }
-            
-            // กรณีเป็น Docs/Sheets/Slides /edit
-            // เปลี่ยนจาก /edit เป็น /preview
-            if (url.includes('docs.google.com') && url.includes('/edit')) {
-                return url.replace(/\/edit.*/, '/preview');
-            }
-
-            return url;
-        }
-
         function filterData() {
             const q = document.getElementById('searchInput').value.toLowerCase();
-            filteredData = allData.filter(d => d.name.toLowerCase().includes(q) || d.category.toLowerCase().includes(q));
+            filteredData = allData.filter(d => 
+                d.name.toLowerCase().includes(q) || 
+                d.category.toLowerCase().includes(q)
+            );
             currentPage = 1;
             renderTable();
         }
@@ -450,15 +381,13 @@
             items.forEach((item, idx) => {
                 html += `
                     <tr>
-                        <td style="text-align: center; color: #999;">${start + idx + 1}</td>
-                        <td style="font-weight: 400; color: #333; white-space: normal; min-width: 150px;">${item.name}</td>
-                        <!-- ตัดการแสดงผลคอลัมน์หมวดหมู่ออก -->
+                        <td style="text-align: center; color: #94a3b8; font-weight: 400;">${start + idx + 1}</td>
+                        <td style="font-weight: 500; color: var(--text-main);">
+                            ${item.name}
+                        </td>
                         <td style="text-align: right;">
-                            <button onclick="openPreview('${item.url}', '${item.name.replace(/'/g, "\\'")}', '${item.originalUrl}')" class="btn-view" title="ดูตัวอย่าง">
-                                <i class="bi bi-eye"></i> <span class="d-none d-sm-inline">เปิด</span>
-                            </button>
-                            <a href="${item.originalUrl}" target="_blank" class="btn-link-ext" title="เปิดลิงก์ภายนอก">
-                                <i class="bi bi-box-arrow-up-right"></i>
+                            <a href="${item.url}" target="_blank" class="btn-open-link">
+                                <span>เปิดเอกสาร</span> <i class="bi bi-box-arrow-up-right"></i>
                             </a>
                         </td>
                     </tr>
@@ -466,39 +395,25 @@
             });
             tbody.innerHTML = html;
             
+            updatePagination();
+        }
+
+        function updatePagination() {
             document.getElementById('curPageDisplay').innerText = currentPage;
             document.getElementById('totalPageDisplay').innerText = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
             document.getElementById('prevBtn').disabled = currentPage === 1;
-            document.getElementById('nextBtn').disabled = currentPage === Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+            document.getElementById('nextBtn').disabled = currentPage >= Math.ceil(filteredData.length / ITEMS_PER_PAGE);
         }
 
         function changePage(p) {
             currentPage = p;
             renderTable();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleLoading(show) {
             document.getElementById('loading').style.display = show ? 'block' : 'none';
             document.getElementById('dataContainer').style.display = show ? 'none' : 'block';
-        }
-
-        function openPreview(url, title, originalUrl) {
-            const frame = document.getElementById('previewFrame');
-            const fallback = document.getElementById('iframeFallback');
-            const titleEl = document.getElementById('previewTitle');
-            const fbBtn = document.getElementById('fallbackLinkBtn');
-
-            titleEl.innerText = title;
-            frame.src = '';
-            frame.style.display = 'block';
-            fallback.style.display = 'none';
-            fbBtn.href = originalUrl; // ลิงก์สำรองให้ใช้ Original เผื่อ Preview พัง
-
-            previewModal.show();
-
-            setTimeout(() => {
-                frame.src = url;
-            }, 100);
         }
     </script>
 </body>
