@@ -1,471 +1,682 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="th">
+<head>
     <base target="_top">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Data Directory</title>
     
     <!-- Google Fonts: Prompt -->
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     
     <style>
-      :root {
-        --primary-color: #333;
-        --secondary-color: #666;
-        --bg-color: #fcfcfc;
-        --card-bg: #ffffff;
-        --border-color: #eee;
-      }
-
-      body {
-        background-color: var(--bg-color);
-        color: var(--primary-color);
-        font-family: 'Prompt', sans-serif;
-        padding: 40px 20px;
-        min-height: 100vh;
-      }
-
-      .container {
-        max-width: 1000px;
-        padding: 0; /* ลด padding ของ container */
-      }
-
-      /* Title Section */
-      .app-header {
-        margin-bottom: 30px;
-        border-bottom: 2px solid var(--primary-color);
-        padding-bottom: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
-      }
-
-      .app-title {
-        font-size: 2rem;
-        font-weight: 600;
-        margin: 0;
-        letter-spacing: -0.5px;
-      }
-
-      .app-subtitle {
-        color: var(--secondary-color);
-        font-weight: 300;
-        font-size: 0.9rem;
-        margin-top: 5px;
-      }
-
-      /* Search Box */
-      .search-wrapper {
-        margin-bottom: 20px;
-      }
-      
-      .search-input {
-        background-color: transparent;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        padding: 12px 15px;
-        font-size: 1rem;
-        width: 100%;
-        transition: all 0.2s;
-      }
-      
-      .search-input:focus {
-        border-color: var(--primary-color);
-        outline: none;
-        box-shadow: none;
-      }
-
-      /* Table Design */
-      .table-container {
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        overflow: hidden;
-      }
-
-      .custom-table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      .custom-table th {
-        text-align: left;
-        padding: 15px 20px;
-        font-weight: 600;
-        color: var(--primary-color);
-        border-bottom: 2px solid var(--border-color);
-        font-size: 0.95rem;
-        background-color: #fafafa;
-        white-space: nowrap;
-      }
-
-      .custom-table td {
-        padding: 15px 20px;
-        border-bottom: 1px solid var(--border-color);
-        vertical-align: middle;
-        font-weight: 300;
-        color: var(--secondary-color);
-      }
-
-      .custom-table tr:hover td {
-        background-color: #f9f9f9;
-        color: #000;
-      }
-
-      .custom-table tr:last-child td {
-        border-bottom: none;
-      }
-
-      /* Text Badges (แทนรูปภาพ) */
-      .category-badge {
-        display: inline-block;
-        font-size: 0.75rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        padding: 4px 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        color: #555;
-        background: #fff;
-        min-width: 60px;
-        text-align: center;
-      }
-
-      /* Link Button */
-      .btn-open {
-        display: inline-block;
-        text-decoration: none;
-        color: #000;
-        border: 1px solid #000;
-        padding: 6px 16px;
-        font-size: 0.85rem;
-        border-radius: 4px;
-        transition: all 0.2s;
-        font-weight: 500;
-        white-space: nowrap;
-      }
-
-      .btn-open:hover {
-        background-color: #000;
-        color: #fff;
-      }
-
-      /* Pagination */
-      .pagination-container {
-        margin-top: 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 10px;
-        flex-wrap: wrap; /* ให้ปุ่มตกบรรทัดได้ถ้ายาวเกิน */
-        gap: 10px;
-      }
-
-      .page-btn {
-        border: none;
-        background: none;
-        font-weight: 600;
-        cursor: pointer;
-        padding: 5px 10px;
-        color: #888;
-      }
-      
-      .page-btn:hover { color: #000; }
-      .page-btn.active { color: #000; border-bottom: 2px solid #000; }
-      .page-btn:disabled { color: #ccc; cursor: default; }
-
-      /* Loading */
-      #loading {
-        text-align: center;
-        padding: 40px;
-        color: #999;
-        font-weight: 300;
-      }
-
-      /* Mobile Responsiveness Styles */
-      @media (max-width: 768px) {
-        body {
-          padding: 20px 15px; /* ลดขอบหน้าจอ */
+        :root {
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Prompt', sans-serif;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        /* --- Header & Nav --- */
         .app-header {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 15px;
-          margin-bottom: 20px;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .app-title {
-          font-size: 1.6rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .app-subtitle {
-          font-size: 0.85rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 2px;
         }
 
-        /* ปรับตารางให้เล็กลง */
-        .custom-table th, 
+        /* --- Search Area --- */
+        .search-container {
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 1px solid #e5e7eb;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            background: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        /* --- Data Cards / Table --- */
+        .data-container {
+            background: transparent;
+        }
+
+        /* Desktop Table View */
+        .desktop-table-container {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            display: block;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .custom-table th {
+            background: #f8fafc;
+            padding: 16px;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+        }
+
         .custom-table td {
-          padding: 12px 10px;
-          font-size: 0.85rem;
+            padding: 16px;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: middle;
         }
 
-        /* ซ่อนคอลัมน์ลำดับบนมือถือเพื่อประหยัดที่ */
-        .col-index {
-          display: none;
+        .custom-table tr:hover td {
+            background-color: #f8fafc;
         }
 
+        /* Badge Styling */
         .category-badge {
-          font-size: 0.7rem;
-          padding: 2px 6px;
-          min-width: auto;
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background-color: #eff6ff;
+            color: var(--primary-color);
+            border: 1px solid #dbeafe;
         }
 
-        .btn-open {
-          padding: 4px 12px;
-          font-size: 0.8rem;
+        /* Action Buttons */
+        .btn-action {
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-preview {
+            background-color: #eff6ff;
+            color: var(--primary-color);
+        }
+        .btn-preview:hover {
+            background-color: #dbeafe;
+            color: var(--primary-hover);
+        }
+
+        .btn-external {
+            background-color: transparent;
+            color: var(--text-muted);
+        }
+        .btn-external:hover {
+            color: var(--text-main);
+            background-color: #f3f4f6;
+        }
+
+        /* Mobile Card View (Hidden by default on Desktop) */
+        .mobile-card-list {
+            display: none;
+            gap: 15px;
+        }
+
+        .mobile-card {
+            background: var(--card-bg);
+            padding: 16px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: transform 0.2s;
         }
         
-        /* ปรับ pagination */
-        .pagination-container {
-            justify-content: center;
-            font-size: 0.85rem;
+        .mobile-card:active {
+            transform: scale(0.98);
         }
-      }
+
+        .m-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+        
+        .m-card-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .m-card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #f3f4f6;
+        }
+        
+        .m-card-actions .btn-action {
+            flex: 1;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        /* --- Modal for Preview --- */
+        .modal-fullscreen-custom {
+            width: 95%;
+            max-width: 1200px;
+            height: 90vh;
+            margin: auto;
+        }
+        
+        .modal-body {
+            padding: 0;
+            background: #000;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #fff;
+        }
+        
+        .modal-header-custom {
+            padding: 10px 15px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .iframe-error {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            background: #f8f9fa;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- Pagination --- */
+        .pagination-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #e5e7eb;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-main);
+        }
+
+        .page-btn:hover:not(:disabled) {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: #eff6ff;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* --- Loading --- */
+        #loading {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-muted);
+        }
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* --- Responsive Breakpoints --- */
+        @media (max-width: 768px) {
+            .desktop-table-container {
+                display: none;
+            }
+            .mobile-card-list {
+                display: flex;
+                flex-direction: column;
+            }
+            .app-title {
+                font-size: 1.25rem;
+            }
+            .modal-fullscreen-custom {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                max-width: none;
+            }
+            .modal-dialog {
+                margin: 0;
+            }
+            .modal-content {
+                height: 100%;
+                border-radius: 0;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container header-content">
+            <div>
+                <h1 class="app-title">
+                    <i class="bi bi-folder2-open"></i> สารบัญข้อมูล
+                </h1>
+                <div class="app-subtitle">Data Directory System</div>
+            </div>
+            <button onclick="loadData()" class="btn btn-light btn-sm rounded-pill px-3 shadow-sm border">
+                <i class="bi bi-arrow-clockwise"></i> รีโหลด
+            </button>
+        </div>
+    </header>
 
     <div class="container">
-      <!-- Header -->
-      <div class="app-header">
-        <div>
-          <h1 class="app-title">สารบัญข้อมูล</h1>
-          <div class="app-subtitle">Data Directory System</div>
-        </div>
-        <button onclick="loadData()" class="btn-open" style="border: 1px solid #ccc; font-weight: 400;">
-          รีโหลด
-        </button>
-      </div>
-
-      <!-- Search -->
-      <div class="search-wrapper">
-        <input type="text" id="searchInput" class="search-input" placeholder="พิมพ์เพื่อค้นหา..." onkeyup="filterData()">
-      </div>
-
-      <!-- Content -->
-      <div class="table-container">
-        <div class="table-responsive">
-          <table class="custom-table">
-            <thead>
-              <tr id="tableHeaderRow">
-                <!-- Headers จะถูกสร้างโดย JavaScript -->
-                <th class="col-index">ลำดับ</th>
-                <th>ชื่อเอกสาร</th>
-                <th>หมวดหมู่</th>
-                <!-- ลบคอลัมน์ข้อมูลอื่นๆ ออก -->
-                <th style="text-align: right;">เปิด</th>
-              </tr>
-            </thead>
-            <tbody id="fileTableBody">
-              <!-- Data -->
-            </tbody>
-          </table>
-        </div>
         
-        <div id="loading">กำลังโหลดข้อมูล...</div>
-        <div id="emptyState" style="display: none; padding: 40px; text-align: center; color: #aaa;">
-          ไม่พบข้อมูล
+        <!-- Search -->
+        <div class="search-container">
+            <i class="bi bi-search search-icon"></i>
+            <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเอกสาร, หมวดหมู่..." onkeyup="filterData()">
         </div>
-      </div>
 
-      <!-- Pagination -->
-      <div id="paginationFooter" class="pagination-container" style="display: none;">
-        <div style="font-size: 0.9rem; color: #888;">
-          รายการที่ <span id="startItem">0</span> - <span id="endItem">0</span> จาก <span id="totalItems">0</span>
+        <!-- Content Area -->
+        <div id="loading">
+            <div class="spinner-border" role="status"></div>
+            <p class="mt-3">กำลังเชื่อมต่อฐานข้อมูล...</p>
         </div>
-        <div id="paginationControls">
-          <!-- Buttons -->
+
+        <div id="dataContainer" class="data-container" style="display: none;">
+            
+            <!-- Desktop View (Table) -->
+            <div class="desktop-table-container">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th width="50">#</th>
+                            <th>ชื่อเอกสาร</th>
+                            <th width="150">หมวดหมู่</th>
+                            <th width="180" class="text-end">การกระทำ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data rows will be injected here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Mobile View (Cards) -->
+            <div id="mobileList" class="mobile-card-list">
+                <!-- Data cards will be injected here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" style="display: none; padding: 60px 20px; text-align: center;">
+                <i class="bi bi-inbox" style="font-size: 3rem; color: #d1d5db;"></i>
+                <p style="color: #6b7280; margin-top: 15px;">ไม่พบข้อมูลที่ค้นหา</p>
+            </div>
+
         </div>
-      </div>
+
+        <!-- Pagination -->
+        <div id="paginationFooter" class="pagination-container" style="display: none;">
+            <button class="page-btn" id="prevBtn" onclick="changePage(currentPage - 1)">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+            <span style="font-size: 0.9rem; color: var(--text-muted);">
+                หน้า <span id="curPageDisplay" style="font-weight: 600; color: var(--text-main);">1</span> จาก <span id="totalPageDisplay">1</span>
+            </span>
+            <button class="page-btn" id="nextBtn" onclick="changePage(currentPage + 1)">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
 
     </div>
 
+    <!-- Preview Modal -->
+    <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-custom">
+            <div class="modal-content">
+                <div class="modal-header-custom">
+                    <div class="d-flex align-items-center" style="min-width: 0; flex: 1;">
+                        <button type="button" class="btn btn-light border btn-sm me-2" data-bs-dismiss="modal" style="flex-shrink: 0;">
+                            <i class="bi bi-chevron-left"></i> กลับหน้าหลัก
+                        </button>
+                        <h5 class="m-0 text-truncate" id="previewTitle" style="font-size: 1rem; font-weight: 500; color: var(--text-main);">
+                            ตัวอย่างเอกสาร
+                        </h5>
+                    </div>
+                    <div style="flex-shrink: 0;">
+                        <a id="externalLinkBtn" href="#" target="_blank" class="btn btn-sm btn-primary">
+                            <i class="bi bi-box-arrow-up-right"></i> <span class="d-none d-sm-inline">เปิดเต็มจอ</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-body position-relative">
+                    <iframe id="previewFrame" src="" allowfullscreen></iframe>
+                    
+                    <!-- Fallback for X-Frame-Options -->
+                    <div id="iframeFallback" class="iframe-error">
+                        <i class="bi bi-shield-lock" style="font-size: 3rem; color: #9ca3af; margin-bottom: 15px;"></i>
+                        <p>เว็บไซต์นี้ไม่อนุญาตให้แสดงตัวอย่างในหน้านี้</p>
+                        <a id="fallbackLinkBtn" href="#" target="_blank" class="btn btn-primary rounded-pill px-4">
+                            เปิดในหน้าต่างใหม่
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-      // URL ของ CSV
-      const CSV_DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTItiReSbPwa0Fz_Afzmi8BrcUdpzdOINQiV7xFkiKWvl_x1KzmEKItpJjQNjtz1SgheZYdL3s4cSiy/pub?output=csv';
-      
-      let allData = [];
-      let filteredData = [];
-      let currentPage = 1;
-      const itemsPerPage = 10;
-      let headers = [];
+        // --- Configuration ---
+        const CSV_DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTItiReSbPwa0Fz_Afzmi8BrcUdpzdOINQiV7xFkiKWvl_x1KzmEKItpJjQNjtz1SgheZYdL3s4cSiy/pub?output=csv';
+        const ITEMS_PER_PAGE = 12;
 
-      // คอลัมน์ที่สำคัญ (Index)
-      let nameIdx = -1;
-      let urlIdx = -1;
-      let categoryIdx = -1; // ถ้าใน CSV มี
-      
-      window.onload = loadData;
+        // --- State ---
+        let allData = [];
+        let filteredData = [];
+        let currentPage = 1;
+        let previewModal;
 
-      function loadData() {
-        document.getElementById('loading').style.display = 'block';
-        document.getElementById('fileTableBody').innerHTML = '';
-        document.getElementById('emptyState').style.display = 'none';
-        
-        if (CSV_DATA_URL) {
+        window.onload = function() {
+            previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+            loadData();
+        };
+
+        function loadData() {
+            toggleLoading(true);
+            
             fetch(CSV_DATA_URL)
                 .then(res => res.text())
                 .then(csvText => {
                     parseCSV(csvText);
-                    renderTable();
-                    document.getElementById('loading').style.display = 'none';
+                    renderAll();
+                    toggleLoading(false);
                 })
                 .catch(err => {
                     console.error(err);
-                    document.getElementById('loading').innerText = 'เกิดข้อผิดพลาดในการโหลดไฟล์ CSV';
+                    document.getElementById('loading').innerHTML = `
+                        <div class="text-danger">
+                            <i class="bi bi-exclamation-circle" style="font-size: 2rem;"></i>
+                            <p class="mt-2">ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ</p>
+                            <button onclick="loadData()" class="btn btn-outline-danger btn-sm mt-2">ลองใหม่</button>
+                        </div>
+                    `;
                 });
         }
-      }
 
-      function parseCSV(text) {
-        const rows = text.split(/\r\n|\n/).filter(r => r.trim() !== '');
-        if (rows.length === 0) return;
+        function parseCSV(text) {
+            const rows = text.split(/\r\n|\n/).filter(r => r.trim() !== '');
+            if (rows.length === 0) return;
 
-        // 1. อ่าน Header
-        const headerRow = rows[0].split(',');
-        headers = headerRow.map(h => h.trim());
-
-        // 2. หา Index ของคอลัมน์สำคัญ
-        nameIdx = headers.findIndex(h => h.toLowerCase().includes('name') || h.includes('ชื่อ'));
-        if (nameIdx === -1) nameIdx = 0; // Default
-
-        urlIdx = headers.findIndex(h => h.toLowerCase().includes('url') || h.toLowerCase().includes('link') || h.includes('ลิงก์'));
-        if (urlIdx === -1) urlIdx = 1; // Default
-
-        categoryIdx = headers.findIndex(h => h.toLowerCase().includes('category') || h.includes('หมวด') || h.toLowerCase().includes('type'));
-        
-        // 3. อ่านข้อมูล
-        allData = [];
-        for (let i = 1; i < rows.length; i++) {
-            const cols = rows[i].split(',').map(c => c.trim());
+            const headerRow = rows[0].split(',').map(h => h.trim().toLowerCase());
             
-            if (cols.length < 2) continue;
+            // Auto-detect columns
+            let nameIdx = headerRow.findIndex(h => h.includes('name') || h.includes('ชื่อ'));
+            if (nameIdx === -1) nameIdx = 0;
 
-            const name = cols[nameIdx] || 'ไม่มีชื่อ';
-            const url = cols[urlIdx] || '#';
-            
-            // หาหมวดหมู่ (Category)
-            let category = 'ทั่วไป';
-            if (categoryIdx !== -1 && cols[categoryIdx]) {
-                category = cols[categoryIdx];
-            } else {
-                if (!name.includes('.')) {
-                    category = 'FOLDER';
+            let urlIdx = headerRow.findIndex(h => h.includes('url') || h.includes('link') || h.includes('ลิงก์'));
+            if (urlIdx === -1) urlIdx = 1;
+
+            let catIdx = headerRow.findIndex(h => h.includes('category') || h.includes('cat') || h.includes('หมวด'));
+
+            allData = [];
+            for (let i = 1; i < rows.length; i++) {
+                // Handle simple CSV splitting (Note: complex CSV with commas inside quotes might need a library)
+                const cols = rows[i].split(',').map(c => c.trim());
+                if (cols.length < 2) continue;
+
+                const name = cols[nameIdx] || 'Untitled';
+                const url = cols[urlIdx] || '#';
+                
+                let category = 'General';
+                if (catIdx !== -1 && cols[catIdx]) {
+                    category = cols[catIdx];
                 } else {
-                    const ext = name.split('.').pop().toUpperCase();
-                    category = ext;
+                    // Guess category from extension
+                    const ext = name.includes('.') ? name.split('.').pop().toUpperCase() : 'FOLDER';
+                    category = ext.length > 5 ? 'FILE' : ext;
                 }
+
+                allData.push({ name, url, category });
+            }
+            filteredData = [...allData];
+        }
+
+        function filterData() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            filteredData = allData.filter(item => 
+                item.name.toLowerCase().includes(query) || 
+                item.category.toLowerCase().includes(query)
+            );
+            currentPage = 1;
+            renderAll();
+        }
+
+        function renderAll() {
+            const tableBody = document.getElementById('tableBody');
+            const mobileList = document.getElementById('mobileList');
+            const emptyState = document.getElementById('emptyState');
+            const paginationFooter = document.getElementById('paginationFooter');
+
+            // Reset
+            tableBody.innerHTML = '';
+            mobileList.innerHTML = '';
+
+            if (filteredData.length === 0) {
+                emptyState.style.display = 'block';
+                paginationFooter.style.display = 'none';
+                return;
             }
 
-            allData.push({
-                name: name,
-                url: url,
-                category: category
+            emptyState.style.display = 'none';
+            paginationFooter.style.display = 'flex';
+
+            // Pagination Logic
+            const start = (currentPage - 1) * ITEMS_PER_PAGE;
+            const end = Math.min(start + ITEMS_PER_PAGE, filteredData.length);
+            const pageItems = filteredData.slice(start, end);
+
+            // 1. Render Table (Desktop)
+            let tableHtml = '';
+            pageItems.forEach((item, index) => {
+                const globalIndex = start + index + 1;
+                tableHtml += `
+                    <tr>
+                        <td style="color: #9ca3af;">${globalIndex}</td>
+                        <td style="font-weight: 500; color: var(--text-main);">
+                            ${item.name}
+                        </td>
+                        <td><span class="category-badge">${item.category}</span></td>
+                        <td class="text-end">
+                            <button onclick="openPreview('${item.url}', '${item.name.replace(/'/g, "\\'")}')" class="btn-action btn-preview">
+                                <i class="bi bi-eye"></i> ดูตัวอย่าง
+                            </button>
+                        </td>
+                    </tr>
+                `;
             });
+            tableBody.innerHTML = tableHtml;
+
+            // 2. Render Cards (Mobile)
+            let cardHtml = '';
+            pageItems.forEach(item => {
+                cardHtml += `
+                    <div class="mobile-card">
+                        <div class="m-card-header">
+                            <div>
+                                <div class="m-card-title text-truncate">${item.name}</div>
+                                <span class="category-badge">${item.category}</span>
+                            </div>
+                        </div>
+                        <div class="m-card-actions">
+                            <button onclick="openPreview('${item.url}', '${item.name.replace(/'/g, "\\'")}')" class="btn-action btn-preview">
+                                <i class="bi bi-eye"></i> ดูตัวอย่าง
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            mobileList.innerHTML = cardHtml;
+
+            updatePaginationControls();
         }
-        filteredData = allData;
-      }
 
-      function renderTable() {
-        const tbody = document.getElementById('fileTableBody');
-        const emptyState = document.getElementById('emptyState');
-        const paginationFooter = document.getElementById('paginationFooter');
-
-        tbody.innerHTML = '';
-        
-        if (filteredData.length === 0) {
-            emptyState.style.display = 'block';
-            paginationFooter.style.display = 'none';
-            return;
+        function updatePaginationControls() {
+            const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+            document.getElementById('curPageDisplay').innerText = currentPage;
+            document.getElementById('totalPageDisplay').innerText = totalPages;
+            
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
         }
 
-        emptyState.style.display = 'none';
-        paginationFooter.style.display = 'flex';
+        function changePage(newPage) {
+            currentPage = newPage;
+            renderAll();
+            // Scroll to top of list smoothly
+            document.querySelector('.search-container').scrollIntoView({ behavior: 'smooth' });
+        }
 
-        const start = (currentPage - 1) * itemsPerPage;
-        const end = Math.min(start + itemsPerPage, filteredData.length);
-        const pageData = filteredData.slice(start, end);
+        function toggleLoading(isLoading) {
+            document.getElementById('loading').style.display = isLoading ? 'block' : 'none';
+            document.getElementById('dataContainer').style.display = isLoading ? 'none' : 'block';
+            document.getElementById('paginationFooter').style.display = isLoading ? 'none' : 'flex';
+        }
 
-        let html = '';
-        pageData.forEach((item, index) => {
-            const realIndex = start + index + 1;
-            html += `
-            <tr>
-                <td class="col-index" style="color: #999; width: 50px;">${realIndex}</td>
-                <td style="font-weight: 500; color: #000; min-width: 120px;">${item.name}</td>
-                <td><span class="category-badge">${item.category}</span></td>
-                <td style="text-align: right;">
-                    <a href="${item.url}" target="_blank" class="btn-open">เปิด</a>
-                </td>
-            </tr>
-            `;
-        });
-        
-        tbody.innerHTML = html;
+        // --- Preview Logic ---
+        function openPreview(url, title) {
+            const frame = document.getElementById('previewFrame');
+            const fallback = document.getElementById('iframeFallback');
+            const modalTitle = document.getElementById('previewTitle');
+            const extBtn = document.getElementById('externalLinkBtn');
+            const fbBtn = document.getElementById('fallbackLinkBtn');
 
-        document.getElementById('startItem').innerText = start + 1;
-        document.getElementById('endItem').innerText = end;
-        document.getElementById('totalItems').innerText = filteredData.length;
-        
-        renderPaginationControls();
-      }
+            // Reset UI
+            frame.style.display = 'block';
+            fallback.style.display = 'none';
+            frame.src = ''; // Clear old
 
-      function renderPaginationControls() {
-        const totalPages = Math.ceil(filteredData.length / itemsPerPage);
-        const controls = document.getElementById('paginationControls');
-        controls.innerHTML = '';
+            // Set content
+            modalTitle.innerText = title;
+            extBtn.href = url;
+            fbBtn.href = url;
 
-        if (totalPages <= 1) return;
+            // Show modal
+            previewModal.show();
 
-        const prevBtn = document.createElement('button');
-        prevBtn.innerText = '<';
-        prevBtn.className = 'page-btn';
-        prevBtn.disabled = currentPage === 1;
-        prevBtn.onclick = () => changePage(currentPage - 1);
-        controls.appendChild(prevBtn);
+            // Load URL with delay to allow animation
+            setTimeout(() => {
+                frame.src = url;
+            }, 200);
 
-        const span = document.createElement('span');
-        span.innerText = ` ${currentPage} / ${totalPages} `;
-        span.style.color = '#888';
-        span.style.fontSize = '0.9rem';
-        span.style.margin = '0 10px';
-        controls.appendChild(span);
-
-        const nextBtn = document.createElement('button');
-        nextBtn.innerText = '>';
-        nextBtn.className = 'page-btn';
-        nextBtn.disabled = currentPage === totalPages;
-        nextBtn.onclick = () => changePage(currentPage + 1);
-        controls.appendChild(nextBtn);
-      }
-
-      function changePage(page) {
-        currentPage = page;
-        renderTable();
-      }
-
-      function filterData() {
-        const query = document.getElementById('searchInput').value.toLowerCase();
-        filteredData = allData.filter(item => {
-            return item.name.toLowerCase().includes(query) || 
-                   item.category.toLowerCase().includes(query);
-        });
-        currentPage = 1;
-        renderTable();
-      }
+            // Handle Load Error (Note: Cross-origin restriction prevents reading iframe content directly,
+            // so we rely on user manually clicking fallback if visual indicates error)
+            frame.onload = function() {
+                // Some logic could go here, but mostly restricted by browser
+            };
+        }
     </script>
-  </body>
+</body>
 </html>
