@@ -90,7 +90,7 @@
         .clean-table {
             margin-bottom: 0;
             width: 100%;
-            white-space: nowrap; /* ให้ตัวหนังสือเรียงบรรทัดเดียว */
+            /* white-space: nowrap; เอาออกเพื่อให้ชื่อยาวๆ ตัดบรรทัดได้บนมือถือ */
         }
 
         .clean-table th {
@@ -100,6 +100,7 @@
             border-bottom: 2px solid #eee;
             padding: 12px 15px;
             font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         .clean-table td {
@@ -117,6 +118,37 @@
             border-bottom: none;
         }
 
+        /* --- Mobile Optimization --- */
+        @media (max-width: 768px) {
+            .app-title { font-size: 1.2rem; }
+            
+            /* ลดระยะห่างในตารางเมื่อเป็นมือถือ */
+            .clean-table th, .clean-table td {
+                padding: 10px 8px; 
+                font-size: 0.85rem;
+            }
+
+            /* ปรับ Modal ให้เต็มจอ 100% บนมือถือ */
+            .modal-fullscreen-custom {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+            }
+            .modal-content {
+                height: 100%;
+                border-radius: 0;
+            }
+            .modal-header-custom {
+                border-radius: 0;
+            }
+            .modal-body-custom {
+                height: calc(100vh - 50px);
+            }
+            iframe {
+                border-radius: 0;
+            }
+        }
+
         /* Buttons */
         .btn-view {
             color: var(--accent-color);
@@ -131,6 +163,7 @@
             align-items: center;
             gap: 5px;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .btn-view:hover {
@@ -224,7 +257,7 @@
 <body>
 
     <header class="app-header">
-        <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+        <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center">
             <h1 class="app-title">สารบัญข้อมูล</h1>
             <button onclick="loadData()" class="btn btn-sm btn-outline-secondary" style="border: 1px solid #ddd;">
                 <i class="bi bi-arrow-clockwise"></i>
@@ -232,7 +265,7 @@
         </div>
     </header>
 
-    <div class="container-fluid px-4">
+    <div class="container-fluid px-3 px-md-4">
         <!-- Search -->
         <div class="search-wrapper">
             <i class="bi bi-search search-icon"></i>
@@ -250,10 +283,10 @@
                 <table class="clean-table">
                     <thead>
                         <tr>
-                            <th style="width: 50px; text-align: center;">#</th>
+                            <th style="width: 40px; text-align: center;">#</th>
                             <th>ชื่อเอกสาร</th>
                             <!-- ตัดคอลัมน์หมวดหมู่ออก -->
-                            <th style="width: 150px; text-align: right;">การกระทำ</th>
+                            <th style="width: 120px; text-align: right;">การกระทำ</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -418,11 +451,11 @@
                 html += `
                     <tr>
                         <td style="text-align: center; color: #999;">${start + idx + 1}</td>
-                        <td style="font-weight: 400; color: #333;">${item.name}</td>
+                        <td style="font-weight: 400; color: #333; white-space: normal; min-width: 150px;">${item.name}</td>
                         <!-- ตัดการแสดงผลคอลัมน์หมวดหมู่ออก -->
                         <td style="text-align: right;">
                             <button onclick="openPreview('${item.url}', '${item.name.replace(/'/g, "\\'")}', '${item.originalUrl}')" class="btn-view" title="ดูตัวอย่าง">
-                                <i class="bi bi-eye"></i> เปิด
+                                <i class="bi bi-eye"></i> <span class="d-none d-sm-inline">เปิด</span>
                             </button>
                             <a href="${item.originalUrl}" target="_blank" class="btn-link-ext" title="เปิดลิงก์ภายนอก">
                                 <i class="bi bi-box-arrow-up-right"></i>
