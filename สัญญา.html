@@ -7,7 +7,7 @@
     <title>Smart Data Directory</title>
     
     <!-- Google Fonts: Prompt -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -15,79 +15,59 @@
     
     <style>
         :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg-color: #f3f4f6;
-            --card-bg: #ffffff;
-            --text-main: #1f2937;
-            --text-muted: #6b7280;
-            --border-radius: 12px;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --primary-color: #444;       /* สีหลักเข้มขึ้นแบบ Minimal */
+            --accent-color: #0d6efd;     /* สีฟ้าสำหรับปุ่ม */
+            --bg-color: #ffffff;         /* พื้นหลังขาวสะอาด */
+            --text-color: #333;
+            --border-color: #eee;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: #f8f9fa;
+            color: var(--text-color);
             font-family: 'Prompt', sans-serif;
-            min-height: 100vh;
+            font-weight: 300;
             padding-bottom: 40px;
         }
 
-        /* --- Header & Nav --- */
+        /* --- Header Minimal --- */
         .app-header {
-            background: var(--card-bg);
-            box-shadow: var(--shadow-sm);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            margin-bottom: 20px;
         }
 
         .app-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #000;
             margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .app-subtitle {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        /* --- Search Area --- */
-        .search-container {
-            margin: 25px 0;
+        /* --- Search Box Clean --- */
+        .search-wrapper {
             position: relative;
+            margin-bottom: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .search-input {
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            padding: 10px 20px 10px 45px;
             width: 100%;
-            padding: 15px 20px 15px 50px;
-            border: 1px solid #e5e7eb;
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            background: var(--card-bg);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
+            background: #fff;
+            font-size: 0.95rem;
+            transition: all 0.2s;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
         }
 
         .search-icon {
@@ -95,158 +75,116 @@
             left: 18px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 1.2rem;
+            color: #999;
         }
 
-        /* --- Data Cards / Table --- */
-        .data-container {
-            background: transparent;
-        }
-
-        /* Desktop Table View */
-        .desktop-table-container {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-            overflow: hidden;
-            display: block;
-        }
-
-        .custom-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-
-        .custom-table th {
-            background: #f8fafc;
-            padding: 16px;
-            font-weight: 600;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-bottom: 1px solid #e5e7eb;
-            text-align: left;
-        }
-
-        .custom-table td {
-            padding: 16px;
-            border-bottom: 1px solid #f3f4f6;
-            vertical-align: middle;
-        }
-
-        .custom-table tr:hover td {
-            background-color: #f8fafc;
-        }
-
-        /* Badge Styling */
-        .category-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            background-color: #eff6ff;
-            color: var(--primary-color);
-            border: 1px solid #dbeafe;
-        }
-
-        /* Action Buttons */
-        .btn-action {
-            padding: 6px 14px;
+        /* --- Table Clean Design --- */
+        .table-container {
+            background: #fff;
             border-radius: 8px;
-            font-size: 0.85rem;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            overflow: hidden; /* มุมมน */
+        }
+
+        .clean-table {
+            margin-bottom: 0;
+            width: 100%;
+            white-space: nowrap; /* ให้ตัวหนังสือเรียงบรรทัดเดียว */
+        }
+
+        .clean-table th {
+            background-color: #fcfcfc;
+            color: #666;
             font-weight: 500;
+            border-bottom: 2px solid #eee;
+            padding: 12px 15px;
+            font-size: 0.9rem;
+        }
+
+        .clean-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+            color: #444;
+        }
+
+        .clean-table tr:hover td {
+            background-color: #f8faff;
+        }
+
+        .clean-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Buttons */
+        .btn-view {
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            background: transparent;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
             transition: all 0.2s;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            border: none;
+            gap: 5px;
             cursor: pointer;
         }
 
-        .btn-preview {
-            background-color: #eff6ff;
-            color: var(--primary-color);
-        }
-        .btn-preview:hover {
-            background-color: #dbeafe;
-            color: var(--primary-hover);
+        .btn-view:hover {
+            background: var(--accent-color);
+            color: #fff;
         }
 
-        .btn-external {
-            background-color: transparent;
-            color: var(--text-muted);
-        }
-        .btn-external:hover {
-            color: var(--text-main);
-            background-color: #f3f4f6;
-        }
-
-        /* Mobile Card View (Hidden by default on Desktop) */
-        .mobile-card-list {
-            display: none;
-            gap: 15px;
-        }
-
-        .mobile-card {
-            background: var(--card-bg);
-            padding: 16px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            transition: transform 0.2s;
-        }
-        
-        .mobile-card:active {
-            transform: scale(0.98);
-        }
-
-        .m-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-        }
-        
-        .m-card-title {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--text-main);
-            margin-bottom: 4px;
-        }
-
-        .m-card-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #f3f4f6;
-        }
-        
-        .m-card-actions .btn-action {
-            flex: 1;
+        .btn-link-ext {
+            color: #666;
+            border: 1px solid #ddd;
+            background: transparent;
+            padding: 4px 8px; /* Square-ish */
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
             justify-content: center;
-            padding: 10px;
-        }
-
-        /* --- Modal for Preview --- */
-        .modal-fullscreen-custom {
-            width: 95%;
-            max-width: 1200px;
-            height: 90vh;
-            margin: auto;
+            margin-left: 5px;
         }
         
-        .modal-body {
+        .btn-link-ext:hover {
+            border-color: #999;
+            color: #333;
+            background: #f1f1f1;
+        }
+
+        /* --- Modal Fullscreen --- */
+        .modal-fullscreen-custom {
+            width: 98%;
+            max-width: 1400px;
+            height: 95vh;
+            margin: 10px auto;
+        }
+        
+        .modal-body-custom {
             padding: 0;
             background: #000;
-            height: 100%;
+            height: calc(95vh - 50px); /* หักความสูง Header */
             display: flex;
             flex-direction: column;
+            position: relative;
+        }
+
+        .modal-header-custom {
+            height: 50px;
+            padding: 0 15px;
+            background: white;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 8px 8px 0 0;
         }
 
         iframe {
@@ -254,226 +192,127 @@
             height: 100%;
             border: none;
             background: #fff;
+            border-radius: 0 0 8px 8px;
+        }
+
+        /* Pagination */
+        .pagination-simple {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            align-items: center;
+            font-size: 0.9rem;
+            color: #777;
         }
         
-        .modal-header-custom {
-            padding: 10px 15px;
-            background: white;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .iframe-error {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            background: #f8f9fa;
-            color: #666;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* --- Pagination --- */
-        .pagination-container {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .page-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid #e5e7eb;
-            background: var(--card-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .btn-page {
+            border: none;
+            background: none;
+            color: #333;
+            font-weight: 500;
+            padding: 5px 10px;
             cursor: pointer;
-            transition: all 0.2s;
-            color: var(--text-main);
         }
+        .btn-page:disabled { color: #ccc; cursor: default; }
+        .btn-page:hover:not(:disabled) { color: var(--accent-color); }
 
-        .page-btn:hover:not(:disabled) {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            background: #eff6ff;
-        }
-
-        .page-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* --- Loading --- */
-        #loading {
-            text-align: center;
-            padding: 60px;
-            color: var(--text-muted);
-        }
-        .spinner-border {
-            width: 3rem;
-            height: 3rem;
-            color: var(--primary-color);
-        }
-
-        /* --- Responsive Breakpoints --- */
-        @media (max-width: 768px) {
-            .desktop-table-container {
-                display: none;
-            }
-            .mobile-card-list {
-                display: flex;
-                flex-direction: column;
-            }
-            .app-title {
-                font-size: 1.25rem;
-            }
-            .modal-fullscreen-custom {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                max-width: none;
-            }
-            .modal-dialog {
-                margin: 0;
-            }
-            .modal-content {
-                height: 100%;
-                border-radius: 0;
-            }
-        }
+        /* Loading */
+        #loading { text-align: center; padding: 40px; color: #999; }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header class="app-header">
-        <div class="container header-content">
-            <div>
-                <h1 class="app-title">
-                    <i class="bi bi-folder2-open"></i> สารบัญข้อมูล
-                </h1>
-                <div class="app-subtitle">Data Directory System</div>
-            </div>
-            <button onclick="loadData()" class="btn btn-light btn-sm rounded-pill px-3 shadow-sm border">
-                <i class="bi bi-arrow-clockwise"></i> รีโหลด
+        <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+            <h1 class="app-title">สารบัญข้อมูล</h1>
+            <button onclick="loadData()" class="btn btn-sm btn-outline-secondary" style="border: 1px solid #ddd;">
+                <i class="bi bi-arrow-clockwise"></i>
             </button>
         </div>
     </header>
 
-    <div class="container">
-        
+    <div class="container-fluid px-4">
         <!-- Search -->
-        <div class="search-container">
+        <div class="search-wrapper">
             <i class="bi bi-search search-icon"></i>
-            <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเอกสาร, หมวดหมู่..." onkeyup="filterData()">
+            <input type="text" id="searchInput" class="search-input" placeholder="ค้นหาเอกสาร..." onkeyup="filterData()">
         </div>
 
-        <!-- Content Area -->
+        <!-- Data Area -->
         <div id="loading">
-            <div class="spinner-border" role="status"></div>
-            <p class="mt-3">กำลังเชื่อมต่อฐานข้อมูล...</p>
+            <div class="spinner-border text-secondary" role="status" style="width: 2rem; height: 2rem;"></div>
         </div>
 
-        <div id="dataContainer" class="data-container" style="display: none;">
-            
-            <!-- Desktop View (Table) -->
-            <div class="desktop-table-container">
-                <table class="custom-table">
+        <div id="dataContainer" style="display: none;">
+            <!-- ใช้ table-responsive เพื่อให้เลื่อนซ้ายขวาได้ในมือถือ เหมือนตารางเดิม -->
+            <div class="table-container table-responsive">
+                <table class="clean-table">
                     <thead>
                         <tr>
-                            <th width="50">#</th>
+                            <th style="width: 50px; text-align: center;">#</th>
                             <th>ชื่อเอกสาร</th>
-                            <th width="150">หมวดหมู่</th>
-                            <th width="180" class="text-end">การกระทำ</th>
+                            <!-- ตัดคอลัมน์หมวดหมู่ออก -->
+                            <th style="width: 150px; text-align: right;">การกระทำ</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <!-- Data rows will be injected here -->
+                        <!-- Data Rows -->
                     </tbody>
                 </table>
             </div>
 
-            <!-- Mobile View (Cards) -->
-            <div id="mobileList" class="mobile-card-list">
-                <!-- Data cards will be injected here -->
+            <div id="emptyState" style="display: none; text-align: center; padding: 40px; color: #aaa;">
+                ไม่พบข้อมูล
             </div>
 
-            <!-- Empty State -->
-            <div id="emptyState" style="display: none; padding: 60px 20px; text-align: center;">
-                <i class="bi bi-inbox" style="font-size: 3rem; color: #d1d5db;"></i>
-                <p style="color: #6b7280; margin-top: 15px;">ไม่พบข้อมูลที่ค้นหา</p>
+            <!-- Simple Pagination -->
+            <div id="paginationFooter" class="pagination-simple" style="display: none;">
+                <button class="btn-page" id="prevBtn" onclick="changePage(currentPage - 1)">ก่อนหน้า</button>
+                <span>หน้า <span id="curPageDisplay" style="color:#000;">1</span> / <span id="totalPageDisplay">1</span></span>
+                <button class="btn-page" id="nextBtn" onclick="changePage(currentPage + 1)">ถัดไป</button>
             </div>
-
         </div>
-
-        <!-- Pagination -->
-        <div id="paginationFooter" class="pagination-container" style="display: none;">
-            <button class="page-btn" id="prevBtn" onclick="changePage(currentPage - 1)">
-                <i class="bi bi-chevron-left"></i>
-            </button>
-            <span style="font-size: 0.9rem; color: var(--text-muted);">
-                หน้า <span id="curPageDisplay" style="font-weight: 600; color: var(--text-main);">1</span> จาก <span id="totalPageDisplay">1</span>
-            </span>
-            <button class="page-btn" id="nextBtn" onclick="changePage(currentPage + 1)">
-                <i class="bi bi-chevron-right"></i>
-            </button>
-        </div>
-
     </div>
 
     <!-- Preview Modal -->
-    <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
         <div class="modal-dialog modal-fullscreen-custom">
-            <div class="modal-content">
+            <div class="modal-content" style="background: transparent; border: none;">
+                
+                <!-- Header ของ Modal: มีปุ่มกลับหน้าหลัก แต่ไม่มีปุ่มไป Drive -->
                 <div class="modal-header-custom">
-                    <div class="d-flex align-items-center" style="min-width: 0; flex: 1;">
-                        <button type="button" class="btn btn-light border btn-sm me-2" data-bs-dismiss="modal" style="flex-shrink: 0;">
-                            <i class="bi bi-chevron-left"></i> กลับหน้าหลัก
+                    <div class="d-flex align-items-center overflow-hidden">
+                        <button type="button" class="btn btn-outline-dark btn-sm me-3" data-bs-dismiss="modal" style="min-width: 80px;">
+                            <i class="bi bi-arrow-left"></i> กลับ
                         </button>
-                        <h5 class="m-0 text-truncate" id="previewTitle" style="font-size: 1rem; font-weight: 500; color: var(--text-main);">
+                        <span id="previewTitle" class="text-truncate fw-normal" style="max-width: 300px; font-size: 0.95rem;">
                             ตัวอย่างเอกสาร
-                        </h5>
-                    </div>
-                    <div style="flex-shrink: 0;">
-                        <a id="externalLinkBtn" href="#" target="_blank" class="btn btn-sm btn-primary">
-                            <i class="bi bi-box-arrow-up-right"></i> <span class="d-none d-sm-inline">เปิดเต็มจอ</span>
-                        </a>
+                        </span>
                     </div>
                 </div>
-                <div class="modal-body position-relative">
-                    <iframe id="previewFrame" src="" allowfullscreen></iframe>
+
+                <div class="modal-body-custom">
+                    <iframe id="previewFrame" src="" allow="autoplay"></iframe>
                     
-                    <!-- Fallback for X-Frame-Options -->
-                    <div id="iframeFallback" class="iframe-error">
-                        <i class="bi bi-shield-lock" style="font-size: 3rem; color: #9ca3af; margin-bottom: 15px;"></i>
-                        <p>เว็บไซต์นี้ไม่อนุญาตให้แสดงตัวอย่างในหน้านี้</p>
-                        <a id="fallbackLinkBtn" href="#" target="_blank" class="btn btn-primary rounded-pill px-4">
+                    <div id="iframeFallback" style="display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: #f9f9f9; flex-direction: column; justify-content: center; align-items: center; z-index: 10;">
+                        <i class="bi bi-file-earmark-lock" style="font-size: 3rem; color: #ccc;"></i>
+                        <p class="mt-3 text-secondary">ไม่สามารถแสดงตัวอย่างได้</p>
+                        <a id="fallbackLinkBtn" href="#" target="_blank" class="btn btn-outline-primary btn-sm">
                             เปิดในหน้าต่างใหม่
                         </a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // --- Configuration ---
         const CSV_DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTItiReSbPwa0Fz_Afzmi8BrcUdpzdOINQiV7xFkiKWvl_x1KzmEKItpJjQNjtz1SgheZYdL3s4cSiy/pub?output=csv';
-        const ITEMS_PER_PAGE = 12;
+        const ITEMS_PER_PAGE = 15; // แสดงเยอะขึ้นเพราะตารางแน่นขึ้น
 
-        // --- State ---
         let allData = [];
         let filteredData = [];
         let currentPage = 1;
@@ -486,196 +325,147 @@
 
         function loadData() {
             toggleLoading(true);
-            
             fetch(CSV_DATA_URL)
                 .then(res => res.text())
-                .then(csvText => {
-                    parseCSV(csvText);
-                    renderAll();
+                .then(text => {
+                    parseCSV(text);
+                    renderTable();
                     toggleLoading(false);
                 })
                 .catch(err => {
                     console.error(err);
-                    document.getElementById('loading').innerHTML = `
-                        <div class="text-danger">
-                            <i class="bi bi-exclamation-circle" style="font-size: 2rem;"></i>
-                            <p class="mt-2">ไม่สามารถโหลดข้อมูลได้ โปรดตรวจสอบการเชื่อมต่อ</p>
-                            <button onclick="loadData()" class="btn btn-outline-danger btn-sm mt-2">ลองใหม่</button>
-                        </div>
-                    `;
+                    document.getElementById('loading').innerHTML = '<span class="text-danger">Error loading data</span>';
                 });
         }
 
         function parseCSV(text) {
             const rows = text.split(/\r\n|\n/).filter(r => r.trim() !== '');
             if (rows.length === 0) return;
-
-            const headerRow = rows[0].split(',').map(h => h.trim().toLowerCase());
             
-            // Auto-detect columns
-            let nameIdx = headerRow.findIndex(h => h.includes('name') || h.includes('ชื่อ'));
+            const header = rows[0].split(',').map(h => h.trim().toLowerCase());
+            let nameIdx = header.findIndex(h => h.includes('name') || h.includes('ชื่อ'));
+            let urlIdx = header.findIndex(h => h.includes('url') || h.includes('link'));
+            // ยังคงอ่าน category ไว้สำหรับการค้นหา แต่จะไม่แสดงผล
+            let catIdx = header.findIndex(h => h.includes('category') || h.includes('หมวด'));
+
             if (nameIdx === -1) nameIdx = 0;
-
-            let urlIdx = headerRow.findIndex(h => h.includes('url') || h.includes('link') || h.includes('ลิงก์'));
             if (urlIdx === -1) urlIdx = 1;
-
-            let catIdx = headerRow.findIndex(h => h.includes('category') || h.includes('cat') || h.includes('หมวด'));
 
             allData = [];
             for (let i = 1; i < rows.length; i++) {
-                // Handle simple CSV splitting (Note: complex CSV with commas inside quotes might need a library)
-                const cols = rows[i].split(',').map(c => c.trim());
+                const cols = rows[i].split(',');
                 if (cols.length < 2) continue;
 
-                const name = cols[nameIdx] || 'Untitled';
-                const url = cols[urlIdx] || '#';
+                const name = cols[nameIdx]?.trim() || 'No Name';
+                const rawUrl = cols[urlIdx]?.trim() || '#';
                 
-                let category = 'General';
-                if (catIdx !== -1 && cols[catIdx]) {
-                    category = cols[catIdx];
-                } else {
-                    // Guess category from extension
-                    const ext = name.includes('.') ? name.split('.').pop().toUpperCase() : 'FOLDER';
-                    category = ext.length > 5 ? 'FILE' : ext;
-                }
+                // Format URL for Preview Mode (Google Drive Magic)
+                const finalUrl = formatUrlForPreview(rawUrl);
 
-                allData.push({ name, url, category });
+                let cat = 'General';
+                if (catIdx !== -1 && cols[catIdx]) cat = cols[catIdx].trim();
+
+                allData.push({ name, url: finalUrl, originalUrl: rawUrl, category: cat });
             }
             filteredData = [...allData];
         }
 
-        function filterData() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            filteredData = allData.filter(item => 
-                item.name.toLowerCase().includes(query) || 
-                item.category.toLowerCase().includes(query)
-            );
-            currentPage = 1;
-            renderAll();
+        // ฟังก์ชันหัวใจสำคัญ: แปลงลิงก์ Google Drive ให้เป็นโหมด Preview
+        function formatUrlForPreview(url) {
+            if (!url) return '';
+            
+            // กรณีเป็น Google Drive File / View
+            // เปลี่ยนจาก /view หรือ /view?usp=sharing เป็น /preview
+            if (url.includes('drive.google.com') && url.includes('/view')) {
+                return url.replace(/\/view.*/, '/preview');
+            }
+            
+            // กรณีเป็น Docs/Sheets/Slides /edit
+            // เปลี่ยนจาก /edit เป็น /preview
+            if (url.includes('docs.google.com') && url.includes('/edit')) {
+                return url.replace(/\/edit.*/, '/preview');
+            }
+
+            return url;
         }
 
-        function renderAll() {
-            const tableBody = document.getElementById('tableBody');
-            const mobileList = document.getElementById('mobileList');
-            const emptyState = document.getElementById('emptyState');
-            const paginationFooter = document.getElementById('paginationFooter');
+        function filterData() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            filteredData = allData.filter(d => d.name.toLowerCase().includes(q) || d.category.toLowerCase().includes(q));
+            currentPage = 1;
+            renderTable();
+        }
 
-            // Reset
-            tableBody.innerHTML = '';
-            mobileList.innerHTML = '';
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
 
             if (filteredData.length === 0) {
-                emptyState.style.display = 'block';
-                paginationFooter.style.display = 'none';
+                document.getElementById('emptyState').style.display = 'block';
+                document.getElementById('paginationFooter').style.display = 'none';
                 return;
             }
 
-            emptyState.style.display = 'none';
-            paginationFooter.style.display = 'flex';
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('paginationFooter').style.display = 'flex';
 
-            // Pagination Logic
             const start = (currentPage - 1) * ITEMS_PER_PAGE;
             const end = Math.min(start + ITEMS_PER_PAGE, filteredData.length);
-            const pageItems = filteredData.slice(start, end);
+            const items = filteredData.slice(start, end);
 
-            // 1. Render Table (Desktop)
-            let tableHtml = '';
-            pageItems.forEach((item, index) => {
-                const globalIndex = start + index + 1;
-                tableHtml += `
+            let html = '';
+            items.forEach((item, idx) => {
+                html += `
                     <tr>
-                        <td style="color: #9ca3af;">${globalIndex}</td>
-                        <td style="font-weight: 500; color: var(--text-main);">
-                            ${item.name}
-                        </td>
-                        <td><span class="category-badge">${item.category}</span></td>
-                        <td class="text-end">
-                            <button onclick="openPreview('${item.url}', '${item.name.replace(/'/g, "\\'")}')" class="btn-action btn-preview">
-                                <i class="bi bi-eye"></i> ดูตัวอย่าง
+                        <td style="text-align: center; color: #999;">${start + idx + 1}</td>
+                        <td style="font-weight: 400; color: #333;">${item.name}</td>
+                        <!-- ตัดการแสดงผลคอลัมน์หมวดหมู่ออก -->
+                        <td style="text-align: right;">
+                            <button onclick="openPreview('${item.url}', '${item.name.replace(/'/g, "\\'")}', '${item.originalUrl}')" class="btn-view" title="ดูตัวอย่าง">
+                                <i class="bi bi-eye"></i> เปิด
                             </button>
+                            <a href="${item.originalUrl}" target="_blank" class="btn-link-ext" title="เปิดลิงก์ภายนอก">
+                                <i class="bi bi-box-arrow-up-right"></i>
+                            </a>
                         </td>
                     </tr>
                 `;
             });
-            tableBody.innerHTML = tableHtml;
-
-            // 2. Render Cards (Mobile)
-            let cardHtml = '';
-            pageItems.forEach(item => {
-                cardHtml += `
-                    <div class="mobile-card">
-                        <div class="m-card-header">
-                            <div>
-                                <div class="m-card-title text-truncate">${item.name}</div>
-                                <span class="category-badge">${item.category}</span>
-                            </div>
-                        </div>
-                        <div class="m-card-actions">
-                            <button onclick="openPreview('${item.url}', '${item.name.replace(/'/g, "\\'")}')" class="btn-action btn-preview">
-                                <i class="bi bi-eye"></i> ดูตัวอย่าง
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-            mobileList.innerHTML = cardHtml;
-
-            updatePaginationControls();
-        }
-
-        function updatePaginationControls() {
-            const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
-            document.getElementById('curPageDisplay').innerText = currentPage;
-            document.getElementById('totalPageDisplay').innerText = totalPages;
+            tbody.innerHTML = html;
             
+            document.getElementById('curPageDisplay').innerText = currentPage;
+            document.getElementById('totalPageDisplay').innerText = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
             document.getElementById('prevBtn').disabled = currentPage === 1;
-            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+            document.getElementById('nextBtn').disabled = currentPage === Math.ceil(filteredData.length / ITEMS_PER_PAGE);
         }
 
-        function changePage(newPage) {
-            currentPage = newPage;
-            renderAll();
-            // Scroll to top of list smoothly
-            document.querySelector('.search-container').scrollIntoView({ behavior: 'smooth' });
+        function changePage(p) {
+            currentPage = p;
+            renderTable();
         }
 
-        function toggleLoading(isLoading) {
-            document.getElementById('loading').style.display = isLoading ? 'block' : 'none';
-            document.getElementById('dataContainer').style.display = isLoading ? 'none' : 'block';
-            document.getElementById('paginationFooter').style.display = isLoading ? 'none' : 'flex';
+        function toggleLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+            document.getElementById('dataContainer').style.display = show ? 'none' : 'block';
         }
 
-        // --- Preview Logic ---
-        function openPreview(url, title) {
+        function openPreview(url, title, originalUrl) {
             const frame = document.getElementById('previewFrame');
             const fallback = document.getElementById('iframeFallback');
-            const modalTitle = document.getElementById('previewTitle');
-            const extBtn = document.getElementById('externalLinkBtn');
+            const titleEl = document.getElementById('previewTitle');
             const fbBtn = document.getElementById('fallbackLinkBtn');
 
-            // Reset UI
+            titleEl.innerText = title;
+            frame.src = '';
             frame.style.display = 'block';
             fallback.style.display = 'none';
-            frame.src = ''; // Clear old
+            fbBtn.href = originalUrl; // ลิงก์สำรองให้ใช้ Original เผื่อ Preview พัง
 
-            // Set content
-            modalTitle.innerText = title;
-            extBtn.href = url;
-            fbBtn.href = url;
-
-            // Show modal
             previewModal.show();
 
-            // Load URL with delay to allow animation
             setTimeout(() => {
                 frame.src = url;
-            }, 200);
-
-            // Handle Load Error (Note: Cross-origin restriction prevents reading iframe content directly,
-            // so we rely on user manually clicking fallback if visual indicates error)
-            frame.onload = function() {
-                // Some logic could go here, but mostly restricted by browser
-            };
+            }, 100);
         }
     </script>
 </body>
