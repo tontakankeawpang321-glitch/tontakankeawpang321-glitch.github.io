@@ -28,9 +28,10 @@
             margin: 0; background: var(--bg); color: var(--ink);
             font-family: "Sarabun", system-ui, sans-serif;
             font-size: 15px; line-height: 1.6;
+            padding-bottom: 80px; /* Space for Bottom Nav */
         }
         h1, h2, h3, h4 { margin: 0 0 8px; font-family: "Kodchasan", sans-serif; }
-        .wrap { max-width: 980px; margin: 0 auto; padding: 12px 12px 80px; }
+        .wrap { max-width: 980px; margin: 0 auto; padding: 12px 12px 20px; }
         .section { margin-top: 16px; }
 
         /* Panel & Cards */
@@ -40,9 +41,11 @@
             padding: 10px 16px; border-radius: 12px; cursor: pointer; color: var(--ink); font-weight: 700;
             box-shadow: var(--shadow-sm), var(--shadow-inset); transition: all .1s;
             font-family: "Kodchasan", sans-serif;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
         }
         .btn:active { transform: translateY(2px); box-shadow: inset 0 2px 0 rgba(0,0,0,.06); }
         .btn.primary { border-color: #fbbf24; background: linear-gradient(#fffbeb, #fcd34d); color: #78350f; }
+        .btn-icon { padding: 8px; width: 40px; height: 40px; border-radius: 50%; }
 
         .searchbar input {
             flex: 1; height: 48px; padding: 0 16px; border: 1px solid var(--line); border-radius: 14px;
@@ -61,28 +64,42 @@
         .card {
             border: 1px solid var(--line); border-radius: 14px; padding: 16px; background: #fff;
             box-shadow: 0 4px 12px -8px rgba(0,0,0,.08); transition: all 0.2s; cursor: pointer;
+            position: relative;
         }
         .card:hover { transform: translateY(-2px); border-color: var(--gold); background: var(--brand-light); }
-        .title { font-size: 18px; font-weight: 700; color: var(--brand); }
+        .title { font-size: 18px; font-weight: 700; color: var(--brand); padding-right: 30px; }
         .tag { background: #fff7ed; border: 1px solid #ffedd5; border-radius: 6px; padding: 2px 8px; color: #9a3412; font-size: 12px; }
+
+        /* Favorite Icon on Card */
+        .fav-toggle {
+            position: absolute; top: 12px; right: 12px;
+            background: none; border: none; font-size: 20px; cursor: pointer;
+            color: #d1d5db; transition: transform 0.2s, color 0.2s;
+            z-index: 2;
+        }
+        .fav-toggle:hover { transform: scale(1.2); }
+        .fav-toggle.active { color: #ef4444; }
 
         /* Chat & Dialogs */
         .chat-bubble { max-width: 85%; padding: 12px 16px; border-radius: 18px; font-size: 15px; }
         .chat-bubble-user { background: var(--brand); color: white; border-bottom-right-radius: 4px; margin-left: auto; }
         .chat-bubble-model { background: #f3f4f6; color: #1f2937; border-bottom-left-radius: 4px; border: 1px solid #e5e7eb; }
 
-        #chatbot-modal, #explain-modal {
+        #chatbot-modal, #explain-modal, #checkin-modal, #favorites-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1000; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px);
             display: none; justify-content: center; align-items: flex-end;
         }
-        @media (min-width: 640px) { #chatbot-modal, #explain-modal { align-items: center; } }
+        @media (min-width: 640px) { #chatbot-modal, #explain-modal, #checkin-modal, #favorites-modal { align-items: center; } }
 
         .modal-content {
             width: 100%; max-width: 500px; background: #fff; border-radius: 24px 24px 0 0;
-            display: flex; flex-direction: column; overflow: hidden; height: 80vh;
+            display: flex; flex-direction: column; overflow: hidden; height: auto; max-height: 90vh;
         }
-        @media (min-width: 640px) { .modal-content { border-radius: 24px; height: 70vh; } }
+        @media (min-width: 640px) { .modal-content { border-radius: 24px; } }
+        
+        #chatbot-modal .modal-content { height: 80vh; }
+        @media (min-width: 640px) { #chatbot-modal .modal-content { height: 70vh; } }
 
         /* Thinking animation */
         .dots span { animation: blink 1.4s infinite both; }
@@ -90,27 +107,57 @@
         .dots span:nth-child(3) { animation-delay: .4s; }
         @keyframes blink { 0% { opacity: .2; } 20% { opacity: 1; } 100% { opacity: .2; } }
 
-        #fab-chat-toggle {
-            position: fixed; bottom: 24px; right: 24px; width: 64px; height: 64px;
-            background: linear-gradient(135deg, #b45309, #d97706); color: white;
-            border: none; border-radius: 50%; font-size: 28px; z-index: 998;
-            box-shadow: 0 8px 20px rgba(180, 83, 9, 0.4); cursor: pointer;
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 65px;
+            background: #fff; border-top: 1px solid var(--line);
+            display: flex; justify-content: space-around; align-items: center;
+            z-index: 999; box-shadow: 0 -4px 20px rgba(0,0,0,0.05);
+            padding-bottom: env(safe-area-inset-bottom);
         }
+        .nav-item {
+            flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: var(--muted); background: none; border: none; cursor: pointer;
+            font-family: "Kodchasan"; font-size: 11px; gap: 4px;
+        }
+        .nav-item svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
+        .nav-item.active { color: var(--brand); font-weight: 700; }
+        .nav-item:active { transform: scale(0.95); }
+
+        /* Progress Bar */
+        .progress-track { background: #e5e7eb; border-radius: 10px; height: 12px; width: 100%; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, #f59e0b, #b45309); height: 100%; width: 0%; transition: width 0.5s ease; }
+
+        /* Empty State */
+        .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
+
     </style>
 </head>
 <body>
 
 <main class="wrap">
-    <header class="text-center py-6">
-        <h1 class="text-3xl font-bold text-orange-800">☸️ พุทธศาสนสุภาษิต</h1>
-        <p class="text-gray-600">คู่มือนักธรรม พร้อมคำอธิบาย AI อัจฉริยะ</p>
+    <!-- Header with Actions -->
+    <header class="flex justify-between items-center py-4 mb-4 border-b border-orange-100">
+        <div>
+            <h1 class="text-2xl font-bold text-orange-800 m-0">☸️ ธรรมะสวัสดี</h1>
+            <p class="text-xs text-gray-500 m-0">พุทธศาสนสุภาษิต & AI</p>
+        </div>
+        <div class="flex gap-2">
+            <button id="btn-fav-header" class="btn btn-icon bg-white border border-gray-200 text-red-500 hover:bg-red-50" title="รายการโปรด">
+                ❤️
+            </button>
+            <button id="btn-refresh" class="btn btn-icon bg-white border border-gray-200 text-gray-600 hover:bg-gray-50" title="รีเฟรช">
+                🔄
+            </button>
+        </div>
     </header>
 
     <!-- สุ่มสุภาษิต -->
-    <div class="panel bg-gradient-to-br from-orange-700 to-orange-900 text-white text-center p-8 mb-6" id="highlightBox">
+    <div class="panel bg-gradient-to-br from-orange-700 to-orange-900 text-white text-center p-8 mb-6 relative overflow-hidden" id="highlightBox">
+        <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl">☸️</div>
         <p class="text-xs uppercase tracking-widest opacity-75 mb-2">พุทธศาสนสุภาษิตวันนี้</p>
-        <h2 id="hl-pali" class="text-2xl font-bold mb-2 italic">...</h2>
-        <p id="hl-thai" class="text-lg opacity-90">...</p>
+        <h2 id="hl-pali" class="text-2xl font-bold mb-2 italic relative z-10">...</h2>
+        <p id="hl-thai" class="text-lg opacity-90 relative z-10">...</p>
     </div>
 
     <!-- ค้นหา & หมวดหมู่ -->
@@ -138,8 +185,21 @@
     </div>
 </main>
 
-<!-- Floating Chat Button -->
-<button id="fab-chat-toggle">💬</button>
+<!-- Bottom Navigation Bar -->
+<nav class="bottom-nav">
+    <button class="nav-item active" onclick="scrollToTop()">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        หน้าหลัก
+    </button>
+    <button class="nav-item" id="nav-checkin">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        เช็คชื่อ
+    </button>
+    <button class="nav-item" id="nav-chat">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        สนทนาธรรม
+    </button>
+</nav>
 
 <!-- Chatbot Modal -->
 <div id="chatbot-modal">
@@ -175,7 +235,7 @@
 
 <!-- Explain Dialog Modal -->
 <div id="explain-modal">
-    <div class="modal-content !h-auto max-h-[90vh]">
+    <div class="modal-content">
         <header class="bg-orange-100 p-4 border-b flex justify-between items-center">
             <h3 class="text-orange-900 font-bold m-0">💡 คำอธิบายโดย AI</h3>
             <button id="close-explain" class="text-2xl">&times;</button>
@@ -197,16 +257,62 @@
     </div>
 </div>
 
+<!-- Check-in Modal -->
+<div id="checkin-modal">
+    <div class="modal-content">
+        <div class="p-6 text-center">
+            <div class="mb-4 text-6xl">🙏</div>
+            <h2 id="checkin-title" class="text-2xl font-bold text-orange-800 mb-2">ลงชื่อเรียนธรรมะ</h2>
+            <p id="checkin-msg" class="text-gray-600 mb-6">สะสมความเพียรวันละนิด จิตแจ่มใส</p>
+
+            <div class="mb-6">
+                <div class="flex justify-between text-sm font-bold text-orange-700 mb-1">
+                    <span>ความเพียรของคุณ</span>
+                    <span id="checkin-count">0 / 100 วัน</span>
+                </div>
+                <div class="progress-track">
+                    <div id="checkin-bar" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <div id="checkin-reward" class="hidden bg-yellow-100 border border-yellow-400 p-4 rounded-xl mb-4">
+                <p class="font-bold text-yellow-800">🎉 ยินดีด้วย! คุณสะสมครบ 100 วัน</p>
+                <p class="text-sm">โค้ดลับของคุณคือ:</p>
+                <code class="block bg-white p-2 mt-2 rounded border border-yellow-200 text-xl font-mono text-red-600 font-bold">NIRVANA-100</code>
+            </div>
+            
+            <button id="close-checkin-btn" class="btn primary w-full">อนุโมทนา (ปิด)</button>
+        </div>
+    </div>
+</div>
+
+<!-- Favorites Modal -->
+<div id="favorites-modal">
+    <div class="modal-content !h-[80vh]">
+        <header class="bg-red-50 p-4 border-b border-red-100 flex justify-between items-center">
+            <h3 class="text-red-800 font-bold m-0">❤️ รายการโปรด</h3>
+            <button id="close-fav" class="text-2xl">&times;</button>
+        </header>
+        <div id="fav-list" class="p-4 overflow-y-auto flex-1 grid gap-3 bg-gray-50">
+            <!-- Favorites items will appear here -->
+        </div>
+        <footer class="p-3 border-t bg-white">
+            <button id="close-fav-btn" class="btn secondary w-full">ปิดหน้าต่าง</button>
+        </footer>
+    </div>
+</div>
+
 <script>
-const BACKEND_URL = 'https://supasit.tontakankeawpang.workers.dev/';
+const BACKEND_URL = 'https://spring-bush-acec.tontakankeawpang321.workers.dev';
 const DATA_URLS = {
     'นักธรรมตรี': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_tri.json',
     'นักธรรมโท': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_to.json',
     'นักธรรมเอก': 'https://raw.githubusercontent.com/tontakankeawpang321-glitch/tontakankeawpang321-glitch.github.io/main/naktam_ek.json'
 };
 
-// คีย์สำหรับเก็บ Cache ใน LocalStorage
 const CACHE_KEY_PREFIX = 'dhamma_explain_';
+const CHECKIN_KEY = 'dhamma_checkin_data';
+const FAV_KEY = 'dhamma_favorites_list';
 
 let allProverbs = [];
 let currentFilter = [];
@@ -214,6 +320,13 @@ let currentPage = 1;
 const PAGE_SIZE = 10;
 let currentLevel = 'นักธรรมตรี';
 let chatHistory = [];
+let favorites = [];
+
+// Load Favorites
+try {
+    const savedFav = localStorage.getItem(FAV_KEY);
+    favorites = savedFav ? JSON.parse(savedFav) : [];
+} catch(e) { favorites = []; }
 
 // Helpers
 const normalizeKeys = (o) => ({
@@ -273,12 +386,39 @@ function filterAndRender() {
     renderList();
 }
 
+function isFav(pali) {
+    return favorites.some(f => f.pali === pali);
+}
+
+function toggleFavorite(event, pali, thai, cat, level) {
+    event.stopPropagation();
+    const idx = favorites.findIndex(f => f.pali === pali);
+    
+    if (idx > -1) {
+        favorites.splice(idx, 1);
+    } else {
+        favorites.push({ pali, thai, cat, level });
+    }
+    localStorage.setItem(FAV_KEY, JSON.stringify(favorites));
+    renderList(); // Re-render to update icon
+    
+    // If inside fav modal, refresh it
+    if(document.getElementById('favorites-modal').style.display === 'flex') {
+        renderFavorites();
+    }
+}
+
 function renderList() {
     const totalPages = Math.ceil(currentFilter.length / PAGE_SIZE) || 1;
     const items = currentFilter.slice((currentPage-1)*PAGE_SIZE, currentPage*PAGE_SIZE);
     
-    document.getElementById('list').innerHTML = items.map(item => `
+    document.getElementById('list').innerHTML = items.map(item => {
+        const favActive = isFav(item.pali) ? 'active' : '';
+        return `
         <article class="card" onclick="explainDialog('${item.pali}', '${item.thai}')">
+            <button class="fav-toggle ${favActive}" onclick="toggleFavorite(event, '${item.pali}', '${item.thai}', '${item.cat}', '${item.level}')">
+                ${favActive ? '❤️' : '🤍'}
+            </button>
             <h4 class="title">${item.pali}</h4>
             <p class="text-gray-600 mb-2">${item.thai}</p>
             <div class="flex gap-2">
@@ -286,13 +426,33 @@ function renderList() {
                 <span class="tag !bg-blue-50 !text-blue-700 !border-blue-100">${item.level}</span>
             </div>
         </article>
-    `).join('');
+        `;
+    }).join('');
 
     document.getElementById('pageInfo').textContent = `${currentPage} / ${totalPages}`;
     document.getElementById('btnPrev').disabled = currentPage === 1;
     document.getElementById('btnNext').disabled = currentPage === totalPages;
 }
 
+function renderFavorites() {
+    const listEl = document.getElementById('fav-list');
+    if (favorites.length === 0) {
+        listEl.innerHTML = `<div class="empty-state">ยังไม่มีรายการโปรด<br>กด ❤️ เพื่อบันทึก</div>`;
+        return;
+    }
+    
+    listEl.innerHTML = favorites.map(item => `
+        <article class="card bg-white" onclick="explainDialog('${item.pali}', '${item.thai}')">
+            <button class="fav-toggle active" onclick="toggleFavorite(event, '${item.pali}', '${item.thai}', '${item.cat}', '${item.level}')">
+                ❤️
+            </button>
+            <h4 class="title">${item.pali}</h4>
+            <p class="text-gray-600 mb-2">${item.thai}</p>
+        </article>
+    `).join('');
+}
+
+// Chat System
 async function handleSend() {
     const text = document.getElementById('user-input').value.trim();
     if (!text) return;
@@ -355,7 +515,7 @@ document.getElementById('new-chat-btn').onclick = () => {
     `;
 };
 
-// 💎 Proverb Explanation Dialog (With Persistent Cache)
+// Explain Dialog
 async function explainDialog(pali, thai) {
     const modal = document.getElementById('explain-modal');
     const content = document.getElementById('exp-content');
@@ -368,19 +528,16 @@ async function explainDialog(pali, thai) {
     content.classList.add('hidden');
     loader.classList.remove('hidden');
 
-    // 1. ตรวจสอบว่ามีข้อมูลในเครื่อง (Cache) หรือไม่
     const cacheKey = CACHE_KEY_PREFIX + pali.replace(/\s+/g, '_');
     const cachedData = localStorage.getItem(cacheKey);
 
     if (cachedData) {
-        // ถ้ามี Cache ให้แสดงทันที ไม่ต้องเรียก AI
         content.textContent = cachedData;
         loader.classList.add('hidden');
         content.classList.remove('hidden');
         return;
     }
 
-    // 2. ถ้าไม่มีใน Cache ให้เรียก AI
     try {
         const res = await fetch(BACKEND_URL, {
             method: 'POST',
@@ -394,10 +551,7 @@ async function explainDialog(pali, thai) {
         const data = await res.json();
         const aiReply = data.reply;
 
-        // 3. บันทึกลง Cache (localStorage) จำไว้ถาวรจนกว่าจะล้างข้อมูลเว็บ
-        if (aiReply) {
-            localStorage.setItem(cacheKey, aiReply);
-        }
+        if (aiReply) localStorage.setItem(cacheKey, aiReply);
 
         content.textContent = aiReply;
         loader.classList.add('hidden');
@@ -409,11 +563,80 @@ async function explainDialog(pali, thai) {
     }
 }
 
+// 📅 Daily Check-in Logic
+function handleCheckIn() {
+    const modal = document.getElementById('checkin-modal');
+    const countEl = document.getElementById('checkin-count');
+    const barEl = document.getElementById('checkin-bar');
+    const titleEl = document.getElementById('checkin-title');
+    const msgEl = document.getElementById('checkin-msg');
+    const rewardEl = document.getElementById('checkin-reward');
+    
+    // Load Data
+    const rawData = localStorage.getItem(CHECKIN_KEY);
+    let data = rawData ? JSON.parse(rawData) : { count: 0, lastDate: null };
+    
+    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    
+    modal.style.display = 'flex';
+    rewardEl.classList.add('hidden');
+
+    if (data.lastDate === today) {
+        // Already checked in
+        titleEl.textContent = "วันนี้ลงชื่อแล้ว";
+        msgEl.textContent = "เจริญพร โยมได้ลงชื่อของวันนี้ไปแล้ว กลับมาใหม่พรุ่งนี้นะ";
+    } else {
+        // New Check-in
+        data.count++;
+        data.lastDate = today;
+        localStorage.setItem(CHECKIN_KEY, JSON.stringify(data));
+        
+        titleEl.textContent = "ลงชื่อสำเร็จ!";
+        msgEl.textContent = "สาธุ! ความสม่ำเสมอคือกุญแจสู่ความสำเร็จ";
+    }
+
+    // Update UI
+    const count = data.count;
+    const percentage = Math.min((count / 100) * 100, 100);
+    
+    countEl.textContent = `${count} / 100 วัน`;
+    barEl.style.width = `${percentage}%`;
+
+    // Check Reward
+    if (count >= 100) {
+        rewardEl.classList.remove('hidden');
+        msgEl.textContent = "สุดยอดมาก! โยมมีความเพียรเป็นเลิศ";
+    }
+}
+
+function scrollToTop() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
 // Modal Handlers
-document.getElementById('fab-chat-toggle').onclick = () => document.getElementById('chatbot-modal').style.display = 'flex';
+document.getElementById('nav-chat').onclick = () => document.getElementById('chatbot-modal').style.display = 'flex';
+document.getElementById('nav-checkin').onclick = handleCheckIn;
+
 document.getElementById('close-chat').onclick = () => document.getElementById('chatbot-modal').style.display = 'none';
 document.getElementById('close-explain').onclick = () => document.getElementById('explain-modal').style.display = 'none';
 document.getElementById('close-explain-btn').onclick = () => document.getElementById('explain-modal').style.display = 'none';
+document.getElementById('close-checkin-btn').onclick = () => document.getElementById('checkin-modal').style.display = 'none';
+
+// Favorites Logic Handlers
+document.getElementById('btn-fav-header').onclick = () => {
+    renderFavorites();
+    document.getElementById('favorites-modal').style.display = 'flex';
+};
+document.getElementById('close-fav').onclick = () => document.getElementById('favorites-modal').style.display = 'none';
+document.getElementById('close-fav-btn').onclick = () => document.getElementById('favorites-modal').style.display = 'none';
+
+// Refresh
+document.getElementById('btn-refresh').onclick = () => {
+    currentPage = 1;
+    document.getElementById('q').value = '';
+    loadData();
+    window.scrollTo({top:0, behavior:'smooth'});
+};
 
 document.getElementById('send-btn').onclick = handleSend;
 document.getElementById('user-input').onkeydown = (e) => { if(e.key==='Enter') handleSend(); };
@@ -425,4 +648,3 @@ loadData();
 </script>
 </body>
 </html>
-
