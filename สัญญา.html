@@ -25,6 +25,7 @@
             --text-main: #334155;        /* สีตัวหนังสือเทาเข้ม */
             --text-muted: #64748b;
             --border-color: #e2e8f0;
+            --nav-height: 60px;
         }
 
         body {
@@ -32,7 +33,7 @@
             color: var(--text-main);
             font-family: 'Prompt', sans-serif;
             font-weight: 300;
-            padding-bottom: 60px;
+            padding-bottom: calc(var(--nav-height) + 20px); /* เว้นที่ให้ Bottom Nav */
         }
 
         /* --- Header Design --- */
@@ -42,20 +43,23 @@
             padding: 20px 0;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .app-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
             letter-spacing: 0.5px;
             margin: 0;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .app-subtitle {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             opacity: 0.8;
             font-weight: 300;
             margin-top: 2px;
@@ -125,7 +129,7 @@
         .custom-table td {
             padding: 20px;
             border-bottom: 1px solid var(--border-color);
-            vertical-align: top; /* จัดให้เนื้อหาเริ่มจากด้านบน */
+            vertical-align: top;
             color: var(--text-main);
         }
 
@@ -143,8 +147,15 @@
             font-weight: 500;
             line-height: 1.5;
             color: var(--text-main);
-            margin-bottom: 12px; /* เว้นระยะห่างจากปุ่ม */
+            margin-bottom: 8px;
             display: block;
+        }
+
+        .action-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
         }
 
         .btn-open-link {
@@ -168,15 +179,66 @@
             box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
         }
 
-        /* --- Mobile Responsive --- */
+        /* Favorite Heart Button */
+        .btn-fav {
+            background: transparent;
+            border: none;
+            color: #cbd5e1; /* Gray by default */
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s, color 0.2s;
+            padding: 0 10px;
+        }
+        
+        .btn-fav:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-fav.active {
+            color: #ef4444; /* Red when active */
+        }
+
+        /* --- Bottom Navigation --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background-color: #ffffff;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1050;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-item {
+            text-align: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.75rem;
+            flex: 1;
+            padding: 8px 0;
+        }
+
+        .nav-item i {
+            display: block;
+            font-size: 1.4rem;
+            margin-bottom: 2px;
+        }
+
+        .nav-item.active {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+        
+        /* Mobile fixes */
         @media (max-width: 768px) {
-            .app-title { font-size: 1.3rem; }
-            .custom-table th, .custom-table td {
-                padding: 15px;
-            }
-            .doc-name {
-                font-size: 1rem;
-            }
+            .app-title { font-size: 1.1rem; }
+            .custom-table th, .custom-table td { padding: 15px; }
+            .doc-name { font-size: 0.95rem; }
         }
 
         /* Pagination */
@@ -189,54 +251,64 @@
             padding: 0 10px;
         }
 
-        .page-info {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
+        .page-info { font-size: 0.9rem; color: var(--text-muted); }
         .btn-page {
-            background: white;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
+            background: white; border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
         }
-
-        .btn-page:hover:not(:disabled) {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .btn-page:disabled {
-            opacity: 0.5;
-            cursor: default;
-        }
+        .btn-page:hover:not(:disabled) { border-color: var(--primary-color); color: var(--primary-color); }
+        .btn-page:disabled { opacity: 0.5; cursor: default; }
 
         #loading { text-align: center; padding: 60px; color: var(--text-muted); }
+
+        /* Modal Customization */
+        .modal-body-custom {
+            max-height: 60vh;
+            overflow-y: auto;
+            background-color: var(--bg-color);
+        }
+        .fav-item-row {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Professional Header -->
+    <!-- Header -->
     <header class="app-header">
-        <div class="container-fluid px-4 px-lg-5">
+        <div class="container-fluid px-3 px-lg-5">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <h1 class="app-title">
-                        <i class="bi bi-database-fill-gear"></i> สารบัญข้อมูลองค์กร
+                        <i class="bi bi-database-fill-gear"></i> Data Directory
                     </h1>
-                    <div class="app-subtitle">Centralized Data Directory System</div>
+                    <div class="app-subtitle">ระบบสารบัญข้อมูลองค์กร</div>
                 </div>
-                <button onclick="loadData()" class="btn btn-outline-light btn-sm opacity-75">
-                    <i class="bi bi-arrow-clockwise"></i> อัปเดตข้อมูล
-                </button>
+                <div class="d-flex gap-2">
+                    <!-- Favorites Button (Trigger Modal) -->
+                    <button onclick="openFavoritesModal()" class="btn btn-outline-light btn-sm position-relative">
+                        <i class="bi bi-heart-fill text-danger"></i> รายการโปรด
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="favCountBadge" style="display: none;">
+                            0
+                        </span>
+                    </button>
+                    <!-- Refresh Button -->
+                    <button onclick="loadData()" class="btn btn-outline-light btn-sm opacity-75">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
 
-    <div class="container-fluid px-4 px-lg-5">
+    <div class="container-fluid px-3 px-lg-5">
         
         <!-- Search Area -->
         <div class="search-container">
@@ -255,8 +327,8 @@
                 <table class="custom-table">
                     <thead>
                         <tr>
-                            <th style="width: 60px; text-align: center;">ลำดับ</th>
-                            <th>รายการเอกสาร / การดำเนินการ</th> <!-- รวม Header -->
+                            <th style="width: 50px; text-align: center;">#</th>
+                            <th>รายละเอียดเอกสาร</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -272,7 +344,7 @@
 
             <div id="paginationFooter" class="pagination-container" style="display: none;">
                 <span class="page-info">
-                    แสดงหน้า <strong id="curPageDisplay">1</strong> จาก <span id="totalPageDisplay">1</span>
+                    หน้า <strong id="curPageDisplay">1</strong> / <span id="totalPageDisplay">1</span>
                 </span>
                 <div>
                     <button class="btn-page" id="prevBtn" onclick="changePage(currentPage - 1)">
@@ -287,19 +359,58 @@
 
     </div>
 
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">
+            <i class="bi bi-house-door-fill"></i>
+            หน้าหลัก
+        </a>
+        <a href="#" class="nav-item" onclick="openFavoritesModal(); return false;">
+            <i class="bi bi-bookmark-heart"></i>
+            รายการโปรด
+        </a>
+    </nav>
+
+    <!-- Favorites Modal -->
+    <div class="modal fade" id="favoritesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title fw-bold"><i class="bi bi-heart-fill text-danger"></i> รายการโปรดของฉัน</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-body-custom" id="favoritesListBody">
+                    <!-- Favorite items will be injected here -->
+                </div>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // --- Configuration ---
         const CSV_DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTItiReSbPwa0Fz_Afzmi8BrcUdpzdOINQiV7xFkiKWvl_x1KzmEKItpJjQNjtz1SgheZYdL3s4cSiy/pub?output=csv';
         const ITEMS_PER_PAGE = 15;
+        const STORAGE_KEY = 'corporate_data_favorites';
 
+        // --- State ---
         let allData = [];
         let filteredData = [];
         let currentPage = 1;
+        let favorites = []; // Array of names or unique keys
 
-        window.onload = loadData;
+        // --- Initialization ---
+        window.onload = () => {
+            loadFavorites();
+            loadData();
+        };
 
+        // --- Data Loading ---
         function loadData() {
             toggleLoading(true);
             fetch(CSV_DATA_URL)
@@ -342,11 +453,97 @@
                 let cat = 'General';
                 if (catIdx !== -1 && cols[catIdx]) cat = cols[catIdx].trim();
 
-                allData.push({ name, url: rawUrl, category: cat });
+                // Generate a simple ID based on name for favorites tracking
+                // In a real app, use a unique ID from database
+                allData.push({ 
+                    id: btoa(unescape(encodeURIComponent(name + rawUrl))), // Base64 encoding as makeshift ID
+                    name, 
+                    url: rawUrl, 
+                    category: cat 
+                });
             }
             filteredData = [...allData];
         }
 
+        // --- Favorites Logic (LocalStorage) ---
+        function loadFavorites() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                favorites = JSON.parse(stored);
+            }
+            updateFavBadge();
+        }
+
+        function toggleFavorite(id) {
+            const itemIndex = favorites.indexOf(id);
+            if (itemIndex === -1) {
+                favorites.push(id); // Add
+            } else {
+                favorites.splice(itemIndex, 1); // Remove
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+            
+            // Re-render to update heart icons
+            renderTable();
+            updateFavBadge();
+            
+            // If modal is open, refresh it too
+            const modalEl = document.getElementById('favoritesModal');
+            if (modalEl.classList.contains('show')) {
+                openFavoritesModal();
+            }
+        }
+
+        function updateFavBadge() {
+            const badge = document.getElementById('favCountBadge');
+            if (favorites.length > 0) {
+                badge.innerText = favorites.length;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function openFavoritesModal() {
+            const modalBody = document.getElementById('favoritesListBody');
+            
+            if (favorites.length === 0) {
+                modalBody.innerHTML = `
+                    <div class="text-center py-5 text-muted">
+                        <i class="bi bi-heart" style="font-size: 3rem;"></i><br>
+                        ยังไม่มีรายการโปรด<br>
+                        <small>กดรูปหัวใจเพื่อบันทึกรายการ</small>
+                    </div>
+                `;
+            } else {
+                // Find full item details from allData
+                const favItems = allData.filter(item => favorites.includes(item.id));
+                
+                let html = '';
+                favItems.forEach(item => {
+                    html += `
+                        <div class="fav-item-row">
+                            <div style="flex:1; padding-right:10px;">
+                                <div class="fw-bold text-dark mb-1">${item.name}</div>
+                                <a href="${item.url}" target="_blank" class="text-primary text-decoration-none small">
+                                    <i class="bi bi-box-arrow-up-right"></i> เปิดเอกสาร
+                                </a>
+                            </div>
+                            <button onclick="toggleFavorite('${item.id}')" class="btn btn-sm btn-outline-danger border-0">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+                modalBody.innerHTML = html;
+            }
+
+            // Show Modal
+            const myModal = new bootstrap.Modal(document.getElementById('favoritesModal'));
+            myModal.show();
+        }
+
+        // --- Table Rendering ---
         function filterData() {
             const q = document.getElementById('searchInput').value.toLowerCase();
             filteredData = allData.filter(d => 
@@ -376,19 +573,26 @@
 
             let html = '';
             items.forEach((item, idx) => {
+                const isFav = favorites.includes(item.id);
+                const heartClass = isFav ? 'bi-heart-fill active' : 'bi-heart';
+                
                 html += `
                     <tr>
-                        <td style="text-align: center; color: #94a3b8; font-weight: 400; vertical-align: top; padding-top: 22px;">
+                        <td style="text-align: center; color: #94a3b8; font-weight: 400; padding-top: 20px;">
                             ${start + idx + 1}
                         </td>
                         <td>
-                            <!-- ชื่อเอกสารอยู่ด้านบน เต็มความกว้าง -->
                             <span class="doc-name">${item.name}</span>
                             
-                            <!-- ปุ่มอยู่ด้านล่าง -->
-                            <a href="${item.url}" target="_blank" class="btn-open-link">
-                                <i class="bi bi-box-arrow-up-right"></i> เปิดเอกสาร
-                            </a>
+                            <div class="action-row">
+                                <a href="${item.url}" target="_blank" class="btn-open-link">
+                                    <i class="bi bi-box-arrow-up-right"></i> เปิดเอกสาร
+                                </a>
+                                
+                                <button onclick="toggleFavorite('${item.id}')" class="btn-fav ${isFav ? 'active' : ''}" title="บันทึกรายการโปรด">
+                                    <i class="bi ${heartClass}"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 `;
