@@ -2,8 +2,8 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knots Database Manual</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Knots Database App</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,29 +16,34 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <style>
-        /* Custom Scrollbar for Raw/Brutalist look */
+        /* Custom Scrollbar */
         .custom-scrollbar::-webkit-scrollbar {
-            width: 12px;
-            height: 12px;
+            width: 8px;
+            height: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-left: 2px solid #000;
+            border-left: 1px solid #000;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #000;
-            border: 2px solid #fff;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #333;
+            border: 1px solid #fff;
         }
         body {
             font-family: 'Courier New', Courier, monospace; 
-            /* Fallback font to ensure monospaced look */
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Hide scrollbar for category list but keep functionality */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
-<body class="bg-white text-black text-sm leading-relaxed overflow-hidden">
+<body class="bg-gray-100 text-black text-sm leading-relaxed overflow-hidden">
     <div id="root"></div>
 
     <script type="text/babel">
@@ -57,7 +62,11 @@
             Fish: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6.5 12c.6-2.5 3.1-4.5 5.5-4.5 2.5 0 5.5 2.5 5.5 5.5 0 2.5-2.5 5.5-5.5 5.5-2.5 0-5-2-5.5-4.5Z"/><path d="M22 12c-2.7 0-4.3-1-5.5-1.5a16 16 0 0 0-9 0C5.3 11 2.7 12 2 12c-.7 0-3.3-1-5.5-1.5a16 16 0 0 0 9 0c1.2.5 2.8 1.5 5.5 1.5Z"/><path d="M14.5 12a2.5 2.5 0 0 0-2.5-2.5"/><path d="M22 12c-2.7 0-4.3 1-5.5 1.5"/></svg>,
             Mountain: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>,
             Package: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22v-9"/></svg>,
-            Zap: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Zap: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+            Heart: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill={props.fill || "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>,
+            Home: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+            Refresh: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>,
+            List: (props) => <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
         };
 
         // --- DATA ---
@@ -245,7 +254,6 @@
                     "ดึงเส้นนั้นให้กลายเป็นบ่วง แล้วรูดเชือกให้แน่น"
                 ]
             },
-            // ... (ข้อมูลอื่นๆ ย่อไว้เพื่อความกระชับ แต่ในโค้ดจริงจะใส่ครบ) ...
             {
                 id: 22,
                 name: "เงื่อนรัดปากถุง (Miller's Knot)",
@@ -289,64 +297,75 @@
         // --- COMPONENTS ---
 
         const HtmlLayout = ({ children }) => (
-            <div className="min-h-screen bg-white text-black font-mono text-sm leading-relaxed p-0 md:p-2">
-                <div className="w-full md:w-[98%] lg:w-[99%] mx-auto border-2 border-black h-[95vh] flex flex-col shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] bg-white">
+            <div className="min-h-screen bg-gray-100 flex justify-center p-0 md:p-4 pb-16 md:pb-4">
+                <div className="w-full md:w-[800px] h-[100vh] md:h-[90vh] bg-white border-x-0 md:border-2 border-black md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col relative overflow-hidden">
                     {children}
                 </div>
             </div>
         );
 
-        const TopMenu = ({ activeCategory, setActiveCategory, searchTerm, setSearchTerm }) => (
-            <div className="w-full bg-gray-100 border-b-2 border-black flex flex-col flex-shrink-0">
-                {/* Row 1: Logo & Search */}
-                <div className="flex flex-col md:flex-row border-b border-black md:border-b-0">
-                    <div className="p-2 bg-yellow-200 border-b border-black md:border-b-0 md:border-r-2 md:w-56 flex-shrink-0 flex items-center justify-between md:block">
+        const TopMenu = ({ activeCategory, setActiveCategory, searchTerm, setSearchTerm, onToggleFavorites, onRefresh }) => (
+            <div className="w-full bg-white border-b-2 border-black flex flex-col z-20">
+                {/* Row 1: Logo, Search, Actions */}
+                <div className="flex flex-col md:flex-row border-b border-black">
+                    <div className="p-2 bg-yellow-300 border-b border-black md:border-b-0 md:border-r-2 md:w-48 flex-shrink-0 flex items-center justify-between">
                         <h1 className="font-bold text-sm uppercase flex items-center gap-2">
-                            <Icons.Globe width={14} height={14} /> KNOTS_DB.HTML
+                            <Icons.Globe width={16} height={16} /> KNOTS_APP
                         </h1>
-                        <p className="text-[10px] mt-0.5 hidden md:block">Ver 1.0 // THAI</p>
+                        <span className="text-[10px] bg-black text-white px-1">v2.0</span>
                     </div>
 
-                    <div className="flex-1 p-1.5 flex items-center gap-3 overflow-x-auto">
-                        <div className="flex items-center gap-2 w-full md:w-auto flex-1 md:flex-none">
-                            <label className="text-[10px] font-bold uppercase whitespace-nowrap hidden md:block">[SEARCH]:</label>
-                            <div className="flex flex-1 md:w-64">
-                                <input
-                                    type="text"
-                                    className="w-full border-2 border-black p-1 bg-white text-black focus:outline-none focus:bg-blue-50 text-xs h-7"
-                                    placeholder="keyword..."
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                />
-                                <button className="bg-black text-white px-3 flex items-center justify-center border-2 border-black border-l-0 hover:bg-gray-800 h-7">
-                                    <Icons.Search width={12} height={12} />
-                                </button>
+                    <div className="flex-1 p-2 flex items-center gap-2 bg-white">
+                        {/* Search Bar */}
+                        <div className="flex flex-1 items-center border-2 border-black h-8 bg-white">
+                            <input 
+                                type="text"
+                                className="w-full h-full px-2 text-xs outline-none bg-transparent"
+                                placeholder="ค้นหา..."
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                            <div className="h-full w-8 bg-black flex items-center justify-center text-white">
+                                <Icons.Search width={14} height={14} />
                             </div>
                         </div>
-                        
-                        <div className="hidden md:flex border border-black p-1 bg-white text-[10px] ml-auto gap-4 whitespace-nowrap h-7 items-center">
-                           <span>STATUS: ONLINE</span>
-                           <span>SERVER: READY</span>
+
+                        {/* Right Side Actions (Requested: Favorites next to Refresh) */}
+                        <div className="flex gap-2">
+                             <button 
+                                onClick={onToggleFavorites}
+                                className="h-8 px-2 bg-pink-100 border-2 border-black hover:bg-pink-200 active:translate-y-0.5 flex items-center gap-1"
+                                title="รายการโปรด"
+                            >
+                                <Icons.Heart width={16} height={16} fill="#ec4899" className="text-pink-500" />
+                                <span className="text-[10px] font-bold hidden sm:inline">SAVED</span>
+                            </button>
+                            <button 
+                                onClick={onRefresh}
+                                className="h-8 w-8 bg-gray-200 border-2 border-black flex items-center justify-center hover:bg-gray-300 active:translate-y-0.5 hover:rotate-180 transition-transform duration-300"
+                                title="รีเฟรช"
+                            >
+                                <Icons.Refresh width={16} height={16} />
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 {/* Row 2: Categories */}
-                <div className="bg-white border-t-2 border-black md:border-t-2 overflow-x-auto custom-scrollbar">
-                    <div className="flex p-1.5 gap-1.5 min-w-max">
-                        <span className="text-[10px] font-bold uppercase py-1 self-center mr-1">[DIR]:</span>
+                <div className="bg-white overflow-x-auto hide-scroll border-black">
+                    <div className="flex p-2 gap-2 min-w-max">
                         {CATEGORIES.map((cat) => (
                             <button
                                 key={cat.id}
                                 onClick={() => setActiveCategory(cat.id)}
                                 className={`
-                                    px-2 py-0.5 text-[11px] border border-black flex items-center gap-1.5 transition-all shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none whitespace-nowrap
-                                    ${activeCategory === cat.id
-                                        ? 'bg-blue-700 text-white font-bold hover:text-white'
-                                        : 'bg-white text-blue-700 hover:bg-blue-50'}
+                                    px-3 py-1 text-[11px] border border-black flex items-center gap-1.5 transition-all whitespace-nowrap rounded-full
+                                    ${activeCategory === cat.id 
+                                        ? 'bg-black text-white font-bold shadow-none' 
+                                        : 'bg-white text-black hover:bg-gray-100 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]'}
                                 `}
                             >
-                                {activeCategory === cat.id ? '▶' : ''} {cat.label}
+                                {cat.label}
                             </button>
                         ))}
                     </div>
@@ -354,175 +373,268 @@
             </div>
         );
 
+        const BottomNavigation = ({ activeTab, onNavigate }) => (
+            <div className="absolute bottom-0 left-0 w-full h-16 bg-white border-t-2 border-black flex justify-around items-center z-30 pb-2 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+                <button 
+                    onClick={() => onNavigate('home')}
+                    className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'home' ? 'text-blue-700' : 'text-gray-500 hover:text-black'}`}
+                >
+                    <Icons.Home width={24} height={24} strokeWidth={activeTab === 'home' ? 2.5 : 2} />
+                    <span className={`text-[10px] font-bold ${activeTab === 'home' ? 'opacity-100' : 'opacity-70'}`}>หน้าแรก</span>
+                </button>
+
+                <div className="w-[1px] h-8 bg-gray-300"></div>
+
+                <button 
+                    onClick={() => onNavigate('favorites')}
+                    className={`flex flex-col items-center justify-center w-full h-full space-y-1 ${activeTab === 'favorites' ? 'text-pink-600' : 'text-gray-500 hover:text-pink-500'}`}
+                >
+                    <Icons.Heart width={24} height={24} fill={activeTab === 'favorites' ? "currentColor" : "none"} strokeWidth={activeTab === 'favorites' ? 2.5 : 2} />
+                    <span className={`text-[10px] font-bold ${activeTab === 'favorites' ? 'opacity-100' : 'opacity-70'}`}>รายการโปรด</span>
+                </button>
+            </div>
+        );
+
         const DifficultyBadge = ({ level }) => {
-            const thaiLevel = {
-                'Very Easy': 'ง่ายมาก',
-                'Easy': 'ง่าย',
-                'Medium': 'ปานกลาง',
-                'Hard': 'ยาก',
-                'Very Hard': 'ยากมาก'
-            }[level] || level;
+            const config = {
+                'Very Easy': { label: 'ง่ายมาก', color: 'bg-green-200' },
+                'Easy': { label: 'ง่าย', color: 'bg-blue-200' },
+                'Medium': { label: 'ปานกลาง', color: 'bg-yellow-200' },
+                'Hard': { label: 'ยาก', color: 'bg-orange-200' },
+                'Very Hard': { label: 'ยากมาก', color: 'bg-red-200' }
+            };
+            const { label, color } = config[level] || { label: level, color: 'bg-gray-200' };
 
             return (
-                <span className="text-[10px] uppercase border border-black px-1 bg-gray-200 text-black">
-                    [{thaiLevel}]
+                <span className={`text-[9px] uppercase border border-black px-1.5 py-0.5 rounded-sm text-black ${color} font-bold`}>
+                    {label}
                 </span>
             );
         };
 
-        const KnotEntry = ({ knot, onClick }) => (
+        const KnotEntry = ({ knot, onClick, isFavorite, onToggleFav }) => (
             <div 
+                className="relative border border-black p-3 cursor-pointer bg-white h-full flex flex-col hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none group"
                 onClick={() => onClick(knot)}
-                className="border border-black p-3 cursor-pointer hover:bg-yellow-50 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-[1px] active:translate-y-[1px] active:shadow-none bg-white h-full flex flex-col"
             >
-                <div className="flex justify-between items-start mb-2 border-b border-black border-dotted pb-2">
-                    <span className="font-bold text-blue-700 underline text-sm line-clamp-1 mr-2">
-                        #{knot.id} {knot.name.split('(')[0]}
-                    </span>
+                <div className="flex justify-between items-start mb-2 pb-2 border-b border-dashed border-gray-400">
+                    <div className="flex-1 pr-2">
+                        <span className="font-bold text-blue-700 text-sm block">
+                            #{knot.id} {knot.name.split('(')[0]}
+                        </span>
+                    </div>
                     <DifficultyBadge level={knot.difficulty} />
                 </div>
 
                 <div className="text-xs space-y-2 flex-1">
-                    <p className="font-bold truncate">{knot.name.split('(')[1]?.replace(')', '') || 'N/A'}</p>
-                    <p className="text-gray-600 line-clamp-2">
-                        <span className="text-black font-bold">&gt; USE:</span> {knot.usage}
+                    <p className="font-bold text-gray-800">{knot.name.split('(')[1]?.replace(')', '') || 'English Name'}</p>
+                    <p className="text-gray-600 line-clamp-2 text-[11px]">
+                        <span className="text-black font-bold">USE:</span> {knot.usage}
                     </p>
                 </div>
+
+                {/* Favorite Button on Card */}
+                <button 
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onToggleFav(knot.id);
+                    }}
+                    className={`absolute bottom-2 right-2 p-1.5 border border-black rounded-full transition-colors z-10 ${isFavorite ? 'bg-pink-500 text-white' : 'bg-white text-gray-300 hover:text-pink-400'}`}
+                >
+                    <Icons.Heart width={14} height={14} fill={isFavorite ? "currentColor" : "none"} />
+                </button>
             </div>
         );
 
-        const HtmlDialog = ({ knot, onClose }) => {
+        const HtmlDialog = ({ knot, onClose, isFavorite, onToggleFav }) => {
             if (!knot) return null;
             const [showVideo, setShowVideo] = useState(false);
             
-            // Fallback content
             const imageUrl = knot.imageUrl || `https://placehold.co/600x400/EEE/31343C?font=roboto&text=${encodeURIComponent(knot.name.split('(')[0])}`;
-            const videoId = knot.youtubeId || "V7_GzJp2j2U"; // Default video
+            const videoId = knot.youtubeId || "V7_GzJp2j2U";
 
             return (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-white/80 backdrop-grayscale">
-                    <div className="bg-white w-full max-w-md border-2 border-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] flex flex-col max-h-[90vh]">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fadeIn">
+                    <div className="bg-white w-full max-w-md border-2 border-black shadow-[10px_10px_0px_0px_rgba(255,255,255,1)] flex flex-col max-h-[85vh] md:max-h-[90vh]">
                         
-                        <div className="bg-blue-700 text-white p-2 flex justify-between items-center border-b-2 border-black flex-shrink-0">
-                           <span className="font-bold text-sm flex items-center gap-2">
-                             <Icons.Info width={14} height={14} /> properties_view.exe
-                           </span>
-                           <button onClick={onClose} className="bg-gray-300 text-black px-2 border border-white border-b-black border-r-black active:border-t-black active:border-l-black hover:bg-red-600 hover:text-white font-bold text-xs">
-                             X
-                           </button>
+                        {/* Header */}
+                        <div className="bg-blue-700 text-white p-3 flex justify-between items-center border-b-2 border-black flex-shrink-0">
+                            <span className="font-bold text-sm flex items-center gap-2 truncate pr-4">
+                                <Icons.Info width={16} height={16} /> {knot.name}
+                            </span>
+                            <button onClick={onClose} className="bg-red-500 text-white w-6 h-6 flex items-center justify-center border border-black font-bold hover:bg-red-600">
+                                X
+                            </button>
                         </div>
 
-                        <div className="p-4 overflow-y-auto font-mono text-sm custom-scrollbar">
-                           <h2 className="text-xl font-bold border-b-4 border-black mb-4 pb-2 text-center">
-                             {knot.name}
-                           </h2>
-
-                           <div className="mb-4 border-2 border-black bg-black">
-                              {showVideo ? (
-                                <div className="relative pt-[56.25%] w-full">
-                                  <iframe 
-                                    className="absolute inset-0 w-full h-full"
-                                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-                                    title="YouTube video player"
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                  ></iframe>
-                                </div>
-                              ) : (
-                                <div className="relative group bg-gray-100 flex items-center justify-center min-h-[200px]">
-                                  <img 
-                                    src={imageUrl} 
-                                    alt={knot.name} 
-                                    className="w-full h-auto object-cover block max-h-[250px]" 
-                                    onError={(e) => {
-                                        e.target.onerror = null; 
-                                        e.target.src='https://placehold.co/600x400/EEE/31343C?font=roboto&text=Image+Not+Found'
-                                    }}
-                                  />
-                                </div>
-                              )}
-                           </div>
-
-                           <div className="flex gap-2 mb-6 justify-center">
-                              {!showVideo ? (
+                        {/* Content */}
+                        <div className="p-4 overflow-y-auto custom-scrollbar flex-1 bg-white">
+                            
+                            {/* Actions Bar inside Dialog */}
+                            <div className="flex justify-between items-center mb-4">
+                                <DifficultyBadge level={knot.difficulty} />
                                 <button 
-                                  onClick={() => setShowVideo(true)}
-                                  className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all active:translate-x-[2px] active:translate-y-[2px]"
+                                    onClick={() => onToggleFav(knot.id)}
+                                    className={`flex items-center gap-2 px-3 py-1 border border-black text-xs font-bold transition-all ${isFavorite ? 'bg-pink-100 text-pink-600' : 'bg-gray-100 text-gray-500 hover:bg-pink-50'}`}
                                 >
-                                  <Icons.Play width={14} height={14} fill="currentColor" /> ดูวิดีโอสาธิต
+                                    <Icons.Heart width={14} height={14} fill={isFavorite ? "currentColor" : "none"} />
+                                    {isFavorite ? 'บันทึกแล้ว' : 'บันทึกรายการ'}
                                 </button>
-                              ) : (
-                                <button 
-                                  onClick={() => setShowVideo(false)}
-                                  className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-black font-bold border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-none transition-all active:translate-x-[2px] active:translate-y-[2px]"
-                                >
-                                  <Icons.Image width={14} height={14} /> กลับไปดูรูปภาพ
-                                </button>
-                              )}
-                           </div>
-                           
-                           <table className="w-full border-2 border-black mb-6 text-xs">
-                             <tbody>
-                               <tr className="border-b border-black">
-                                 <td className="bg-gray-200 p-2 border-r border-black w-1/3 font-bold">หมวดหมู่</td>
-                                 <td className="p-2">{knot.category}</td>
-                               </tr>
-                               <tr className="border-b border-black">
-                                 <td className="bg-gray-200 p-2 border-r border-black font-bold">ความยาก</td>
-                                 <td className="p-2">{knot.difficulty}</td>
-                               </tr>
-                               <tr>
-                                 <td className="bg-gray-200 p-2 border-r border-black font-bold">การใช้งาน</td>
-                                 <td className="p-2">{knot.usage}</td>
-                               </tr>
-                             </tbody>
-                           </table>
+                            </div>
 
-                           <fieldset className="border-2 border-black p-4 mb-4">
-                             <legend className="px-2 font-bold bg-white border border-black ml-2 text-xs">ขั้นตอน (STEPS)</legend>
-                             <ol className="list-decimal list-inside space-y-2">
-                               {knot.steps.map((step, idx) => (
-                                 <li key={idx} className="pl-2">
-                                   {step}
-                                 </li>
-                               ))}
-                             </ol>
-                           </fieldset>
+                            <div className="mb-4 border-2 border-black bg-black">
+                                {showVideo ? (
+                                    <div className="relative pt-[56.25%] w-full">
+                                        <iframe 
+                                            className="absolute inset-0 w-full h-full"
+                                            src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+                                            title="YouTube video player"
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                ) : (
+                                    <div className="relative group bg-gray-100 flex items-center justify-center min-h-[200px]">
+                                        <img 
+                                            src={imageUrl} 
+                                            alt={knot.name} 
+                                            className="w-full h-auto object-cover block max-h-[250px]" 
+                                            onError={(e) => {
+                                                e.target.onerror = null; 
+                                                e.target.src='https://placehold.co/600x400/EEE/31343C?font=roboto&text=No+Image'
+                                            }}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="flex justify-center mb-6">
+                                <button 
+                                    onClick={() => setShowVideo(!showVideo)}
+                                    className={`flex items-center gap-2 px-4 py-2 border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all text-xs ${showVideo ? 'bg-white text-black' : 'bg-red-600 text-white'}`}
+                                >
+                                    {showVideo ? (
+                                        <><Icons.Image width={14} height={14} /> ดูรูปภาพ</>
+                                    ) : (
+                                        <><Icons.Play width={14} height={14} fill="currentColor" /> ดูวิดีโอสาธิต</>
+                                    )}
+                                </button>
+                            </div>
+                            
+                            <table className="w-full border-2 border-black mb-6 text-xs">
+                                <tbody>
+                                    <tr className="border-b border-black">
+                                        <td className="bg-gray-100 p-2 border-r border-black w-1/3 font-bold">หมวดหมู่</td>
+                                        <td className="p-2">{knot.category}</td>
+                                    </tr>
+                                    <tr className="border-b border-black">
+                                        <td className="bg-gray-100 p-2 border-r border-black font-bold">การใช้งาน</td>
+                                        <td className="p-2">{knot.usage}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div className="border-2 border-black p-4 bg-yellow-50 relative mt-4">
+                                <span className="absolute -top-3 left-4 bg-white border border-black px-2 text-[10px] font-bold">STEPS / วิธีทำ</span>
+                                <ol className="list-decimal list-inside space-y-3 text-sm mt-1">
+                                    {knot.steps.map((step, idx) => (
+                                        <li key={idx} className="pl-1 leading-snug text-gray-800">
+                                            {step}
+                                        </li>
+                                    ))}
+                                </ol>
+                            </div>
                         </div>
 
-                        <div className="p-2 border-t-2 border-black bg-gray-100 flex justify-end flex-shrink-0">
-                           <button onClick={onClose} className="px-6 py-1 bg-gray-200 border-2 border-white border-b-black border-r-black active:border-t-black active:border-l-black active:bg-gray-300 text-sm font-bold hover:bg-red-500 hover:text-white transition-colors">
-                             ปิด (CLOSE)
-                           </button>
+                        {/* Footer */}
+                        <div className="p-3 border-t-2 border-black bg-gray-100 flex justify-end">
+                            <button onClick={onClose} className="px-6 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-[1px] active:translate-y-[1px] text-xs font-bold hover:bg-gray-50">
+                                ปิดหน้าต่าง
+                            </button>
                         </div>
                     </div>
                 </div>
             );
         };
 
-        const PageContent = ({ children, title, subtitle }) => (
-            <main className="flex-1 flex flex-col h-full bg-white overflow-hidden relative">
-                <header className="p-2 md:p-3 border-b-2 border-black flex justify-between items-center bg-gray-50">
-                    <div>
-                        <h2 className="text-lg md:text-xl font-bold uppercase font-sans tracking-tighter">{title}</h2>
-                        <p className="text-[10px] md:text-xs text-gray-500 font-mono">path: /root/{subtitle}</p>
+        const FavoritesDialog = ({ favorites, allKnots, onClose, onToggleFav, onSelectKnot }) => {
+            const favKnots = allKnots.filter(k => favorites.includes(k.id));
+
+            return (
+                <div className="fixed inset-0 z-40 flex items-center justify-center p-4 bg-white/90 backdrop-grayscale animate-fadeIn">
+                    <div className="bg-white w-full max-w-md h-[80vh] border-2 border-black shadow-[8px_8px_0px_0px_pink] flex flex-col">
+                        <div className="bg-pink-500 text-white p-3 flex justify-between items-center border-b-2 border-black">
+                            <h2 className="font-bold text-lg flex items-center gap-2">
+                                <Icons.Heart width={20} height={20} fill="white" /> รายการโปรด ({favKnots.length})
+                            </h2>
+                            <button onClick={onClose} className="text-white hover:text-black font-bold">Close</button>
+                        </div>
+
+                        <div className="flex-1 overflow-y-auto p-4 custom-scrollbar bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
+                            {favKnots.length > 0 ? (
+                                <div className="space-y-3">
+                                    {favKnots.map(knot => (
+                                        <div key={knot.id} onClick={() => onSelectKnot(knot)} className="flex items-center justify-between border border-black bg-white p-3 cursor-pointer hover:bg-pink-50 shadow-sm">
+                                            <div>
+                                                <div className="font-bold text-sm text-blue-800">{knot.name}</div>
+                                                <div className="text-xs text-gray-500">{knot.category}</div>
+                                            </div>
+                                            <button 
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    onToggleFav(knot.id);
+                                                }}
+                                                className="text-red-500 hover:text-red-700 p-2"
+                                            >
+                                                <Icons.Heart width={16} height={16} fill="currentColor" />
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-4">
+                                    <Icons.Heart width={48} height={48} />
+                                    <p className="text-center font-mono">ยังไม่มีรายการที่บันทึกไว้<br/>กดหัวใจเพื่อเพิ่มรายการ</p>
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div className="hidden md:block text-xs border border-black px-2 py-1 bg-white">
-                        {new Date().toLocaleDateString()}
-                    </div>
-                </header>
-                
-                <div className="flex-1 overflow-y-auto p-4 md:p-6 custom-scrollbar bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
-                    {children}
                 </div>
-            </main>
-        );
+            );
+        };
 
         function App() {
             const [searchTerm, setSearchTerm] = useState("");
             const [activeCategory, setActiveCategory] = useState("All");
             const [selectedKnot, setSelectedKnot] = useState(null);
+            const [showFavorites, setShowFavorites] = useState(false);
+            
+            // Local Storage Logic
+            const [favorites, setFavorites] = useState(() => {
+                try {
+                    const saved = localStorage.getItem('knots_favorites');
+                    return saved ? JSON.parse(saved) : [];
+                } catch (e) {
+                    return [];
+                }
+            });
+
+            useEffect(() => {
+                localStorage.setItem('knots_favorites', JSON.stringify(favorites));
+            }, [favorites]);
+
+            const toggleFavorite = (id) => {
+                setFavorites(prev => 
+                    prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+                );
+            };
+
+            const handleRefresh = () => {
+                setSearchTerm("");
+                setActiveCategory("All");
+                // Optional: window.location.reload() for hard refresh
+            };
 
             const filteredKnots = useMemo(() => {
                 return KNOTS_DATA.filter(knot => {
@@ -547,35 +659,76 @@
                         setActiveCategory={setActiveCategory}
                         searchTerm={searchTerm}
                         setSearchTerm={setSearchTerm}
+                        onToggleFavorites={() => setShowFavorites(true)}
+                        onRefresh={handleRefresh}
                     />
                     
-                    <PageContent 
-                        title={activeCategory === 'All' ? 'Index' : activeCategory} 
-                        subtitle={activeCategory === 'All' ? 'all_items' : 'filtered'}
-                    >
-                        <div className="w-full">
-                            <div className="mb-4 text-xs font-bold border-b-2 border-black pb-1 flex justify-between">
-                                <span>QUERY_RESULTS: {filteredKnots.length} ITEM(S)</span>
-                                <span>[VIEW: GRID]</span>
+                    <main className="flex-1 overflow-y-auto p-4 custom-scrollbar bg-gray-50 pb-20 relative">
+                        {/* Background Pattern */}
+                        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '20px 20px'}}></div>
+
+                        <div className="relative z-10">
+                            <div className="mb-4 text-xs font-bold border-b-2 border-gray-300 pb-1 flex justify-between text-gray-500">
+                                <span>RESULTS: {filteredKnots.length}</span>
+                                <span>MODE: LIST_VIEW</span>
                             </div>
 
                             {filteredKnots.length > 0 ? (
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                                     {filteredKnots.map((knot) => (
-                                        <KnotEntry key={knot.id} knot={knot} onClick={setSelectedKnot} />
+                                        <KnotEntry 
+                                            key={knot.id} 
+                                            knot={knot} 
+                                            onClick={setSelectedKnot} 
+                                            isFavorite={favorites.includes(knot.id)}
+                                            onToggleFav={toggleFavorite}
+                                        />
                                     ))}
                                 </div>
                             ) : (
-                                <div className="p-8 border-2 border-black border-dashed text-center bg-gray-50">
-                                    <p className="font-bold text-red-600 mb-2">ERROR 404: KNOT NOT FOUND</p>
-                                    <p className="text-xs">Please refine your search parameters.</p>
+                                <div className="p-10 border-2 border-black border-dashed text-center bg-white mt-10">
+                                    <p className="font-bold text-red-600 mb-2">NOT FOUND</p>
+                                    <p className="text-xs text-gray-500">ไม่พบเงื่อนที่คุณค้นหา</p>
+                                    <button onClick={handleRefresh} className="mt-4 underline text-blue-600 text-xs">ล้างการค้นหา</button>
                                 </div>
                             )}
                         </div>
-                    </PageContent>
+                    </main>
 
+                    {/* Bottom Navigation */}
+                    <BottomNavigation 
+                        activeTab={showFavorites ? 'favorites' : 'home'}
+                        onNavigate={(tab) => {
+                            if (tab === 'home') {
+                                setShowFavorites(false);
+                                handleRefresh(); // Optional: reset view on home click
+                            } else if (tab === 'favorites') {
+                                setShowFavorites(true);
+                            }
+                        }}
+                    />
+
+                    {/* Dialogs */}
                     {selectedKnot && (
-                        <HtmlDialog knot={selectedKnot} onClose={() => setSelectedKnot(null)} />
+                        <HtmlDialog 
+                            knot={selectedKnot} 
+                            onClose={() => setSelectedKnot(null)} 
+                            isFavorite={favorites.includes(selectedKnot.id)}
+                            onToggleFav={toggleFavorite}
+                        />
+                    )}
+
+                    {showFavorites && (
+                        <FavoritesDialog 
+                            favorites={favorites}
+                            allKnots={KNOTS_DATA}
+                            onClose={() => setShowFavorites(false)}
+                            onToggleFav={toggleFavorite}
+                            onSelectKnot={(knot) => {
+                                setSelectedKnot(knot);
+                                setShowFavorites(false); // Close list to show detail
+                            }}
+                        />
                     )}
                 </HtmlLayout>
             );
