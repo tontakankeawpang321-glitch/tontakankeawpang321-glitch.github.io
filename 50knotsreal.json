@@ -1,0 +1,752 @@
+[
+  {
+    "id": 1,
+    "name": "เงื่อนพิรอด (Square Knot)",
+    "category": "Basic",
+    "usage": "ต่อเชือกขนาดเท่ากัน, ผูกผ้าพันแผล",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "เงื่อนขัดสมาธิ (Sheet Bend)",
+    "category": "Basic",
+    "usage": "ต่อเชือกต่างขนาด",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "เงื่อนบ่วงสายธนู (Bowline)",
+    "category": "Basic",
+    "usage": "ทำบ่วงไม่รัดแน่น",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "เงื่อนตะกรุดเบ็ด (Clove Hitch)",
+    "category": "Basic",
+    "usage": "ผูกกับเสา/หลัก",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "เงื่อนประมง (Double Fisherman's Knot)",
+    "category": "Fishing",
+    "usage": "ต่อเชือกเอ็น",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "เงื่อนเลข 8 (Figure Eight Knot)",
+    "category": "Climbing",
+    "usage": "ปมหยุดเชือก",
+    "difficulty": "Very Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "เงื่อนเลข 8 ร้อยกลับ (Figure Eight Follow Through)",
+    "category": "Climbing",
+    "usage": "ผูกตัวเข้ากับสายเซฟ",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "เงื่อนผูกรั้ง (Taut-Line Hitch)",
+    "category": "Camping",
+    "usage": "ขึงสมอบกเต็นท์",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "เงื่อนผูกซุง (Timber Hitch)",
+    "category": "Camping",
+    "usage": "ลากไม้",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "เงื่อนผูกสมอ (Anchor Bend)",
+    "category": "Boating",
+    "usage": "ผูกเชือกกับห่วงเหล็ก",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "เงื่อนผูกรั้งรถบรรทุก (Trucker's Hitch)",
+    "category": "Camping",
+    "usage": "รัดของท้ายรถ",
+    "difficulty": "Hard",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "เงื่อนกระหวัดไม้ 2 ชั้น (Two Half Hitches)",
+    "category": "Basic",
+    "usage": "ผูกหลักง่ายๆ",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "เงื่อนผีเสื้อ (Alpine Butterfly Loop)",
+    "category": "Climbing",
+    "usage": "ทำบ่วงกลางเชือก",
+    "difficulty": "Hard",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "เงื่อนพรูสิค (Prusik Knot)",
+    "category": "Climbing",
+    "usage": "ไต่เชือก",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "เงื่อนมัดปมตาย (Overhand Knot)",
+    "category": "Basic",
+    "usage": "ปมหยุดพื้นฐาน",
+    "difficulty": "Very Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 16,
+    "name": "เงื่อนมัดปมตายคู่ (Double Overhand Knot)",
+    "category": "Basic",
+    "usage": "ปมหยุดที่แน่นกว่า",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 17,
+    "name": "เงื่อนผูกเก้าอี้ (Chair Knot)",
+    "category": "Rescue",
+    "usage": "ช่วยยกคน",
+    "difficulty": "Hard",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 18,
+    "name": "เงื่อนคาวบอย (Cow Hitch)",
+    "category": "Basic",
+    "usage": "ผูกสัตว์หรือของกับเสา",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 19,
+    "name": "เงื่อนปมตายแปดคู่ (Double Figure Eight)",
+    "category": "Climbing",
+    "usage": "งานกู้ภัย",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 20,
+    "name": "เงื่อนบ่วงลื่น (Slip Knot)",
+    "category": "Basic",
+    "usage": "ผูกชั่วคราว",
+    "difficulty": "Very Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 21,
+    "name": "เงื่อนคาราบิเนอร์ (Munter Hitch)",
+    "category": "Climbing",
+    "usage": "บีเลย์ฉุกเฉิน",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 22,
+    "name": "เงื่อนรัดปากถุง (Miller's Knot)",
+    "category": "Binding",
+    "usage": "มัดปากถุง",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 23,
+    "name": "เงื่อนผูกแพ (Sheepshank)",
+    "category": "Utility",
+    "usage": "ย่นเชือกให้สั้นลง",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 24,
+    "name": "เงื่อนแมวน้ำ (Rolling Hitch)",
+    "category": "Boating",
+    "usage": "ยึดกับเชือกเส้นอื่น",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 25,
+    "name": "เงื่อนคาร์ริค (Carrick Bend)",
+    "category": "Boating",
+    "usage": "ต่อเชือกใหญ่",
+    "difficulty": "Hard",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 26,
+    "name": "เงื่อนผูกเสากลาง (Midshipman's Hitch)",
+    "category": "Camping",
+    "usage": "ปรับความตึง",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 27,
+    "name": "เงื่อนบันได (Marlinespike Hitch)",
+    "category": "Boating",
+    "usage": "ทำด้ามจับชั่วคราว",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 28,
+    "name": "เงื่อนผูกธง (Cleat Hitch)",
+    "category": "Boating",
+    "usage": "ผูกเรือกับท่า",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 29,
+    "name": "เงื่อนผูกเสาคู่ (Round Turn and Two Half Hitches)",
+    "category": "Boating",
+    "usage": "ผูกกับหลักแน่นมาก",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 30,
+    "name": "เงื่อนคองสตริคเตอร์ (Constrictor Knot)",
+    "category": "Binding",
+    "usage": "รัดแน่นมาก",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 31,
+    "name": "เงื่อนผูกคอ (Noose Knot)",
+    "category": "Utility",
+    "usage": "ทำบ่วงรูด",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 32,
+    "name": "เงื่อนผูกแฮงแมน (Hangman's Knot)",
+    "category": "Utility",
+    "usage": "ทำบ่วงหลายรอบ",
+    "difficulty": "Hard",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 33,
+    "name": "เงื่อนผูกปมแพทย์ (Surgeon's Knot)",
+    "category": "Medical",
+    "usage": "ผูกไหมเย็บแผล",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 34,
+    "name": "เงื่อนผูกเอว (Water Knot)",
+    "category": "Climbing",
+    "usage": "ต่อสายแบน",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 35,
+    "name": "เงื่อนสต็อปเปอร์ (Stopper Knot)",
+    "category": "Basic",
+    "usage": "กันเชือกหลุดรู",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 36,
+    "name": "เงื่อนบ่วงโปรตุเกส (Portuguese Bowline)",
+    "category": "Rescue",
+    "usage": "ทำบ่วงสองชั้นช่วยคน",
+    "difficulty": "Hard",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 37,
+    "name": "เงื่อนผูกลวด (Wireman's Knot)",
+    "category": "Utility",
+    "usage": "ทำบ่วงกลางสาย",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 38,
+    "name": "เงื่อนผูกเสาแบบเร็ว (Highwayman's Hitch)",
+    "category": "Utility",
+    "usage": "ปลดเร็ว",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 39,
+    "name": "เงื่อนกลอง (Drum Hitch)",
+    "category": "Binding",
+    "usage": "รัดวัตถุทรงกระบอก",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 40,
+    "name": "เงื่อนผูกกล่อง (Packing Knot)",
+    "category": "Binding",
+    "usage": "มัดกล่องพัสดุ",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 41,
+    "name": "เงื่อนตาข่าย (Netting Knot)",
+    "category": "Fishing",
+    "usage": "ถักอวน",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 42,
+    "name": "เงื่อนปมเลือด (Blood Knot)",
+    "category": "Fishing",
+    "usage": "ต่อเอ็นขนาดใกล้เคียง",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 43,
+    "name": "เงื่อนยูนิ (Uni Knot)",
+    "category": "Fishing",
+    "usage": "ผูกตะขอ",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 44,
+    "name": "เงื่อนปาโลมาร์ (Palomar Knot)",
+    "category": "Fishing",
+    "usage": "ผูกตะขอแข็งแรงมาก",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 45,
+    "name": "เงื่อนผูกห่วง (Loop Knot)",
+    "category": "Fishing",
+    "usage": "ทำห่วงปลายสาย",
+    "difficulty": "Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 46,
+    "name": "เงื่อนคิงสลิง (King Sling Knot)",
+    "category": "Climbing",
+    "usage": "ทำสลิงกลางเชือก",
+    "difficulty": "Hard",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 47,
+    "name": "เงื่อนกรีปไวน์ (Grapevine Knot)",
+    "category": "Climbing",
+    "usage": "ต่อเชือกปีนเขา",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 48,
+    "name": "เงื่อนซิบบันด์ (Zeppelin Bend)",
+    "category": "Boating",
+    "usage": "ต่อเชือกไม่ติดตาย",
+    "difficulty": "Hard",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 49,
+    "name": "เงื่อนฮาล์ฟฮิตช์ (Half Hitch)",
+    "category": "Basic",
+    "usage": "เงื่อนพื้นฐาน",
+    "difficulty": "Very Easy",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  },
+  {
+    "id": 50,
+    "name": "เงื่อนบ่วงกระตุก (Running Bowline)",
+    "category": "Rescue",
+    "usage": "ทำบ่วงเลื่อนรัดวัตถุ",
+    "difficulty": "Medium",
+    "imageUrl": "https://www.netknots.com",
+    "youtubeId": "",
+    "steps": [
+      "เตรียมเชือกให้พร้อม",
+      "จัดรูปแบบตามลักษณะเงื่อน",
+      "สอดปลายเชือกตามโครงสร้างเงื่อน",
+      "ดึงจัดระเบียบให้แน่นและถูกต้อง"
+    ]
+  }
+]
