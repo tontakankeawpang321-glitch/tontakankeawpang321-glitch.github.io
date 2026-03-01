@@ -3,24 +3,24 @@
     "id": 1,
     "name": "เงื่อนพิรอด (Reef Knot / Square Knot)",
     "category": "Basic",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
-    "youtubeUrl": "https://youtu.be/9lPvK_LeLc0?si=TO2H_5R98n7wEeIA",
+    "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -29,24 +29,24 @@
     "id": 2,
     "name": "เงื่อนต่อเชือก (Sheet Bend)",
     "category": "Camping",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -55,24 +55,24 @@
     "id": 3,
     "name": "เงื่อนต่อเชือกสองชั้น (Double Sheet Bend)",
     "category": "Boating",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -81,24 +81,24 @@
     "id": 4,
     "name": "เงื่อนปมธรรมดา (Overhand Knot)",
     "category": "Climbing",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -107,24 +107,24 @@
     "id": 5,
     "name": "เงื่อนสองชั้น (Double Overhand Knot)",
     "category": "Binding",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -133,24 +133,24 @@
     "id": 6,
     "name": "เงื่อนครึ่งปม (Half Hitch)",
     "category": "Decorative",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -159,24 +159,24 @@
     "id": 7,
     "name": "เงื่อนสองครึ่งปม (Two Half Hitches)",
     "category": "Basic",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -185,24 +185,24 @@
     "id": 8,
     "name": "เงื่อนผูกเสา (Clove Hitch)",
     "category": "Camping",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -211,24 +211,24 @@
     "id": 9,
     "name": "เงื่อนผูกหลัก (Round Turn and Two Half Hitches)",
     "category": "Boating",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -237,24 +237,24 @@
     "id": 10,
     "name": "เงื่อนสมอเรือ (Anchor Bend)",
     "category": "Climbing",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -263,24 +263,24 @@
     "id": 11,
     "name": "เงื่อนบ่วงสาย (Bowline)",
     "category": "Binding",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -289,24 +289,24 @@
     "id": 12,
     "name": "เงื่อนบ่วงสายคู่ (Double Bowline)",
     "category": "Decorative",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -315,24 +315,24 @@
     "id": 13,
     "name": "เงื่อนบ่วงสายโยเซมิตี (Yosemite Bowline)",
     "category": "Basic",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -341,24 +341,24 @@
     "id": 14,
     "name": "เงื่อนเลขแปด (Figure Eight Knot)",
     "category": "Camping",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -367,24 +367,24 @@
     "id": 15,
     "name": "เงื่อนเลขแปดร้อยตาม (Figure Eight Follow Through)",
     "category": "Boating",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -393,24 +393,24 @@
     "id": 16,
     "name": "เงื่อนชาวประมง (Fisherman's Knot)",
     "category": "Climbing",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -419,24 +419,24 @@
     "id": 17,
     "name": "เงื่อนชาวประมงสองชั้น (Double Fisherman's Knot)",
     "category": "Binding",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -445,24 +445,24 @@
     "id": 18,
     "name": "เงื่อนเลือด (Blood Knot)",
     "category": "Decorative",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -471,24 +471,24 @@
     "id": 19,
     "name": "เงื่อนพาโลมาร์ (Palomar Knot)",
     "category": "Basic",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -497,24 +497,24 @@
     "id": 20,
     "name": "เงื่อนคลินช์ปรับปรุง (Improved Clinch Knot)",
     "category": "Camping",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -523,24 +523,24 @@
     "id": 21,
     "name": "เงื่อนตะกรุดเบ็ด (Snell Knot)",
     "category": "Boating",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -549,24 +549,24 @@
     "id": 22,
     "name": "เงื่อนปรูซิก (Prusik Knot)",
     "category": "Climbing",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -575,24 +575,24 @@
     "id": 23,
     "name": "เงื่อนผีเสื้ออัลไพน์ (Alpine Butterfly Loop)",
     "category": "Binding",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -601,24 +601,24 @@
     "id": 24,
     "name": "เงื่อนรัดแน่น (Constrictor Knot)",
     "category": "Decorative",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -627,24 +627,24 @@
     "id": 25,
     "name": "เงื่อนกำปั้นลิง (Monkey’s Fist)",
     "category": "Basic",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -653,24 +653,24 @@
     "id": 26,
     "name": "เงื่อนแคร์ริก (Carrick Bend)",
     "category": "Camping",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -679,50 +679,50 @@
     "id": 27,
     "name": "เงื่อนผูกไม้ (Timber Hitch)",
     "category": "Boating",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 28,
-    "name": "เงื่อนผูกไม้แหลม (Marlinespike Hitch)",
+    "name": "เงื่อนมาร์ลินสไปค์ (Marlinespike Hitch)",
     "category": "Climbing",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -731,24 +731,24 @@
     "id": 29,
     "name": "เงื่อนคอวัว (Cow Hitch)",
     "category": "Binding",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -757,24 +757,24 @@
     "id": 30,
     "name": "เงื่อนลาร์คเฮด (Lark’s Head Knot)",
     "category": "Decorative",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -783,50 +783,50 @@
     "id": 31,
     "name": "เงื่อนสายสั้น (Sheepshank)",
     "category": "Basic",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 32,
-    "name": "เงื่อนบัคเคิล (Buntline Hitch)",
+    "name": "เงื่อนบันท์ไลน์ (Buntline Hitch)",
     "category": "Camping",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -835,24 +835,24 @@
     "id": 33,
     "name": "เงื่อนผูกเรือ (Cleat Hitch)",
     "category": "Boating",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -861,24 +861,24 @@
     "id": 34,
     "name": "เงื่อนตะกรุด (Barrel Knot)",
     "category": "Climbing",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
@@ -887,414 +887,1636 @@
     "id": 35,
     "name": "เงื่อนสลิป (Slip Knot)",
     "category": "Binding",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 36,
-    "name": "เงื่อนฟิชเชอร์แมนเบนด์ (Fisherman's Bend)",
+    "name": "เงื่อนปลดเร็ว (Highwayman's Hitch)",
     "category": "Decorative",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 37,
-    "name": "เงื่อนปลดเร็ว (Highwayman's Hitch)",
+    "name": "เงื่อนแมทธิววอล์คเกอร์ (Matthew Walker Knot)",
     "category": "Basic",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 38,
-    "name": "เงื่อนแมทธิววอล์คเกอร์ (Matthew Walker Knot)",
+    "name": "เงื่อนห่วงเพชร (Diamond Knot)",
     "category": "Camping",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 39,
-    "name": "เงื่อนห่วงเพชร (Diamond Knot)",
+    "name": "เงื่อนปมมงกุฎ (Crown Knot)",
     "category": "Boating",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 40,
-    "name": "เงื่อนปมสี่ทิศ (Crown Knot)",
+    "name": "เงื่อนผูกหีบห่อ (Parcel Knot)",
     "category": "Climbing",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 41,
-    "name": "เงื่อนปมแบน (Flat Knot)",
+    "name": "เงื่อนบ่วงกระตุก (Running Bowline)",
     "category": "Binding",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 42,
-    "name": "เงื่อนผูกหีบห่อ (Parcel Knot)",
+    "name": "เงื่อนผูกค้ำ (Rolling Hitch)",
     "category": "Decorative",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 43,
-    "name": "เงื่อนบ่วงกระตุก (Running Bowline)",
+    "name": "เงื่อนก้างปลา (Surgeon’s Knot)",
     "category": "Basic",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 44,
-    "name": "เงื่อนผูกค้ำ (Rolling Hitch)",
+    "name": "เงื่อนทบปลาย (Stopper Knot)",
     "category": "Camping",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 45,
-    "name": "เงื่อนก้างปลา (Surgeon’s Knot)",
+    "name": "เงื่อนสตีเวดอร์ (Stevedore Knot)",
     "category": "Boating",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 46,
-    "name": "เงื่อนทบปลาย (Stopper Knot)",
+    "name": "เงื่อนห่วงกลางเชือก (Midshipman’s Hitch)",
     "category": "Climbing",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 47,
-    "name": "เงื่อนเกลียวคู่ (Stevedore Knot)",
+    "name": "เงื่อนโบว์ไลน์น้ำ (Water Bowline)",
     "category": "Binding",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 48,
-    "name": "เงื่อนห่วงกลางเชือก (Midshipman’s Hitch)",
+    "name": "เงื่อนยูนิ (Uni Knot)",
     "category": "Decorative",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ยาก",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 49,
-    "name": "เงื่อนคาร์ริคแบบหลวม (Loose Carrick Bend)",
+    "name": "เงื่อนยูนิคู่ (Double Uni Knot)",
     "category": "Basic",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ง่าย",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
   },
   {
     "id": 50,
-    "name": "เงื่อนโบว์ไลน์น้ำ (Water Bowline)",
+    "name": "เงื่อนทริลีน (Trilene Knot)",
     "category": "Camping",
-    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง หรือใช้งานเฉพาะทาง",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
     "difficulty": "ปานกลาง",
     "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
     "youtubeUrl": "",
     "steps": [
       {
         "title": "เตรียมเชือก",
-        "desc": "จัดตำแหน่งเชือกให้พร้อมเริ่มผูก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
         "title": "สร้างโครงเงื่อน",
-        "desc": "ไขว้หรือพันเชือกตามรูปแบบของเงื่อนชนิดนี้",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       },
       {
-        "title": "ดึงให้แน่น",
-        "desc": "จัดรูปทรงเงื่อนและดึงปลายเชือกให้กระชับ",
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "name": "เงื่อนบ่วงสองห่วง (Bowline on a Bight)",
+    "category": "Boating",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "name": "เงื่อนห่วงสเปน (Spanish Bowline)",
+    "category": "Climbing",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "name": "เงื่อนมิลเลอร์ (Miller’s Knot)",
+    "category": "Binding",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "name": "เงื่อนผูกคาน (Square Lashing)",
+    "category": "Decorative",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "name": "เงื่อนกากบาท (Diagonal Lashing)",
+    "category": "Basic",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "name": "เงื่อนสามขา (Tripod Lashing)",
+    "category": "Camping",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "name": "เงื่อนผูกธง (Flag Knot)",
+    "category": "Boating",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "name": "เงื่อนดรอปเปอร์ (Dropper Loop)",
+    "category": "Climbing",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name": "เงื่อนรัดสายไฟ (Icicle Hitch)",
+    "category": "Binding",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "name": "เงื่อนสายลาก (Taut Line Hitch)",
+    "category": "Decorative",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "name": "เงื่อนผูกห่วงคงที่ (Fixed Loop)",
+    "category": "Basic",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 62,
+    "name": "เงื่อนคัปสแตน (Capstan Hitch)",
+    "category": "Camping",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "name": "เงื่อนบาคแมน (Bachmann Knot)",
+    "category": "Boating",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "name": "เงื่อนเคลมไฮสต์ (Klemheist Knot)",
+    "category": "Climbing",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "name": "เงื่อนมุนเตอร์ (Munter Hitch)",
+    "category": "Binding",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 66,
+    "name": "เงื่อนเลขแปดสองห่วง (Double Figure Eight)",
+    "category": "Decorative",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "name": "เงื่อนแอชลีย์ (Ashley Stopper Knot)",
+    "category": "Basic",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "name": "เงื่อนเชือกโซ่ (Chain Sinnet)",
+    "category": "Camping",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "name": "เงื่อนถักสามเส้น (Three Strand Braid)",
+    "category": "Boating",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 70,
+    "name": "เงื่อนถักสี่เส้น (Four Strand Braid)",
+    "category": "Climbing",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "name": "เงื่อนบ่วงหางปลา (Perfection Loop)",
+    "category": "Binding",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "name": "เงื่อนปมกระดุม (Button Knot)",
+    "category": "Decorative",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "name": "เงื่อนรัดท่อ (Pipe Hitch)",
+    "category": "Basic",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "name": "เงื่อนบ่วงแขวน (Hangman’s Knot)",
+    "category": "Camping",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "name": "เงื่อนฮันเตอร์ (Hunter’s Bend)",
+    "category": "Boating",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "name": "เงื่อนวอเตอร์ (Water Knot)",
+    "category": "Climbing",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "name": "เงื่อนเซลฟ์ล็อก (Self Locking Knot)",
+    "category": "Binding",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "name": "เงื่อนตาข่าย (Net Knot)",
+    "category": "Decorative",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "name": "เงื่อนปมคู่ (Double Knot)",
+    "category": "Basic",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "name": "เงื่อนสลิง (Sling Knot)",
+    "category": "Camping",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "name": "เงื่อนดอกไม้ (Flower Knot)",
+    "category": "Boating",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "name": "เงื่อนโบว์ไลน์คู่กลาง (Double Bowline on a Bight)",
+    "category": "Climbing",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "name": "เงื่อนยึดสาย (Line Hitch)",
+    "category": "Binding",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "name": "เงื่อนผูกพัสดุ (Package Knot)",
+    "category": "Decorative",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "name": "เงื่อนขัดเชือก (Binding Knot)",
+    "category": "Basic",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "name": "เงื่อนปลายคู่ (Double End Knot)",
+    "category": "Camping",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "name": "เงื่อนแปดกลางเชือก (Figure Eight Loop)",
+    "category": "Boating",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "name": "เงื่อนคาร์ริกหลวม (Loose Carrick Bend)",
+    "category": "Climbing",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "name": "เงื่อนตะกรุดสามรอบ (Triple Overhand)",
+    "category": "Binding",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "name": "เงื่อนบ่วงไต่เชือก (Friction Hitch)",
+    "category": "Decorative",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "name": "เงื่อนปมทรงกลม (Wall Knot)",
+    "category": "Basic",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "name": "เงื่อนปมมงกุฎคู่ (Double Crown Knot)",
+    "category": "Camping",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "name": "เงื่อนรัดแนวตั้ง (Vertical Hitch)",
+    "category": "Boating",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "name": "เงื่อนโบว์ไลน์เร็ว (Quick Bowline)",
+    "category": "Climbing",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "name": "เงื่อนรัดกล่อง (Box Knot)",
+    "category": "Binding",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ปานกลาง",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "name": "เงื่อนห่วงประมง (Fishing Loop)",
+    "category": "Decorative",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ยาก",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "name": "เงื่อนบ่วงเลื่อน (Sliding Loop)",
+    "category": "Basic",
+    "usage": "ใช้ตามลักษณะเฉพาะของเงื่อนชนิดนี้ เช่น การต่อเชือก ผูกยึด ทำห่วง รับแรง หรือใช้งานเฉพาะทาง",
+    "difficulty": "ง่าย",
+    "imageUrl": "https://www.animatedknots.com/photos/reef/reefR11.jpg",
+    "youtubeUrl": "",
+    "steps": [
+      {
+        "title": "เตรียมเชือก",
+        "desc": "จัดเชือกตามตำแหน่งเริ่มต้นของเงื่อนชนิดนี้",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "สร้างโครงเงื่อน",
+        "desc": "ไขว้ พัน หรือสอดเชือกตามรูปแบบเฉพาะของเงื่อน",
+        "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
+      },
+      {
+        "title": "ดึงให้แน่นและจัดรูป",
+        "desc": "ดึงปลายเชือกให้กระชับ ตรวจสอบความสมมาตรและความมั่นคง",
         "image": "https://www.animatedknots.com/photos/reef/reefR11.jpg"
       }
     ]
