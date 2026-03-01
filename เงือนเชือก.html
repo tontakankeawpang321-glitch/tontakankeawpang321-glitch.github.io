@@ -275,14 +275,14 @@
             const safeName = knot.name || "ไม่ระบุชื่อเงื่อน";
             const mainImageUrl = knot.imageUrl || knot.image || `https://placehold.co/600x400/EEE/31343C?text=${encodeURIComponent(safeName.split('(')[0])}`;
             
-            // Collect all images for the slider (Main image + Step images)
+            // Collect all images for the slider (Main image + Step images) safely
             const sliderImages = useMemo(() => {
                 const images = [];
-                if (mainImageUrl && mainImageUrl.trim() !== '') images.push(mainImageUrl);
+                if (typeof mainImageUrl === 'string' && mainImageUrl.trim() !== '') images.push(mainImageUrl);
                 
                 if (Array.isArray(knot.steps)) {
                     knot.steps.forEach(step => {
-                        if (step && typeof step === 'object' && step.image && step.image.trim() !== '') {
+                        if (step && typeof step === 'object' && typeof step.image === 'string' && step.image.trim() !== '') {
                             if (!images.includes(step.image)) {
                                 images.push(step.image);
                             }
@@ -295,8 +295,8 @@
             const nextImg = (e) => { e.stopPropagation(); setCurrentImgIndex(prev => (prev + 1) % sliderImages.length); };
             const prevImg = (e) => { e.stopPropagation(); setCurrentImgIndex(prev => (prev - 1 + sliderImages.length) % sliderImages.length); };
 
-            // Handle parsing logic for youtubeUrl, youtubeId, or video to get ID safely
-            let videoId = null;
+            // กำหนดวิดีโอเริ่มต้นในกรณีที่ JSON ไม่ได้ใส่ลิงก์มา หรือใส่มาผิด (เช่น ใส่แค่ ",")
+            let videoId = "RQkDcVdXNURYO9Fg"; // Default Video ID (Square Knot)
             const rawVideo = knot.youtubeUrl || knot.youtubeId || knot.video;
             if (rawVideo && typeof rawVideo === 'string') {
                 try {
@@ -314,8 +314,6 @@
                     console.error("Video ID parsing error", err);
                 }
             }
-            // Flag to check if we should show the video button at all
-            const hasVideo = !!videoId;
             
             // Ensure steps is an array to prevent .map() from crashing
             const stepsArray = Array.isArray(knot.steps) ? knot.steps : (typeof knot.steps === 'string' ? [{desc: knot.steps}] : []);
@@ -326,7 +324,7 @@
                         
                         {/* Header Image/Video Area */}
                         <div className="relative h-56 sm:h-64 bg-slate-100 flex-shrink-0 group">
-                            {showVideo && hasVideo ? (
+                            {showVideo ? (
                                 <iframe 
                                     className="w-full h-full"
                                     src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
@@ -382,19 +380,17 @@
                                 </div>
                             </div>
                             
-                            {/* Toggle Media Button (Only show if has valid video) */}
-                            {hasVideo && (
-                                <button 
-                                    onClick={() => setShowVideo(!showVideo)}
-                                    className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full shadow-lg text-xs font-bold text-slate-800 hover:bg-white hover:scale-105 transition-all z-20"
-                                >
-                                    {showVideo ? (
-                                        <span className="flex items-center gap-1"><Icons.Image width={16} height={16} className="text-indigo-600"/> ดูรูปภาพ</span>
-                                    ) : (
-                                        <span className="flex items-center gap-1"><Icons.Play width={16} height={16} className="text-red-600" fill="currentColor" /> ดูวิดีโอ</span>
-                                    )}
-                                </button>
-                            )}
+                            {/* Toggle Media Button (แสดงเสมอ) */}
+                            <button 
+                                onClick={() => setShowVideo(!showVideo)}
+                                className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full shadow-lg text-xs font-bold text-slate-800 hover:bg-white hover:scale-105 transition-all z-20"
+                            >
+                                {showVideo ? (
+                                    <span className="flex items-center gap-1"><Icons.Image width={16} height={16} className="text-indigo-600"/> ดูรูปภาพ</span>
+                                ) : (
+                                    <span className="flex items-center gap-1"><Icons.Play width={16} height={16} className="text-red-600" fill="currentColor" /> ดูวิดีโอ</span>
+                                )}
+                            </button>
                         </div>
 
                         {/* Detail Content */}
@@ -445,7 +441,7 @@
                                                             {desc}
                                                         </p>
                                                     )}
-                                                    {image && image.trim() !== '' && (
+                                                    {typeof image === 'string' && image.trim() !== '' && (
                                                         <img 
                                                             src={image} 
                                                             alt={title || `ขั้นตอนที่ ${idx + 1}`} 
