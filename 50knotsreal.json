@@ -3,1000 +3,700 @@
     "id": 1,
     "name": "เงื่อนพิรอด (Square Knot (Reef Knot))",
     "category": "Basic",
-    "usage_th": "ใช้ต่อเชือกขนาดเท่ากัน เหมาะสำหรับงานมัดทั่วไป ไม่ควรใช้กับงานรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Square%20Knot%20%28Reef%20Knot%29%20how%20to%20tie",
-    "url": "https://en.wikipedia.org/wiki/Square_Knot_%28Reef_Knot%29"
+    "url": "https://en.wikipedia.org/wiki/Reef_Knot"
   },
   {
     "id": 2,
     "name": "เงื่อนกระหวัดไม้ (Clove Hitch)",
     "category": "Basic",
-    "usage_th": "ใช้ผูกเชือกกับเสา หลัก หรือวัตถุทรงกระบอก เหมาะกับการผูกชั่วคราว",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Clove%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 3,
     "name": "เงื่อนตะกรุดเบ็ด (Bowline)",
     "category": "Boating",
-    "usage_th": "ทำห่วงปลายเชือกที่ไม่รูดแน่น เหมาะกับงานเรือและกู้ภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Bowline%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 4,
     "name": "เงื่อนเลขแปด (Figure Eight Knot)",
     "category": "Climbing",
-    "usage_th": "เงื่อนหยุดปลายเชือก ป้องกันเชือกรูดผ่านอุปกรณ์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 5,
     "name": "เงื่อนเลขแปดร้อยสาย (Figure Eight Follow Through)",
     "category": "Climbing",
-    "usage_th": "ใช้ผูกตัวกับสายปีนเขาอย่างปลอดภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Follow%20Through%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 6,
     "name": "เงื่อนประมงคู่ (Double Fisherman's Knot)",
     "category": "Climbing",
-    "usage_th": "ใช้ต่อเชือกสองเส้นที่ต้องรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Fisherman%27s%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 7,
     "name": "เงื่อนผูกพัสดุ (Sheet Bend)",
     "category": "Binding",
-    "usage_th": "ใช้ต่อเชือกต่างขนาด",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 8,
     "name": "เงื่อนผูกพัสดุคู่ (Double Sheet Bend)",
     "category": "Binding",
-    "usage_th": "รุ่นแน่นหนาของเงื่อนผูกพัสดุ",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
   },
   {
     "id": 9,
     "name": "เงื่อนผูกเต็นท์ (Taut Line Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ปรับความตึงสมอบกเต็นท์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Taut%20Line%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Taut_Line_Hitch"
   },
   {
     "id": 10,
     "name": "เงื่อนลากไม้ (Timber Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ลากท่อนไม้หรือวัตถุทรงกระบอก",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Timber%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   },
   {
     "id": 11,
     "name": "เงื่อนพิรอด แบบที่ 11 (Square Knot (Reef Knot))",
     "category": "Basic",
-    "usage_th": "ใช้ต่อเชือกขนาดเท่ากัน เหมาะสำหรับงานมัดทั่วไป ไม่ควรใช้กับงานรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Square%20Knot%20%28Reef%20Knot%29%20how%20to%20tie",
-    "url": "https://en.wikipedia.org/wiki/Square_Knot_%28Reef_Knot%29"
+    "url": "https://en.wikipedia.org/wiki/Reef_Knot"
   },
   {
     "id": 12,
     "name": "เงื่อนกระหวัดไม้ แบบที่ 12 (Clove Hitch)",
     "category": "Basic",
-    "usage_th": "ใช้ผูกเชือกกับเสา หลัก หรือวัตถุทรงกระบอก เหมาะกับการผูกชั่วคราว",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Clove%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 13,
     "name": "เงื่อนตะกรุดเบ็ด แบบที่ 13 (Bowline)",
     "category": "Boating",
-    "usage_th": "ทำห่วงปลายเชือกที่ไม่รูดแน่น เหมาะกับงานเรือและกู้ภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Bowline%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 14,
     "name": "เงื่อนเลขแปด แบบที่ 14 (Figure Eight Knot)",
     "category": "Climbing",
-    "usage_th": "เงื่อนหยุดปลายเชือก ป้องกันเชือกรูดผ่านอุปกรณ์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 15,
     "name": "เงื่อนเลขแปดร้อยสาย แบบที่ 15 (Figure Eight Follow Through)",
     "category": "Climbing",
-    "usage_th": "ใช้ผูกตัวกับสายปีนเขาอย่างปลอดภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Follow%20Through%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 16,
     "name": "เงื่อนประมงคู่ แบบที่ 16 (Double Fisherman's Knot)",
     "category": "Climbing",
-    "usage_th": "ใช้ต่อเชือกสองเส้นที่ต้องรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Fisherman%27s%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 17,
     "name": "เงื่อนผูกพัสดุ แบบที่ 17 (Sheet Bend)",
     "category": "Binding",
-    "usage_th": "ใช้ต่อเชือกต่างขนาด",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 18,
     "name": "เงื่อนผูกพัสดุคู่ แบบที่ 18 (Double Sheet Bend)",
     "category": "Binding",
-    "usage_th": "รุ่นแน่นหนาของเงื่อนผูกพัสดุ",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
   },
   {
     "id": 19,
     "name": "เงื่อนผูกเต็นท์ แบบที่ 19 (Taut Line Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ปรับความตึงสมอบกเต็นท์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Taut%20Line%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Taut_Line_Hitch"
   },
   {
     "id": 20,
     "name": "เงื่อนลากไม้ แบบที่ 20 (Timber Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ลากท่อนไม้หรือวัตถุทรงกระบอก",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Timber%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   },
   {
     "id": 21,
     "name": "เงื่อนพิรอด แบบที่ 21 (Square Knot (Reef Knot))",
     "category": "Basic",
-    "usage_th": "ใช้ต่อเชือกขนาดเท่ากัน เหมาะสำหรับงานมัดทั่วไป ไม่ควรใช้กับงานรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Square%20Knot%20%28Reef%20Knot%29%20how%20to%20tie",
-    "url": "https://en.wikipedia.org/wiki/Square_Knot_%28Reef_Knot%29"
+    "url": "https://en.wikipedia.org/wiki/Reef_Knot"
   },
   {
     "id": 22,
     "name": "เงื่อนกระหวัดไม้ แบบที่ 22 (Clove Hitch)",
     "category": "Basic",
-    "usage_th": "ใช้ผูกเชือกกับเสา หลัก หรือวัตถุทรงกระบอก เหมาะกับการผูกชั่วคราว",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Clove%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 23,
     "name": "เงื่อนตะกรุดเบ็ด แบบที่ 23 (Bowline)",
     "category": "Boating",
-    "usage_th": "ทำห่วงปลายเชือกที่ไม่รูดแน่น เหมาะกับงานเรือและกู้ภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Bowline%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 24,
     "name": "เงื่อนเลขแปด แบบที่ 24 (Figure Eight Knot)",
     "category": "Climbing",
-    "usage_th": "เงื่อนหยุดปลายเชือก ป้องกันเชือกรูดผ่านอุปกรณ์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 25,
     "name": "เงื่อนเลขแปดร้อยสาย แบบที่ 25 (Figure Eight Follow Through)",
     "category": "Climbing",
-    "usage_th": "ใช้ผูกตัวกับสายปีนเขาอย่างปลอดภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Follow%20Through%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 26,
     "name": "เงื่อนประมงคู่ แบบที่ 26 (Double Fisherman's Knot)",
     "category": "Climbing",
-    "usage_th": "ใช้ต่อเชือกสองเส้นที่ต้องรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Fisherman%27s%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 27,
     "name": "เงื่อนผูกพัสดุ แบบที่ 27 (Sheet Bend)",
     "category": "Binding",
-    "usage_th": "ใช้ต่อเชือกต่างขนาด",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 28,
     "name": "เงื่อนผูกพัสดุคู่ แบบที่ 28 (Double Sheet Bend)",
     "category": "Binding",
-    "usage_th": "รุ่นแน่นหนาของเงื่อนผูกพัสดุ",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
   },
   {
     "id": 29,
     "name": "เงื่อนผูกเต็นท์ แบบที่ 29 (Taut Line Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ปรับความตึงสมอบกเต็นท์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Taut%20Line%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Taut_Line_Hitch"
   },
   {
     "id": 30,
     "name": "เงื่อนลากไม้ แบบที่ 30 (Timber Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ลากท่อนไม้หรือวัตถุทรงกระบอก",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Timber%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   },
   {
     "id": 31,
     "name": "เงื่อนพิรอด แบบที่ 31 (Square Knot (Reef Knot))",
     "category": "Basic",
-    "usage_th": "ใช้ต่อเชือกขนาดเท่ากัน เหมาะสำหรับงานมัดทั่วไป ไม่ควรใช้กับงานรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Square%20Knot%20%28Reef%20Knot%29%20how%20to%20tie",
-    "url": "https://en.wikipedia.org/wiki/Square_Knot_%28Reef_Knot%29"
+    "url": "https://en.wikipedia.org/wiki/Reef_Knot"
   },
   {
     "id": 32,
     "name": "เงื่อนกระหวัดไม้ แบบที่ 32 (Clove Hitch)",
     "category": "Basic",
-    "usage_th": "ใช้ผูกเชือกกับเสา หลัก หรือวัตถุทรงกระบอก เหมาะกับการผูกชั่วคราว",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Clove%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 33,
     "name": "เงื่อนตะกรุดเบ็ด แบบที่ 33 (Bowline)",
     "category": "Boating",
-    "usage_th": "ทำห่วงปลายเชือกที่ไม่รูดแน่น เหมาะกับงานเรือและกู้ภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Bowline%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 34,
     "name": "เงื่อนเลขแปด แบบที่ 34 (Figure Eight Knot)",
     "category": "Climbing",
-    "usage_th": "เงื่อนหยุดปลายเชือก ป้องกันเชือกรูดผ่านอุปกรณ์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 35,
     "name": "เงื่อนเลขแปดร้อยสาย แบบที่ 35 (Figure Eight Follow Through)",
     "category": "Climbing",
-    "usage_th": "ใช้ผูกตัวกับสายปีนเขาอย่างปลอดภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Follow%20Through%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 36,
     "name": "เงื่อนประมงคู่ แบบที่ 36 (Double Fisherman's Knot)",
     "category": "Climbing",
-    "usage_th": "ใช้ต่อเชือกสองเส้นที่ต้องรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Fisherman%27s%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 37,
     "name": "เงื่อนผูกพัสดุ แบบที่ 37 (Sheet Bend)",
     "category": "Binding",
-    "usage_th": "ใช้ต่อเชือกต่างขนาด",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 38,
     "name": "เงื่อนผูกพัสดุคู่ แบบที่ 38 (Double Sheet Bend)",
     "category": "Binding",
-    "usage_th": "รุ่นแน่นหนาของเงื่อนผูกพัสดุ",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
   },
   {
     "id": 39,
     "name": "เงื่อนผูกเต็นท์ แบบที่ 39 (Taut Line Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ปรับความตึงสมอบกเต็นท์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Taut%20Line%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Taut_Line_Hitch"
   },
   {
     "id": 40,
     "name": "เงื่อนลากไม้ แบบที่ 40 (Timber Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ลากท่อนไม้หรือวัตถุทรงกระบอก",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Timber%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   },
   {
     "id": 41,
     "name": "เงื่อนพิรอด แบบที่ 41 (Square Knot (Reef Knot))",
     "category": "Basic",
-    "usage_th": "ใช้ต่อเชือกขนาดเท่ากัน เหมาะสำหรับงานมัดทั่วไป ไม่ควรใช้กับงานรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Square%20Knot%20%28Reef%20Knot%29%20how%20to%20tie",
-    "url": "https://en.wikipedia.org/wiki/Square_Knot_%28Reef_Knot%29"
+    "url": "https://en.wikipedia.org/wiki/Reef_Knot"
   },
   {
     "id": 42,
     "name": "เงื่อนกระหวัดไม้ แบบที่ 42 (Clove Hitch)",
     "category": "Basic",
-    "usage_th": "ใช้ผูกเชือกกับเสา หลัก หรือวัตถุทรงกระบอก เหมาะกับการผูกชั่วคราว",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Clove%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 43,
     "name": "เงื่อนตะกรุดเบ็ด แบบที่ 43 (Bowline)",
     "category": "Boating",
-    "usage_th": "ทำห่วงปลายเชือกที่ไม่รูดแน่น เหมาะกับงานเรือและกู้ภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Bowline%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 44,
     "name": "เงื่อนเลขแปด แบบที่ 44 (Figure Eight Knot)",
     "category": "Climbing",
-    "usage_th": "เงื่อนหยุดปลายเชือก ป้องกันเชือกรูดผ่านอุปกรณ์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 45,
     "name": "เงื่อนเลขแปดร้อยสาย แบบที่ 45 (Figure Eight Follow Through)",
     "category": "Climbing",
-    "usage_th": "ใช้ผูกตัวกับสายปีนเขาอย่างปลอดภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Follow%20Through%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 46,
     "name": "เงื่อนประมงคู่ แบบที่ 46 (Double Fisherman's Knot)",
     "category": "Climbing",
-    "usage_th": "ใช้ต่อเชือกสองเส้นที่ต้องรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Fisherman%27s%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 47,
     "name": "เงื่อนผูกพัสดุ แบบที่ 47 (Sheet Bend)",
     "category": "Binding",
-    "usage_th": "ใช้ต่อเชือกต่างขนาด",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 48,
     "name": "เงื่อนผูกพัสดุคู่ แบบที่ 48 (Double Sheet Bend)",
     "category": "Binding",
-    "usage_th": "รุ่นแน่นหนาของเงื่อนผูกพัสดุ",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
   },
   {
     "id": 49,
     "name": "เงื่อนผูกเต็นท์ แบบที่ 49 (Taut Line Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ปรับความตึงสมอบกเต็นท์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Taut%20Line%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Taut_Line_Hitch"
   },
   {
     "id": 50,
     "name": "เงื่อนลากไม้ แบบที่ 50 (Timber Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ลากท่อนไม้หรือวัตถุทรงกระบอก",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Timber%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   },
   {
     "id": 51,
     "name": "เงื่อนพิรอด แบบที่ 51 (Square Knot (Reef Knot))",
     "category": "Basic",
-    "usage_th": "ใช้ต่อเชือกขนาดเท่ากัน เหมาะสำหรับงานมัดทั่วไป ไม่ควรใช้กับงานรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Square%20Knot%20%28Reef%20Knot%29%20how%20to%20tie",
-    "url": "https://en.wikipedia.org/wiki/Square_Knot_%28Reef_Knot%29"
+    "url": "https://en.wikipedia.org/wiki/Reef_Knot"
   },
   {
     "id": 52,
     "name": "เงื่อนกระหวัดไม้ แบบที่ 52 (Clove Hitch)",
     "category": "Basic",
-    "usage_th": "ใช้ผูกเชือกกับเสา หลัก หรือวัตถุทรงกระบอก เหมาะกับการผูกชั่วคราว",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Clove%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 53,
     "name": "เงื่อนตะกรุดเบ็ด แบบที่ 53 (Bowline)",
     "category": "Boating",
-    "usage_th": "ทำห่วงปลายเชือกที่ไม่รูดแน่น เหมาะกับงานเรือและกู้ภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Bowline%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 54,
     "name": "เงื่อนเลขแปด แบบที่ 54 (Figure Eight Knot)",
     "category": "Climbing",
-    "usage_th": "เงื่อนหยุดปลายเชือก ป้องกันเชือกรูดผ่านอุปกรณ์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 55,
     "name": "เงื่อนเลขแปดร้อยสาย แบบที่ 55 (Figure Eight Follow Through)",
     "category": "Climbing",
-    "usage_th": "ใช้ผูกตัวกับสายปีนเขาอย่างปลอดภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Follow%20Through%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 56,
     "name": "เงื่อนประมงคู่ แบบที่ 56 (Double Fisherman's Knot)",
     "category": "Climbing",
-    "usage_th": "ใช้ต่อเชือกสองเส้นที่ต้องรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Fisherman%27s%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 57,
     "name": "เงื่อนผูกพัสดุ แบบที่ 57 (Sheet Bend)",
     "category": "Binding",
-    "usage_th": "ใช้ต่อเชือกต่างขนาด",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 58,
     "name": "เงื่อนผูกพัสดุคู่ แบบที่ 58 (Double Sheet Bend)",
     "category": "Binding",
-    "usage_th": "รุ่นแน่นหนาของเงื่อนผูกพัสดุ",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
   },
   {
     "id": 59,
     "name": "เงื่อนผูกเต็นท์ แบบที่ 59 (Taut Line Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ปรับความตึงสมอบกเต็นท์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Taut%20Line%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Taut_Line_Hitch"
   },
   {
     "id": 60,
     "name": "เงื่อนลากไม้ แบบที่ 60 (Timber Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ลากท่อนไม้หรือวัตถุทรงกระบอก",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Timber%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   },
   {
     "id": 61,
     "name": "เงื่อนพิรอด แบบที่ 61 (Square Knot (Reef Knot))",
     "category": "Basic",
-    "usage_th": "ใช้ต่อเชือกขนาดเท่ากัน เหมาะสำหรับงานมัดทั่วไป ไม่ควรใช้กับงานรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Square%20Knot%20%28Reef%20Knot%29%20how%20to%20tie",
-    "url": "https://en.wikipedia.org/wiki/Square_Knot_%28Reef_Knot%29"
+    "url": "https://en.wikipedia.org/wiki/Reef_Knot"
   },
   {
     "id": 62,
     "name": "เงื่อนกระหวัดไม้ แบบที่ 62 (Clove Hitch)",
     "category": "Basic",
-    "usage_th": "ใช้ผูกเชือกกับเสา หลัก หรือวัตถุทรงกระบอก เหมาะกับการผูกชั่วคราว",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Clove%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 63,
     "name": "เงื่อนตะกรุดเบ็ด แบบที่ 63 (Bowline)",
     "category": "Boating",
-    "usage_th": "ทำห่วงปลายเชือกที่ไม่รูดแน่น เหมาะกับงานเรือและกู้ภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Bowline%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 64,
     "name": "เงื่อนเลขแปด แบบที่ 64 (Figure Eight Knot)",
     "category": "Climbing",
-    "usage_th": "เงื่อนหยุดปลายเชือก ป้องกันเชือกรูดผ่านอุปกรณ์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 65,
     "name": "เงื่อนเลขแปดร้อยสาย แบบที่ 65 (Figure Eight Follow Through)",
     "category": "Climbing",
-    "usage_th": "ใช้ผูกตัวกับสายปีนเขาอย่างปลอดภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Follow%20Through%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 66,
     "name": "เงื่อนประมงคู่ แบบที่ 66 (Double Fisherman's Knot)",
     "category": "Climbing",
-    "usage_th": "ใช้ต่อเชือกสองเส้นที่ต้องรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Fisherman%27s%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 67,
     "name": "เงื่อนผูกพัสดุ แบบที่ 67 (Sheet Bend)",
     "category": "Binding",
-    "usage_th": "ใช้ต่อเชือกต่างขนาด",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 68,
     "name": "เงื่อนผูกพัสดุคู่ แบบที่ 68 (Double Sheet Bend)",
     "category": "Binding",
-    "usage_th": "รุ่นแน่นหนาของเงื่อนผูกพัสดุ",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
   },
   {
     "id": 69,
     "name": "เงื่อนผูกเต็นท์ แบบที่ 69 (Taut Line Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ปรับความตึงสมอบกเต็นท์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Taut%20Line%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Taut_Line_Hitch"
   },
   {
     "id": 70,
     "name": "เงื่อนลากไม้ แบบที่ 70 (Timber Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ลากท่อนไม้หรือวัตถุทรงกระบอก",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Timber%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   },
   {
     "id": 71,
     "name": "เงื่อนพิรอด แบบที่ 71 (Square Knot (Reef Knot))",
     "category": "Basic",
-    "usage_th": "ใช้ต่อเชือกขนาดเท่ากัน เหมาะสำหรับงานมัดทั่วไป ไม่ควรใช้กับงานรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Square%20Knot%20%28Reef%20Knot%29%20how%20to%20tie",
-    "url": "https://en.wikipedia.org/wiki/Square_Knot_%28Reef_Knot%29"
+    "url": "https://en.wikipedia.org/wiki/Reef_Knot"
   },
   {
     "id": 72,
     "name": "เงื่อนกระหวัดไม้ แบบที่ 72 (Clove Hitch)",
     "category": "Basic",
-    "usage_th": "ใช้ผูกเชือกกับเสา หลัก หรือวัตถุทรงกระบอก เหมาะกับการผูกชั่วคราว",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Clove%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 73,
     "name": "เงื่อนตะกรุดเบ็ด แบบที่ 73 (Bowline)",
     "category": "Boating",
-    "usage_th": "ทำห่วงปลายเชือกที่ไม่รูดแน่น เหมาะกับงานเรือและกู้ภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Bowline%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 74,
     "name": "เงื่อนเลขแปด แบบที่ 74 (Figure Eight Knot)",
     "category": "Climbing",
-    "usage_th": "เงื่อนหยุดปลายเชือก ป้องกันเชือกรูดผ่านอุปกรณ์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 75,
     "name": "เงื่อนเลขแปดร้อยสาย แบบที่ 75 (Figure Eight Follow Through)",
     "category": "Climbing",
-    "usage_th": "ใช้ผูกตัวกับสายปีนเขาอย่างปลอดภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Follow%20Through%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 76,
     "name": "เงื่อนประมงคู่ แบบที่ 76 (Double Fisherman's Knot)",
     "category": "Climbing",
-    "usage_th": "ใช้ต่อเชือกสองเส้นที่ต้องรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Fisherman%27s%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 77,
     "name": "เงื่อนผูกพัสดุ แบบที่ 77 (Sheet Bend)",
     "category": "Binding",
-    "usage_th": "ใช้ต่อเชือกต่างขนาด",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 78,
     "name": "เงื่อนผูกพัสดุคู่ แบบที่ 78 (Double Sheet Bend)",
     "category": "Binding",
-    "usage_th": "รุ่นแน่นหนาของเงื่อนผูกพัสดุ",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
   },
   {
     "id": 79,
     "name": "เงื่อนผูกเต็นท์ แบบที่ 79 (Taut Line Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ปรับความตึงสมอบกเต็นท์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Taut%20Line%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Taut_Line_Hitch"
   },
   {
     "id": 80,
     "name": "เงื่อนลากไม้ แบบที่ 80 (Timber Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ลากท่อนไม้หรือวัตถุทรงกระบอก",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Timber%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   },
   {
     "id": 81,
     "name": "เงื่อนพิรอด แบบที่ 81 (Square Knot (Reef Knot))",
     "category": "Basic",
-    "usage_th": "ใช้ต่อเชือกขนาดเท่ากัน เหมาะสำหรับงานมัดทั่วไป ไม่ควรใช้กับงานรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Square%20Knot%20%28Reef%20Knot%29%20how%20to%20tie",
-    "url": "https://en.wikipedia.org/wiki/Square_Knot_%28Reef_Knot%29"
+    "url": "https://en.wikipedia.org/wiki/Reef_Knot"
   },
   {
     "id": 82,
     "name": "เงื่อนกระหวัดไม้ แบบที่ 82 (Clove Hitch)",
     "category": "Basic",
-    "usage_th": "ใช้ผูกเชือกกับเสา หลัก หรือวัตถุทรงกระบอก เหมาะกับการผูกชั่วคราว",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Clove%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 83,
     "name": "เงื่อนตะกรุดเบ็ด แบบที่ 83 (Bowline)",
     "category": "Boating",
-    "usage_th": "ทำห่วงปลายเชือกที่ไม่รูดแน่น เหมาะกับงานเรือและกู้ภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Bowline%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 84,
     "name": "เงื่อนเลขแปด แบบที่ 84 (Figure Eight Knot)",
     "category": "Climbing",
-    "usage_th": "เงื่อนหยุดปลายเชือก ป้องกันเชือกรูดผ่านอุปกรณ์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 85,
     "name": "เงื่อนเลขแปดร้อยสาย แบบที่ 85 (Figure Eight Follow Through)",
     "category": "Climbing",
-    "usage_th": "ใช้ผูกตัวกับสายปีนเขาอย่างปลอดภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Follow%20Through%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 86,
     "name": "เงื่อนประมงคู่ แบบที่ 86 (Double Fisherman's Knot)",
     "category": "Climbing",
-    "usage_th": "ใช้ต่อเชือกสองเส้นที่ต้องรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Fisherman%27s%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 87,
     "name": "เงื่อนผูกพัสดุ แบบที่ 87 (Sheet Bend)",
     "category": "Binding",
-    "usage_th": "ใช้ต่อเชือกต่างขนาด",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 88,
     "name": "เงื่อนผูกพัสดุคู่ แบบที่ 88 (Double Sheet Bend)",
     "category": "Binding",
-    "usage_th": "รุ่นแน่นหนาของเงื่อนผูกพัสดุ",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
   },
   {
     "id": 89,
     "name": "เงื่อนผูกเต็นท์ แบบที่ 89 (Taut Line Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ปรับความตึงสมอบกเต็นท์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Taut%20Line%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Taut_Line_Hitch"
   },
   {
     "id": 90,
     "name": "เงื่อนลากไม้ แบบที่ 90 (Timber Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ลากท่อนไม้หรือวัตถุทรงกระบอก",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Timber%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   },
   {
     "id": 91,
     "name": "เงื่อนพิรอด แบบที่ 91 (Square Knot (Reef Knot))",
     "category": "Basic",
-    "usage_th": "ใช้ต่อเชือกขนาดเท่ากัน เหมาะสำหรับงานมัดทั่วไป ไม่ควรใช้กับงานรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Square%20Knot%20%28Reef%20Knot%29%20how%20to%20tie",
-    "url": "https://en.wikipedia.org/wiki/Square_Knot_%28Reef_Knot%29"
+    "url": "https://en.wikipedia.org/wiki/Reef_Knot"
   },
   {
     "id": 92,
     "name": "เงื่อนกระหวัดไม้ แบบที่ 92 (Clove Hitch)",
     "category": "Basic",
-    "usage_th": "ใช้ผูกเชือกกับเสา หลัก หรือวัตถุทรงกระบอก เหมาะกับการผูกชั่วคราว",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Clove%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 93,
     "name": "เงื่อนตะกรุดเบ็ด แบบที่ 93 (Bowline)",
     "category": "Boating",
-    "usage_th": "ทำห่วงปลายเชือกที่ไม่รูดแน่น เหมาะกับงานเรือและกู้ภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Bowline%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 94,
     "name": "เงื่อนเลขแปด แบบที่ 94 (Figure Eight Knot)",
     "category": "Climbing",
-    "usage_th": "เงื่อนหยุดปลายเชือก ป้องกันเชือกรูดผ่านอุปกรณ์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 95,
     "name": "เงื่อนเลขแปดร้อยสาย แบบที่ 95 (Figure Eight Follow Through)",
     "category": "Climbing",
-    "usage_th": "ใช้ผูกตัวกับสายปีนเขาอย่างปลอดภัย",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Figure%20Eight%20Follow%20Through%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 96,
     "name": "เงื่อนประมงคู่ แบบที่ 96 (Double Fisherman's Knot)",
     "category": "Climbing",
-    "usage_th": "ใช้ต่อเชือกสองเส้นที่ต้องรับแรงสูง",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Fisherman%27s%20Knot%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 97,
     "name": "เงื่อนผูกพัสดุ แบบที่ 97 (Sheet Bend)",
     "category": "Binding",
-    "usage_th": "ใช้ต่อเชือกต่างขนาด",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 98,
     "name": "เงื่อนผูกพัสดุคู่ แบบที่ 98 (Double Sheet Bend)",
     "category": "Binding",
-    "usage_th": "รุ่นแน่นหนาของเงื่อนผูกพัสดุ",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Double%20Sheet%20Bend%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
   },
   {
     "id": 99,
     "name": "เงื่อนผูกเต็นท์ แบบที่ 99 (Taut Line Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ปรับความตึงสมอบกเต็นท์",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Taut%20Line%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Taut_Line_Hitch"
   },
   {
     "id": 100,
     "name": "เงื่อนลากไม้ แบบที่ 100 (Timber Hitch)",
     "category": "Camping",
-    "usage_th": "ใช้ลากท่อนไม้หรือวัตถุทรงกระบอก",
-    "usage_en": "Commonly used in rope work and practical applications.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "youtubeUrl": "https://www.youtube.com/results?search_query=Timber%20Hitch%20how%20to%20tie",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   }
 ]
