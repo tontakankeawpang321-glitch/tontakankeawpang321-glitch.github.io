@@ -208,10 +208,15 @@
         const DifficultyBadge = ({ level }) => {
             const config = {
                 'Very Easy': { label: 'ง่ายมาก', bg: 'bg-emerald-100', text: 'text-emerald-700' },
+                'ง่ายมาก': { label: 'ง่ายมาก', bg: 'bg-emerald-100', text: 'text-emerald-700' },
                 'Easy': { label: 'ง่าย', bg: 'bg-sky-100', text: 'text-sky-700' },
+                'ง่าย': { label: 'ง่าย', bg: 'bg-sky-100', text: 'text-sky-700' },
                 'Medium': { label: 'ปานกลาง', bg: 'bg-amber-100', text: 'text-amber-700' },
+                'ปานกลาง': { label: 'ปานกลาง', bg: 'bg-amber-100', text: 'text-amber-700' },
                 'Hard': { label: 'ยาก', bg: 'bg-orange-100', text: 'text-orange-700' },
-                'Very Hard': { label: 'ยากมาก', bg: 'bg-rose-100', text: 'text-rose-700' }
+                'ยาก': { label: 'ยาก', bg: 'bg-orange-100', text: 'text-orange-700' },
+                'Very Hard': { label: 'ยากมาก', bg: 'bg-rose-100', text: 'text-rose-700' },
+                'ยากมาก': { label: 'ยากมาก', bg: 'bg-rose-100', text: 'text-rose-700' }
             };
             const { label, bg, text } = config[level] || { label: level || 'ทั่วไป', bg: 'bg-slate-100', text: 'text-slate-700' };
 
@@ -270,10 +275,22 @@
             // Safe Data Fallbacks to prevent White Screen (Crash)
             const safeName = knot.name || "ไม่ระบุชื่อเงื่อน";
             const imageUrl = knot.imageUrl || knot.image || `https://placehold.co/600x400/EEE/31343C?text=${encodeURIComponent(safeName.split('(')[0])}`;
-            const videoId = knot.youtubeId || knot.video || "V7_GzJp2j2U";
+            
+            // Handle parsing logic for youtubeUrl, youtubeId, or video to get ID
+            let videoId = "V7_GzJp2j2U";
+            const rawVideo = knot.youtubeUrl || knot.youtubeId || knot.video;
+            if (rawVideo && typeof rawVideo === 'string') {
+                if (rawVideo.includes("v=")) {
+                    videoId = rawVideo.split("v=")[1].split("&")[0];
+                } else if (rawVideo.includes("youtu.be/")) {
+                    videoId = rawVideo.split("youtu.be/")[1].split("?")[0];
+                } else if (rawVideo.length > 3 && rawVideo !== ',') {
+                    videoId = rawVideo;
+                }
+            }
             
             // Ensure steps is an array to prevent .map() from crashing
-            const stepsArray = Array.isArray(knot.steps) ? knot.steps : (typeof knot.steps === 'string' ? [knot.steps] : ["ไม่มีข้อมูลขั้นตอนสำหรับเงื่อนนี้"]);
+            const stepsArray = Array.isArray(knot.steps) ? knot.steps : (typeof knot.steps === 'string' ? [{desc: knot.steps}] : []);
 
             return (
                 <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center p-0 sm:p-4 bg-slate-900/40 backdrop-blur-sm animate-fadeIn">
@@ -352,21 +369,40 @@
                             </div>
 
                             <div>
-                                <h3 className="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
+                                <h3 className="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
                                     <span className="w-1.5 h-4 bg-indigo-500 rounded-full inline-block"></span>
                                     ขั้นตอนวิธีทำ (Steps)
                                 </h3>
-                                <div className="space-y-3">
-                                    {stepsArray.map((step, idx) => (
-                                        <div key={idx} className="flex gap-3">
-                                            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs font-bold">
-                                                {idx + 1}
+                                <div className="space-y-4">
+                                    {stepsArray.map((step, idx) => {
+                                        // Handle both old string format and new object format
+                                        const isObject = typeof step === 'object' && step !== null;
+                                        const title = isObject ? step.title : null;
+                                        const desc = isObject ? step.desc : step;
+                                        const image = isObject ? step.image : null;
+                                        
+                                        return (
+                                            <div key={idx} className="flex gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs font-bold mt-0.5">
+                                                    {idx + 1}
+                                                </div>
+                                                <div className="flex-1">
+                                                    {title && <h4 className="font-bold text-slate-800 text-sm mb-1">{title}</h4>}
+                                                    <p className="text-sm text-slate-700 leading-relaxed">
+                                                        {desc}
+                                                    </p>
+                                                    {image && (
+                                                        <div className="mt-3 rounded-lg overflow-hidden border border-slate-200 bg-white">
+                                                            <img src={image} alt={title || `ขั้นตอนที่ ${idx + 1}`} className="w-full h-auto object-contain max-h-48" loading="lazy" />
+                                                        </div>
+                                                    )}
+                                                </div>
                                             </div>
-                                            <p className="text-sm text-slate-700 leading-relaxed pt-0.5">
-                                                {step}
-                                            </p>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
+                                    {stepsArray.length === 0 && (
+                                        <div className="text-center py-4 text-slate-400 text-sm">ไม่มีข้อมูลขั้นตอนสำหรับเงื่อนนี้</div>
+                                    )}
                                 </div>
                             </div>
                         </div>
