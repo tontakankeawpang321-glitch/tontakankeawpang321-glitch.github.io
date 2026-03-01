@@ -98,6 +98,21 @@
             { id: 'Decorative', label: 'อื่นๆ', icon: Icons.Zap },
         ];
 
+        // --- Helper Function for URL ---
+        const openKnotUrl = (knot) => {
+            if (!knot) return;
+            // ดึง URL ที่มีในระบบ (เรียงตามลำดับความสำคัญ)
+            // ให้ความสำคัญกับ url (เช่น หน้าวิกิ/เว็บไซต์) หรือ youtubeUrl ก่อน
+            let targetUrl = knot.url || knot.youtubeUrl || knot.video || knot.link || knot.imageUrl || knot.image;
+            
+            // ตรวจสอบความถูกต้องของ URL เบื้องต้น
+            if (targetUrl && typeof targetUrl === 'string' && targetUrl.trim().length > 3 && targetUrl.trim() !== ',') {
+                window.open(targetUrl.trim(), '_blank', 'noopener,noreferrer');
+            } else {
+                console.warn("ไม่พบลิงก์ที่ถูกต้องสำหรับเงื่อนนี้");
+            }
+        };
+
         // --- COMPONENTS ---
 
         const HtmlLayout = ({ children }) => (
@@ -202,43 +217,26 @@
             </div>
         );
 
-        const DifficultyBadge = ({ level }) => {
-            const config = {
-                'Very Easy': { label: 'ง่ายมาก', bg: 'bg-emerald-100', text: 'text-emerald-700' },
-                'ง่ายมาก': { label: 'ง่ายมาก', bg: 'bg-emerald-100', text: 'text-emerald-700' },
-                'Easy': { label: 'ง่าย', bg: 'bg-sky-100', text: 'text-sky-700' },
-                'ง่าย': { label: 'ง่าย', bg: 'bg-sky-100', text: 'text-sky-700' },
-                'Medium': { label: 'ปานกลาง', bg: 'bg-amber-100', text: 'text-amber-700' },
-                'ปานกลาง': { label: 'ปานกลาง', bg: 'bg-amber-100', text: 'text-amber-700' },
-                'Hard': { label: 'ยาก', bg: 'bg-orange-100', text: 'text-orange-700' },
-                'ยาก': { label: 'ยาก', bg: 'bg-orange-100', text: 'text-orange-700' },
-                'Very Hard': { label: 'ยากมาก', bg: 'bg-rose-100', text: 'text-rose-700' },
-                'ยากมาก': { label: 'ยากมาก', bg: 'bg-rose-100', text: 'text-rose-700' }
-            };
-            const { label, bg, text } = config[level] || { label: level || 'ทั่วไป', bg: 'bg-slate-100', text: 'text-slate-700' };
-
-            return (
-                <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium shadow-sm backdrop-blur-md ${bg} ${text} inline-block`}>
-                    {label}
-                </span>
-            );
-        };
-
-        const KnotEntry = ({ knot, onClick, isFavorite, onToggleFav }) => {
+        const KnotEntry = ({ knot, isFavorite, onToggleFav }) => {
             // Safe fallback values to prevent crashes if JSON is missing data
             const safeName = knot?.name || "ไม่ระบุชื่อเงื่อน";
             const imageUrl = knot?.imageUrl || knot?.image || `https://placehold.co/400x400/EEE/31343C?text=${encodeURIComponent(safeName.split('(')[0])}`;
             
+            // ตัดชื่อภาษาไทยและอังกฤษออกจากกัน (ถ้ามีวงเล็บ)
+            const splitName = safeName.split('(');
+            const primaryName = splitName[0].trim();
+            const secondaryName = splitName.length > 1 ? splitName[1].replace(')', '').trim() : '';
+
             return (
                 <div 
                     className="relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer border border-slate-100 flex flex-col h-full active:scale-[0.95]"
-                    onClick={() => onClick(knot)}
+                    onClick={() => openKnotUrl(knot)}
                 >
                     {/* Image Area - Square Aspect Ratio for Compact 3-Column Grid */}
                     <div className="relative aspect-square w-full overflow-hidden bg-slate-100 border-b border-slate-50">
                         <img 
                             src={imageUrl} 
-                            alt={safeName} 
+                            alt={primaryName} 
                             loading="lazy"
                             referrerPolicy="no-referrer"
                             className="w-full h-full object-cover" 
@@ -257,216 +255,21 @@
                     </div>
 
                     {/* Content Area - Minimalist */}
-                    <div className="p-2 flex-1 flex flex-col items-center justify-center text-center">
-                        <h3 className="font-bold text-slate-800 text-[10px] sm:text-xs leading-tight line-clamp-2">
-                            {safeName.split('(')[0].trim()}
+                    <div className="p-2 flex-1 flex flex-col items-center justify-center text-center w-full">
+                        <h3 className="font-bold text-slate-800 text-[11px] sm:text-xs leading-tight line-clamp-1 w-full">
+                            {primaryName}
                         </h3>
+                        {secondaryName && (
+                            <span className="text-[9px] sm:text-[10px] text-slate-500 line-clamp-1 w-full mt-0.5">
+                                {secondaryName}
+                            </span>
+                        )}
                     </div>
                 </div>
             );
         };
 
-        const HtmlDialog = ({ knot, onClose, isFavorite, onToggleFav }) => {
-            if (!knot) return null;
-            const [showVideo, setShowVideo] = useState(false);
-            const [currentImgIndex, setCurrentImgIndex] = useState(0);
-            
-            // Safe Data Fallbacks to prevent White Screen (Crash)
-            const safeName = knot.name || "ไม่ระบุชื่อเงื่อน";
-            const mainImageUrl = knot.imageUrl || knot.image || `https://placehold.co/600x400/EEE/31343C?text=${encodeURIComponent(safeName.split('(')[0])}`;
-            
-            // Collect all images for the slider (Main image + Step images) safely
-            const sliderImages = useMemo(() => {
-                const images = [];
-                if (typeof mainImageUrl === 'string' && mainImageUrl.trim() !== '') images.push(mainImageUrl);
-                
-                if (Array.isArray(knot.steps)) {
-                    knot.steps.forEach(step => {
-                        if (step && typeof step === 'object' && typeof step.image === 'string' && step.image.trim() !== '') {
-                            if (!images.includes(step.image)) {
-                                images.push(step.image);
-                            }
-                        }
-                    });
-                }
-                return images.length > 0 ? images : ['https://placehold.co/600x400/f8fafc/94a3b8?text=No+Image'];
-            }, [knot, mainImageUrl]);
-
-            const nextImg = (e) => { e.stopPropagation(); setCurrentImgIndex(prev => (prev + 1) % sliderImages.length); };
-            const prevImg = (e) => { e.stopPropagation(); setCurrentImgIndex(prev => (prev - 1 + sliderImages.length) % sliderImages.length); };
-
-            // กำหนดวิดีโอเริ่มต้นในกรณีที่ JSON ไม่ได้ใส่ลิงก์มา หรือใส่มาผิด (เช่น ใส่แค่ ",")
-            let videoId = "RQkDcVdXNURYO9Fg"; // Default Video ID (Square Knot)
-            const rawVideo = knot.youtubeUrl || knot.youtubeId || knot.video;
-            if (rawVideo && typeof rawVideo === 'string') {
-                try {
-                    const trimmedVideo = rawVideo.trim();
-                    if (trimmedVideo.length > 5 && trimmedVideo !== ',') {
-                        if (trimmedVideo.includes("v=")) {
-                            videoId = trimmedVideo.split("v=")[1].split("&")[0];
-                        } else if (trimmedVideo.includes("youtu.be/")) {
-                            videoId = trimmedVideo.split("youtu.be/")[1].split("?")[0];
-                        } else if (!trimmedVideo.includes("http")) {
-                            videoId = trimmedVideo;
-                        }
-                    }
-                } catch (err) {
-                    console.error("Video ID parsing error", err);
-                }
-            }
-            
-            // Ensure steps is an array to prevent .map() from crashing
-            const stepsArray = Array.isArray(knot.steps) ? knot.steps : (typeof knot.steps === 'string' ? [{desc: knot.steps}] : []);
-
-            return (
-                <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center p-0 sm:p-4 bg-slate-900/40 backdrop-blur-sm animate-fadeIn">
-                    <div className="bg-white w-full sm:max-w-md md:max-w-lg rounded-t-[2rem] sm:rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden transform transition-all">
-                        
-                        {/* Header Image/Video Area */}
-                        <div className="relative h-56 sm:h-64 bg-slate-100 flex-shrink-0 group">
-                            {showVideo ? (
-                                <iframe 
-                                    className="w-full h-full"
-                                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-                                    title="YouTube video player"
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                ></iframe>
-                            ) : (
-                                <div className="relative w-full h-full bg-slate-200">
-                                    <img 
-                                        src={sliderImages[currentImgIndex]} 
-                                        alt={`${safeName} - รูปที่ ${currentImgIndex + 1}`} 
-                                        className="w-full h-full object-cover transition-all duration-300" 
-                                        referrerPolicy="no-referrer"
-                                        onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/f8fafc/94a3b8?text=Image+Error'; }}
-                                    />
-                                    
-                                    {/* Slider Controls */}
-                                    {sliderImages.length > 1 && (
-                                        <>
-                                            <button onClick={prevImg} className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-slate-700 shadow-md hover:bg-white transition-all opacity-0 group-hover:opacity-100 z-10">
-                                                <Icons.ChevronLeft width={20} height={20} />
-                                            </button>
-                                            <button onClick={nextImg} className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-slate-700 shadow-md hover:bg-white transition-all opacity-0 group-hover:opacity-100 rotate-180 z-10">
-                                                <Icons.ChevronLeft width={20} height={20} />
-                                            </button>
-                                            
-                                            {/* Indicators */}
-                                            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-1.5 bg-black/40 px-2.5 py-1.5 rounded-full backdrop-blur-sm z-10">
-                                                {sliderImages.map((_, i) => (
-                                                    <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentImgIndex ? 'bg-white w-3' : 'bg-white/50'}`} />
-                                                ))}
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
-                            )}
-                            
-                            {/* Close Button & Actions overlay */}
-                            <div className="absolute top-4 left-4 right-4 flex justify-between items-start z-20">
-                                <button onClick={onClose} className="w-10 h-10 bg-white/80 backdrop-blur-md rounded-full flex items-center justify-center text-slate-700 hover:bg-white shadow-sm transition-transform active:scale-95">
-                                    <Icons.ChevronLeft width={24} height={24} />
-                                </button>
-                                
-                                <div className="flex gap-2 flex-col">
-                                    <button 
-                                        onClick={() => { if(knot.id) onToggleFav(knot.id); }}
-                                        className={`w-10 h-10 rounded-full flex items-center justify-center shadow-sm backdrop-blur-md transition-transform active:scale-95 ${isFavorite ? 'bg-white text-pink-500' : 'bg-black/40 text-white hover:bg-white hover:text-pink-500'}`}
-                                    >
-                                        <Icons.Heart width={20} height={20} fill={isFavorite ? "currentColor" : "none"} />
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            {/* Toggle Media Button (แสดงเสมอ) */}
-                            <button 
-                                onClick={() => setShowVideo(!showVideo)}
-                                className="absolute bottom-4 right-4 flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full shadow-lg text-xs font-bold text-slate-800 hover:bg-white hover:scale-105 transition-all z-20"
-                            >
-                                {showVideo ? (
-                                    <span className="flex items-center gap-1"><Icons.Image width={16} height={16} className="text-indigo-600"/> ดูรูปภาพ</span>
-                                ) : (
-                                    <span className="flex items-center gap-1"><Icons.Play width={16} height={16} className="text-red-600" fill="currentColor" /> ดูวิดีโอ</span>
-                                )}
-                            </button>
-                        </div>
-
-                        {/* Detail Content */}
-                        <div className="p-6 overflow-y-auto custom-scrollbar flex-1 bg-white">
-                            <div className="mb-4">
-                                <DifficultyBadge level={knot.difficulty} />
-                                <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mt-2 mb-1 leading-tight">
-                                    {safeName.split('(')[0]}
-                                </h2>
-                                <p className="text-sm text-slate-500 font-medium">
-                                    {safeName.split('(')[1]?.replace(')', '') || 'รายละเอียดเงื่อน'}
-                                </p>
-                            </div>
-
-                            <div className="bg-slate-50 rounded-2xl p-4 mb-6 border border-slate-100">
-                                <div className="flex mb-2">
-                                    <div className="w-20 font-semibold text-slate-500 text-xs">หมวดหมู่</div>
-                                    <div className="flex-1 text-sm text-slate-800 font-medium">{knot.category || "ไม่ระบุ"}</div>
-                                </div>
-                                <div className="flex">
-                                    <div className="w-20 font-semibold text-slate-500 text-xs mt-0.5">การใช้งาน</div>
-                                    <div className="flex-1 text-sm text-slate-700 leading-relaxed">{knot.usage || "ไม่มีข้อมูลอธิบาย"}</div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <h3 className="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
-                                    <span className="w-1.5 h-4 bg-indigo-500 rounded-full inline-block"></span>
-                                    ขั้นตอนวิธีทำ (Steps)
-                                </h3>
-                                <div className="space-y-4">
-                                    {stepsArray.map((step, idx) => {
-                                        // Handle both old string format and new object format safely
-                                        const isObject = typeof step === 'object' && step !== null;
-                                        const title = isObject ? step.title : null;
-                                        const desc = isObject ? step.desc : (typeof step === 'string' ? step : '');
-                                        const image = isObject ? step.image : null;
-                                        
-                                        return (
-                                            <div key={idx} className="flex gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
-                                                <div className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xs font-bold mt-0.5">
-                                                    {idx + 1}
-                                                </div>
-                                                <div className="flex-1 overflow-hidden">
-                                                    {title && <h4 className="font-bold text-slate-800 text-sm mb-1">{title}</h4>}
-                                                    {desc && (
-                                                        <p className="text-sm text-slate-700 leading-relaxed break-words">
-                                                            {desc}
-                                                        </p>
-                                                    )}
-                                                    {typeof image === 'string' && image.trim() !== '' && (
-                                                        <img 
-                                                            src={image} 
-                                                            alt={title || `ขั้นตอนที่ ${idx + 1}`} 
-                                                            className="mt-3 w-full h-auto object-contain max-h-48 rounded-lg border border-slate-200 bg-white" 
-                                                            loading="lazy" 
-                                                            referrerPolicy="no-referrer"
-                                                            onError={(e) => { e.target.style.display = 'none'; }} 
-                                                        />
-                                                    )}
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                    {stepsArray.length === 0 && (
-                                        <div className="text-center py-4 text-slate-400 text-sm">ไม่มีข้อมูลขั้นตอนสำหรับเงื่อนนี้</div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        const FavoritesDialog = ({ favorites, allKnots, onClose, onToggleFav, onSelectKnot }) => {
+        const FavoritesDialog = ({ favorites, allKnots, onClose, onToggleFav }) => {
             const favKnots = allKnots.filter(k => k && k.id && (favorites || []).includes(k.id));
 
             return (
@@ -491,10 +294,11 @@
                                 <div className="space-y-3">
                                     {favKnots.map(knot => {
                                         const safeName = knot.name || "ไม่ระบุชื่อ";
+                                        const primaryName = safeName.split('(')[0].trim();
                                         return (
                                             <div 
                                                 key={knot.id} 
-                                                onClick={() => onSelectKnot(knot)} 
+                                                onClick={() => openKnotUrl(knot)} 
                                                 className="flex items-center gap-3 bg-white p-3 rounded-2xl cursor-pointer hover:shadow-md transition-all border border-slate-100 active:scale-[0.98]"
                                             >
                                                 <div className="w-16 h-16 rounded-xl bg-slate-100 overflow-hidden flex-shrink-0">
@@ -507,7 +311,7 @@
                                                     />
                                                 </div>
                                                 <div className="flex-1 overflow-hidden">
-                                                    <div className="font-bold text-sm text-slate-800 truncate">{safeName.split('(')[0]}</div>
+                                                    <div className="font-bold text-sm text-slate-800 truncate">{primaryName}</div>
                                                     <div className="text-xs text-slate-500 mt-0.5">{knot.category || "-"}</div>
                                                 </div>
                                                 <button 
@@ -547,7 +351,6 @@
 
             const [searchTerm, setSearchTerm] = useState("");
             const [activeCategory, setActiveCategory] = useState("All");
-            const [selectedKnot, setSelectedKnot] = useState(null);
             const [showFavorites, setShowFavorites] = useState(false);
             
             // Local Storage Logic
@@ -656,7 +459,6 @@
                                             // Fallback key just in case id is missing
                                             key={knot?.id || `knot-index-${index}`} 
                                             knot={knot} 
-                                            onClick={setSelectedKnot} 
                                             isFavorite={favorites.includes(knot?.id)}
                                             onToggleFav={toggleFavorite}
                                         />
@@ -693,26 +495,13 @@
                         }}
                     />
 
-                    {/* Dialogs */}
-                    {selectedKnot && (
-                        <HtmlDialog 
-                            knot={selectedKnot} 
-                            onClose={() => setSelectedKnot(null)} 
-                            isFavorite={favorites.includes(selectedKnot.id)}
-                            onToggleFav={toggleFavorite}
-                        />
-                    )}
-
+                    {/* Favorites Dialog */}
                     {showFavorites && (
                         <FavoritesDialog 
                             favorites={favorites}
                             allKnots={knotsData}
                             onClose={() => setShowFavorites(false)}
                             onToggleFav={toggleFavorite}
-                            onSelectKnot={(knot) => {
-                                setSelectedKnot(knot);
-                                setShowFavorites(false);
-                            }}
                         />
                     )}
                 </HtmlLayout>
