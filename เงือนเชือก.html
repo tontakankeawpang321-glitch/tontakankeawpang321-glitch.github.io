@@ -406,10 +406,16 @@
                     
                     const lowerSearch = searchTerm.toLowerCase();
                     const safeName = knot.name || "";
+                    // รองรับทั้ง usage แบบเก่า และ usage_th / usage_en แบบใหม่
                     const safeUsage = knot.usage || "";
+                    const safeUsageTh = knot.usage_th || "";
+                    const safeUsageEn = knot.usage_en || "";
                     
                     const lowerName = safeName.toLowerCase();
-                    const matchesSearch = lowerName.includes(lowerSearch) || safeUsage.toLowerCase().includes(lowerSearch);
+                    const matchesSearch = lowerName.includes(lowerSearch) || 
+                                          safeUsage.toLowerCase().includes(lowerSearch) ||
+                                          safeUsageTh.toLowerCase().includes(lowerSearch) ||
+                                          safeUsageEn.toLowerCase().includes(lowerSearch);
                     
                     const categoryMatch = activeCategory === "All" 
                         ? true 
