@@ -48,13 +48,7 @@
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
-  {
-    "id": 8,
-    "name": "เงื่อนผูกพัสดุคู่ (Double Sheet Bend)",
-    "category": "General",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "https://en.wikipedia.org/wiki/Double_Sheet_Bend"
-  },
+ 
   {
     "id": 9,
     "name": "เงื่อนผูกเต็นท์ (Taut Line Hitch)",
@@ -237,35 +231,7 @@
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Hangman%27s_Knot"
   },
-  {
-    "id": 35,
-    "name": "เงื่อนปมจีน (Chinese Button Knot)",
-    "category": "General",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "https://en.wikipedia.org/wiki/Chinese_Button_Knot"
-  },
-  {
-    "id": 36,
-    "name": "เงื่อนรัก (Lover's Knot)",
-    "category": "General",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "https://en.wikipedia.org/wiki/Lover%27s_Knot"
-  },
-  {
-    "id": 37,
-    "name": "เงื่อนแมทธิววอล์กเกอร์ (Matthew Walker Knot)",
-    "category": "General",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "https://en.wikipedia.org/wiki/Matthew_Walker_Knot"
-  },
-  {
-    "id": 38,
-    "name": "เงื่อนมงกุฎ (Crown Knot)",
-    "category": "General",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "https://en.wikipedia.org/wiki/Crown_Knot"
-  },
-  {
+   {
     "id": 39,
     "name": "เงื่อนปมสี่ทิศ (Turk's Head Knot)",
     "category": "General",
