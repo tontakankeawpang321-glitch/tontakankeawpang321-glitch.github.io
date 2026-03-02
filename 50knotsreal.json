@@ -2,1169 +2,1169 @@
   {
     "id": 1,
     "name": "เงื่อนผูกยึด (Adjustable Grip Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Adjustable_Grip_Hitch"
   },
   {
     "id": 2,
     "name": "สลิงเชือก (Adjustable Sling)",
-    "category": "General",
+    "category": "Sling",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Adjustable_Sling"
   },
   {
     "id": 3,
-    "name": "เงื่อน (Albright Knot)",
-    "category": "General",
+    "name": "เงื่อนออลไบรท์ (Albright Knot)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Albright_Knot"
   },
   {
     "id": 4,
     "name": "เงื่อนต่อเชือก (Alpine Butterfly Bend)",
-    "category": "General",
+    "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Alpine_Butterfly_Bend"
   },
   {
     "id": 5,
     "name": "ห่วงเชือก (Alpine Butterfly Loop)",
-    "category": "General",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Alpine_Butterfly_Loop"
   },
   {
     "id": 6,
     "name": "เงื่อนผูกยึด (Anchor Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Anchor_Hitch"
   },
   {
     "id": 7,
     "name": "เงื่อน (Arbor Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Arbor_Knot"
   },
   {
     "id": 8,
     "name": "เงื่อนต่อเชือก (Ashley Bend)",
-    "category": "General",
+    "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Ashley_Bend"
   },
   {
     "id": 9,
     "name": "ปมหยุด เงื่อน (Ashley Stopper Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Ashley_Stopper_Knot"
   },
   {
     "id": 10,
     "name": "การถักเปียเชือก เงื่อน (Australian Braid Knot)",
-    "category": "General",
+    "category": "Braid/Sinnet",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Australian_Braid_Knot"
   },
   {
     "id": 11,
     "name": "การสไปซ์เชือก (Back Splice)",
-    "category": "General",
+    "category": "Splice",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Back_Splice"
   },
   {
     "id": 12,
     "name": "เงื่อนผูกยึด (Barrel Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Barrel_Hitch"
   },
   {
     "id": 13,
     "name": "เงื่อนผูกยึด (Basket Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Basket_Hitch"
   },
   {
     "id": 14,
     "name": "เงื่อน (Beer Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Beer_Knot"
   },
   {
     "id": 15,
-    "name": "Bimini Twist (Bimini Twist)",
-    "category": "General",
+    "name": "เงื่อน (Bimini Twist)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Bimini_Twist"
   },
   {
     "id": 16,
     "name": "เงื่อนผูกยึด (Blake's Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Blake%27s_Hitch"
   },
   {
     "id": 17,
     "name": "เงื่อน (Blood Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Blood_Knot"
   },
   {
     "id": 18,
     "name": "เงื่อนผูกยึด (Boom Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Boom_Hitch"
   },
   {
     "id": 19,
     "name": "สลิงเชือก (Bottle Sling)",
-    "category": "General",
+    "category": "Sling",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Bottle_Sling"
   },
   {
     "id": 20,
     "name": "เงื่อนผูกเนคไท (Bow Tie)",
-    "category": "General",
+    "category": "Tie",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Bow_Tie"
   },
   {
     "id": 21,
     "name": "เงื่อนตะกรุดเบ็ด (Bowline)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Bowline"
   },
   {
     "id": 22,
-    "name": "เงื่อนตะกรุดเบ็ด on a Bight (Bowline on a Bight)",
-    "category": "General",
+    "name": "เงื่อนตะกรุดเบ็ด (Bowline on a Bight)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Bowline_on_a_Bight"
   },
   {
     "id": 23,
     "name": "การสไปซ์เชือก (Brummel Splice)",
-    "category": "General",
+    "category": "Splice",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Brummel_Splice"
   },
   {
     "id": 24,
     "name": "เงื่อนผูกยึด (Buntline Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Buntline_Hitch"
   },
   {
     "id": 25,
     "name": "เงื่อน (Butcher's Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Butcher%27s_Knot"
   },
   {
     "id": 26,
     "name": "เงื่อนต่อเชือก (Carrick Bend)",
-    "category": "General",
+    "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Carrick_Bend"
   },
   {
     "id": 27,
-    "name": "เงื่อนต่อเชือก Mat (Carrick Bend Mat)",
-    "category": "General",
+    "name": "เงื่อนต่อเชือก (Carrick Bend Mat)",
+    "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Carrick_Bend_Mat"
   },
   {
     "id": 28,
     "name": "เงื่อน (Celtic Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Celtic_Knot"
   },
   {
     "id": 29,
-    "name": "Chain Sinnet (Chain Sinnet)",
-    "category": "General",
+    "name": "เงื่อน (Chain Sinnet)",
+    "category": "Braid/Sinnet",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Chain_Sinnet"
   },
   {
     "id": 30,
     "name": "การสไปซ์เชือก (Chain Splice)",
-    "category": "General",
+    "category": "Splice",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Chain_Splice"
   },
   {
     "id": 31,
     "name": "เงื่อนผูกยึด (Cleat Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Cleat_Hitch"
   },
   {
     "id": 32,
     "name": "เงื่อนผูกยึด (Clove Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Clove_Hitch"
   },
   {
     "id": 33,
     "name": "เงื่อน (Cobra Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Cobra_Knot"
   },
   {
     "id": 34,
     "name": "การพันปลายเชือก (Common Whipping)",
-    "category": "General",
+    "category": "Whipping",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Common_Whipping"
   },
   {
     "id": 35,
     "name": "เงื่อน (Constrictor Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Constrictor_Knot"
   },
   {
     "id": 36,
     "name": "เงื่อนผูกยึด (Cow Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Cow_Hitch"
   },
   {
     "id": 37,
     "name": "เงื่อน (Crown Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Crown_Knot"
   },
   {
     "id": 38,
-    "name": "Crown Sinnet (Crown Sinnet)",
-    "category": "General",
+    "name": "เงื่อน (Crown Sinnet)",
+    "category": "Braid/Sinnet",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Crown_Sinnet"
   },
   {
     "id": 39,
-    "name": "เงื่อนผูกเนคไท-Back (Curtain Tie-Back)",
-    "category": "General",
+    "name": "เงื่อนผูกเนคไท- (Curtain Tie-Back)",
+    "category": "Tie",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Curtain_Tie-Back"
   },
   {
     "id": 40,
     "name": "เงื่อน (Davy Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Davy_Knot"
   },
   {
     "id": 41,
     "name": "เงื่อนผูกยึด (Distel Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Distel_Hitch"
   },
   {
     "id": 42,
-    "name": "เงื่อนคู่ Alpine Butterfly ห่วงเชือก (Double Alpine Butterfly Loop)",
-    "category": "General",
+    "name": "เงื่อนคู่ ห่วงเชือก (Double Alpine Butterfly Loop)",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Double_Alpine_Butterfly_Loop"
   },
   {
     "id": 43,
-    "name": "เงื่อนคู่ Davy เงื่อน (Double Davy Knot)",
-    "category": "General",
+    "name": "เงื่อนคู่ เงื่อน (Double Davy Knot)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Double_Davy_Knot"
   },
   {
     "id": 44,
-    "name": "เงื่อนคู่ Dragon ห่วงเชือก (Double Dragon Loop)",
-    "category": "General",
+    "name": "เงื่อนคู่ ห่วงเชือก (Double Dragon Loop)",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Double_Dragon_Loop"
   },
   {
     "id": 45,
-    "name": "เงื่อนคู่ Fisherman's เงื่อน (Double Fisherman's Knot)",
-    "category": "General",
+    "name": "เงื่อนประมงคู่ (Double Fisherman's Knot)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Double_Fisherman%27s_Knot"
   },
   {
     "id": 46,
-    "name": "เงื่อนคู่ Matthew Walker เงื่อน (Double Matthew Walker Knot)",
-    "category": "General",
+    "name": "เงื่อนแมทธิววอล์กเกอร์คู่ (Double Matthew Walker Knot)",
+    "category": "Mat",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Double_Matthew_Walker_Knot"
   },
   {
     "id": 47,
     "name": "เงื่อนคู่ เงื่อนปมตาย ปมหยุด เงื่อน (Double Overhand Stopper Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Double_Overhand_Stopper_Knot"
   },
   {
     "id": 48,
-    "name": "เงื่อนคู่ Turle เงื่อน (Double Turle Knot)",
-    "category": "General",
+    "name": "เงื่อนคู่ เงื่อน (Double Turle Knot)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Double_Turle_Knot"
   },
   {
     "id": 49,
     "name": "ห่วงเชือก (Dropper Loop)",
-    "category": "General",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Dropper_Loop"
   },
   {
     "id": 50,
     "name": "ห่วงเชือก เงื่อน (Egg Loop Knot)",
-    "category": "General",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Egg_Loop_Knot"
   },
   {
     "id": 51,
     "name": "ปมหยุด เงื่อน (EStar Stopper Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/EStar_Stopper_Knot"
   },
   {
     "id": 52,
     "name": "การสไปซ์เชือก (Eye Splice)",
-    "category": "General",
+    "category": "Splice",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Eye_Splice"
   },
   {
     "id": 53,
     "name": "ห่วงเชือก (Farmer's Loop)",
-    "category": "General",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Farmer%27s_Loop"
   },
   {
     "id": 54,
     "name": "เงื่อนผูกยึด (Farrimond Friction Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Farrimond_Friction_Hitch"
   },
   {
     "id": 55,
-    "name": "เงื่อน (FG Knot)",
-    "category": "General",
+    "name": "เงื่อนเอฟจี (FG Knot)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/FG_Knot"
   },
   {
     "id": 56,
     "name": "เงื่อน (Fiador Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Fiador_Knot"
   },
   {
     "id": 57,
     "name": "เงื่อนเลขแปด เงื่อนต่อเชือก (Figure Eight Bend)",
-    "category": "General",
+    "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Bend"
   },
   {
     "id": 58,
-    "name": "เงื่อนเลขแปด Directional ห่วงเชือก (Figure Eight Directional Loop)",
-    "category": "General",
+    "name": "เงื่อนเลขแปด ห่วงเชือก (Figure Eight Directional Loop)",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Directional_Loop"
   },
   {
     "id": 59,
     "name": "เงื่อนเลขแปด เงื่อนคู่ ห่วงเชือก (Figure Eight Double Loop)",
-    "category": "General",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Double_Loop"
   },
   {
     "id": 60,
-    "name": "เงื่อนเลขแปด Follow Through (Figure Eight Follow Through)",
-    "category": "General",
+    "name": "เงื่อนเลขแปด (Figure Eight Follow Through)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Follow_Through"
   },
   {
     "id": 61,
     "name": "เงื่อนเลขแปด เงื่อน (Figure Eight Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Figure_Eight_Knot"
   },
   {
     "id": 62,
     "name": "ห่วงเชือก (Figure Nine Loop)",
-    "category": "General",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Figure_Nine_Loop"
   },
   {
     "id": 63,
     "name": "เงื่อนปมตาย เงื่อนต่อเชือก (Flat Overhand Bend)",
-    "category": "General",
+    "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Flat_Overhand_Bend"
   },
   {
     "id": 64,
-    "name": "Flemish Flake (Flemish Flake)",
-    "category": "General",
+    "name": "เงื่อน (Flemish Flake)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Flemish_Flake"
   },
   {
     "id": 65,
-    "name": "Four Strand Sinnet (Four Strand Sinnet)",
-    "category": "General",
+    "name": "เงื่อน (Four Strand Sinnet)",
+    "category": "Braid/Sinnet",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Four_Strand_Sinnet"
   },
   {
     "id": 66,
-    "name": "Four Strand Square Sinnet (Four Strand Square Sinnet)",
-    "category": "General",
+    "name": "เงื่อน (Four Strand Square Sinnet)",
+    "category": "Braid/Sinnet",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Four_Strand_Square_Sinnet"
   },
   {
     "id": 67,
     "name": "เงื่อนผูกเนคไท (Four-in-Hand Tie)",
-    "category": "General",
+    "category": "Tie",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Four-in-Hand_Tie"
   },
   {
     "id": 68,
-    "name": "French Sinnet (French Sinnet)",
-    "category": "General",
+    "name": "เงื่อน (French Sinnet)",
+    "category": "Braid/Sinnet",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/French_Sinnet"
   },
   {
     "id": 69,
     "name": "เงื่อนผูกยึด (Girth Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Girth_Hitch"
   },
   {
     "id": 70,
     "name": "เงื่อนผูกยึด (Gnat Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Gnat_Hitch"
   },
   {
     "id": 71,
     "name": "การสไปซ์เชือก (Grog Sliding Splice)",
-    "category": "General",
+    "category": "Splice",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Grog_Sliding_Splice"
   },
   {
     "id": 72,
     "name": "สลิงเชือก (Grog Sling)",
-    "category": "General",
+    "category": "Sling",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Grog_Sling"
   },
   {
     "id": 73,
     "name": "ครึ่ง เงื่อนผูกยึด (Half Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Half_Hitch"
   },
   {
     "id": 74,
     "name": "ครึ่ง เงื่อน (Half Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Half_Knot"
   },
   {
     "id": 75,
-    "name": "ครึ่ง Windsor เงื่อนผูกเนคไท (Half Windsor Tie)",
-    "category": "General",
+    "name": "ครึ่ง เงื่อนผูกเนคไท (Half Windsor Tie)",
+    "category": "Tie",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Half_Windsor_Tie"
   },
   {
     "id": 76,
     "name": "เงื่อนผูกยึด (Halter Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Halter_Hitch"
   },
   {
     "id": 77,
     "name": "เงื่อนผูกยึด (Halyard Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Halyard_Hitch"
   },
   {
     "id": 78,
     "name": "เงื่อน (Handcuff Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Handcuff_Knot"
   },
   {
     "id": 79,
-    "name": "Hasty Harness (Hasty Harness)",
-    "category": "General",
+    "name": "เงื่อน (Hasty Harness)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Hasty_Harness"
   },
   {
     "id": 80,
     "name": "เงื่อน (Heaving Line Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Heaving_Line_Knot"
   },
   {
     "id": 81,
     "name": "เงื่อนผูกยึด (Highwayman's Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Highwayman%27s_Hitch"
   },
   {
     "id": 82,
     "name": "เงื่อน (Honda Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Honda_Knot"
   },
   {
     "id": 83,
     "name": "เงื่อนต่อเชือก (Hunter's Bend)",
-    "category": "General",
+    "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Hunter%27s_Bend"
   },
   {
     "id": 84,
     "name": "เงื่อนผูกยึด (Icicle Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Icicle_Hitch"
   },
   {
     "id": 85,
     "name": "เงื่อน (Improved Clinch Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Improved_Clinch_Knot"
   },
   {
     "id": 86,
     "name": "เงื่อน (Klemheist Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Klemheist_Knot"
   },
   {
     "id": 87,
     "name": "เงื่อน (Lanyard Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Lanyard_Knot"
   },
   {
     "id": 88,
     "name": "การผูกมัดไม้ (Diagonal Lashing)",
-    "category": "General",
+    "category": "Lashing",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Diagonal_Lashing"
   },
   {
     "id": 89,
     "name": "การผูกมัดไม้ (Round Lashing)",
-    "category": "General",
+    "category": "Lashing",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Round_Lashing"
   },
   {
     "id": 90,
     "name": "การผูกมัดไม้ (Shear Lashing)",
-    "category": "General",
+    "category": "Lashing",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Shear_Lashing"
   },
   {
     "id": 91,
     "name": "การผูกมัดไม้ (Square Lashing)",
-    "category": "General",
+    "category": "Lashing",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Square_Lashing"
   },
   {
     "id": 92,
     "name": "การผูกมัดไม้ (Tripod Lashing)",
-    "category": "General",
+    "category": "Lashing",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Tripod_Lashing"
   },
   {
     "id": 93,
     "name": "เงื่อน (Ligature Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Ligature_Knot"
   },
   {
     "id": 94,
     "name": "เงื่อนผูกยึด (Lighterman's Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Lighterman%27s_Hitch"
   },
   {
     "id": 95,
     "name": "การสไปซ์เชือก (Long Bury Splice)",
-    "category": "General",
+    "category": "Splice",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Long_Bury_Splice"
   },
   {
     "id": 96,
     "name": "เงื่อนผูกยึด (Manger Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Manger_Hitch"
   },
   {
     "id": 97,
     "name": "เงื่อนผูกยึด (Marlinspike Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Marlinspike_Hitch"
   },
   {
     "id": 98,
-    "name": "เงื่อน Mat (Masthead Knot Mat)",
-    "category": "General",
+    "name": "เงื่อน (Masthead Knot Mat)",
+    "category": "Mat",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Masthead_Knot_Mat"
   },
   {
     "id": 99,
     "name": "การสไปซ์เชือก (McDonald Brummel Splice)",
-    "category": "General",
+    "category": "Splice",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/McDonald_Brummel_Splice"
   },
   {
     "id": 100,
     "name": "เงื่อนผูกยึด (Midshipman's Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Midshipman%27s_Hitch"
   },
   {
     "id": 101,
     "name": "เงื่อน (Miller's Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Miller%27s_Knot"
   },
   {
     "id": 102,
     "name": "เงื่อนกำปั้นลิง (Monkey's Fist)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Monkey%27s_Fist"
   },
   {
     "id": 103,
     "name": "เงื่อนผูกยึด (Mooring Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Mooring_Hitch"
   },
   {
     "id": 104,
-    "name": "Munter Mule Combination (Munter Mule Combination)",
-    "category": "General",
+    "name": "เงื่อน (Munter Mule Combination)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Munter_Mule_Combination"
   },
   {
     "id": 105,
     "name": "เงื่อน (Nail Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Nail_Knot"
   },
   {
     "id": 106,
-    "name": "เงื่อน (Non-Slip Mono Knot)",
-    "category": "General",
+    "name": "เงื่อน- (Non-Slip Mono Knot)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Non-Slip_Mono_Knot"
   },
   {
     "id": 107,
     "name": "เงื่อน (Noose Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Noose_Knot"
   },
   {
     "id": 108,
-    "name": "Ocean Plait Mat (Ocean Plait Mat)",
-    "category": "General",
+    "name": "เงื่อน (Ocean Plait Mat)",
+    "category": "Mat",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Ocean_Plait_Mat"
   },
   {
     "id": 109,
     "name": "เงื่อนตะกรุดเบ็ด (One-Handed Bowline)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/One-Handed_Bowline"
   },
   {
     "id": 110,
-    "name": "เงื่อน (Orvis Knot)",
-    "category": "General",
+    "name": "เงื่อนออร์วิส (Orvis Knot)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Orvis_Knot"
   },
   {
     "id": 111,
     "name": "เงื่อนปมตาย เงื่อน (Overhand Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Overhand_Knot"
   },
   {
     "id": 112,
     "name": "เงื่อน (Package Tying Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Package_Tying_Knot"
   },
   {
     "id": 113,
     "name": "เงื่อน (Palomar Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Palomar_Knot"
   },
   {
     "id": 114,
     "name": "ห่วงเชือก (Perfection Loop)",
-    "category": "General",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Perfection_Loop"
   },
   {
     "id": 115,
     "name": "เงื่อนผูกยึด (Pile Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Pile_Hitch"
   },
   {
     "id": 116,
     "name": "เงื่อน (Poacher's Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Poacher%27s_Knot"
   },
   {
     "id": 117,
     "name": "เงื่อนผูกเนคไท (Pratt Tie)",
-    "category": "General",
+    "category": "Tie",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Pratt_Tie"
   },
   {
     "id": 118,
     "name": "เงื่อนปรัสสิก เงื่อน (Prusik Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Prusik_Knot"
   },
   {
     "id": 119,
     "name": "เงื่อนปรัสสิก ห่วงเชือก (Purcell Prusik Loop)",
-    "category": "General",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Purcell_Prusik_Loop"
   },
   {
     "id": 120,
     "name": "เงื่อนผูกยึด (Quick Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Quick_Hitch"
   },
   {
     "id": 121,
     "name": "เงื่อนผูกยึด (Radium Release Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Radium_Release_Hitch"
   },
   {
     "id": 122,
     "name": "เงื่อน (Rapala Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Rapala_Knot"
   },
   {
     "id": 123,
     "name": "ปมหยุด เงื่อน (Rat Tail Stopper Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Rat_Tail_Stopper_Knot"
   },
   {
     "id": 124,
     "name": "เงื่อนผูกยึด (Ring Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Ring_Hitch"
   },
   {
     "id": 125,
     "name": "เงื่อนผูกยึด (Rolling Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Rolling_Hitch"
   },
   {
     "id": 126,
-    "name": "ครึ่ง เงื่อนผูกยึดes (Round Turn and Two Half Hitches)",
-    "category": "General",
+    "name": "ครึ่ง เงื่อนผูกยึด (Round Turn and Two Half Hitches)",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Round_Turn_and_Two_Half_Hitches"
   },
   {
     "id": 127,
     "name": "เงื่อนตะกรุดเบ็ด (Running Bowline)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Running_Bowline"
   },
   {
     "id": 128,
     "name": "การพันปลายเชือก (Sailmaker's Whipping)",
-    "category": "General",
+    "category": "Whipping",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Sailmaker%27s_Whipping"
   },
   {
     "id": 129,
     "name": "เงื่อน (San Diego Jam Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/San_Diego_Jam_Knot"
   },
   {
     "id": 130,
-    "name": "Sheepshank (Sheepshank)",
-    "category": "General",
+    "name": "เงื่อน (Sheepshank)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Sheepshank"
   },
   {
     "id": 131,
     "name": "เงื่อนต่อเชือก (Sheet Bend)",
-    "category": "General",
+    "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Sheet_Bend"
   },
   {
     "id": 132,
     "name": "เงื่อน (Shoelace Bow Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Shoelace_Bow_Knot"
   },
   {
     "id": 133,
     "name": "การสไปซ์เชือก (Short Splice)",
-    "category": "General",
+    "category": "Splice",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Short_Splice"
   },
   {
     "id": 134,
     "name": "เงื่อนผูกยึด (Siberian Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Siberian_Hitch"
   },
   {
     "id": 135,
     "name": "การถักเปียเชือก (Single Rope Braid)",
-    "category": "General",
+    "category": "Braid/Sinnet",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Single_Rope_Braid"
   },
   {
     "id": 136,
-    "name": "เงื่อนคู่ Fisherman's เงื่อน (Sliding Double Fisherman's Knot)",
-    "category": "General",
+    "name": "เงื่อนคู่ เงื่อน (Sliding Double Fisherman's Knot)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Sliding_Double_Fisherman%27s_Knot"
   },
   {
     "id": 137,
     "name": "เงื่อน (Slim Beauty Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Slim_Beauty_Knot"
   },
   {
     "id": 138,
     "name": "เงื่อน (Slip Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Slip_Knot"
   },
   {
     "id": 139,
     "name": "เงื่อน (Snell Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Snell_Knot"
   },
   {
     "id": 140,
-    "name": "Soft Shackle (Soft Shackle)",
-    "category": "General",
+    "name": "เงื่อน (Soft Shackle)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Soft_Shackle"
   },
   {
     "id": 141,
     "name": "เงื่อนตะกรุดเบ็ด (Spanish Bowline)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Spanish_Bowline"
   },
   {
     "id": 142,
     "name": "เงื่อน (Square Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Square_Knot"
   },
   {
     "id": 143,
     "name": "ปมหยุด เงื่อน (Stevedore Stopper Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Stevedore_Stopper_Knot"
   },
   {
     "id": 144,
     "name": "ปมหยุด ห่วงเชือก (Stopper Loop)",
-    "category": "General",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Stopper_Loop"
   },
   {
     "id": 145,
     "name": "เงื่อน (Strangle Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Strangle_Knot"
   },
   {
     "id": 146,
-    "name": "Surgeon's Join (Surgeon's Join)",
-    "category": "General",
+    "name": "เงื่อนศัลยแพทย์แบบต่อสาย (Surgeon's Join)",
+    "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Surgeon%27s_Join"
   },
   {
     "id": 147,
     "name": "ห่วงเชือก (Surgeon's Loop)",
-    "category": "General",
+    "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Surgeon%27s_Loop"
   },
   {
     "id": 148,
     "name": "เงื่อน (Surgical Slip Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Surgical_Slip_Knot"
   },
   {
     "id": 149,
     "name": "เงื่อนผูกยึด (Tensionless Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Tensionless_Hitch"
   },
   {
     "id": 150,
     "name": "การถักเปียเชือก (Three Strand Braid)",
-    "category": "General",
+    "category": "Braid/Sinnet",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Three_Strand_Braid"
   },
   {
     "id": 151,
     "name": "เงื่อนผูกยึด (Timber Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Timber_Hitch"
   },
   {
     "id": 152,
     "name": "เงื่อน (Tree Swing Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Tree_Swing_Knot"
   },
   {
     "id": 153,
     "name": "เงื่อน (Trilene Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Trilene_Knot"
   },
   {
     "id": 154,
     "name": "เงื่อนผูกยึด (Trucker's Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Trucker%27s_Hitch"
   },
   {
     "id": 155,
     "name": "เงื่อนผูกยึด (Tumble Hitch)",
-    "category": "General",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Tumble_Hitch"
   },
   {
     "id": 156,
-    "name": "Turk's Head (Turk's Head)",
-    "category": "General",
+    "name": "เงื่อน (Turk's Head)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Turk%27s_Head"
   },
   {
     "id": 157,
-    "name": "ครึ่ง เงื่อนผูกยึดes (Two Half Hitches)",
-    "category": "General",
+    "name": "ครึ่ง เงื่อนผูกยึด (Two Half Hitches)",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Two_Half_Hitches"
   },
   {
     "id": 158,
-    "name": "เงื่อน (Underwriter's Knot)",
-    "category": "General",
+    "name": "เงื่อนช่างไฟ (Underwriter's Knot)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Underwriter%27s_Knot"
   },
   {
     "id": 159,
     "name": "เงื่อน (Uni Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Uni_Knot"
   },
   {
     "id": 160,
     "name": "เงื่อน (Wall and Crown Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Wall_and_Crown_Knot"
   },
   {
     "id": 161,
     "name": "เงื่อน (Wall Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Wall_Knot"
   },
   {
     "id": 162,
     "name": "เงื่อนตะกรุดเบ็ด (Water Bowline)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Water_Bowline"
   },
   {
     "id": 163,
     "name": "เงื่อน (Water Knot)",
-    "category": "General",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Water_Knot"
   },
   {
     "id": 164,
     "name": "การพันปลายเชือก (West Country Whipping)",
-    "category": "General",
+    "category": "Whipping",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/West_Country_Whipping"
   },
   {
     "id": 165,
     "name": "สลิงเชือก (Whoopie Sling)",
-    "category": "General",
+    "category": "Sling",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Whoopie_Sling"
   },
   {
     "id": 166,
     "name": "เงื่อนผูกเนคไท (Windsor Tie)",
-    "category": "General",
+    "category": "Tie",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Windsor_Tie"
   },
   {
     "id": 167,
     "name": "เงื่อนต่อเชือก (Zeppelin Bend)",
-    "category": "General",
+    "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Zeppelin_Bend"
   }
