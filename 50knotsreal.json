@@ -32,14 +32,14 @@
     "name": "ห่วงเชือก (Alpine Butterfly Loop)",
     "category": "Loop",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "knot2/5.Alpine Butterfly Loop.html"
+    "url": "knot2/5.html"
   },
   {
     "id": 6,
     "name": "เงื่อนผูกยึด (Anchor Hitch)",
     "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "knot2/6.Anchor Hitch .html"
+    "url": "knot2/6.html"
   },
   {
     "id": 7,
@@ -81,7 +81,7 @@
     "name": "เงื่อนผูกยึด (Barrel Hitch)",
     "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "knot2/12.Barrel Hitch.html"
+    "url": "knot2/12.html"
   },
   {
     "id": 13,
@@ -151,7 +151,7 @@
     "name": "เงื่อนตะกรุดเบ็ด (Bowline on a Bight)",
     "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "knot2/22.Bowline on a Bight.html"
+    "url": "knot2/22.html"
   },
   {
     "id": 23,
@@ -179,7 +179,7 @@
     "name": "เงื่อนต่อเชือก (Carrick Bend)",
     "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "knot2/26.Carrick Bend.html"
+    "url": "knot2/26.html"
   },
   {
     "id": 27,
@@ -214,7 +214,7 @@
     "name": "เงื่อนผูกยึด (Cleat Hitch)",
     "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "knot2/32.Clove Hitch.html"
+    "url": "knot2/32.html"
   },
 
   {
@@ -222,14 +222,14 @@
     "name": "เงื่อนผูกยึด (Clove Hitch)",
     "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "knot2/32-1.Clove Hitch.html"
+    "url": "knot2/32_1.html"
   },
 {
     "id": 32-1,
     "name": "เงื่อนผูกยึด (Clove Hitch Rope End )",
     "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "knot2/32-1.Clove Hitch -Rope End.html"
+    "url": "knot2/32_1.html"
   },
   {
     "id": 33,
