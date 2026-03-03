@@ -175,11 +175,11 @@
     "url": "knot2/25.html"
   },
   {
-    "id": 25-1,
+    "id": 251,
     "name": "เงื่อนต่อเชือก Butcher’s Knot",
     "category": "Bend",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
-    "url": "knot2/25-1.html"
+    "url": "knot2/25_1.html"
   },
   {
     "id": 26,
@@ -246,6 +246,21 @@
     "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "https://en.wikipedia.org/wiki/Cobra_Knot"
+  },
+  {
+    "id": 331,
+    "name": "การพันเชือก (Coil Attached Rope)",
+    "category": "Whipping",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "url": "https://en.wikipedia.org/wiki/Common_Whipping"
+  },
+
+   {
+    "id": 331,
+    "name": "การพันเชือก Coil Unattached Rope",
+    "category": "Whipping",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "url": "https://en.wikipedia.org/wiki/Common_Whipping"
   },
   {
     "id": 34,
