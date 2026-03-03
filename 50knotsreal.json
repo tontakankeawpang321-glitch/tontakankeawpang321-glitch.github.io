@@ -24,155 +24,162 @@
     "id": 4,
     "name": "เงื่อนต่อเชือก (Alpine Butterfly Bend)",
     "category": "Bend",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/alpinebend/alpinebendR9.jpg",
     "url": "knot2/4.html"
   },
   {
     "id": 5,
     "name": "ห่วงเชือก (Alpine Butterfly Loop)",
     "category": "Loop",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/alpinebutterfly/alpinebutterflyR9.jpg",
     "url": "knot2/5.html"
   },
   {
     "id": 6,
     "name": "เงื่อนผูกยึด (Anchor Hitch)",
     "category": "Hitch",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/anchor/anchorR10.jpg",
     "url": "knot2/6.html"
   },
   {
     "id": 7,
     "name": "เงื่อน (Arbor Knot)",
     "category": "Knot",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/arbor/arborR12.jpg",
     "url": "knot2/7.html"
   },
   {
     "id": 8,
     "name": "เงื่อนต่อเชือก (Ashley Bend)",
     "category": "Bend",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/ashleybend/ashleybendR11.jpg",
     "url": "knot2/8.html"
   },
   {
     "id": 9,
     "name": "ปมหยุด เงื่อน (Ashley Stopper Knot)",
     "category": "Knot",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/ashleystopper/ashleystopperR12.jpg",
     "url": "knot2/9.html"
   },
   {
     "id": 10,
     "name": "การถักเปียเชือก เงื่อน (Australian Braid Knot)",
     "category": "Braid/Sinnet",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/australian/australianR15.jpg",
     "url": "knot2/10.html"
   },
   {
     "id": 11,
     "name": "การสไปซ์เชือก (Back Splice)",
     "category": "Splice",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/backsplice/backspliceR15.jpg",
     "url": "knot2/11.html"
   },
   {
     "id": 12,
     "name": "เงื่อนผูกยึด (Barrel Hitch)",
     "category": "Hitch",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/barrel/barrelR8.jpg",
     "url": "knot2/12.html"
   },
   {
     "id": 13,
     "name": "เงื่อนผูกยึด (Basket Hitch)",
     "category": "Hitch",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/basket/basketR9.jpg",
     "url": "knot2/13.html"
   },
   {
     "id": 14,
     "name": "เงื่อน (Beer Knot)",
     "category": "Knot",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/beer/beerR9.jpg",
     "url": "knot2/14.html"
   },
   {
     "id": 15,
     "name": "เงื่อน (Bimini Twist)",
     "category": "Knot",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/bimini/biminiR12.jpg",
     "url": "knot2/15.html"
   },
   {
     "id": 16,
     "name": "เงื่อนผูกยึด (Blake's Hitch)",
     "category": "Hitch",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/blakes/blakesR8.jpg",
     "url": "knot2/16.html"
   },
   {
     "id": 17,
     "name": "เงื่อน (Blood Knot)",
     "category": "Knot",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/bloodknot/bloodknotR15.jpg",
     "url": "knot2/17.html"
   },
   {
     "id": 18,
     "name": "เงื่อนผูกยึด (Boom Hitch)",
     "category": "Hitch",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/boomhitch/boomhitchR15.jpg",
     "url": "knot2/18.html"
   },
   {
     "id": 19,
     "name": "สลิงเชือก (Bottle Sling)",
     "category": "Sling",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/bottlesling/bottleslingR15.jpg",
     "url": "knot2/19.html"
   },
   {
     "id": 20,
     "name": "เงื่อนผูกเนคไท (Bow Tie)",
     "category": "Tie",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/tiebow/tiebowR15.jpg",
     "url": "knot2/20.html"
   },
   {
     "id": 21,
     "name": "เงื่อนตะกรุดเบ็ด (Bowline)",
     "category": "Knot",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/bowline/bowlineR9.jpg",
     "url": "knot2/21.html"
   },
   {
     "id": 22,
     "name": "เงื่อนตะกรุดเบ็ด (Bowline on a Bight)",
     "category": "Knot",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/bowlinebight/bowlinebightR8.jpg",
     "url": "knot2/22.html"
   },
   {
     "id": 23,
     "name": "การสไปซ์เชือก (Brummel Splice)",
     "category": "Splice",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/brummel/brummelR9.jpg",
     "url": "knot2/23.html"
   },
   {
     "id": 24,
-    "name": "เงื่อนผูกยึด (Buntline Hitch)",
+    "name": "เงื่อนผูกยึด (Brummel Splice Demo)",
     "category": "Hitch",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/brummeldemo/brummeldemoR9.jpg",
     "url": "knot2/24.html"
   },
   {
     "id": 25,
-    "name": "เงื่อน (Butcher's Knot)",
+    "name": "เงื่อน (Buntline Hitch)",
     "category": "Knot",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "imageUrl": "https://www.animatedknots.com/photos/buntline/buntlineR6.jpg",
     "url": "knot2/25.html"
+  },
+  {
+    "id": 25-1,
+    "name": "เงื่อนต่อเชือก Butcher’s Knot",
+    "category": "Bend",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
+    "url": "knot2/25-1.html"
   },
   {
     "id": 26,
@@ -183,18 +190,19 @@
   },
   {
     "id": 27,
-    "name": "เงื่อนต่อเชือก (Carrick Bend Mat)",
-    "category": "Bend",
+    "name": "เงื่อน (Carrick Bend met)",
+    "category": "Knot",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "knot2/27.html"
   },
-  {
+   {
     "id": 28,
-    "name": "เงื่อน (Celtic Knot)",
-    "category": "Knot",
+    "name": "เชือก (Celtic Knot Mat)",
+    "category": "Splice",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "knot2/28.html"
   },
+  
   {
     "id": 29,
     "name": "เงื่อน (Chain Sinnet)",
@@ -202,24 +210,25 @@
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "knot2/29.html"
   },
-  {
+  
+   {
     "id": 30,
-    "name": "การสไปซ์เชือก (Chain Splice)",
-    "category": "Splice",
+    "name": "เงื่อนผูกยึด Chain Splice ",
+    "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "knot2/30.html"
   },
-  {
-    "id": 31,
+  
+{
+    "id": 310,
     "name": "เงื่อนผูกยึด (Cleat Hitch)",
     "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "knot2/31.html"
   },
-
-  {
-    "id": 32,
-    "name": "เงื่อนผูกยึด (Clove Hitch)",
+   {
+    "id": 320,
+    "name": "เงื่อนผูกยึด Clove Hitch ",
     "category": "Hitch",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Reef_knot.svg",
     "url": "knot2/32.html"
