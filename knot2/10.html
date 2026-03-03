@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีถักเงื่อน Australian Braid - สไลเดอร์สอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons สำหรับปุ่มลูกศร -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .image-placeholder {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+    </style>
+    <script>
+        // ฟังก์ชันอัจฉริยะ: หากโหลดภาพไม่สำเร็จ (ภาพไม่มีอยู่จริง) จะลบสไลด์นั้นทิ้งและจัดเรียงใหม่ทันที
+        function handleImageError(img) {
+            const slide = img.closest('.slide-item');
+            if (slide) {
+                slide.remove();
+                if (window.initSlider) window.initSlider(); // สั่งจัดเรียงหมายเลขสไลด์ใหม่
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+
+    <!-- คอนเทนเนอร์หลักของแอป -->
+    <div class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl overflow-hidden relative border border-gray-100">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-blue-600 text-white p-5 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">วิธีถักเงื่อน Australian Braid</h1>
+            <p class="text-blue-100 text-sm mt-1 opacity-90">เงื่อนถักที่สวยงามและแข็งแรงสำหรับสร้างห่วงปลายเชือก</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex transition-transform duration-300 ease-out w-full cursor-grab active:cursor-grabbing">
+                
+                <!-- ชุดสไลด์ -->
+                
+                <!-- สไลด์ที่ 1 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR1.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เตรียมและคลายเกลียวเชือก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เริ่มจากการคลายเกลียวปลายเชือกออกเป็นเส้นย่อยๆ เพื่อเตรียมสำหรับการถักเข้ากับตัวเชือกหลัก</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 2 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR2.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สร้างห่วงและเปิดช่อง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">โค้งปลายเชือกกลับมาเพื่อกำหนดขนาดห่วงที่ต้องการ แล้วใช้อุปกรณ์เปิดเกลียวของสายเชือกหลักให้เป็นช่อง</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 3 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR3.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดเส้นที่หนึ่ง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">นำเกลียวเชือกเส้นแรกสอดเข้าไปในช่องว่างที่คุณเปิดไว้ในสายหลัก ดึงให้ตึงพอประมาณ</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 4 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR4.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดเส้นที่สอง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">หมุนสายหลักเล็กน้อย เปิดช่องเกลียวถัดไป แล้วสอดเกลียวเชือกเส้นที่สองเข้าไป</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 5 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR5.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดเส้นที่สาม</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ทำเช่นเดียวกันกับเกลียวเส้นสุดท้าย โดยสอดเข้าใต้เกลียวของสายหลักที่เหลืออยู่</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 6 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR6.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ดึงรวบครั้งแรก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงเกลียวเชือกย่อยทั้งสามเส้นให้ตึง เพื่อให้ฐานของการถักแนบชิดกับสายหลักอย่างสวยงาม</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 7 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR7.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เริ่มถักชั้นที่สอง (ข้าม 1 ลอด 1)</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เริ่มกระบวนการถักรอบต่อไป โดยนำเส้นย่อยข้ามเกลียวถัดไป แล้วลอดเข้าใต้เกลียวถัดไปอีกที</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 8 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR8.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ถักเส้นที่เหลือในชั้นที่สอง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ทำซ้ำหลักการ "ข้าม 1 ลอด 1" กับเส้นย่อยที่เหลือ หมุนเชือกไปรอบๆ เพื่อให้สอดได้ง่ายขึ้น</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 9 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR9.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ดึงรัดชั้นที่สองให้แน่น</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เมื่อสอดครบทุกเส้นในชั้นนี้แล้ว ให้ดึงเส้นย่อยแต่ละเส้นให้ตึงกระชับไปตามแนวสายหลัก</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 10 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR10.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ดำเนินการถักต่อเนื่อง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ถักซ้ำด้วยวิธีเดิม (ข้าม 1 ลอด 1) สร้างชั้นการถักเพิ่มลงไปตามความยาวของสายหลัก</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 11 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR11.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: จัดระเบียบรอยถัก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ตรวจสอบให้แน่ใจว่าเกลียวเชือกเรียงตัวสวยงาม ไม่บิดเบี้ยว และมีความตึงที่สม่ำเสมอกัน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 12 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR12.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ถักจบกระบวนการ</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เมื่อถักได้ความยาวประมาณ 3-4 ครั้ง (Tucks) หรือตามที่ต้องการแล้ว ให้เตรียมรัดจบ</p>
+                    </div>
+                </div>
+                
+                <!-- สไลด์ที่ 13 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR13.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: นวดและดึงให้เข้าทรง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ใช้มือคลึงและดึงรอยถักให้ตัวเชือกคลายความตึงเครียดและประสานเป็นเนื้อเดียวกันอย่างสมบูรณ์</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 14 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR14.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ตัดปลายเชือกที่เหลือทิ้ง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">หากมีปลายเชือกย่อยเหลือยาวเกินไป สามารถใช้กรรไกรหรือมีดความร้อนตัดปลายส่วนเกินออกได้</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 15 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" src="https://www.animatedknots.com/photos/australian/australianR15.jpg" alt="Australian Braid Knot, Step-by-Step Animation" title="Animation: Australian Braid Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เสร็จสมบูรณ์</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เงื่อนถัก Australian Braid เสร็จสมบูรณ์ ได้ห่วงตา (Eye Splice) ที่มีความสวยงามและทนทานสูง!</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม ซ้าย-ขวา -->
+        <button id="prevBtn" class="absolute top-[35%] left-2 -translate-y-1/2 bg-white/90 backdrop-blur text-blue-600 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[35%] right-2 -translate-y-1/2 bg-white/90 backdrop-blur text-blue-600 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุดบ่งชี้สถานะ (Dots) -->
+        <div class="flex justify-center space-x-2 pb-6 pt-2 bg-white rounded-b-3xl" id="dots-container">
+            <!-- Dots จะถูกสร้างด้วย JavaScript อัตโนมัติ -->
+        </div>
+    </div>
+
+    <!-- สคริปต์การทำงานของ Slider -->
+    <script>
+        // เริ่มต้นเรนเดอร์ไอคอน
+        lucide.createIcons();
+
+        const track = document.getElementById('slider-track');
+        const container = document.getElementById('slider-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        // ฟังก์ชันอัปเดตสถานะและจำนวนสไลด์ทั้งหมดแบบไดนามิก
+        window.initSlider = function() {
+            const slides = track.querySelectorAll('.slide-item');
+            const totalSlides = slides.length;
+            
+            if (totalSlides === 0) return;
+
+            slides.forEach((slide, index) => {
+                const isLast = (index === totalSlides - 1);
+                
+                // อัปเดตตัวเลข Counter 
+                const counter = slide.querySelector('.slider-counter');
+                if (counter) {
+                    counter.innerText = `${index + 1} / ${totalSlides}`;
+                    counter.className = `absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter transition-colors duration-300 ${isLast ? 'bg-green-500' : 'bg-blue-500'}`;
+                }
+                
+                // อัปเดตหมายเลขขั้นตอน
+                const stepNum = slide.querySelector('.step-num');
+                if (stepNum) {
+                    stepNum.innerText = `ขั้นตอนที่ ${index + 1}`;
+                }
+                
+                // หากเป็นสไลด์ภาพ "สุดท้ายที่มีอยู่จริง" ระบบจะบังคับเปลี่ยนข้อความเป็นเสร็จสมบูรณ์
+                if (isLast) {
+                    const stepDesc = slide.querySelector('.step-desc');
+                    if (stepDesc) stepDesc.innerText = ': ตรวจสอบและใช้งาน (เสร็จสมบูรณ์)';
+                    
+                    const p = slide.querySelector('p');
+                    if (p) p.innerText = 'เงื่อนถัก Australian Braid เสร็จสมบูรณ์ ได้ห่วงที่แข็งแรง ทนทาน และพร้อมนำไปใช้งานจริงแล้ว!';
+                }
+
+                // สไตล์กรอบและพื้นหลังภาพ
+                const imgContainer = slide.querySelector('.image-placeholder');
+                if (imgContainer) {
+                    imgContainer.className = `h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300 ${isLast ? 'border-green-500 bg-green-50' : 'border-blue-500'}`;
+                }
+                
+                // สไตล์สีของหัวข้อ
+                const titleText = slide.querySelector('.slide-title-text');
+                if (titleText) {
+                    titleText.className = `text-xl font-bold mb-2 slide-title-text transition-colors duration-300 ${isLast ? 'text-green-600' : 'text-blue-600'}`;
+                }
+            });
+
+            // สร้างจุด Dots นำทางใหม่ให้ตรงกับจำนวนรูปที่หลงเหลืออยู่จริง
+            const dotsContainer = document.getElementById('dots-container');
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300 focus:outline-none';
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            }
+            
+            // ป้องกัน currentIndex เกินขอบเขต
+            if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
+            if (currentIndex < 0) currentIndex = 0;
+            
+            updateSlider();
+        };
+
+        // เลื่อนสไลด์และอัปเดตปุ่ม
+        function updateSlider() {
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            if (totalSlides === 0) return;
+            
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalSlides - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if(index === currentIndex) {
+                    dot.classList.remove('bg-gray-300', 'w-2.5');
+                    dot.classList.add(index === totalSlides - 1 ? 'bg-green-500' : 'bg-blue-600', 'w-5');
+                } else {
+                    dot.classList.remove('bg-blue-600', 'bg-green-500', 'w-5');
+                    dot.classList.add('bg-gray-300', 'w-2.5');
+                }
+            });
+        }
+
+        // กดปุ่มถัดไป-ย้อนกลับ
+        nextBtn.addEventListener('click', () => {
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // --- ระบบ Touch / Swipe สำหรับมือถือและเมาส์ (Drag) ---
+        let startX = 0;
+        let endX = 0;
+        let isDragging = false;
+
+        const startDrag = (e) => {
+            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        };
+
+        const onDrag = (e) => {
+            if (!isDragging) return;
+            e.preventDefault(); 
+            endX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            const diff = startX - endX;
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            
+            if((currentIndex === 0 && diff < 0) || (currentIndex === totalSlides - 1 && diff > 0)) {
+               track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff * 0.2}px))`;
+            } else {
+               track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff}px))`;
+            }
+        };
+
+        const endDrag = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.transition = 'transform 0.3s ease-out'; 
+            
+            const diff = startX - endX;
+            const swipeThreshold = 50; 
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                } else if (diff < 0 && currentIndex > 0) {
+                    currentIndex--;
+                }
+            }
+            updateSlider();
+        };
+
+        container.addEventListener('touchstart', startDrag, {passive: true});
+        container.addEventListener('touchmove', onDrag, {passive: false});
+        container.addEventListener('touchend', endDrag);
+
+        container.addEventListener('mousedown', startDrag);
+        container.addEventListener('mousemove', onDrag);
+        window.addEventListener('mouseup', endDrag); 
+
+        // เริ่มต้นการทำงาน (หลังจากโหลด DOM เสร็จ)
+        window.onload = function() {
+            window.initSlider();
+        };
+    </script>
+</body>
+</html>

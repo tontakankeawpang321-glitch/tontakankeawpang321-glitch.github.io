@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีผูกเงื่อน Blood Knot - สไลเดอร์สอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons สำหรับปุ่มลูกศร -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .image-placeholder {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+    </style>
+    <script>
+        // ฟังก์ชันอัจฉริยะ: หากโหลดภาพไม่สำเร็จ (ภาพไม่มีอยู่จริง) จะลบสไลด์นั้นทิ้งและจัดเรียงใหม่ทันที
+        function handleImageError(img) {
+            const slide = img.closest('.slide-item');
+            if (slide) {
+                slide.remove();
+                if (window.initSlider) window.initSlider(); // สั่งจัดเรียงหมายเลขสไลด์ใหม่
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+
+    <!-- คอนเทนเนอร์หลักของแอป -->
+    <div class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl overflow-hidden relative border border-gray-100">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-red-600 text-white p-5 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">วิธีผูกเงื่อนต่อสายเอ็น</h1>
+            <h2 class="text-lg font-semibold">(Blood Knot)</h2>
+            <p class="text-red-100 text-sm mt-1 opacity-90">เงื่อนยอดนิยมสำหรับนักตกปลา ใช้ต่อสายที่มีขนาดใกล้เคียงกัน</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex transition-transform duration-300 ease-out w-full cursor-grab active:cursor-grabbing">
+                
+                <!-- ชุดสไลด์ -->
+                
+                <!-- สไลด์ที่ 1 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR1.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: วางสายทับซ้อนกัน</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">นำปลายสายเอ็นทั้งสองเส้นที่จะนำมาต่อกัน วางขนานทับซ้อนกันในทิศทางสวนทางกัน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 2 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR2.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: พันสายด้านแรก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">นำปลายสายเส้นหนึ่ง พันรัดรอบสายอีกเส้นหนึ่ง จำนวนประมาณ 4 ถึง 5 รอบ</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 3 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR3.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดกลับเข้าตรงกลาง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">นำปลายสายเส้นเดิม ย้อนกลับมาสอดเข้าไปในช่องว่างระหว่างสายทั้งสองเส้นตรงจุดกึ่งกลางที่เริ่มพัน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 4 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR4.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: พันสายด้านที่สอง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ทำซ้ำกับสายอีกด้าน โดยนำปลายสายพันรอบเส้นแรก จำนวน 4 ถึง 5 รอบเช่นเดียวกัน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 5 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR5.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดสวนทางตรงกลาง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">นำปลายสายเส้นที่สอง ย้อนมาสอดเข้าช่องตรงกลางช่องเดียวกัน แต่ให้สอดสวนทางกับปลายสายเส้นแรก</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 6 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img id="Knot" class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR6.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เตรียมดึงให้แน่น</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">จับสายหลักทั้งสองข้างให้มั่นคง (ควรใช้น้ำลายหรือน้ำลูบปมเล็กน้อยเพื่อลดความร้อนและแรงเสียดทาน)</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 7 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR7.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: รูดเกลียวเข้าหากัน</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ค่อยๆ ดึงสายหลักทั้งสองข้างออกจากกันอย่างช้าๆ เกลียวของเงื่อนจะรูดบีบเข้าหากันจนแน่น</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 8 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR8.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: รูดเกลียวให้แน่นขึ้น</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงสายหลักต่อไปเพื่อให้เกลียวทั้งหมดบีบตัวแน่นเป็นปมเดียวกัน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 9 (เผื่อภาพมีมากกว่า 8) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR9.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ดึงสายหลักให้ตึง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ออกแรงดึงสายหลักทั้งสองข้างให้ตึงขึ้นอีกระดับ เพื่อตรวจสอบความแน่นหนา</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 10 (เผื่อภาพมีมากกว่า 8) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR10.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: จัดระเบียบปมเงื่อน</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ตรวจสอบปมเงื่อนให้แน่ใจว่าเกลียวเรียงตัวสวยงาม ไม่มีการปีนเกลียวกัน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 11 (เผื่อภาพมีมากกว่า 8) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR11.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ดึงให้แน่นสนิท</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงย้ำอีกครั้งเพื่อให้ปมเงื่อนล็อกตัวแน่นสนิทที่สุด</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 12 (เผื่อภาพมีมากกว่า 8) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR12.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ตัดปลายสายด้านแรก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ใช้กรรไกรหรือมีดตัดปลายสายด้านที่หนึ่งออกให้ชิดปมที่สุด</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 13 (เผื่อภาพมีมากกว่า 8) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR13.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ตัดปลายสายด้านที่สอง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ตัดปลายสายอีกด้านที่เหลือออกให้ชิดปมเช่นเดียวกัน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 14 (เผื่อภาพมีมากกว่า 8) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR14.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ตรวจสอบความเรียบร้อย</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">สำรวจปมที่ตัดปลายสายเรียบร้อยแล้วว่าไม่มีส่วนที่ยื่นออกมาเกะกะ</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 15 (เผื่อภาพมีมากกว่า 8) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/bloodknot/bloodknotR15.jpg" alt="Blood Knot, Step-by-Step Animation" title="Animation: Blood Knot Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ตัดแต่งปลายสาย</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เงื่อน Blood Knot ของคุณเสร็จสมบูรณ์พร้อมใช้งาน!</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม ซ้าย-ขวา -->
+        <button id="prevBtn" class="absolute top-[35%] left-2 -translate-y-1/2 bg-white/90 backdrop-blur text-red-600 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[35%] right-2 -translate-y-1/2 bg-white/90 backdrop-blur text-red-600 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุดบ่งชี้สถานะ (Dots) -->
+        <div class="flex justify-center space-x-2 pb-6 pt-2 bg-white rounded-b-3xl" id="dots-container">
+            <!-- Dots จะถูกสร้างด้วย JavaScript อัตโนมัติ -->
+        </div>
+    </div>
+
+    <!-- สคริปต์การทำงานของ Slider -->
+    <script>
+        // เริ่มต้นเรนเดอร์ไอคอน
+        lucide.createIcons();
+
+        const track = document.getElementById('slider-track');
+        const container = document.getElementById('slider-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        // ฟังก์ชันอัปเดตสถานะและจำนวนสไลด์ทั้งหมดแบบไดนามิก
+        window.initSlider = function() {
+            const slides = track.querySelectorAll('.slide-item');
+            const totalSlides = slides.length;
+            
+            if (totalSlides === 0) return;
+
+            slides.forEach((slide, index) => {
+                const isLast = (index === totalSlides - 1);
+                
+                // อัปเดตตัวเลข Counter 
+                const counter = slide.querySelector('.slider-counter');
+                if (counter) {
+                    counter.innerText = `${index + 1} / ${totalSlides}`;
+                    counter.className = `absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter transition-colors duration-300 ${isLast ? 'bg-green-500' : 'bg-red-500'}`;
+                }
+                
+                // อัปเดตหมายเลขขั้นตอน
+                const stepNum = slide.querySelector('.step-num');
+                if (stepNum) {
+                    stepNum.innerText = `ขั้นตอนที่ ${index + 1}`;
+                }
+                
+                // หากเป็นสไลด์ภาพ "สุดท้ายที่มีอยู่จริง" ระบบจะบังคับเปลี่ยนข้อความเป็นเสร็จสมบูรณ์
+                if (isLast) {
+                    const stepDesc = slide.querySelector('.step-desc');
+                    if (stepDesc) stepDesc.innerText = ': พร้อมใช้งาน (เสร็จสมบูรณ์)';
+                    
+                    const p = slide.querySelector('p');
+                    if (p) p.innerText = 'ตัดปลายสายที่ยื่นออกมาให้ชิดปม เงื่อน Blood Knot ของคุณเสร็จสมบูรณ์และพร้อมใช้งานแล้ว!';
+                }
+
+                // สไตล์กรอบและพื้นหลังภาพ
+                const imgContainer = slide.querySelector('.image-placeholder');
+                if (imgContainer) {
+                    imgContainer.className = `h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300 ${isLast ? 'border-green-500 bg-green-50' : 'border-red-500'}`;
+                }
+                
+                // สไตล์สีของหัวข้อ
+                const titleText = slide.querySelector('.slide-title-text');
+                if (titleText) {
+                    titleText.className = `text-xl font-bold mb-2 slide-title-text transition-colors duration-300 ${isLast ? 'text-green-600' : 'text-red-600'}`;
+                }
+            });
+
+            // สร้างจุด Dots นำทางใหม่ให้ตรงกับจำนวนรูปที่หลงเหลืออยู่จริง
+            const dotsContainer = document.getElementById('dots-container');
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300 focus:outline-none';
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            }
+            
+            // ป้องกัน currentIndex เกินขอบเขต
+            if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
+            if (currentIndex < 0) currentIndex = 0;
+            
+            updateSlider();
+        };
+
+        // เลื่อนสไลด์และอัปเดตปุ่ม
+        function updateSlider() {
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            if (totalSlides === 0) return;
+            
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalSlides - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if(index === currentIndex) {
+                    dot.classList.remove('bg-gray-300', 'w-2.5');
+                    dot.classList.add(index === totalSlides - 1 ? 'bg-green-500' : 'bg-red-600', 'w-5');
+                } else {
+                    dot.classList.remove('bg-red-600', 'bg-green-500', 'w-5');
+                    dot.classList.add('bg-gray-300', 'w-2.5');
+                }
+            });
+        }
+
+        // กดปุ่มถัดไป-ย้อนกลับ
+        nextBtn.addEventListener('click', () => {
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // --- ระบบ Touch / Swipe สำหรับมือถือและเมาส์ (Drag) ---
+        let startX = 0;
+        let endX = 0;
+        let isDragging = false;
+
+        const startDrag = (e) => {
+            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        };
+
+        const onDrag = (e) => {
+            if (!isDragging) return;
+            e.preventDefault(); 
+            endX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            const diff = startX - endX;
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            
+            if((currentIndex === 0 && diff < 0) || (currentIndex === totalSlides - 1 && diff > 0)) {
+               track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff * 0.2}px))`;
+            } else {
+               track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff}px))`;
+            }
+        };
+
+        const endDrag = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.transition = 'transform 0.3s ease-out'; 
+            
+            const diff = startX - endX;
+            const swipeThreshold = 50; 
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                } else if (diff < 0 && currentIndex > 0) {
+                    currentIndex--;
+                }
+            }
+            updateSlider();
+        };
+
+        container.addEventListener('touchstart', startDrag, {passive: true});
+        container.addEventListener('touchmove', onDrag, {passive: false});
+        container.addEventListener('touchend', endDrag);
+
+        container.addEventListener('mousedown', startDrag);
+        container.addEventListener('mousemove', onDrag);
+        window.addEventListener('mouseup', endDrag); 
+
+        // เริ่มต้นการทำงาน
+        // ใช้ setTimeout เล็กน้อยเพื่อให้เบราว์เซอร์ตรวจสอบภาพเสีย(ถ้ามี) ให้เสร็จก่อนประมวลผล Slider
+        setTimeout(() => {
+            window.initSlider();
+        }, 100);
+    </script>
+</body>
+</html>

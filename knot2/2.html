@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีทำสลิงปรับระยะ (Adjustable Sling) - สไลเดอร์สอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons สำหรับปุ่มลูกศร -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f3f4f6;
+        }
+        /* ซ่อน scrollbar แต่ยังเลื่อนได้ */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* พื้นหลังสำรองขณะโหลดภาพ */
+        .image-placeholder {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+
+    <!-- คอนเทนเนอร์หลักของแอป -->
+    <div class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl overflow-hidden relative border border-gray-100">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-blue-600 text-white p-5 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">วิธีทำสลิงปรับระยะ</h1>
+            <p class="text-blue-100 text-sm mt-1 opacity-90">Adjustable Sling (สไลด์เพื่อดูขั้นตอน)</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ (ใส่ transition สำหรับภาพเคลื่อนไหว) -->
+            <div id="slider-track" class="flex transition-transform duration-300 ease-out w-full cursor-grab active:cursor-grabbing">
+                
+                <!-- สไลด์ที่ 1 -->
+                <div class="w-full flex-shrink-0 flex flex-col">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow">1 / 5</div>
+                        <img src="https://www.animatedknots.com/photos/adjustablesling/adjustableslingR1.jpg" alt="ขั้นตอนที่ 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold text-blue-600 mb-2">ขั้นตอนที่ 1: เตรียมเชือก</h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                            เริ่มต้นด้วยการเตรียมเชือกถัก วัดระยะและทำเครื่องหมายสำหรับทำสลิงปรับระยะ (Adjustable Sling)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 2 -->
+                <div class="w-full flex-shrink-0 flex flex-col">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow">2 / 5</div>
+                        <img src="https://www.animatedknots.com/photos/adjustablesling/adjustableslingR3.jpg" alt="ขั้นตอนที่ 2" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold text-blue-600 mb-2">ขั้นตอนที่ 2: สอดเชือกผ่านแกน</h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                            ใช้เครื่องมือ (Fid) แทงสอดปลายเชือกทะลุผ่านแกนกลางของเชือกหลักเพื่อสร้างจุดเริ่มต้น
+                        </p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 3 -->
+                <div class="w-full flex-shrink-0 flex flex-col">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow">3 / 5</div>
+                        <img src="https://www.animatedknots.com/photos/adjustablesling/adjustableslingR5.jpg" alt="ขั้นตอนที่ 3" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold text-blue-600 mb-2">ขั้นตอนที่ 3: ดึงปลายเชือกกลับ</h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                            นำปลายเชือกสอดกลับเข้าไปในแกนกลางอีกครั้ง เป็นการขัดเชือกเพื่อล็อคและเริ่มสร้างห่วงสลิง
+                        </p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 4 -->
+                <div class="w-full flex-shrink-0 flex flex-col">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow">4 / 5</div>
+                        <img src="https://www.animatedknots.com/photos/adjustablesling/adjustableslingR7.jpg" alt="ขั้นตอนที่ 4" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold text-blue-600 mb-2">ขั้นตอนที่ 4: จัดเรียงและดึงห่วง</h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                            ค่อยๆ จัดเรียงเส้นเชือกให้เป็นระเบียบ และดึงปลายเชือกเพื่อให้สลิงแน่นกระชับเข้าหากัน
+                        </p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 5 (แก้ไขรูปตามที่ระบุ) -->
+                <div class="w-full flex-shrink-0 flex flex-col">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-green-500 relative bg-green-50 overflow-hidden">
+                        <div class="absolute top-2 right-2 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow">5 / 5</div>
+                        <img src="https://www.animatedknots.com/photos/adjustablesling/adjustableslingR10.jpg" alt="ขั้นตอนที่ 5 (สำเร็จ)" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold text-green-600 mb-2">ขั้นตอนที่ 5: ซ่อนปลายเชือก</h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">
+                            ซ่อนปลายเชือกที่เหลือเข้าไปในแกนกลาง (Burying) รูดให้เรียบ คุณจะได้ Adjustable Sling ที่แข็งแรงพร้อมใช้งาน
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม ซ้าย-ขวา -->
+        <button id="prevBtn" class="absolute top-[35%] left-2 -translate-y-1/2 bg-white/90 backdrop-blur text-blue-600 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[35%] right-2 -translate-y-1/2 bg-white/90 backdrop-blur text-blue-600 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุดบ่งชี้สถานะ (Dots) -->
+        <div class="flex justify-center space-x-2 pb-6 pt-2 bg-white rounded-b-3xl" id="dots-container">
+            <!-- Dots จะถูกสร้างด้วย JavaScript -->
+        </div>
+    </div>
+
+    <!-- สคริปต์การทำงานของ Slider -->
+    <script>
+        // เริ่มต้นเรนเดอร์ไอคอน Lucide
+        lucide.createIcons();
+
+        // ตัวแปรที่จำเป็นสำหรับ Slider
+        const track = document.getElementById('slider-track');
+        const container = document.getElementById('slider-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dotsContainer = document.getElementById('dots-container');
+        
+        const slides = track.children;
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+
+        // สร้าง Dots ตามจำนวน Slide
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300 focus:outline-none';
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                updateSlider();
+            });
+            dotsContainer.appendChild(dot);
+        }
+        const dots = document.querySelectorAll('.dot');
+
+        // อัปเดต UI เมื่อมีการเปลี่ยนหน้า
+        function updateSlider() {
+            // เลื่อน track
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // อัปเดตสถานะปุ่ม
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalSlides - 1;
+
+            // อัปเดตสีและขนาดของจุด dots
+            dots.forEach((dot, index) => {
+                if(index === currentIndex) {
+                    dot.classList.remove('bg-gray-300', 'w-2.5');
+                    dot.classList.add(index === totalSlides - 1 ? 'bg-green-500' : 'bg-blue-600', 'w-5');
+                } else {
+                    dot.classList.remove('bg-blue-600', 'bg-green-500', 'w-5');
+                    dot.classList.add('bg-gray-300', 'w-2.5');
+                }
+            });
+        }
+
+        // กดปุ่มถัดไป
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        // กดปุ่มย้อนกลับ
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // --- ระบบ Touch / Swipe สำหรับมือถือและเมาส์ (Drag) ---
+        let startX = 0;
+        let endX = 0;
+        let isDragging = false;
+
+        const startDrag = (e) => {
+            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none'; // ยกเลิก transition ชั่วคราวเวลาลากนิ้วให้สมูท
+        };
+
+        const onDrag = (e) => {
+            if (!isDragging) return;
+            e.preventDefault(); // ป้องกันการคลุมดำ text
+            endX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            const diff = startX - endX;
+            
+            // ป้องกันการลากเกินขอบ (เพิ่มความหนืด)
+            if((currentIndex === 0 && diff < 0) || (currentIndex === totalSlides - 1 && diff > 0)) {
+               track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff * 0.2}px))`;
+            } else {
+               track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff}px))`;
+            }
+        };
+
+        const endDrag = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.transition = 'transform 0.3s ease-out'; // เปิด transition กลับมาเหมือนเดิม
+            
+            const diff = startX - endX;
+            const swipeThreshold = 50; // ระยะที่ถือว่าเป็นการ swipe (พิกเซล)
+
+            if (Math.abs(diff) > swipeThreshold) {
+                // ปัดซ้าย (ไปหน้าถัดไป)
+                if (diff > 0 && currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                } 
+                // ปัดขวา (ย้อนกลับ)
+                else if (diff < 0 && currentIndex > 0) {
+                    currentIndex--;
+                }
+            }
+            // รีเซ็ตตำแหน่งให้ลงล็อก
+            updateSlider();
+        };
+
+        // Event Listeners สำหรับ Touch (มือถือ)
+        container.addEventListener('touchstart', startDrag, {passive: true});
+        container.addEventListener('touchmove', onDrag, {passive: false});
+        container.addEventListener('touchend', endDrag);
+
+        // Event Listeners สำหรับ Mouse (คอมพิวเตอร์)
+        container.addEventListener('mousedown', startDrag);
+        container.addEventListener('mousemove', onDrag);
+        window.addEventListener('mouseup', endDrag); // ใช้ window เผื่อลากเมาส์ออกนอกกล่อง
+
+        // อัปเดตสถานะเริ่มต้นตอนโหลดหน้าแรก
+        updateSlider();
+    </script>
+</body>
+</html>

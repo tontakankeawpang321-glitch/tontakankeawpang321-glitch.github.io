@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีถักต่อเชือกกับโซ่ (Chain Splice)</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons สำหรับปุ่มลูกศร -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .image-placeholder {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+    </style>
+    <script>
+        // ฟังก์ชันลบสไลด์ทิ้งอัตโนมัติหากโหลดภาพไม่สำเร็จ
+        function handleImageError(img) {
+            const slide = img.closest('.slide-item');
+            if (slide) {
+                slide.remove();
+                if (window.initSlider) window.initSlider(); 
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+
+    <div class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl overflow-hidden relative border border-gray-100">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-slate-800 text-white p-5 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">วิธีถักต่อเชือกกับโซ่</h1>
+            <h2 class="text-lg font-semibold text-slate-300">(Chain Splice)</h2>
+            <p class="text-slate-200 text-sm mt-1 opacity-90">การถักเชือก 3 เกลียวเข้ากับข้อโซ่เพื่อความแข็งแรงทนทาน</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <div id="slider-track" class="flex transition-transform duration-300 ease-out w-full cursor-grab active:cursor-grabbing">
+                
+                <!-- Slide 1 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR01.jpg" alt="Chain Splice, Step 1" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เตรียมเชือกและโซ่</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เริ่มต้นด้วยการเตรียมเชือกแบบ 3 เกลียว (3-Strand Rope) และโซ่ข้อสุดท้ายที่คุณต้องการถักติด</p>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR02.jpg" alt="Chain Splice, Step 2" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: คลายเกลียวเชือก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">คลายเกลียวเชือกทั้ง 3 เส้นออกมาระยะหนึ่ง (ประมาณ 6-8 ทบ) เพื่อให้ยาวพอที่จะนำไปถักได้</p>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR03.jpg" alt="Chain Splice, Step 3" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: กันเกลียวหลุดรุ่ย</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">แนะนำให้ใช้เทปพันปลายเกลียวเชือกแต่ละเส้นไว้ เพื่อป้องกันไม่ให้ปลายเชือกแตกหรือหลุดลุ่ยระหว่างถัก</p>
+                    </div>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR04.jpg" alt="Chain Splice, Step 4" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: จัดเรียงเกลียว</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">แยกเกลียวทั้ง 3 เส้นออกจากกันให้ชัดเจน เพื่อให้ง่ายต่อการแบ่งลำดับการสอดเข้าข้อโซ่</p>
+                    </div>
+                </div>
+
+                <!-- Slide 5 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR05.jpg" alt="Chain Splice, Step 5" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ร้อยผ่านข้อโซ่เส้นที่ 1</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">นำเกลียวเส้นที่หนึ่งสอดผ่านข้อโซ่เข้าไปเป็นเส้นแรก</p>
+                    </div>
+                </div>
+
+                <!-- Slide 6 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR06.jpg" alt="Chain Splice, Step 6" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ร้อยผ่านข้อโซ่เส้นที่ 2</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">นำเกลียวเส้นที่สองสอดผ่านข้อโซ่ตามเข้าไปในทิศทางเดียวกัน</p>
+                    </div>
+                </div>
+
+                <!-- Slide 7 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR07.jpg" alt="Chain Splice, Step 7" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: จัดตำแหน่งเชือกหลัก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงตัวเชือกหลักให้เข้ามาแนบชิดติดกับข้อโซ่ เพื่อเตรียมทำการถักย้อนกลับ</p>
+                    </div>
+                </div>
+
+                <!-- Slide 8 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR08.jpg" alt="Chain Splice, Step 8" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เปิดช่องเกลียวหลัก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ใช้ปลายนิ้วหรือเครื่องมือเบิกช่องว่างใต้เกลียวของตัวเชือกหลัก 1 เส้น</p>
+                    </div>
+                </div>
+
+                <!-- Slide 9 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR09.jpg" alt="Chain Splice, Step 9" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดเกลียวเส้นแรก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">สอดเกลียวเส้นแรกลอดใต้ช่องว่างของเชือกหลักที่คุณเปิดไว้</p>
+                    </div>
+                </div>
+
+                <!-- Slide 10 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR10.jpg" alt="Chain Splice, Step 10" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ดึงเส้นแรกให้ตึง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงเกลียวที่เพิ่งสอดให้รัดแน่นและกระชับเข้ากับตัวเชือก</p>
+                    </div>
+                </div>
+
+                <!-- Slide 11 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR11.jpg" alt="Chain Splice, Step 11" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เตรียมสอดเกลียวที่ 2</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">จับเกลียวเส้นที่สองขึ้นมา และหาช่องของเกลียวเชือกหลักถัดไป</p>
+                    </div>
+                </div>
+
+                <!-- Slide 12 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR12.jpg" alt="Chain Splice, Step 12" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดเกลียวที่ 2</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">สอดเกลียวเส้นที่สองลอดใต้เกลียวหลักเส้นถัดไป (ระวังอย่าให้ซ้อนทับรูเดิม)</p>
+                    </div>
+                </div>
+
+                <!-- Slide 13 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR13.jpg" alt="Chain Splice, Step 13" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: พลิกเชือกกลับด้าน</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">พลิกเชือกไปด้านหลัง เพื่อหาช่องว่างสำหรับสอดเกลียวเส้นที่สามที่เหลืออยู่</p>
+                    </div>
+                </div>
+
+                <!-- Slide 14 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR14.jpg" alt="Chain Splice, Step 14" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดเกลียวที่ 3</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">สอดเกลียวเส้นสุดท้ายลอดใต้เกลียวเชือกหลักเส้นที่ยังว่างอยู่</p>
+                    </div>
+                </div>
+
+                <!-- Slide 15 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR15.jpg" alt="Chain Splice, Step 15" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ตรวจสอบรอบแรก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงทุกเส้นให้ตึง และตรวจสอบให้แน่ใจว่าเกลียวทั้ง 3 เส้นโผล่ออกมาคนละช่องอย่างสม่ำเสมอ</p>
+                    </div>
+                </div>
+
+                <!-- Slide 16 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR16.jpg" alt="Chain Splice, Step 16" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ถักรอบที่สอง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เริ่มถักรอบที่สองด้วยหลักการ "ข้าม 1 ลอด 1" (Over one, under one) ทับเกลียวถัดไปแล้วสอดลอดเกลียวถัดไป</p>
+                    </div>
+                </div>
+
+                <!-- Slide 17 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR17.jpg" alt="Chain Splice, Step 17" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดเส้นที่ 2 (รอบสอง)</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">นำเส้นถัดไปมาถัก ข้าม 1 ลอด 1 เช่นเดียวกัน</p>
+                    </div>
+                </div>
+
+                <!-- Slide 18 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR18.jpg" alt="Chain Splice, Step 18" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดเส้นที่ 3 (รอบสอง)</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">สอดเกลียวเส้นสุดท้ายในรอบที่สองให้ครบ</p>
+                    </div>
+                </div>
+
+                <!-- Slide 19 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR19.jpg" alt="Chain Splice, Step 19" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ดึงกระชับรอบสอง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงเกลียวทุกเส้นให้แน่นตึง เพื่อให้ลายถักเข้ารูปสวยงาม</p>
+                    </div>
+                </div>
+
+                <!-- Slide 20 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR20.jpg" alt="Chain Splice, Step 20" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เริ่มถักรอบที่สาม</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ทำซ้ำขั้นตอน ข้าม 1 ลอด 1 ต่อไปเป็นรอบที่สาม เพื่อเพิ่มความแข็งแรงสูงสุด</p>
+                    </div>
+                </div>
+
+                <!-- Slide 21 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR21.jpg" alt="Chain Splice, Step 21" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ถักรอบสามให้ครบ</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">สอดเกลียวทั้ง 3 เส้นในรอบที่สามให้ครบถ้วน</p>
+                    </div>
+                </div>
+
+                <!-- Slide 22 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR22.jpg" alt="Chain Splice, Step 22" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ดึงให้แน่นรอบสุดท้าย</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงรั้งทุกเส้นให้แน่นที่สุดเท่าที่จะทำได้ ถือว่าเพียงพอต่อความปลอดภัยแล้ว</p>
+                    </div>
+                </div>
+
+                <!-- Slide 23 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR23.jpg" alt="Chain Splice, Step 23" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: นวดจัดทรงเชือก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ใช้มือคลึงหรือกลิ้งบริเวณรอยถักเพื่อให้เกลียวเชือกเข้าที่เรียบเนียนสม่ำเสมอ</p>
+                    </div>
+                </div>
+
+                <!-- Slide 24 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="w-full h-full object-cover rotation0" src="https://www.animatedknots.com/photos/chainsplice/chainspliceR24.jpg" alt="Chain Splice, Step 24" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ตัดปลายเชือก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ใช้มีดหรือกรรไกรตัดปลายเชือกส่วนเกินทั้ง 3 เส้นออก หรือลนไฟเก็บปลายให้เรียบร้อย (ถ้าเป็นเชือกไนลอน)</p>
+                    </div>
+                </div>
+
+                <!-- Slide 25 (Final with Specific Tag requested) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        
+                        <!-- ไอดี Knot และ tag ตามที่คุณระบุ (รวม class พื้นฐานของ slider ไว้ด้วยเพื่อให้แสดงผลสมบูรณ์) -->
+                        <img id="Knot" class="rotation0 w-full h-full object-cover" style="width: 100%; " src="https://www.animatedknots.com/photos/chainsplice/chainspliceR25.jpg" alt="Chain Splice, Step-by-Step Animation" title="Animation: Chain Splice Tying" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เสร็จสมบูรณ์</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">การถักต่อเชือกกับโซ่ (Chain Splice) เสร็จสมบูรณ์! ปลอดภัย แข็งแรง และพร้อมนำไปใช้งาน</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ปุ่มซ้ายขวา -->
+        <button id="prevBtn" class="absolute top-[35%] left-2 -translate-y-1/2 bg-white/90 backdrop-blur text-slate-800 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[35%] right-2 -translate-y-1/2 bg-white/90 backdrop-blur text-slate-800 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุดบอกตำแหน่ง -->
+        <div class="flex flex-wrap justify-center gap-1.5 pb-6 pt-2 px-4 bg-white rounded-b-3xl" id="dots-container">
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const track = document.getElementById('slider-track');
+        const container = document.getElementById('slider-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        window.initSlider = function() {
+            const slides = track.querySelectorAll('.slide-item');
+            const totalSlides = slides.length;
+            
+            if (totalSlides === 0) return;
+
+            slides.forEach((slide, index) => {
+                const isLast = (index === totalSlides - 1);
+                
+                // อัปเดตตัวเลขจำนวนหน้า
+                const counter = slide.querySelector('.slider-counter');
+                if (counter) {
+                    counter.innerText = `${index + 1} / ${totalSlides}`;
+                    counter.className = `absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter transition-colors duration-300 ${isLast ? 'bg-emerald-500' : 'bg-slate-800'}`;
+                }
+                
+                // อัปเดตคำว่า "ขั้นตอนที่ X" 
+                const stepNum = slide.querySelector('.step-num');
+                if (stepNum) {
+                    stepNum.innerText = `ขั้นตอนที่ ${index + 1}`;
+                }
+
+                // สไตล์กรอบและพื้นหลังภาพสไลด์สุดท้าย
+                const imgContainer = slide.querySelector('.image-placeholder');
+                if (imgContainer) {
+                    imgContainer.className = `h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300 ${isLast ? 'border-emerald-500 bg-emerald-50' : 'border-slate-800'}`;
+                }
+                
+                // สไตล์สีข้อความสไลด์สุดท้าย
+                const titleText = slide.querySelector('.slide-title-text');
+                if (titleText) {
+                    titleText.className = `text-xl font-bold mb-2 slide-title-text transition-colors duration-300 ${isLast ? 'text-emerald-600' : 'text-slate-800'}`;
+                }
+            });
+
+            // สร้างจุดบอกตำแหน่ง
+            const dotsContainer = document.getElementById('dots-container');
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'dot w-2 h-2 rounded-full bg-gray-300 transition-all duration-300 focus:outline-none';
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            }
+            
+            if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
+            if (currentIndex < 0) currentIndex = 0;
+            
+            updateSlider();
+        };
+
+        function updateSlider() {
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            if (totalSlides === 0) return;
+            
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalSlides - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if(index === currentIndex) {
+                    dot.classList.remove('bg-gray-300', 'w-2');
+                    dot.classList.add(index === totalSlides - 1 ? 'bg-emerald-500' : 'bg-slate-800', 'w-4');
+                } else {
+                    dot.classList.remove('bg-slate-800', 'bg-emerald-500', 'w-4');
+                    dot.classList.add('bg-gray-300', 'w-2');
+                }
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // ควบคุมระบบ Swipe และ Drag
+        let startX = 0;
+        let endX = 0;
+        let isDragging = false;
+
+        const startDrag = (e) => {
+            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        };
+
+        const onDrag = (e) => {
+            if (!isDragging) return;
+            e.preventDefault(); 
+            endX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            const diff = startX - endX;
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            
+            if((currentIndex === 0 && diff < 0) || (currentIndex === totalSlides - 1 && diff > 0)) {
+               track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff * 0.2}px))`;
+            } else {
+               track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diff}px))`;
+            }
+        };
+
+        const endDrag = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            track.style.transition = 'transform 0.3s ease-out'; 
+            
+            const diff = startX - endX;
+            const swipeThreshold = 50; 
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                } else if (diff < 0 && currentIndex > 0) {
+                    currentIndex--;
+                }
+            }
+            updateSlider();
+        };
+
+        container.addEventListener('touchstart', startDrag, {passive: true});
+        container.addEventListener('touchmove', onDrag, {passive: false});
+        container.addEventListener('touchend', endDrag);
+
+        container.addEventListener('mousedown', startDrag);
+        container.addEventListener('mousemove', onDrag);
+        window.addEventListener('mouseup', endDrag); 
+
+        // รันฟังก์ชันเซ็ตระบบเมื่อโหลดเสร็จ
+        setTimeout(() => {
+            window.initSlider();
+        }, 100);
+    </script>
+</body>
+</html>
