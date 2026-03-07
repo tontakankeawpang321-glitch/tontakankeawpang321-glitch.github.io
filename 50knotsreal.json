@@ -178,21 +178,21 @@
     "id": 26,
     "name": "เงื่อนต่อเชือก (Carrick Bend)",
     "category": "Bend",
-    "imageUrl": "imgeknot/Butchers-Knot-S.jpg",
+    "imageUrl": "imgeknot/Carrick-Bend-Knot-S",
     "url": "knot2/26.html"
   },
   {
     "id": 27,
     "name": "เงื่อน (Carrick Bend met)",
     "category": "Knot",
-    "imageUrl": "imgeknot/Carrick-Bend-Knot-S.jpg",
+    "imageUrl": "imgeknot/Carrick-Bend-Mat-Knot-S",
     "url": "knot2/27.html"
   },
    {
     "id": 28,
     "name": "เชือก (Celtic Knot Mat)",
     "category": "Splice",
-    "imageUrl": "imgeknot/Carrick-Bend-Mat-Knot-S.jpg",
+    "imageUrl": "imgeknot/Celtic-Knot-S",
     "url": "knot2/28.html"
   },
   
