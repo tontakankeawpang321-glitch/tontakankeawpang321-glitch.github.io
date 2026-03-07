@@ -174,7 +174,6 @@
     "imageUrl": "imgeknot/Buntline-Hitch-Knot-S.jpg",
     "url": "knot2/25.html"
   },
-  
   {
     "id": 26,
     "name": "เงื่อนต่อเชือก (Carrick Bend)",
@@ -1188,7 +1187,7 @@
     "url": "https://en.wikipedia.org/wiki/Zeppelin_Bend"
   },
 {
-    "id": 251,
+    "id": 168,
     "name": "เงื่อนต่อเชือก Butcher’s Knot",
     "category": "Bend",
     "imageUrl": "imgeknot/Butchers-Knot-S.jpg",
