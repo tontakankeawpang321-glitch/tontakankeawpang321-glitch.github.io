@@ -233,22 +233,7 @@
     "imageUrl": "imgeknot/Cobra-Knot-S.jpg",
     "url": "https://en.wikipedia.org/wiki/Cobra_Knot"
   },
-  {
-    "id": 331,
-    "name": "การพันเชือก (Coil Attached Rope)",
-    "category": "Whipping",
-    "imageUrl": "imgeknot/Coil-Attached-Rope-S.jpg",
-    "url": "https://en.wikipedia.org/wiki/Common_Whipping"
-  },
-
    {
-    "id": 331,
-    "name": "การพันเชือก Coil Unattached Rope",
-    "category": "Whipping",
-    "imageUrl": "imgeknot/Coil-Unattached-Rope-S.jpg",
-    "url": "https://en.wikipedia.org/wiki/Common_Whipping"
-  },
-  {
     "id": 34,
     "name": "การพันปลายเชือก (Common Whipping)",
     "category": "Whipping",
@@ -1192,5 +1177,19 @@
     "category": "Hitch",
     "imageUrl": "imgeknot/Clove-Hitch-Knot-Rope-End-Method-S.jpg",
     "url": "knot2/32_1.html"
+  },
+ {
+    "id": 170,
+    "name": "การพันเชือก (Coil Attached Rope)",
+    "category": "Whipping",
+    "imageUrl": "imgeknot/Coil-Attached-Rope-S.jpg",
+    "url": "https://en.wikipedia.org/wiki/Common_Whipping"
+  },
+   {
+    "id": 171,
+    "name": "การพันเชือก Coil Unattached Rope",
+    "category": "Whipping",
+    "imageUrl": "imgeknot/Coil-Unattached-Rope-S.jpg",
+    "url": "https://en.wikipedia.org/wiki/Common_Whipping"
   }
 ]
