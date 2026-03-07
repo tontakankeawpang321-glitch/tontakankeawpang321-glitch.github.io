@@ -213,25 +213,18 @@
   },
   
 {
-    "id": 310,
+    "id": 31,
     "name": "เงื่อนผูกยึด (Cleat Hitch)",
     "category": "Hitch",
     "imageUrl": "imgeknot/Cleat-Hitch-Knot-Dock-Line-S.jpg",
     "url": "knot2/31.html"
   },
    {
-    "id": 320,
+    "id": 32,
     "name": "เงื่อนผูกยึด Clove Hitch ",
     "category": "Hitch",
     "imageUrl": "imgeknot/Clove-Hitch-Knot-Loops-Method-S.jpg",
     "url": "knot2/32.html"
-  },
-{
-    "id": 321,
-    "name": "เงื่อนผูกยึด (Clove Hitch Rope End )",
-    "category": "Hitch",
-    "imageUrl": "imgeknot/Clove-Hitch-Knot-Rope-End-Method-S.jpg",
-    "url": "knot2/32_1.html"
   },
   {
     "id": 33,
@@ -1192,5 +1185,12 @@
     "category": "Bend",
     "imageUrl": "imgeknot/Butchers-Knot-S.jpg",
     "url": "knot2/25_1.html"
+  },
+{
+    "id": 169,
+    "name": "เงื่อนผูกยึด (Clove Hitch Rope End )",
+    "category": "Hitch",
+    "imageUrl": "imgeknot/Clove-Hitch-Knot-Rope-End-Method-S.jpg",
+    "url": "knot2/32_1.html"
   }
 ]
