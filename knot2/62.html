@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีผูกเงื่อน Figure 9 Loop - สไลเดอร์สอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons สำหรับปุ่มลูกศร -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .image-placeholder {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+        }
+        /* ป้องกันการเลือกข้อความขณะลากสไลด์ */
+        .user-select-none {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+    </style>
+    <script>
+        // ฟังก์ชันจัดการหากโหลดภาพไม่สำเร็จ
+        function handleImageError(img) {
+            const slide = img.closest('.slide-item');
+            if (slide) {
+                slide.remove();
+                if (window.initSlider) window.initSlider(); 
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- คอนเทนเนอร์หลัก -->
+    <div class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-gray-100">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-blue-600 text-white p-6 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">เงื่อน Figure 9 Loop</h1>
+            <p class="text-blue-100 text-sm mt-1 opacity-90">เงื่อนทำห่วงที่แข็งแรงและแก้ง่ายกว่าเงื่อนเลข 8</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex transition-transform duration-500 ease-out w-full cursor-grab active:cursor-grabbing">
+                
+                <!-- สไลด์ที่ 1 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-80 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-600"></div>
+                        <img class="user-select-none w-full h-full object-contain" src="https://www.animatedknots.com/photos/fig9loop/fig9loopR1.jpg" alt="Step 1" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอนที่ 1</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เริ่มต้นด้วยการพับทบเชือก (Bight) เพื่อเตรียมทำห่วง</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 2 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-80 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-600"></div>
+                        <img class="user-select-none w-full h-full object-contain" src="https://www.animatedknots.com/photos/fig9loop/fig9loopR2.jpg" alt="Step 2" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอนที่ 2</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">นำส่วนที่ทบพาดทับเส้นหลักเพื่อสร้างห่วงแรก</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 3 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-80 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-600"></div>
+                        <img class="user-select-none w-full h-full object-contain" src="https://www.animatedknots.com/photos/fig9loop/fig9loopR3.jpg" alt="Step 3" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอนที่ 3</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">อ้อมส่วนที่ทบไปด้านหลังเส้นหลักหนึ่งรอบ</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 4 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-80 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-600"></div>
+                        <img class="user-select-none w-full h-full object-contain" src="https://www.animatedknots.com/photos/fig9loop/fig9loopR4.jpg" alt="Step 4" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอนที่ 4</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">พันรอบเส้นหลักเพิ่มอีกครึ่งรอบ (นี่คือส่วนที่ต่างจากเงื่อนเลข 8)</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 5 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-80 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-600"></div>
+                        <img class="user-select-none w-full h-full object-contain" src="https://www.animatedknots.com/photos/fig9loop/fig9loopR5.jpg" alt="Step 5" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอนที่ 5</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">อ้อมกลับมาด้านหน้าเพื่อเตรียมสอดเข้าห่วง</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 6 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-80 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-600"></div>
+                        <img class="user-select-none w-full h-full object-contain" src="https://www.animatedknots.com/photos/fig9loop/fig9loopR6.jpg" alt="Step 6" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอนที่ 6</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">สอดส่วนปลายทบเข้าไปในห่วงจากด้านบน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 7 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-80 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-600"></div>
+                        <img class="user-select-none w-full h-full object-contain" src="https://www.animatedknots.com/photos/fig9loop/fig9loopR7.jpg" alt="Step 7" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอนที่ 7</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เริ่มจัดรูปทรงของปมให้เข้าที่</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 8 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-80 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-600"></div>
+                        <img class="user-select-none w-full h-full object-contain" src="https://www.animatedknots.com/photos/fig9loop/fig9loopR8.jpg" alt="Step 8" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอนที่ 8</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงปลายทบและเส้นหลักพร้อมกันเพื่อกระชับเงื่อน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 9 (สุดท้าย) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-80 image-placeholder w-full flex items-center justify-center border-b-4 border-emerald-500 relative overflow-hidden bg-emerald-50">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-emerald-600"></div>
+                        <img class="user-select-none w-full h-full object-contain" src="https://www.animatedknots.com/photos/fig9loop/fig9loopR9.jpg" alt="Step 9" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-emerald-600"><span class="step-num">เสร็จสมบูรณ์</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เงื่อน Figure 9 Loop พร้อมใช้งาน มีความมั่นคงสูงและแก้ง่ายแม้รับแรงดึงมาก</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม -->
+        <button id="prevBtn" class="absolute top-[35%] left-3 -translate-y-1/2 bg-white/90 backdrop-blur text-blue-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 z-20 focus:outline-none border border-blue-100">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[35%] right-3 -translate-y-1/2 bg-white/90 backdrop-blur text-blue-700 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 z-20 focus:outline-none border border-blue-100">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุด Indicators -->
+        <div class="flex justify-center flex-wrap space-x-2 pb-8 pt-2 bg-white" id="dots-container"></div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const track = document.getElementById('slider-track');
+        const container = document.getElementById('slider-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        window.initSlider = function() {
+            let slides = track.querySelectorAll('.slide-item');
+            const totalSlides = slides.length;
+            
+            if (totalSlides === 0) return;
+
+            slides.forEach((slide, index) => {
+                const counter = slide.querySelector('.slider-counter');
+                if (counter) counter.innerText = `${index + 1} / ${totalSlides}`;
+            });
+
+            const dotsContainer = document.getElementById('dots-container');
+            dotsContainer.innerHTML = '';
+            
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = `dot h-2 rounded-full transition-all duration-300 cursor-pointer ${i === currentIndex ? 'bg-blue-600 w-6' : 'bg-gray-300 w-2'}`;
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            }
+            
+            updateSliderPos();
+        };
+
+        function updateSliderPos() {
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalSlides - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                if (i === currentIndex) {
+                    dot.className = `dot h-2 rounded-full transition-all duration-300 bg-blue-600 w-6`;
+                } else {
+                    dot.className = `dot h-2 rounded-full transition-all duration-300 bg-gray-300 w-2`;
+                }
+            });
+        }
+
+        function updateSlider() {
+            updateSliderPos();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // รองรับการปัด (Swipe)
+        let startX = 0;
+        let isDragging = false;
+
+        container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        }, {passive: true});
+
+        container.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].clientX;
+            const walk = startX - x;
+            track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${walk}px))`;
+        }, {passive: true});
+
+        container.addEventListener('touchend', (e) => {
+            isDragging = false;
+            track.style.transition = 'transform 0.5s ease-out';
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex < track.querySelectorAll('.slide-item').length - 1) currentIndex++;
+                else if (diff < 0 && currentIndex > 0) currentIndex--;
+            }
+            updateSlider();
+        });
+
+        // เริ่มต้น Slider
+        setTimeout(window.initSlider, 100);
+        window.addEventListener('resize', updateSlider);
+    </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีผูกเนคไท Four-in-Hand - สไลเดอร์สอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f8fafc;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .image-placeholder {
+            background: #ffffff;
+        }
+        .user-select-none {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .slide-transition {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* ปรับแต่งความสวยงามของภาพ */
+        .knot-img {
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- คอนเทนเนอร์หลัก -->
+    <div class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-gray-100">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-slate-800 text-white p-6 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">วิธีผูกเนคไท Four-in-Hand</h1>
+            <p class="text-slate-300 text-sm mt-1 opacity-90">เงื่อนมาตรฐานที่ง่ายและรวดเร็วสำหรับทุกโอกาส</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex slide-transition w-full cursor-grab active:cursor-grabbing">
+                <!-- สไลด์จะถูกสร้างด้วย JavaScript -->
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม -->
+        <button id="prevBtn" class="absolute top-[35%] left-3 -translate-y-1/2 bg-white/95 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[35%] right-3 -translate-y-1/2 bg-white/95 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุด Indicators -->
+        <div class="flex justify-center flex-wrap gap-2 pb-8 pt-2 bg-white" id="dots-container"></div>
+    </div>
+
+    <script>
+        // ข้อมูลสไลด์สำหรับ Four-in-Hand Knot (R1 - R9)
+        const slidesData = [
+            { img: "https://www.animatedknots.com/photos/tiefourinhand/tiefourinhandR1.jpg", title: "เริ่มต้น", desc: "วางเนคไทรอบคอ ให้ปลายด้านกว้าง (ด้านขวา) ยาวกว่าปลายด้านแคบประมาณ 12 นิ้ว" },
+            { img: "https://www.animatedknots.com/photos/tiefourinhand/tiefourinhandR2.jpg", title: "พาดทับ", desc: "นำปลายด้านกว้างไขว้ทับด้านบนของปลายด้านแคบไปทางซ้าย" },
+            { img: "https://www.animatedknots.com/photos/tiefourinhand/tiefourinhandR3.jpg", title: "อ้อมใต้", desc: "นำปลายด้านกว้างลอดใต้ปลายด้านแคบกลับมาทางขวา" },
+            { img: "https://www.animatedknots.com/photos/tiefourinhand/tiefourinhandR4.jpg", title: "พันด้านหน้า", desc: "นำปลายด้านกว้างพาดทับด้านหน้าไปทางซ้ายอีกครั้ง (สร้างห่วงสำหรับสอด)" },
+            { img: "https://www.animatedknots.com/photos/tiefourinhand/tiefourinhandR5.jpg", title: "สอดขึ้น", desc: "ดึงปลายด้านกว้างขึ้นมาผ่านช่องว่างระหว่างคอกับเนคไทจากด้านล่าง" },
+            { img: "https://www.animatedknots.com/photos/tiefourinhand/tiefourinhandR6.jpg", title: "สอดลงห่วง", desc: "สอดปลายด้านกว้างลงไปในห่วงที่สร้างไว้บริเวณด้านหน้า" },
+            { img: "https://www.animatedknots.com/photos/tiefourinhand/tiefourinhandR7.jpg", title: "ดึงให้ตึง", desc: "ดึงปลายด้านกว้างลงเพื่อค่อยๆ กระชับปมให้แน่นขึ้น" },
+            { img: "https://www.animatedknots.com/photos/tiefourinhand/tiefourinhandR8.jpg", title: "รูดปม", desc: "ใช้มือหนึ่งจับปมไว้ อีกมือดึงปลายด้านแคบเพื่อรูดปมขึ้นไปที่คอเสื้อ" },
+            { img: "https://www.animatedknots.com/photos/tiefourinhand/tiefourinhandR9.jpg", title: "เสร็จสมบูรณ์", desc: "จัดแต่งทรงเนคไทให้สวยงาม ปลายด้านกว้างควรยาวพอดีกับหัวเข็มขัด" }
+        ];
+
+        const track = document.getElementById('slider-track');
+        const dotsContainer = document.getElementById('dots-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        // ฟังก์ชันสร้างสไลด์
+        function createSlides() {
+            slidesData.forEach((slide, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'w-full flex-shrink-0 flex flex-col slide-item';
+                
+                const isLast = index === slidesData.length - 1;
+                const accentColor = isLast ? 'border-green-500' : 'border-slate-800';
+                const textColor = isLast ? 'text-green-600' : 'text-slate-800';
+                const badgeColor = isLast ? 'bg-green-600' : 'bg-slate-800';
+
+                slideDiv.innerHTML = `
+                    <div class="h-64 sm:h-80 image-placeholder w-full flex items-center justify-center border-b-4 ${accentColor} relative overflow-hidden">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow ${badgeColor}">${index + 1} / ${slidesData.length}</div>
+                        <img id="Knot-${index}" class="knot-img user-select-none w-full h-full object-contain p-4 transition-transform duration-500 hover:scale-105" 
+                             src="${slide.img}" 
+                             alt="${slide.title}"
+                             title="Animation: Four-in-Hand Knot Tying Step ${index + 1}">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 ${textColor}">${slide.title}</h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base px-2">${slide.desc}</p>
+                    </div>
+                `;
+                track.appendChild(slideDiv);
+
+                // สร้างจุด Indicator
+                const dot = document.createElement('div');
+                dot.className = `dot h-2 rounded-full transition-all duration-300 cursor-pointer ${index === 0 ? 'bg-slate-800 w-6' : 'bg-gray-300 w-2'}`;
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === slidesData.length - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                if (i === currentIndex) {
+                    dot.classList.add('bg-slate-800', 'w-6');
+                    dot.classList.remove('bg-gray-300', 'w-2');
+                } else {
+                    dot.classList.remove('bg-slate-800', 'w-6');
+                    dot.classList.add('bg-gray-300', 'w-2');
+                }
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < slidesData.length - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // รองรับการปัด (Swipe)
+        let startX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        }, {passive: true});
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].clientX;
+            const walk = startX - x;
+            track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${walk}px))`;
+        }, {passive: true});
+
+        track.addEventListener('touchend', (e) => {
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex < slidesData.length - 1) currentIndex++;
+                else if (diff < 0 && currentIndex > 0) currentIndex--;
+            }
+            updateSlider();
+        });
+
+        // เริ่มต้นสร้างสไลด์และตั้งค่า
+        createSlides();
+        updateSlider();
+        lucide.createIcons();
+        window.addEventListener('resize', updateSlider);
+    </script>
+</body>
+</html>

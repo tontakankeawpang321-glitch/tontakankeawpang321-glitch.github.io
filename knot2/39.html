@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีมัดผ้าม่าน (Drapery Tie Back) - สไลเดอร์สอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons สำหรับปุ่มลูกศร -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .image-placeholder {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+    </style>
+    <script>
+        // ฟังก์ชันอัจฉริยะ: หากโหลดภาพไม่สำเร็จ (ภาพไม่มีอยู่จริง) จะลบสไลด์นั้นทิ้งและจัดเรียงใหม่ทันที
+        function handleImageError(img) {
+            const slide = img.closest('.slide-item');
+            if (slide) {
+                slide.remove();
+                if (window.initSlider) window.initSlider(); // สั่งจัดเรียงหมายเลขสไลด์ใหม่
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+
+    <!-- คอนเทนเนอร์หลักของแอป -->
+    <div class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl overflow-hidden relative border border-gray-100">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-indigo-600 text-white p-5 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">วิธีมัดผ้าม่าน</h1>
+            <h2 class="text-lg font-semibold">(Drapery Tie Back)</h2>
+            <p class="text-indigo-100 text-sm mt-1 opacity-90">รวบเก็บผ้าม่านให้สวยงาม เปิดรับแสงสว่างและเพิ่มความเป็นระเบียบ</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex transition-transform duration-300 ease-out w-full cursor-grab active:cursor-grabbing">
+                
+                <!-- ชุดสไลด์ -->
+                
+                <!-- สไลด์ที่ 1 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR1.jpg" alt="Tying Back Drapery (Curtain), Step-by-Step Animation" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: รวบผ้าม่าน</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เริ่มต้นด้วยการจับจีบหรือรวบเนื้อผ้าม่านเข้าด้วยกันในระดับความสูงที่ต้องการ</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 2 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR2.jpg" alt="Tying Back Drapery (Curtain), Step-by-Step Animation" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: คล้องสายรัด</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">นำสายรัดผ้าม่าน (Tie-back) อ้อมไปด้านหลังของกลุ่มผ้าม่านที่รวบเอาไว้</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 3 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR3.jpg" alt="Tying Back Drapery (Curtain), Step-by-Step Animation" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: นำปลายมาด้านหน้า</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงปลายสายรัดทั้งสองข้างให้มาบรรจบกันที่บริเวณด้านหน้าของผ้าม่าน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 4 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR4.jpg" alt="Tying Back Drapery (Curtain), Step-by-Step Animation" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เตรียมสอดสาย</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">จับปลายสายรัดด้านหนึ่งเตรียมไว้ เพื่อสอดเข้ากับห่วงของปลายสายอีกด้านหนึ่ง</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 5 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR5.jpg" alt="Tying Back Drapery (Curtain), Step-by-Step Animation" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดห่วงล็อค</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ร้อยปลายสายด้านหนึ่ง ทะลุผ่านห่วงของสายอีกด้าน เพื่อทำการล็อคเข้าด้วยกัน</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 6 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR6.jpg" alt="Tying Back Drapery (Curtain), Step-by-Step Animation" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ดึงให้ตึงกระชับ</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงสายรัดให้กระชับกับตัวผ้าม่าน ไม่ให้หลวมหรือแน่นจนเกินไป</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 7 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR7.jpg" alt="Tying Back Drapery (Curtain), Step-by-Step Animation" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: คล้องตะขอ (ถ้ามี)</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">หากมีตะขอติดผนัง ให้นำปลายสายรัดไปคล้องกับตะขอเพื่อรั้งม่านไว้ด้านข้าง</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 8 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR8.jpg" alt="Tying Back Drapery (Curtain), Step-by-Step Animation" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: จัดทรงผ้าม่าน</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ใช้มือปรับแต่งจีบผ้าม่านด้านบนและด้านล่างของสายรัดให้ทิ้งตัวเป็นธรรมชาติ</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ที่ 9 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR9.jpg" alt="Tying Back Drapery (Curtain), Step-by-Step Animation" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เสร็จสมบูรณ์</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">การมัดรวบผ้าม่านเสร็จเรียบร้อย ได้มุมหน้าต่างที่ดูสวยงามและเปิดรับแสงเต็มที่</p>
+                    </div>
+                </div>
+                
+                <!-- สไลด์สำรองเผื่อมีเกิน 9 สเต็ป (ถ้าไม่มีภาพ Script จะลบให้เอง) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR10.jpg" alt="Tying Back Drapery (Curtain)" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ปรับแต่งเพิ่มเติม</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ปรับแต่งรายละเอียดเพิ่มเติมตามความเหมาะสม</p>
+                    </div>
+                </div>
+                
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter"></div>
+                        <img class="rotation0 w-full h-full object-cover" style="width: 100%;" src="https://www.animatedknots.com/photos/draperytie/draperytieR11.jpg" alt="Tying Back Drapery (Curtain)" title="Animation: Drapery Tie Back Animation" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ปรับแต่งเพิ่มเติม</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ปรับแต่งรายละเอียดเพิ่มเติมตามความเหมาะสม</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม ซ้าย-ขวา -->
+        <button id="prevBtn" class="absolute top-[35%] left-2 -translate-y-1/2 bg-white/90 backdrop-blur text-indigo-600 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[35%] right-2 -translate-y-1/2 bg-white/90 backdrop-blur text-indigo-600 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุดบ่งชี้สถานะ (Dots) -->
+        <div class="flex justify-center space-x-2 pb-6 pt-2 bg-white rounded-b-3xl" id="dots-container">
+            <!-- Dots จะถูกสร้างด้วย JavaScript อัตโนมัติ -->
+        </div>
+    </div>
+
+    <!-- สคริปต์การทำงานของ Slider -->
+    <script>
+        // เริ่มต้นเรนเดอร์ไอคอน
+        lucide.createIcons();
+
+        const track = document.getElementById('slider-track');
+        const container = document.getElementById('slider-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        // ฟังก์ชันอัปเดตสถานะและจำนวนสไลด์ทั้งหมดแบบไดนามิก
+        window.initSlider = function() {
+            // นับสไลด์ทั้งหมด (ทั้งที่ยังไม่ได้ลบและที่เหลืออยู่)
+            let slides = track.querySelectorAll('.slide-item');
+            
+            // คัดกรองเฉพาะสไลด์ที่โหลดภาพสำเร็จ (เอา onerror ออก หรือไม่มี) หรือยังไม่ได้เรียก onerror
+            // เพื่อหลีกเลี่ยงการนับสไลด์ที่กำลังจะถูกลบ
+            let validSlides = [];
+            slides.forEach(slide => {
+                const img = slide.querySelector('img');
+                // เช็คว่าโหลดเสร็จและพังหรือไม่ (naturalWidth === 0 หมายถึงพัง)
+                if (img.complete && img.naturalWidth === 0 && img.src) {
+                    slide.remove(); // ลบซ้ำเพื่อความชัวร์
+                } else {
+                    validSlides.push(slide);
+                }
+            });
+
+            // อัปเดต node list ล่าสุด
+            slides = track.querySelectorAll('.slide-item');
+            const totalSlides = slides.length;
+            
+            if (totalSlides === 0) return;
+
+            slides.forEach((slide, index) => {
+                const isLast = (index === totalSlides - 1);
+                
+                // อัปเดตตัวเลข Counter 
+                const counter = slide.querySelector('.slider-counter');
+                if (counter) {
+                    counter.innerText = `${index + 1} / ${totalSlides}`;
+                    counter.className = `absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter transition-colors duration-300 ${isLast ? 'bg-green-500' : 'bg-indigo-500'}`;
+                }
+                
+                // อัปเดตหมายเลขขั้นตอน
+                const stepNum = slide.querySelector('.step-num');
+                if (stepNum) {
+                    stepNum.innerText = `ขั้นตอนที่ ${index + 1}`;
+                }
+                
+                // หากเป็นสไลด์ภาพ "สุดท้ายที่มีอยู่จริง" ระบบจะบังคับเปลี่ยนข้อความเป็นเสร็จสมบูรณ์
+                if (isLast) {
+                    const stepDesc = slide.querySelector('.step-desc');
+                    if (stepDesc) stepDesc.innerText = ': พร้อมใช้งาน (เสร็จสมบูรณ์)';
+                    
+                    const p = slide.querySelector('p');
+                    if (p) p.innerText = 'การจัดผ้าม่านของคุณเสร็จสมบูรณ์เรียบร้อยแล้ว!';
+                }
+
+                // สไตล์กรอบและพื้นหลังภาพ
+                const imgContainer = slide.querySelector('.image-placeholder');
+                if (imgContainer) {
+                    imgContainer.className = `h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300 ${isLast ? 'border-green-500 bg-green-50' : 'border-indigo-500'}`;
+                }
+                
+                // สไตล์สีของหัวข้อ
+                const titleText = slide.querySelector('.slide-title-text');
+                if (titleText) {
+                    titleText.className = `text-xl font-bold mb-2 slide-title-text transition-colors duration-300 ${isLast ? 'text-green-600' : 'text-indigo-600'}`;
+                }
+            });
+
+            // สร้างจุด Dots นำทางใหม่ให้ตรงกับจำนวนรูปที่หลงเหลืออยู่จริง
+            const dotsContainer = document.getElementById('dots-container');
+            dotsContainer.innerHTML = '';
+            
+            for (let i = 0; i < totalSlides; i++) {
+                // สร้าง div ครอบจุด dot ไว้ เพื่อขยายพื้นที่การแตะสัมผัส
+                const dotWrapper = document.createElement('div');
+                dotWrapper.className = 'p-2 cursor-pointer touch-manipulation flex items-center justify-center';
+                dotWrapper.style.margin = '0 -4px'; // ดึงให้ชิดกันนิดนึง
+
+                const dot = document.createElement('div');
+                dot.className = 'dot w-2.5 h-2.5 rounded-full bg-gray-300 transition-all duration-300 focus:outline-none';
+                
+                dotWrapper.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlider();
+                });
+                
+                dotWrapper.appendChild(dot);
+                dotsContainer.appendChild(dotWrapper);
+            }
+            
+            // ป้องกัน currentIndex เกินขอบเขต
+            if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
+            if (currentIndex < 0) currentIndex = 0;
+            
+            // อัปเดต UI
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if(index === currentIndex) {
+                    dot.classList.remove('bg-gray-300', 'w-2.5');
+                    dot.classList.add(index === totalSlides - 1 ? 'bg-green-500' : 'bg-indigo-600', 'w-5');
+                } else {
+                    dot.classList.remove('bg-indigo-600', 'bg-green-500', 'w-5');
+                    dot.classList.add('bg-gray-300', 'w-2.5');
+                }
+            });
+            
+            updateSlider();
+        };
+
+        // เลื่อนสไลด์และอัปเดตปุ่ม
+        function updateSlider() {
+            const slides = track.querySelectorAll('.slide-item');
+            const totalSlides = slides.length;
+            if (totalSlides === 0) return;
+            
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalSlides - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if(index === currentIndex) {
+                    dot.classList.remove('bg-gray-300', 'w-2.5');
+                    dot.classList.add(index === totalSlides - 1 ? 'bg-green-500' : 'bg-indigo-600', 'w-5');
+                } else {
+                    dot.classList.remove('bg-indigo-600', 'bg-green-500', 'w-5');
+                    dot.classList.add('bg-gray-300', 'w-2.5');
+                }
+            });
+        }
+
+        // กดปุ่มถัดไป-ย้อนกลับ
+        nextBtn.addEventListener('click', () => {
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // --- ระบบ Touch / Swipe สำหรับมือถือและเมาส์ (Drag) ---
+        let startX = 0;
+        let endX = 0;
+        let isDragging = false;
+        let isScrolling = false; // ตัวแปรเช็คว่ากำลังเลื่อนจอแนวตั้งหรือเลื่อนสไลด์แนวนอน
+        let startY = 0;
+
+        const startDrag = (e) => {
+            startX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            startY = e.type.includes('mouse') ? e.pageY : e.touches[0].clientY;
+            isDragging = true;
+            isScrolling = false;
+            track.style.transition = 'none';
+        };
+
+        const onDrag = (e) => {
+            if (!isDragging) return;
+            
+            const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+            const currentY = e.type.includes('mouse') ? e.pageY : e.touches[0].clientY;
+            
+            const diffX = startX - currentX;
+            const diffY = startY - currentY;
+            
+            // เช็คทิศทางในตอนเริ่มลาก (ป้องกันการขัดจังหวะการเลื่อนจอแนวตั้งของมือถือ)
+            if (!isScrolling) {
+                if (Math.abs(diffY) > Math.abs(diffX)) {
+                    isScrolling = true;
+                    isDragging = false; // ยกเลิกการลากสไลด์
+                    track.style.transition = 'transform 0.3s ease-out';
+                    updateSlider(); // ดึงกลับที่เดิม
+                    return;
+                }
+            }
+            
+            if (isScrolling) return;
+
+            e.preventDefault(); // ป้องกันการดึงหน้าจอเฉพาะเวลาปัดแนวนอน
+            endX = currentX;
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            
+            // เอฟเฟกต์หน่วงตอนสุดขอบ
+            if((currentIndex === 0 && diffX < 0) || (currentIndex === totalSlides - 1 && diffX > 0)) {
+               track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diffX * 0.2}px))`;
+            } else {
+               track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diffX}px))`;
+            }
+        };
+
+        const endDrag = () => {
+            if (!isDragging || isScrolling) return;
+            isDragging = false;
+            track.style.transition = 'transform 0.3s ease-out'; 
+            
+            const diff = startX - endX;
+            const swipeThreshold = 50; 
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+
+            // ตรวจสอบว่า endX มีการเปลี่ยนแปลงหรือไม่ (เพื่อแยกระหว่างการคลิกธรรมดากับการลาก)
+            if (endX !== 0 && Math.abs(diff) > swipeThreshold) {
+                if (diff > 0 && currentIndex < totalSlides - 1) {
+                    currentIndex++;
+                } else if (diff < 0 && currentIndex > 0) {
+                    currentIndex--;
+                }
+            }
+            
+            // รีเซ็ตค่า endX สำหรับการทัชครั้งต่อไป
+            endX = 0;
+            updateSlider();
+        };
+
+        container.addEventListener('touchstart', startDrag, {passive: true});
+        container.addEventListener('touchmove', onDrag, {passive: false}); // ต้อง false เพื่อให้ e.preventDefault() ทำงานในแนวนอนได้
+        container.addEventListener('touchend', endDrag);
+
+        container.addEventListener('mousedown', startDrag);
+        container.addEventListener('mousemove', onDrag);
+        window.addEventListener('mouseup', endDrag); 
+
+        // เริ่มต้นการทำงานหลังจากโหลดรูปเสร็จระดับหนึ่ง
+        // ใช้ setTimeout เล็กน้อยและเรียกซ้ำเผื่อรูปโหลดช้า เพื่อให้สคริปต์ลบรูปภาพที่ไม่มีอยู่ออกไปให้หมดก่อน
+        setTimeout(() => {
+            window.initSlider();
+            
+            // ตรวจสอบความถูกต้องซ้ำอีกครั้งหลังจาก 1.5 วินาที เผื่ออินเทอร์เน็ตโหลดภาพช้า
+            setTimeout(() => {
+                window.initSlider();
+            }, 1500);
+            
+        }, 200);
+        
+        // ผูกฟังก์ชัน resize หน้าต่างเพื่ออัปเดตสไลด์
+        window.addEventListener('resize', updateSlider);
+    </script>
+</body>
+</html>

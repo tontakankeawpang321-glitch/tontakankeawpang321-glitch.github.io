@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีผูกเงื่อน Heaving Line Knot - สไลเดอร์สอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f8fafc;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .user-select-none {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .slide-transition {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .knot-img {
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.05));
+        }
+        .dot-container {
+            max-width: 90%;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- คอนเทนเนอร์หลัก -->
+    <div class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-gray-100">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-indigo-900 text-white p-6 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">วิธีผูกเงื่อน Heaving Line Knot</h1>
+            <p class="text-indigo-200 text-sm mt-1 opacity-90">เงื่อนถ่วงน้ำหนักปลายเชือก สำหรับขว้างให้ได้ระยะไกล</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex slide-transition w-full cursor-grab active:cursor-grabbing">
+                <!-- สไลด์จะถูกสร้างด้วย JavaScript -->
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม -->
+        <button id="prevBtn" class="absolute top-[35%] left-3 -translate-y-1/2 bg-white/95 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[35%] right-3 -translate-y-1/2 bg-white/95 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุด Indicators -->
+        <div class="flex justify-center flex-wrap gap-1.5 pb-8 pt-4 bg-white px-4" id="dots-container"></div>
+    </div>
+
+    <script>
+        // ข้อมูลสไลด์สำหรับ Heaving Line Knot (R1 - R15)
+        const slidesData = [
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR1.jpg", title: "ทบเชือก", desc: "ทบปลายเชือกกลับมาให้เป็นบ่วงยาว เพื่อเตรียมเป็นแกนกลาง" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR2.jpg", title: "เริ่มพัน", desc: "นำปลายเชือกพันอ้อมด้านหลังแกนเชือกทั้งสองเส้น" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR3.jpg", title: "พันรอบแรก", desc: "พันปลายเชือกรอบแกนเชือกให้แน่น" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR4.jpg", title: "พันเรียงซ้อน", desc: "พันรอบที่สองเรียงต่อลงมาทางด้านล่าง (เข้าหาบ่วง)" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR5.jpg", title: "พันต่อเนื่อง", desc: "พันรอบเชือกเรียงซ้อนกันให้เป็นระเบียบ" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR6.jpg", title: "ดึงให้ตึง", desc: "ดึงเชือกแต่ละรอบให้ตึงและแนบชิดกัน" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR7.jpg", title: "เพิ่มน้ำหนัก", desc: "ยิ่งพันหลายรอบ เงื่อนจะยิ่งมีน้ำหนักมาก เหมาะแก่การขว้าง" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR8.jpg", title: "พันต่อไป", desc: "รักษาระยะการพันให้สม่ำเสมอเรียงลงมาเรื่อยๆ" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR9.jpg", title: "ใกล้สุดบ่วง", desc: "พันจนเหลือบ่วงด้านล่างไว้เล็กน้อยสำหรับสอดปลายเชือก" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR10.jpg", title: "เตรียมสอด", desc: "นำปลายเชือกที่พันเสร็จแล้ว มาเตรียมสอดเข้าบ่วง" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR11.jpg", title: "สอดปลายเชือก", desc: "สอดปลายเชือกเข้าไปในบ่วงที่เหลืออยู่ด้านล่าง" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR12.jpg", title: "ดึงปลายให้พ้น", desc: "ดึงปลายเชือกให้ทะลุบ่วงออกมาพอประมาณ" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR13.jpg", title: "ดึงเส้นหลัก", desc: "จับเส้นหลักด้านบน แล้วดึงขึ้นเพื่อรูดบ่วงด้านล่างให้แคบลง" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR14.jpg", title: "ล็อคปลายเชือก", desc: "ดึงเส้นหลักจนบ่วงรัดปลายเชือกที่สอดไว้จนแน่นกระชับ" },
+            { img: "https://www.animatedknots.com/photos/heavingline/heavinglineR15.jpg", title: "เสร็จสมบูรณ์", desc: "เงื่อน Heaving Line Knot เสร็จสมบูรณ์ นำไปใช้ขว้างถ่วงน้ำหนักได้เลย" }
+        ];
+
+        const track = document.getElementById('slider-track');
+        const dotsContainer = document.getElementById('dots-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        // ฟังก์ชันสร้างสไลด์
+        function createSlides() {
+            slidesData.forEach((slide, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'w-full flex-shrink-0 flex flex-col slide-item';
+                
+                const isLast = index === slidesData.length - 1;
+                const accentColor = isLast ? 'border-emerald-500' : 'border-indigo-900';
+                const textColor = isLast ? 'text-emerald-600' : 'text-indigo-900';
+                const badgeColor = isLast ? 'bg-emerald-600' : 'bg-indigo-900';
+
+                slideDiv.innerHTML = `
+                    <div class="h-72 sm:h-80 w-full flex items-center justify-center border-b-4 ${accentColor} relative overflow-hidden bg-white">
+                        <div class="absolute top-4 right-4 text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 shadow ${badgeColor}">${index + 1} / ${slidesData.length}</div>
+                        
+                        <!-- แท็กรูปภาพตามรูปแบบที่กำหนด -->
+                        <img id="Knot-${index}" class="rotation0 knot-img user-select-none h-full object-contain p-4 transition-transform duration-500 hover:scale-105" 
+                             style="width: 100%;" 
+                             src="${slide.img}" 
+                             alt="Heaving Line Knot, Step-by-Step Animation" 
+                             title="Animation: Heaving Line Knot Tying - ขั้นตอนที่ ${index + 1}: ${slide.title}">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 ${textColor}">${slide.title}</h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base px-2">${slide.desc}</p>
+                    </div>
+                `;
+                track.appendChild(slideDiv);
+
+                // สร้างจุด Indicator
+                const dot = document.createElement('div');
+                dot.className = `dot h-2 rounded-full transition-all duration-300 cursor-pointer ${index === 0 ? 'bg-indigo-900 w-4' : 'bg-gray-200 w-2'}`;
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === slidesData.length - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                if (i === currentIndex) {
+                    dot.classList.add('bg-indigo-900', 'w-4');
+                    dot.classList.remove('bg-gray-200', 'w-2');
+                } else {
+                    dot.classList.remove('bg-indigo-900', 'w-4');
+                    dot.classList.add('bg-gray-200', 'w-2');
+                }
+            });
+            
+            // เลื่อน Dot container ถ้ามีจุดเยอะเกินไป
+            if (dots[currentIndex]) {
+                dots[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < slidesData.length - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // รองรับการปัด (Swipe)
+        let startX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        }, {passive: true});
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].clientX;
+            const walk = startX - x;
+            track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${walk}px))`;
+        }, {passive: true});
+
+        track.addEventListener('touchend', (e) => {
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex < slidesData.length - 1) currentIndex++;
+                else if (diff < 0 && currentIndex > 0) currentIndex--;
+            }
+            updateSlider();
+        });
+
+        // เริ่มต้นสร้างสไลด์และตั้งค่า
+        createSlides();
+        updateSlider();
+        lucide.createIcons();
+        window.addEventListener('resize', updateSlider);
+    </script>
+</body>
+</html>

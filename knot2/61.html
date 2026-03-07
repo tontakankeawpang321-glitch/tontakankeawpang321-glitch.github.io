@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีผูกเงื่อน Figure 8 Knot - สไลเดอร์สอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons สำหรับปุ่มลูกศร -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .image-placeholder {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+        }
+    </style>
+    <script>
+        // ฟังก์ชันอัจฉริยะ: หากโหลดภาพไม่สำเร็จ จะลบสไลด์นั้นทิ้งและจัดเรียงใหม่ทันที
+        function handleImageError(img) {
+            const slide = img.closest('.slide-item');
+            if (slide) {
+                slide.remove();
+                if (window.initSlider) window.initSlider(); 
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+
+    <!-- คอนเทนเนอร์หลักของแอป -->
+    <div class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-gray-100">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-blue-800 text-white p-6 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">เงื่อนเลขแปด (Figure 8)</h1>
+            <h2 class="text-lg font-semibold">(Flemish Knot)</h2>
+            <p class="text-blue-100 text-sm mt-1 opacity-90">เงื่อนพื้นฐานที่แข็งแรง แก้ง่าย และเป็นรากฐานของเงื่อนกู้ภัย</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex transition-transform duration-300 ease-out w-full cursor-grab active:cursor-grabbing">
+                
+                <!-- ชุดสไลด์ (ระบบจะตรวจสอบรูปภาพจาก URL ของ Animated Knots) -->
+                
+                <!-- สไลด์ 1 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-500"></div>
+                        <img id="Knot1" class="w-full h-full object-cover" src="https://www.animatedknots.com/photos/fig8_/fig8_R1.jpg" alt="Figure 8 Knot Step 1" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เริ่มต้น</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ถือปลายเชือกด้านที่ใช้งาน (Working End) เตรียมพร้อมสำหรับเริ่มขดเชือก</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ 2 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-500"></div>
+                        <img id="Knot2" class="w-full h-full object-cover" src="https://www.animatedknots.com/photos/fig8_/fig8_R2.jpg" alt="Figure 8 Knot Step 2" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอน</span><span class="step-desc">: ทำห่วง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">พาดปลายเชือกทับส่วนตัวเชือก (Standing Part) เพื่อสร้างเป็นห่วงวงกลม</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ 3 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-500"></div>
+                        <img id="Knot3" class="w-full h-full object-cover" src="https://www.animatedknots.com/photos/fig8_/fig8_R3.jpg" alt="Figure 8 Knot Step 3" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอน</span><span class="step-desc">: อ้อมเชือก</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">อ้อมปลายเชือกไปด้านหลังตัวเชือกหลักเพื่อเตรียมสอดเข้าไปในห่วง</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ 4 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-500"></div>
+                        <img id="Knot4" class="w-full h-full object-cover" src="https://www.animatedknots.com/photos/fig8_/fig8_R4.jpg" alt="Figure 8 Knot Step 4" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอน</span><span class="step-desc">: สอดห่วง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">สอดปลายเชือกกลับเข้ามาในห่วงจากด้านหน้า เพื่อสร้างลักษณะเป็นรูปเลขแปด</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ 5 -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-500"></div>
+                        <img id="Knot5" class="w-full h-full object-cover" src="https://www.animatedknots.com/photos/fig8_/fig8_R5.jpg" alt="Figure 8 Knot Step 5" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอน</span><span class="step-desc">: จัดทรง</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">ดึงเชือกทั้งสองด้านพร้อมกันเพื่อจัดปมให้กระชับและสวยงาม</p>
+                    </div>
+                </div>
+
+                <!-- สไลด์ 6-10 เผื่อไว้ (จะถูกลบออกถ้าไม่มีรูปภาพ) -->
+                <div class="w-full flex-shrink-0 flex flex-col slide-item">
+                    <div class="h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 border-blue-500 relative overflow-hidden transition-colors duration-300">
+                        <div class="absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter bg-blue-500"></div>
+                        <img id="Knot6" class="w-full h-full object-cover" src="https://www.animatedknots.com/photos/fig8_/fig8_R6.jpg" alt="Step 6" onerror="handleImageError(this)">
+                    </div>
+                    <div class="p-6 text-center bg-white h-48 flex flex-col justify-center">
+                        <h2 class="text-xl font-bold mb-2 slide-title-text text-blue-700"><span class="step-num">ขั้นตอน</span><span class="step-desc">: เสร็จสิ้น</span></h2>
+                        <p class="text-gray-600 leading-relaxed text-sm sm:text-base">เงื่อนเสร็จสมบูรณ์</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม ซ้าย-ขวา -->
+        <button id="prevBtn" class="absolute top-[35%] left-2 -translate-y-1/2 bg-white/90 backdrop-blur text-blue-700 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[35%] right-2 -translate-y-1/2 bg-white/90 backdrop-blur text-blue-700 p-2 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-0 disabled:pointer-events-none z-20 focus:outline-none">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุดบ่งชี้สถานะ (Dots) -->
+        <div class="flex justify-center flex-wrap space-x-1 sm:space-x-2 pb-6 pt-2 bg-white rounded-b-3xl px-4" id="dots-container">
+        </div>
+    </div>
+
+    <script>
+        // เริ่มต้นเรนเดอร์ไอคอน
+        lucide.createIcons();
+
+        const track = document.getElementById('slider-track');
+        const container = document.getElementById('slider-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        // ฟังก์ชันจัดระเบียบสไลเดอร์ตามจำนวนรูปที่มีอยู่จริง
+        window.initSlider = function() {
+            let slides = track.querySelectorAll('.slide-item');
+            
+            // ลบสไลด์ที่พัง (ถ้ามี)
+            slides.forEach(slide => {
+                const img = slide.querySelector('img');
+                if (img.complete && img.naturalWidth === 0 && img.src) {
+                    slide.remove();
+                }
+            });
+
+            // อัปเดต node list หลังจากลบ
+            slides = track.querySelectorAll('.slide-item');
+            const totalSlides = slides.length;
+            
+            if (totalSlides === 0) return;
+
+            slides.forEach((slide, index) => {
+                const isLast = (index === totalSlides - 1);
+                
+                // อัปเดตตัวเลข Counter
+                const counter = slide.querySelector('.slider-counter');
+                if (counter) {
+                    counter.innerText = `${index + 1} / ${totalSlides}`;
+                    counter.className = `absolute top-2 right-2 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow slider-counter transition-colors duration-300 ${isLast ? 'bg-green-500' : 'bg-blue-600'}`;
+                }
+                
+                // อัปเดตหมายเลขขั้นตอน
+                const stepNum = slide.querySelector('.step-num');
+                if (stepNum) {
+                    stepNum.innerText = `ขั้นตอนที่ ${index + 1}`;
+                }
+                
+                // สไลด์สุดท้ายปรับข้อความพิเศษ
+                if (isLast) {
+                    const stepDesc = slide.querySelector('.step-desc');
+                    if (stepDesc) stepDesc.innerText = ': เสร็จสมบูรณ์';
+                    
+                    const p = slide.querySelector('p');
+                    if (p) p.innerText = 'เงื่อนเลขแปดของคุณพร้อมใช้งานแล้ว! เงื่อนนี้จะช่วยป้องกันไม่ให้ปลายเชือกรูดออกจากรอกหรือรูเชือกได้อย่างดีเยี่ยม';
+                }
+
+                // สไตล์สี
+                const imgContainer = slide.querySelector('.image-placeholder');
+                if (imgContainer) {
+                    imgContainer.className = `h-64 sm:h-72 image-placeholder w-full flex items-center justify-center border-b-4 relative overflow-hidden transition-colors duration-300 ${isLast ? 'border-green-500 bg-green-50' : 'border-blue-500'}`;
+                }
+                
+                const titleText = slide.querySelector('.slide-title-text');
+                if (titleText) {
+                    titleText.className = `text-xl font-bold mb-2 slide-title-text transition-colors duration-300 ${isLast ? 'text-green-600' : 'text-blue-700'}`;
+                }
+            });
+
+            // สร้าง Dots ใหม่
+            const dotsContainer = document.getElementById('dots-container');
+            dotsContainer.innerHTML = '';
+            
+            for (let i = 0; i < totalSlides; i++) {
+                const dotWrapper = document.createElement('div');
+                dotWrapper.className = 'p-2 cursor-pointer touch-manipulation flex items-center justify-center';
+                const dot = document.createElement('div');
+                dot.className = 'dot w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-gray-300 transition-all duration-300';
+                dotWrapper.addEventListener('click', () => { currentIndex = i; updateSlider(); });
+                dotWrapper.appendChild(dot);
+                dotsContainer.appendChild(dotWrapper);
+            }
+            
+            if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
+            updateSliderPos();
+        };
+
+        function updateDots(totalSlides) {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                if(index === currentIndex) {
+                    dot.classList.remove('bg-gray-300', 'w-2');
+                    dot.classList.add(index === totalSlides - 1 ? 'bg-green-500' : 'bg-blue-600', 'w-4');
+                } else {
+                    dot.classList.remove('bg-blue-600', 'bg-green-500', 'w-4');
+                    dot.classList.add('bg-gray-300', 'w-2');
+                }
+            });
+        }
+
+        function updateSliderPos() {
+            const slides = track.querySelectorAll('.slide-item');
+            const totalSlides = slides.length;
+            if (totalSlides === 0) return;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === totalSlides - 1;
+            updateDots(totalSlides);
+        }
+
+        function updateSlider() { updateSliderPos(); }
+
+        nextBtn.addEventListener('click', () => {
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            if (currentIndex < totalSlides - 1) { currentIndex++; updateSlider(); }
+        });
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) { currentIndex--; updateSlider(); }
+        });
+
+        // Swipe Support
+        let startX = 0, isDragging = false, startY = 0, isScrolling = false;
+
+        container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = true;
+            isScrolling = false;
+            track.style.transition = 'none';
+        }, {passive: true});
+
+        container.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const currentX = e.touches[0].clientX;
+            const currentY = e.touches[0].clientY;
+            const diffX = startX - currentX;
+            const diffY = startY - currentY;
+            if (!isScrolling && Math.abs(diffY) > Math.abs(diffX)) {
+                isScrolling = true;
+                isDragging = false;
+                track.style.transition = 'transform 0.3s ease-out';
+                updateSlider();
+                return;
+            }
+            if (isScrolling) return;
+            e.preventDefault();
+            const totalSlides = track.querySelectorAll('.slide-item').length;
+            track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${diffX}px))`;
+        }, {passive: false});
+
+        container.addEventListener('touchend', (e) => {
+            if (!isDragging || isScrolling) return;
+            isDragging = false;
+            track.style.transition = 'transform 0.3s ease-out';
+            const diff = startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) {
+                const totalSlides = track.querySelectorAll('.slide-item').length;
+                if (diff > 0 && currentIndex < totalSlides - 1) currentIndex++;
+                else if (diff < 0 && currentIndex > 0) currentIndex--;
+            }
+            updateSlider();
+        });
+
+        setTimeout(window.initSlider, 300);
+        window.addEventListener('resize', updateSlider);
+    </script>
+</body>
+</html>

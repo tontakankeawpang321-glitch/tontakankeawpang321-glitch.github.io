@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีผูกเงื่อน Munter Mule Combination - คู่มือทีละขั้นตอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f1f5f9;
+        }
+        .slide-transition {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .knot-img {
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+            max-width: 100%;
+            height: auto;
+        }
+        .user-select-none {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- คอนเทนเนอร์หลัก -->
+    <div class="w-full max-w-xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-slate-300">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-blue-800 text-white p-6 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">เงื่อนมันเตอร์มิว</h1>
+            <h2 class="text-lg font-medium mt-1 text-blue-200">(Munter Mule Combination)</h2>
+            <p class="text-blue-100 text-sm mt-2 opacity-90">เงื่อนสำคัญสำหรับนักปีนเขา ใช้ล็อคระบบเชือกขณะบีเลย์ สามารถปลดล็อคได้ง่ายแม้เชือกกำลังรับน้ำหนัก</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex slide-transition w-full cursor-grab active:cursor-grabbing">
+                <!-- สไลด์จะถูกสร้างด้วย JavaScript -->
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม -->
+        <button id="prevBtn" class="absolute top-[45%] left-3 -translate-y-1/2 bg-white/95 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-30 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[45%] right-3 -translate-y-1/2 bg-white/95 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-30 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุด Indicators -->
+        <div class="flex justify-center flex-wrap gap-1.5 px-4 pb-6 pt-2 bg-white" id="dots-container"></div>
+        
+        <!-- ข้อมูลสรุปด้านล่าง -->
+        <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 text-center flex flex-col items-center">
+            <p class="text-xs text-slate-500 font-medium italic">ที่มาของภาพ: Animated Knots (Munter Mule Combination Hitch)</p>
+        </div>
+    </div>
+
+    <script>
+        // ข้อมูลสไลด์สำหรับ Munter Mule Combination Hitch
+        const baseUrl = "https://www.animatedknots.com/photos/muntermule/muntermuleR";
+        
+        // คำอธิบายขั้นตอน 14 ขั้นตอน สำหรับ Munter Mule
+        const descriptions = [
+            "เริ่มต้นด้วยเงื่อนมันเตอร์ (Munter Hitch) บนคาราไบเนอร์ที่ล็อคแล้ว และเชือกกำลังรับน้ำหนัก (เส้นซ้าย)",
+            "ดึงเส้นเบรก (Brake strand - เส้นขวา) ขึ้นมาให้ขนานกับเส้นรับน้ำหนัก เพื่อเริ่มทำเงื่อนล็อค (Mule)",
+            "นำห่วงเชือกเส้นเบรก อ้อมไปด้านหลังของเส้นรับน้ำหนัก (Load strand)",
+            "ไขว้ห่วงเชือกข้ามมาด้านหน้าของเส้นรับน้ำหนัก สร้างเป็นวง",
+            "นำห่วงเชือก (Bight) สอดลอดเข้าไปในช่องว่างด้านหลังเส้นเบรกของตัวมันเอง",
+            "ดึงห่วงเชือกให้ทะลุออกมาด้านหน้า เพื่อสร้างปมเงื่อนขัด (Mule Knot)",
+            "ดึงห่วงที่ทะลุออกมาให้แน่นขึ้นในระดับหนึ่ง",
+            "รูดปมเงื่อน Mule ให้เลื่อนลงไปชิดกับคาราไบเนอร์มากที่สุด ตอนนี้ระบบถูกล็อคแล้ว",
+            "เพื่อความปลอดภัยขั้นสูงสุด ต้องทำเงื่อน Overhand ปิดท้าย นำห่วงเชือกที่เหลืออ้อมเส้นรับน้ำหนักอีกครั้ง",
+            "พับห่วงเชือกอ้อมไปด้านหลังเส้นรับน้ำหนัก",
+            "สอดปลายห่วงเข้าไปในช่องว่างเพื่อเตรียมมัดเงื่อนผูกรั้ง (Overhand Knot)",
+            "ดึงห่วงเชือกให้ทะลุออกมาจนสุด",
+            "ดึงปมเงื่อน Overhand ให้แน่น",
+            "รูดปมเงื่อน Overhand ลงไปชิดกับปมเงื่อน Mule เสร็จสมบูรณ์! ระบบล็อคอย่างปลอดภัยและพร้อมปลดเมื่อต้องการ"
+        ];
+
+        // สร้างข้อมูลสไลด์ ตามจำนวนคำอธิบาย (14 รูป)
+        const slidesData = Array.from({ length: descriptions.length }, (_, i) => ({
+            img: `${baseUrl}${i + 1}.jpg`,
+            title: `ขั้นตอนที่ ${i + 1}`,
+            desc: descriptions[i]
+        }));
+
+        const track = document.getElementById('slider-track');
+        const dotsContainer = document.getElementById('dots-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        function createSlides() {
+            // ล้างข้อมูลเก่า
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            slidesData.forEach((slide, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'w-full flex-shrink-0 flex flex-col slide-item';
+                
+                const isLast = index === slidesData.length - 1;
+                // โทนสี
+                const accentColor = isLast ? 'border-green-500' : 'border-blue-400';
+                const textColor = isLast ? 'text-green-700' : 'text-slate-800';
+                const badgeColor = isLast ? 'bg-green-500' : 'bg-blue-500';
+
+                slideDiv.innerHTML = `
+                    <div class="h-80 sm:h-[450px] w-full flex items-center justify-center border-b-4 ${accentColor} relative overflow-hidden bg-white">
+                        <div class="absolute top-4 right-4 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-lg ${badgeColor}">${index + 1} / ${slidesData.length}</div>
+                        <img id="Knot_${index}" class="knot-img user-select-none object-contain p-6 transition-transform duration-700 rotation0" 
+                             style="width: 100%; height: 100%;"
+                             src="${slide.img}" 
+                             alt="Munter Mule Combination Hitch Step ${index + 1}"
+                             title="Animation: Munter Mule Combination Hitch - Step ${index + 1}"
+                             onerror="this.src='https://via.placeholder.com/600x600?text=Image+Not+Found'">
+                    </div>
+                    <div class="p-8 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-extrabold mb-3 ${textColor}">${slide.title}</h2>
+                        <p class="text-slate-600 leading-relaxed text-sm sm:text-base px-2 font-medium">${slide.desc}</p>
+                    </div>
+                `;
+                track.appendChild(slideDiv);
+
+                const dot = document.createElement('div');
+                dot.className = `dot h-1.5 rounded-full transition-all duration-300 cursor-pointer ${index === 0 ? 'bg-blue-800 w-8' : 'bg-slate-300 w-2'}`;
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === slidesData.length - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                if (i === currentIndex) {
+                    dot.classList.add('bg-blue-800', 'w-8');
+                    dot.classList.remove('bg-slate-300', 'w-2');
+                    
+                    if (i === slidesData.length - 1) {
+                        dot.classList.remove('bg-blue-800');
+                        dot.classList.add('bg-green-500');
+                    }
+                } else {
+                    dot.classList.remove('bg-blue-800', 'w-8', 'bg-green-500');
+                    dot.classList.add('bg-slate-300', 'w-2');
+                }
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < slidesData.length - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // Swipe support สำหรับมือถือ
+        let startX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        }, {passive: true});
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].clientX;
+            const walk = startX - x;
+            track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${walk}px))`;
+        }, {passive: true});
+
+        track.addEventListener('touchend', (e) => {
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex < slidesData.length - 1) currentIndex++;
+                else if (diff < 0 && currentIndex > 0) currentIndex--;
+            }
+            updateSlider();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextBtn.click();
+            if (e.key === 'ArrowLeft') prevBtn.click();
+        });
+
+        window.onload = () => {
+            createSlides();
+            updateSlider();
+            lucide.createIcons();
+        };
+
+        window.addEventListener('resize', updateSlider);
+    </script>
+</body>
+</html>
