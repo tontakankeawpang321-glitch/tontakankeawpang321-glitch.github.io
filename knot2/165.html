@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีผูก Whoopie Sling (เงื่อนปรับระยะ)</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .slide-transition {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .knot-img {
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+            max-width: 100%;
+            height: auto;
+        }
+        .user-select-none {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .dot {
+            height: 6px; 
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- คอนเทนเนอร์หลัก -->
+    <div class="w-full max-w-xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-slate-100">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-indigo-600 text-white p-6 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">วิธีทำ Whoopie Sling</h1>
+            <h2 class="text-lg font-medium mt-1 text-indigo-100">(เงื่อนสลิงปรับระยะ)</h2>
+            <p class="text-indigo-50 text-sm mt-2 opacity-90">เทคนิคการทำห่วงปรับระยะยอดนิยมสำหรับเปลญวน (Hammock) โดยใช้เชือกถักกลวง</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y bg-white">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex slide-transition w-full cursor-grab active:cursor-grabbing">
+                <!-- สไลด์จะถูกสร้างด้วย JavaScript -->
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม -->
+        <button id="prevBtn" class="absolute top-[40%] left-3 -translate-y-1/2 bg-white/95 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-indigo-50 hover:scale-110 transition-all disabled:opacity-30 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[40%] right-3 -translate-y-1/2 bg-white/95 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-indigo-50 hover:scale-110 transition-all disabled:opacity-30 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุด Indicators -->
+        <div class="flex justify-center flex-wrap gap-1.5 px-4 pb-6 pt-3 bg-white" id="dots-container"></div>
+        
+        <!-- ข้อมูลสรุปด้านล่าง -->
+        <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 text-center flex flex-col items-center">
+            <div class="flex items-center gap-2 mb-1">
+                <span class="px-2 py-0.5 bg-indigo-100 text-indigo-700 text-[10px] font-bold rounded">จุดเด่น</span>
+                <p class="text-[11px] text-slate-500 font-medium italic">ปรับความยาวได้ง่าย แข็งแรงมาก และไม่ต้องใช้ห่วงโลหะช่วย</p>
+            </div>
+            <p class="text-[10px] text-slate-400 font-medium uppercase tracking-widest mt-1">Reference: Animated Knots - Whoopie Sling</p>
+        </div>
+    </div>
+
+    <script>
+        // เปลี่ยน URL เป็น Whoopie Sling
+        const baseUrl = "https://www.animatedknots.com/photos/whoopiesling/whoopieslingR";
+        
+        // คำอธิบายขั้นตอนสำหรับ Whoopie Sling
+        const descriptions = [
+            "เตรียมเชือกถักแบบกลวง (Hollow Braid) และอุปกรณ์ช่วยสอด (Fid หรือลวดสลิง)",
+            "ทำเครื่องหมายที่ระยะประมาณ 2 ฟุตจากปลายเชือกเพื่อเริ่มทำห่วงตาย (Fixed Eye)",
+            "สอดอุปกรณ์ผ่านแกนกลางของเชือกหลักเพื่อสร้างช่องว่าง",
+            "นำปลายเชือกสอดเข้าไปในอุปกรณ์เพื่อดึงผ่านแกนเชือกหลัก",
+            "ดึงปลายเชือกออกมาให้เป็นห่วงเล็กๆ เพื่อทำเป็นห่วงตายที่มั่นคง",
+            "จัดระเบียบเชือกให้เรียบร้อย จะได้ห่วงตายหนึ่งข้าง",
+            "ย้ายมาทำด้านที่เป็นห่วงปรับระยะ (Adjustable Loop) โดยสอดอุปกรณ์เข้าไปในแกนกลางยาวประมาณ 10-12 นิ้ว",
+            "นำปลายเชือกส่วนที่เหลือมาเตรียมสอดเข้าไปในจุดที่อุปกรณ์โผล่ออกมา",
+            "ดึงปลายเชือกเข้าไปซ่อนไว้ในแกนกลางของเชือกเส้นหลัก",
+            "ปลายเชือกจะวิ่งอยู่ภายในแกนกลางเหมือน 'นิ้วที่สวมอยู่ในถุงมือ'",
+            "ดึงปลายเชือกให้ออกมาจากแกนกลางในจุดที่กำหนดไว้",
+            "ตรวจสอบว่าเชือกภายในไม่บิดตัวและสามารถเลื่อนเข้าออกได้",
+            "ตกแต่งปลายเชือกด้วยการคลายเกลียวออกบางส่วน (Tapering) เพื่อให้สอดได้แนบสนิท",
+            "สอดปลายที่แต่งแล้วกลับเข้าไปซ่อนในแกนเชือกอีกครั้ง",
+            "ทดสอบการเลื่อนห่วงเข้าและออก เพื่อให้แน่ใจว่าการปรับระยะทำได้ลื่นไหล",
+            "หลักการคือเมื่อมีความตึง แกนเชือกหลักจะบีบรัดเชือกเส้นในไว้แน่นหนา",
+            "เสร็จสิ้นขั้นตอน จะได้ Whoopie Sling ที่ปรับความยาวได้ตามต้องการพร้อมใช้งาน"
+        ];
+
+        const totalSteps = descriptions.length;
+        const slidesData = Array.from({ length: totalSteps }, (_, i) => ({
+            img: `${baseUrl}${i + 1}.jpg`,
+            title: `ขั้นตอนที่ ${i + 1}`,
+            desc: descriptions[i]
+        }));
+
+        const track = document.getElementById('slider-track');
+        const dotsContainer = document.getElementById('dots-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        function createSlides() {
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            slidesData.forEach((slide, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'w-full flex-shrink-0 flex flex-col slide-item';
+                
+                const isLast = index === slidesData.length - 1;
+                const accentColor = isLast ? 'border-emerald-500' : 'border-indigo-600';
+                const textColor = isLast ? 'text-emerald-600' : 'text-slate-800';
+                const badgeColor = isLast ? 'bg-emerald-500' : 'bg-indigo-600';
+
+                slideDiv.innerHTML = `
+                    <div class="h-64 sm:h-[400px] w-full flex items-center justify-center border-b-4 ${accentColor} relative overflow-hidden bg-white">
+                        <div class="absolute top-4 right-4 text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 shadow-md ${badgeColor}">${index + 1} / ${slidesData.length}</div>
+                        <img id="Knot_${index}" class="knot-img user-select-none object-contain p-4 transition-transform duration-700" 
+                             src="${slide.img}" 
+                             alt="Whoopie Sling Step ${index + 1}" 
+                             title="Animation: Whoopie Sling Tying"
+                             onerror="this.src='https://via.placeholder.com/600x600?text=Knot+Step+${index+1}'">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[140px] flex flex-col justify-center">
+                        <h2 class="text-xl font-extrabold mb-2 ${textColor}">${slide.title}</h2>
+                        <p class="text-slate-600 leading-relaxed text-sm sm:text-base px-2 font-medium">${slide.desc}</p>
+                    </div>
+                `;
+                track.appendChild(slideDiv);
+
+                const dot = document.createElement('div');
+                dot.className = `dot transition-all duration-300 ${index === 0 ? 'bg-indigo-600 w-8' : 'bg-slate-300 w-3'}`;
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === slidesData.length - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                if (i === currentIndex) {
+                    dot.classList.add(i === slidesData.length - 1 ? 'bg-emerald-500' : 'bg-indigo-600', 'w-8');
+                    dot.classList.remove('bg-slate-300', 'w-3');
+                } else {
+                    dot.classList.remove('bg-indigo-600', 'w-8', 'bg-emerald-500');
+                    dot.classList.add('bg-slate-300', 'w-3');
+                }
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < slidesData.length - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // Touch Swipe Support
+        let startX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        }, {passive: true});
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].clientX;
+            const walk = startX - x;
+            track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${walk}px))`;
+        }, {passive: true});
+
+        track.addEventListener('touchend', (e) => {
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex < slidesData.length - 1) currentIndex++;
+                else if (diff < 0 && currentIndex > 0) currentIndex--;
+            }
+            updateSlider();
+        });
+
+        // Keyboard Support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextBtn.click();
+            if (e.key === 'ArrowLeft') prevBtn.click();
+        });
+
+        // Initialize
+        window.onload = () => {
+            createSlides();
+            updateSlider();
+            lucide.createIcons();
+        };
+
+        window.addEventListener('resize', updateSlider);
+    </script>
+</body>
+</html>

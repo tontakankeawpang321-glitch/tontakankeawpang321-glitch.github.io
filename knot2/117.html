@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีผูกเนคไทเงื่อน Pratt (Shelby) - คู่มือทีละขั้นตอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f8fafc;
+        }
+        .slide-transition {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .knot-img {
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+            max-width: 100%;
+            height: auto;
+        }
+        .user-select-none {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        /* ปรับขนาดของจุด indicator */
+        .dot {
+            height: 8px;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- คอนเทนเนอร์หลัก -->
+    <div class="w-full max-w-xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-slate-200">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-indigo-800 text-white p-6 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">วิธีผูกเนคไท Pratt (Shelby)</h1>
+            <h2 class="text-lg font-medium mt-1 text-indigo-200">(Pratt Tie Knot)</h2>
+            <p class="text-indigo-100 text-sm mt-2 opacity-90">เงื่อนเนคไทสุดคลาสสิกที่ผูกง่าย ขนาดปมกำลังดี มีความสมมาตร เหมาะสำหรับใส่กับเสื้อเชิ้ตคอปกมาตรฐานในทุกโอกาส</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex slide-transition w-full cursor-grab active:cursor-grabbing">
+                <!-- สไลด์จะถูกสร้างด้วย JavaScript -->
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม -->
+        <button id="prevBtn" class="absolute top-[45%] left-3 -translate-y-1/2 bg-white/95 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-30 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[45%] right-3 -translate-y-1/2 bg-white/95 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-white hover:scale-110 transition-all disabled:opacity-30 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุด Indicators -->
+        <div class="flex justify-center flex-wrap gap-2 px-4 pb-6 pt-3 bg-white" id="dots-container"></div>
+        
+        <!-- ข้อมูลสรุปด้านล่าง -->
+        <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 text-center flex flex-col items-center">
+            <p class="text-xs text-slate-500 font-medium italic">ที่มาของภาพ: Animated Knots (Pratt (Shelby) Tie Knot)</p>
+        </div>
+    </div>
+
+    <script>
+        // ข้อมูล URL สไลด์สำหรับ Pratt (Shelby) Knot
+        const baseUrl = "https://www.animatedknots.com/photos/tiepratt/tieprattR";
+        
+        // คำอธิบาย 10 ขั้นตอนสำหรับการผูกเงื่อน Pratt
+        const descriptions = [
+            "เริ่มต้นโดยพาดเนคไทไว้รอบคอ ให้ด้านหลัง (ตะเข็บ) หันออกด้านนอก ปลายด้านกว้างยาวกว่าด้านแคบ",
+            "นำปลายด้านกว้าง สอดไขว้ <strong>ใต้</strong> ปลายด้านแคบไปอีกฝั่ง",
+            "นำปลายด้านกว้าง พาดขึ้นไปด้านบนตรงกลาง",
+            "สอดปลายด้านกว้าง ลงไปในห่วงรอบคอด้านใน",
+            "ดึงให้ตึงและแน่น โดยให้ปลายด้านกว้างตกลงมาทางด้านซ้าย",
+            "พาดปลายด้านกว้าง ข้ามด้านหน้าจากซ้ายไปยังฝั่งขวา",
+            "ร้อยปลายด้านกว้าง ลอดใต้ห่วงรอบคอขึ้นมาด้านบน",
+            "สอดปลายด้านกว้าง ลงไปในช่องว่าง (ห่วง) ที่เพิ่งสร้างขึ้นด้านหน้า",
+            "ค่อยๆ ดึงปลายด้านกว้างลงเพื่อจัดทรงปมเงื่อนให้แน่นและสวยงาม",
+            "จับที่ปมเงื่อน และดึงปลายด้านแคบเพื่อรูดปมขึ้นไปจนชิดคอปกเสื้อ เป็นอันเสร็จสมบูรณ์!"
+        ];
+
+        // สร้างข้อมูลสไลด์ 10 ภาพ (tieprattR1.jpg ถึง tieprattR10.jpg)
+        const slidesData = Array.from({ length: 10 }, (_, i) => ({
+            img: `${baseUrl}${i + 1}.jpg`,
+            title: `ขั้นตอนที่ ${i + 1}`,
+            desc: descriptions[i]
+        }));
+
+        const track = document.getElementById('slider-track');
+        const dotsContainer = document.getElementById('dots-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        function createSlides() {
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            slidesData.forEach((slide, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'w-full flex-shrink-0 flex flex-col slide-item';
+                
+                const isLast = index === slidesData.length - 1;
+                // เปลี่ยนสี Accent เป็นโทนสีคราม-ม่วง (Indigo)
+                const accentColor = isLast ? 'border-green-500' : 'border-indigo-500';
+                const textColor = isLast ? 'text-green-700' : 'text-slate-800';
+                const badgeColor = isLast ? 'bg-green-500' : 'bg-indigo-600';
+
+                slideDiv.innerHTML = `
+                    <div class="h-80 sm:h-[450px] w-full flex items-center justify-center border-b-4 ${accentColor} relative overflow-hidden bg-white">
+                        <div class="absolute top-4 right-4 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-lg ${badgeColor}">${index + 1} / ${slidesData.length}</div>
+                        <img id="Knot_${index}" class="knot-img user-select-none object-contain p-6 transition-transform duration-700 rotation0" 
+                             style="width: 100%; height: 100%;"
+                             src="${slide.img}" 
+                             alt="Pratt (Shelby) Tie Knot, Step-by-Step Animation - Step ${index + 1}"
+                             title="Animation: Pratt (Shelby) Knot Tying - Step ${index + 1}"
+                             onerror="this.src='https://via.placeholder.com/600x600?text=Image+Not+Found'">
+                    </div>
+                    <div class="p-8 text-center bg-white min-h-[160px] flex flex-col justify-center">
+                        <h2 class="text-xl font-extrabold mb-3 ${textColor}">${slide.title}</h2>
+                        <p class="text-slate-600 leading-relaxed text-sm sm:text-base px-2 font-medium">${slide.desc}</p>
+                    </div>
+                `;
+                track.appendChild(slideDiv);
+
+                const dot = document.createElement('div');
+                dot.className = `dot transition-all duration-300 ${index === 0 ? 'bg-indigo-800 w-8' : 'bg-slate-300 w-2'}`;
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === slidesData.length - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                if (i === currentIndex) {
+                    dot.classList.add('bg-indigo-800', 'w-8');
+                    dot.classList.remove('bg-slate-300', 'w-2');
+                    
+                    if (i === slidesData.length - 1) {
+                        dot.classList.remove('bg-indigo-800');
+                        dot.classList.add('bg-green-500');
+                    }
+                } else {
+                    dot.classList.remove('bg-indigo-800', 'w-8', 'bg-green-500');
+                    dot.classList.add('bg-slate-300', 'w-2');
+                }
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < slidesData.length - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // Touch Swipe Support
+        let startX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        }, {passive: true});
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].clientX;
+            const walk = startX - x;
+            track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${walk}px))`;
+        }, {passive: true});
+
+        track.addEventListener('touchend', (e) => {
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex < slidesData.length - 1) currentIndex++;
+                else if (diff < 0 && currentIndex > 0) currentIndex--;
+            }
+            updateSlider();
+        });
+
+        // Keyboard Support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextBtn.click();
+            if (e.key === 'ArrowLeft') prevBtn.click();
+        });
+
+        // Initialize
+        window.onload = () => {
+            createSlides();
+            updateSlider();
+            lucide.createIcons();
+        };
+
+        window.addEventListener('resize', updateSlider);
+    </script>
+</body>
+</html>

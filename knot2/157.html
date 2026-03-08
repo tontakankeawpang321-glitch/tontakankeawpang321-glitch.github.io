@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Half Hitches Interactive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f8fafc;
+        }
+        .player-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+        }
+        .visual-area {
+            position: relative;
+            background-color: #ffffff;
+            aspect-ratio: 4 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .control-bar {
+            background-color: #fcfcfd;
+            padding: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid #f1f5f9;
+        }
+        .main-play-btn {
+            width: 68px;
+            height: 68px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.15);
+            border: 1px solid #eef2ff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #4f46e5;
+        }
+        .main-play-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 20px -5px rgba(79, 70, 229, 0.25);
+            border-color: #e0e7ff;
+        }
+        .main-play-btn:active {
+            transform: scale(0.92);
+        }
+        .nav-btn {
+            color: #6366f1;
+            padding: 12px;
+            transition: all 0.2s;
+            border-radius: 50%;
+        }
+        .nav-btn:hover {
+            background-color: #eef2ff;
+            color: #4338ca;
+        }
+        .step-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(30, 27, 75, 0.85);
+            backdrop-filter: blur(8px);
+            color: white;
+            padding: 5px 14px;
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .caption-area {
+            padding: 1.25rem 2rem;
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+        }
+        .speed-indicator {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #4f46e5;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .show-speed { opacity: 1; }
+    </style>
+</head>
+<body class="p-6 sm:p-12">
+
+    <div class="max-w-2xl mx-auto mb-10 text-center">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">เงื่อนทูฮาล์ฟฮิตช์<br><span class="text-2xl text-slate-500">(Two Half Hitches)</span></h1>
+        <div class="h-1.5 w-16 bg-indigo-500 mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <div class="player-container">
+        <div class="visual-area" id="touchArea">
+            <div id="loading" class="absolute inset-0 flex items-center justify-center bg-white z-20">
+                <div class="w-10 h-10 border-4 border-indigo-100 border-t-indigo-600 rounded-full animate-spin"></div>
+            </div>
+            <!-- เริ่มต้นที่รูปแรกของ Two Half Hitches -->
+            <img id="knotImg" src="https://www.animatedknots.com/photos/twohalfhitches/twohalfhitchesR1.jpg" alt="Two Half Hitches Step" class="max-w-full max-h-full object-contain transition-opacity duration-300">
+            <div class="step-badge">ขั้นตอน <span id="curStep">1</span> / <span id="totalSteps">6</span></div>
+            <div id="speedLabel" class="speed-indicator">ความเร็ว: x1</div>
+        </div>
+
+        <div class="caption-area">
+            <p id="captionText" class="text-slate-800 font-semibold text-lg leading-relaxed">1. นำเชือกคล้องรอบเสาแล้วพาดทับบนเชือกเส้นหลัก</p>
+        </div>
+
+        <div class="control-bar">
+            <button id="speedBtn" class="nav-btn" title="ปรับความเร็ว">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </button>
+            <button id="prevBtn" class="nav-btn" title="ย้อนกลับ">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button id="playBtn" class="main-play-btn">
+                <svg id="playIcon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            </button>
+            <button id="nextBtn" class="nav-btn" title="ถัดไป">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+            <button id="resetBtn" class="nav-btn" title="เริ่มใหม่">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Details Section -->
+    <div class="max-w-2xl mx-auto mt-10 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-indigo-50 p-5 rounded-2xl border border-indigo-100">
+                <h3 class="font-bold text-indigo-900 mb-2 flex items-center gap-2">
+                    <span>🪢</span> คุณสมบัติเด่น
+                </h3>
+                <ul class="text-sm text-indigo-800 space-y-1 opacity-90">
+                    <li>• ผูกเข้ากับเสา ห่วง หรือวัตถุต่างๆ ได้รวดเร็ว</li>
+                    <li>• เป็นเงื่อนพื้นฐานในการพัฒนาไปสู่เงื่อนอื่นๆ</li>
+                    <li>• รับแรงดึงได้ดีในแนวตรง ยิ่งดึงยิ่งรัดแน่น</li>
+                    <li>• นิยมใช้ผูกเต็นท์ ผูกเรือ หรือผูกของทั่วไป</li>
+                </ul>
+            </div>
+            <div class="bg-slate-800 p-5 rounded-2xl text-white">
+                <h3 class="font-bold mb-2 flex items-center gap-2">
+                    <span class="text-amber-400">💡</span> ข้อแนะนำ
+                </h3>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    เงื่อน <strong>Two Half Hitches</strong> เหมาะสำหรับใช้งานทั่วไป หากเชือกมีความลื่นมาก หรือต้องรับน้ำหนักที่มีการกระชากไปมาบ่อยๆ แนะนำให้เพิ่มจำนวนการมัดขัด (Half Hitch) หรือเปลี่ยนไปใช้เงื่อนที่ปรับความตึงได้ดีกว่าอย่าง Taut-Line Hitch
+                </p>
+            </div>
+        </div>
+        
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 class="font-bold text-slate-800 mb-4 text-center">สรุปคาถาท่องจำ</h3>
+            <div class="flex flex-col sm:flex-row justify-around items-center gap-2 text-sm text-slate-600">
+                <div class="text-center">
+                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 font-bold">1</div>
+                    คล้องเสา
+                </div>
+                <div class="hidden sm:block text-slate-300">→</div>
+                <div class="text-center">
+                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 font-bold">2</div>
+                    มัดรอบแรก
+                </div>
+                <div class="hidden sm:block text-slate-300">→</div>
+                <div class="text-center">
+                    <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-2 font-bold">3</div>
+                    มัดรอบสอง
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // เปลี่ยนชุดรูปภาพเป็น Two Half Hitches Knot
+        const images = [
+            "https://www.animatedknots.com/photos/twohalfhitches/twohalfhitchesR1.jpg",
+            "https://www.animatedknots.com/photos/twohalfhitches/twohalfhitchesR2.jpg",
+            "https://www.animatedknots.com/photos/twohalfhitches/twohalfhitchesR3.jpg",
+            "https://www.animatedknots.com/photos/twohalfhitches/twohalfhitchesR4.jpg",
+            "https://www.animatedknots.com/photos/twohalfhitches/twohalfhitchesR5.jpg",
+            "https://www.animatedknots.com/photos/twohalfhitches/twohalfhitchesR6.jpg"
+        ];
+
+        // เปลี่ยนคำอธิบายให้เข้ากับขั้นตอน Two Half Hitches Knot
+        const captions = [
+            "1. นำเชือกคล้องรอบเสาแล้วพาดทับบนเชือกเส้นหลัก",
+            "2. สอดปลายเชือกเข้าใต้เส้นหลักเพื่อทำ Half Hitch ครั้งที่ 1",
+            "3. ดึงปมแรกให้รัดเข้าที่",
+            "4. นำปลายเชือกพาดทับเส้นหลักอีกครั้ง (ให้อยู่เหนือปมแรก)",
+            "5. สอดปลายเชือกเข้าในห่วงเพื่อทำ Half Hitch ครั้งที่ 2",
+            "6. ดึงปลายเชือกให้แน่นและรูดปมให้ชิดกับเสา เป็นอันเสร็จสิ้น"
+        ];
+
+        let currentIndex = 0;
+        let isPlaying = true;
+        let speed = 1500;
+        let speedLevel = 1;
+        let timer = null;
+
+        const imgEl = document.getElementById('knotImg');
+        const capEl = document.getElementById('captionText');
+        const stepEl = document.getElementById('curStep');
+        const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const speedLabel = document.getElementById('speedLabel');
+
+        // อัปเดตตัวเลขจำนวนหน้าทั้งหมดให้ตรงกับ Array อัตโนมัติ
+        document.getElementById('totalSteps').textContent = images.length;
+
+        function updateDisplay() {
+            imgEl.style.opacity = '0.4';
+            setTimeout(() => {
+                imgEl.src = images[currentIndex];
+                capEl.textContent = captions[currentIndex];
+                stepEl.textContent = currentIndex + 1;
+                imgEl.style.opacity = '1';
+            }, 120);
+        }
+
+        function next() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateDisplay();
+        }
+
+        function prev() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateDisplay();
+        }
+
+        function startAuto() {
+            stopAuto();
+            timer = setInterval(next, speed);
+            isPlaying = true;
+            playIcon.classList.add('hidden');
+            pauseIcon.classList.remove('hidden');
+        }
+
+        function stopAuto() {
+            if (timer) clearInterval(timer);
+            isPlaying = false;
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+        }
+
+        function togglePlay() {
+            if (isPlaying) stopAuto();
+            else startAuto();
+        }
+
+        function cycleSpeed() {
+            speedLevel = (speedLevel % 3) + 1;
+            if (speedLevel === 1) speed = 1500;
+            else if (speedLevel === 2) speed = 800;
+            else speed = 400;
+
+            speedLabel.textContent = `ความเร็ว: x${speedLevel}`;
+            speedLabel.classList.add('show-speed');
+            setTimeout(() => speedLabel.classList.remove('show-speed'), 1000);
+
+            if (isPlaying) startAuto();
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', () => { stopAuto(); next(); });
+        document.getElementById('prevBtn').addEventListener('click', () => { stopAuto(); prev(); });
+        document.getElementById('playBtn').addEventListener('click', togglePlay);
+        document.getElementById('resetBtn').addEventListener('click', () => { stopAuto(); currentIndex = 0; updateDisplay(); });
+        document.getElementById('speedBtn').addEventListener('click', cycleSpeed);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') { stopAuto(); next(); }
+            else if (e.key === 'ArrowLeft') { stopAuto(); prev(); }
+            else if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+        });
+
+        let startX = 0;
+        const touchArea = document.getElementById('touchArea');
+        touchArea.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive: true});
+        touchArea.addEventListener('touchend', e => {
+            const endX = e.changedTouches[0].clientX;
+            if (startX - endX > 60) { stopAuto(); next(); }
+            else if (endX - startX > 60) { stopAuto(); prev(); }
+        }, {passive: true});
+
+        window.onload = () => {
+            let loaded = 0;
+            let isStarted = false;
+
+            const initApp = () => {
+                if (isStarted) return;
+                isStarted = true;
+                document.getElementById('loading').classList.add('hidden');
+                startAuto();
+            };
+
+            images.forEach(src => {
+                const img = new Image();
+                img.onload = () => {
+                    loaded++;
+                    if (loaded === images.length) initApp();
+                };
+                img.onerror = () => {
+                    loaded++; 
+                    if (loaded === images.length) initApp();
+                };
+                img.src = src;
+            });
+
+            // ป้องกันกรณีติดปัญหาเครือข่าย บังคับให้เริ่มทำงานหลังจากผ่านไป 4 วินาที
+            setTimeout(initApp, 4000);
+        };
+    </script>
+</body>
+</html>

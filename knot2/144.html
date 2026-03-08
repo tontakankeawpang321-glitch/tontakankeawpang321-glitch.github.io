@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีผูกเงื่อน Stopper Loop - คู่มือทีละขั้นตอน</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f1f5f9;
+        }
+        .slide-transition {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .knot-img {
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.08));
+            max-width: 100%;
+            height: auto;
+        }
+        .user-select-none {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .dot {
+            height: 6px; 
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- คอนเทนเนอร์หลัก -->
+    <div class="w-full max-w-xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-slate-200">
+        
+        <!-- ส่วนหัว -->
+        <div class="bg-blue-700 text-white p-6 text-center shadow-md relative z-10">
+            <h1 class="text-2xl font-bold tracking-wide">วิธีผูกเงื่อน Stopper Loop</h1>
+            <h2 class="text-lg font-medium mt-1 text-blue-200">(Ashley's Stopper Knot)</h2>
+            <p class="text-blue-50 text-sm mt-2 opacity-95">เงื่อนที่สร้างปมขนาดใหญ่และแน่นหนา นิยมใช้สำหรับทำเป็นเงื่อนหยุดปลายเชือกเพื่อไม่ให้รุดออกจากรูหรือรอก</p>
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y">
+            <!-- แทร็กสไลเดอร์ -->
+            <div id="slider-track" class="flex slide-transition w-full cursor-grab active:cursor-grabbing">
+                <!-- สไลด์จะถูกสร้างด้วย JavaScript -->
+            </div>
+        </div>
+
+        <!-- ปุ่มควบคุม -->
+        <button id="prevBtn" class="absolute top-[40%] left-3 -translate-y-1/2 bg-white/90 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-blue-50 hover:scale-110 transition-all disabled:opacity-30 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute top-[40%] right-3 -translate-y-1/2 bg-white/90 backdrop-blur text-slate-800 p-3 rounded-full shadow-lg hover:bg-blue-50 hover:scale-110 transition-all disabled:opacity-30 z-20 focus:outline-none border border-slate-100">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- จุด Indicators -->
+        <div class="flex justify-center flex-wrap gap-1 px-4 pb-6 pt-3 bg-white" id="dots-container"></div>
+        
+        <!-- ข้อมูลสรุปด้านล่าง -->
+        <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 text-center">
+            <p class="text-[10px] text-slate-400 font-medium uppercase tracking-widest">ข้อมูลอ้างอิง: Animated Knots by Grog</p>
+        </div>
+    </div>
+
+    <script>
+        // ข้อมูลรูปภาพ Stopper Loop (มี 19 ขั้นตอนตามภาพสุดท้ายที่คุณส่งมา)
+        const baseUrl = "https://www.animatedknots.com/photos/stopperloop/stopperloopR";
+        
+        const descriptions = [
+            "เริ่มต้นด้วยการวางเชือกเป็นแนวตั้ง",
+            "ทำห่วงบิดทับเชือกเส้นหลัก (Overhand Loop) ในส่วนล่าง",
+            "จับปลายเชือกด้านล่างเตรียมสอด",
+            "ยกปลายเชือกขึ้นด้านบนข้ามเชือกเส้นหลัก",
+            "พาดปลายเชือกข้ามไปทางด้านหลังของห่วงแรก",
+            "เริ่มหมุนปลายเชือกเพื่อสร้างโครงสร้างของปม",
+            "สอดปลายเชือกลอดผ่านใต้เส้นที่ตัดขวาง",
+            "ดึงปลายเชือกอ้อมมาด้านหน้าเพื่อเตรียมพันรอบ",
+            "สอดปลายเชือกย้อนกลับเข้าไปในช่องว่างที่เกิดขึ้น",
+            "สังเกตการขัดกันของเส้นเชือกในส่วนกลาง",
+            "เริ่มจัดรูปทรงของปมให้เริ่มเข้าที่",
+            "ดึงปลายเชือกให้ลอดผ่านห่วงตรงกลางอย่างระมัดระวัง",
+            "ปรับตำแหน่งของปมให้ปมมีขนาดใหญ่และสมมาตร",
+            "เตรียมการรูดเชือกเพื่อล็อกปม",
+            "ใช้มือค่อยๆ ดึงปลายเชือกและเส้นหลักพร้อมกัน",
+            "จัดระเบียบเกลียวเชือกไม่ให้ซ้อนทับกันผิดวิธี",
+            "ดึงให้แน่นขึ้นเพื่อให้เห็นรูปทรงของ Ashley's Stopper Knot",
+            "ตรวจสอบความแน่นหนาของปมในทุกด้าน",
+            "เสร็จสมบูรณ์! จะได้เงื่อน Stopper Loop ที่มีปมขนาดใหญ่และแข็งแรงที่สุด"
+        ];
+
+        const totalSteps = 19;
+        const slidesData = Array.from({ length: totalSteps }, (_, i) => ({
+            img: `${baseUrl}${i + 1}.jpg`,
+            title: `ขั้นตอนที่ ${i + 1}`,
+            desc: descriptions[i]
+        }));
+
+        const track = document.getElementById('slider-track');
+        const dotsContainer = document.getElementById('dots-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        function createSlides() {
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            slidesData.forEach((slide, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'w-full flex-shrink-0 flex flex-col slide-item';
+                
+                const isLast = index === slidesData.length - 1;
+                const accentColor = isLast ? 'border-emerald-500' : 'border-blue-500';
+                const textColor = isLast ? 'text-emerald-600' : 'text-slate-800';
+                const badgeColor = isLast ? 'bg-emerald-500' : 'bg-blue-600';
+
+                slideDiv.innerHTML = `
+                    <div class="h-72 sm:h-[400px] w-full flex items-center justify-center border-b-4 ${accentColor} relative overflow-hidden bg-white">
+                        <div class="absolute top-4 right-4 text-white text-[10px] font-bold px-2.5 py-1 rounded-full z-10 shadow-md ${badgeColor}">${index + 1} / ${slidesData.length}</div>
+                        <img id="Knot_${index}" class="knot-img user-select-none object-contain p-4 transition-transform duration-700" 
+                             style="width: 100%; height: 100%;" 
+                             src="${slide.img}" 
+                             alt="Stopper Loop Step ${index + 1}"
+                             onerror="this.src='https://via.placeholder.com/600x600?text=กำลังโหลด...'">
+                    </div>
+                    <div class="p-6 text-center bg-white min-h-[140px] flex flex-col justify-center">
+                        <h2 class="text-lg font-extrabold mb-2 ${textColor}">${slide.title}</h2>
+                        <p class="text-slate-600 leading-relaxed text-sm px-4 font-medium">${slide.desc}</p>
+                    </div>
+                `;
+                track.appendChild(slideDiv);
+
+                const dot = document.createElement('div');
+                dot.className = `dot transition-all duration-300 ${index === 0 ? 'bg-blue-800 w-5' : 'bg-slate-200 w-1.5'}`;
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === slidesData.length - 1;
+
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                if (i === currentIndex) {
+                    dot.classList.add('bg-blue-800', 'w-5');
+                    dot.classList.remove('bg-slate-200', 'w-1.5', 'bg-emerald-500');
+                    if (i === slidesData.length - 1) {
+                        dot.classList.remove('bg-blue-800');
+                        dot.classList.add('bg-emerald-500');
+                    }
+                } else {
+                    dot.classList.remove('bg-blue-800', 'w-5', 'bg-emerald-500');
+                    dot.classList.add('bg-slate-200', 'w-1.5');
+                }
+            });
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < slidesData.length - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // Touch Swipe Support
+        let startX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        }, {passive: true});
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].clientX;
+            const walk = startX - x;
+            track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${walk}px))`;
+        }, {passive: true});
+
+        track.addEventListener('touchend', (e) => {
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex < slidesData.length - 1) currentIndex++;
+                else if (diff < 0 && currentIndex > 0) currentIndex--;
+            }
+            updateSlider();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextBtn.click();
+            if (e.key === 'ArrowLeft') prevBtn.click();
+        });
+
+        window.onload = () => {
+            createSlides();
+            updateSlider();
+            lucide.createIcons();
+        };
+
+        window.addEventListener('resize', updateSlider);
+    </script>
+</body>
+</html>
