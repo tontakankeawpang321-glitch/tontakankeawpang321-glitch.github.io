@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิธีการขดเชือกแบบ Gasket Coil (Full Steps)</title>
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- ตั้งค่าฟอนต์ภาษาไทย -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f8fafc;
+        }
+        .slide-transition {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .knot-img {
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        .user-select-none {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+        .dot {
+            height: 4px; 
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        #slider-track {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #4338ca 0%, #1e1b4b 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen py-8 px-4 flex flex-col items-center">
+
+    <!-- คอนเทนเนอร์หลัก -->
+    <div class="w-full max-w-2xl bg-white rounded-[2rem] shadow-2xl overflow-hidden relative border border-slate-200">
+        
+        <!-- ส่วนหัว (Hero Section) -->
+        <div class="hero-gradient text-white p-8 relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="bg-indigo-500/30 text-indigo-100 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-widest border border-indigo-400/30">Tutorial</span>
+                </div>
+                <h1 class="text-3xl font-extrabold tracking-tight">Gasket Coil</h1>
+                <p class="text-indigo-200 text-sm mt-2 font-light">วิธีการขดเชือกให้เป็นระเบียบ แข็งแรง และพกพาสะดวก</p>
+            </div>
+            <!-- ภาพโชว์หลัก (R21 ตามที่ผู้ใช้ระบุ) -->
+            <img src="https://www.animatedknots.com/photos/coiling/coilingR21.jpg" 
+                 class="absolute -right-10 -bottom-10 w-48 h-48 object-contain opacity-20 rotate-12 pointer-events-none" 
+                 alt="Final Knot Preview">
+        </div>
+
+        <!-- พื้นที่สไลเดอร์ -->
+        <div id="slider-container" class="relative overflow-hidden w-full touch-pan-y bg-white border-b border-slate-100">
+            <div id="slider-track" class="flex slide-transition w-full cursor-grab active:cursor-grabbing">
+                <!-- สไลด์จะถูกสร้างด้วย JavaScript ทั้งหมด 21 สไลด์ -->
+            </div>
+            
+            <!-- ปุ่มควบคุมแบบ Floating -->
+            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                <button id="prevBtn" class="pointer-events-auto bg-white/90 backdrop-blur-sm text-slate-800 p-3 rounded-2xl shadow-xl hover:bg-indigo-600 hover:text-white transition-all disabled:opacity-0 focus:outline-none border border-slate-200 group">
+                    <i data-lucide="chevron-left" class="w-6 h-6 transition-transform group-hover:-translate-x-0.5"></i>
+                </button>
+            </div>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none">
+                <button id="nextBtn" class="pointer-events-auto bg-white/90 backdrop-blur-sm text-slate-800 p-3 rounded-2xl shadow-xl hover:bg-indigo-600 hover:text-white transition-all disabled:opacity-0 focus:outline-none border border-slate-200 group">
+                    <i data-lucide="chevron-right" class="w-6 h-6 transition-transform group-hover:translate-x-0.5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- จุด Indicators (Progress) -->
+        <div class="bg-white px-8 pt-6 pb-2">
+            <div class="flex justify-between items-center mb-4">
+                <span id="step-counter" class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Step 1 of 21</span>
+                <div class="flex gap-1" id="dots-container"></div>
+            </div>
+        </div>
+        
+        <!-- ส่วนเนื้อหาคำอธิบาย -->
+        <div id="description-panel" class="px-8 pb-8 pt-2 bg-white min-h-[120px]">
+            <h2 id="slide-title" class="text-xl font-bold text-slate-800 mb-2">เริ่มต้นการขด</h2>
+            <p id="slide-desc" class="text-slate-600 text-sm leading-relaxed">ข้อมูลขั้นตอนกำลังโหลด...</p>
+        </div>
+
+        <!-- ฟุตเตอร์ -->
+        <div class="px-8 py-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i data-lucide="info" class="w-4 h-4 text-indigo-500"></i>
+                <p class="text-[11px] text-slate-500 font-medium italic">เหมาะสำหรับเชือกที่ไม่ได้มัดกับหลัก</p>
+            </div>
+            <p class="text-[9px] text-slate-400 font-bold uppercase tracking-tight">Animated Knots Reference</p>
+        </div>
+    </div>
+
+    <script>
+        const baseUrl = "https://www.animatedknots.com/photos/coiling/coilingR";
+        
+        // คำอธิบาย 21 ขั้นตอนสำหรับ Gasket Coil
+        const descriptions = [
+            "เริ่มต้นโดยการขดเชือกเป็นวงกลมหลายๆ รอบให้มีขนาดเท่ากัน",
+            "ขดเชือกต่อไปเรื่อยๆ โดยรักษาขนาดวงให้สม่ำเสมอ",
+            "กะระยะให้เหลือปลายเชือกไว้พอสมควรสำหรับการพันปิดท้าย",
+            "รวบขดเชือกทั้งหมดไว้ในมือเดียวให้แน่น",
+            "เริ่มนำปลายเชือกที่เหลือมาพันรอบกลุ่มขดเชือก",
+            "พันวนรอบ 'คอ' ของขดเชือกหนึ่งรอบ",
+            "พันวนรอบที่สองเพื่อให้เกิดความมั่นคง",
+            "พันวนซ้ำรอบเดิมเพื่อให้รอยพันดูเรียบร้อยและแน่นหนา",
+            "ดึงการพันให้กระชับเข้าหาจุดศูนย์กลาง",
+            "จัดระเบียบเส้นเชือกที่พันรอบคอให้เรียงตัวสวยงาม",
+            "เตรียมสร้างห่วงจากปลายเชือกที่เหลือ",
+            "ทำห่วง (Bight) แล้วสอดเข้าไปในช่องว่างกลางขดเชือกด้านบน",
+            "ดันห่วงให้โผล่ออกมาอีกด้านหนึ่งของช่องกลาง",
+            "เตรียมนำปลายเชือกที่เหลือสอดเข้าในห่วงที่เพิ่งทำ",
+            "สอดปลายเชือกลอดผ่านห่วงนั้นออกมา",
+            "เริ่มดึงปลายเชือกเพื่อล็อคตำแหน่ง",
+            "ค่อยๆ ดึงให้ห่วงหดตัวรัดปลายเชือกไว้",
+            "ตรวจสอบความแน่นหนาของการล็อคส่วนหัว",
+            "จัดแต่งกลุ่มขดเชือกให้ตรงแนว ไม่บิดเบี้ยว",
+            "ดึงปลายสุดท้ายให้แน่นที่สุดเพื่อป้องกันการคลายตัว",
+            "เสร็จสมบูรณ์: ขดเชือก Gasket Coil พร้อมสำหรับการจัดเก็บหรือพกพา"
+        ];
+
+        const totalSteps = 21;
+        const slidesData = Array.from({ length: totalSteps }, (_, i) => ({
+            img: `${baseUrl}${i + 1}.jpg`,
+            title: `ขั้นตอนที่ ${i + 1}`,
+            desc: descriptions[i] || "ขั้นตอนการขดเชือกเพื่อความเรียบร้อย"
+        }));
+
+        const track = document.getElementById('slider-track');
+        const dotsContainer = document.getElementById('dots-container');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const stepCounter = document.getElementById('step-counter');
+        const slideTitle = document.getElementById('slide-title');
+        const slideDesc = document.getElementById('slide-desc');
+        
+        let currentIndex = 0;
+
+        function createSlides() {
+            track.innerHTML = '';
+            dotsContainer.innerHTML = '';
+
+            slidesData.forEach((slide, index) => {
+                // สร้าง Slide Image
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'w-full flex-shrink-0 flex flex-col slide-item';
+                slideDiv.innerHTML = `
+                    <div class="h-80 sm:h-[420px] w-full flex items-center justify-center relative overflow-hidden bg-white">
+                        <img class="knot-img user-select-none p-4 transition-all duration-700" 
+                             src="${slide.img}" 
+                             alt="Step ${index + 1}" 
+                             onerror="this.src='https://via.placeholder.com/600x600?text=Image+Step+${index+1}'">
+                    </div>
+                `;
+                track.appendChild(slideDiv);
+
+                // สร้าง Dots (Progress bar style)
+                const dot = document.createElement('div');
+                dot.className = `dot ${index === 0 ? 'bg-indigo-600 w-6' : 'bg-slate-200 w-2'}`;
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function updateSlider() {
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // อัปเดตสถานะปุ่ม
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === slidesData.length - 1;
+
+            // อัปเดตข้อความ
+            stepCounter.innerText = `Step ${currentIndex + 1} of ${totalSteps}`;
+            slideTitle.innerText = slidesData[currentIndex].title;
+            slideDesc.innerText = slidesData[currentIndex].desc;
+
+            // อัปเดตจุด Indicators
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, i) => {
+                if (i === currentIndex) {
+                    dot.classList.add('bg-indigo-600', 'w-6');
+                    dot.classList.remove('bg-slate-200', 'w-2');
+                } else {
+                    dot.classList.remove('bg-indigo-600', 'w-6');
+                    dot.classList.add('bg-slate-200', 'w-2');
+                }
+            });
+
+            // เพิ่ม Animation เล็กน้อยให้รูปภาพ
+            const activeImg = document.querySelectorAll('.knot-img')[currentIndex];
+            if (activeImg) {
+                activeImg.style.transform = 'scale(1.05)';
+                setTimeout(() => { activeImg.style.transform = 'scale(1)'; }, 300);
+            }
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < slidesData.length - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        });
+
+        // Touch Swipe Support
+        let startX = 0;
+        let isDragging = false;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            track.style.transition = 'none';
+        }, {passive: true});
+
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].clientX;
+            const walk = startX - x;
+            track.style.transform = `translateX(calc(-${currentIndex * 100}% - ${walk}px))`;
+        }, {passive: true});
+
+        track.addEventListener('touchend', (e) => {
+            isDragging = false;
+            track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0 && currentIndex < slidesData.length - 1) currentIndex++;
+                else if (diff < 0 && currentIndex > 0) currentIndex--;
+            }
+            updateSlider();
+        });
+
+        // Keyboard Support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextBtn.click();
+            if (e.key === 'ArrowLeft') prevBtn.click();
+        });
+
+        // Initialize
+        window.onload = () => {
+            createSlides();
+            updateSlider();
+            lucide.createIcons();
+        };
+
+        window.addEventListener('resize', updateSlider);
+    </script>
+</body>
+</html>
