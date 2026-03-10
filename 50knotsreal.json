@@ -486,26 +486,13 @@
     "url": "knot2/69.html"
   },
   {
-    "id": 70,
+    "id": 70,ห
     "name": "เงื่อนผูกยึด (Gnat Hitch)",
     "category": "Hitch",
     "imageUrl": "imgeknot/Gnat-Hitch-Knot-S.jpg",
     "url": "knot2/70.html"
   },
-  {
-    "id": 71,
-    "name": "การสไปซ์เชือก (Grog Sliding Splice)",
-    "category": "Splice",
-    "imageUrl": "imgeknot/Grog-Sliding-Splice-Knot-S.jpg",
-    "url": "knot2/71.html"
-  },
-  {
-    "id": 72,
-    "name": "สลิงเชือก (Grog Sling)",
-    "category": "Sling",
-    "imageUrl": "imgeknot/Grog-Sling-Knot-S.jpg",
-    "url": "knot2/72.html"
-  },
+
   {
     "id": 73,
     "name": "ครึ่ง เงื่อนผูกยึด (Half Hitch)",
