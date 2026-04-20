@@ -188,11 +188,17 @@
             <!-- JS Inject Sidebar Pills -->
         </nav>
 
-        <div class="p-6 border-t border-stone-200 bg-stone-100">
+        <div class="p-6 border-t border-stone-200 bg-stone-100 space-y-4">
             <a href="https://sites.google.com/view/privacy-policy-sovie/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81" target="_blank" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white hover:text-rope-600 transition-all text-stone-500 font-medium text-sm border border-transparent hover:border-rope-200 shadow-sm">
                 <i data-lucide="shield-check" class="w-5 h-5"></i>
                 นโยบายและคู่มือ
             </a>
+            
+            <!-- เครดิต Powered by YouTube ใน Sidebar -->
+            <div class="flex items-center justify-center gap-1.5 pt-2 border-t border-stone-200/60">
+                <i data-lucide="youtube" class="w-4 h-4 text-red-500/80"></i>
+                <span class="text-[10px] font-bold text-stone-400 uppercase tracking-widest">Powered by YouTube</span>
+            </div>
         </div>
     </aside>
 
@@ -229,7 +235,7 @@
         </div>
     </header>
 
-    <main id="main-content" class="max-w-7xl mx-auto pt-8">
+    <main id="main-content" class="max-w-7xl mx-auto pt-8 min-h-[50vh]">
         <div id="loader" class="flex flex-col items-center justify-center py-40">
             <div class="relative">
                 <!-- วงแหวนสีเชือกหมุน -->
@@ -241,6 +247,19 @@
             <p class="mt-6 text-stone-400 text-sm font-medium tracking-widest animate-pulse">กำลังเตรียมเส้นเชือก... โหลดข้อมูลเทคนิค...</p>
         </div>
     </main>
+
+    <!-- ป้าย Powered by YouTube แบบทางการ โดดเด่นเป็นมืออาชีพ -->
+    <div id="youtube-footer-badge" class="max-w-7xl mx-auto px-4 pb-12 pt-4 flex justify-center hidden">
+        <a href="https://www.youtube.com" target="_blank" class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white border border-stone-200 shadow-[0_4px_15px_-3px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_20px_-3px_rgba(220,38,38,0.15)] hover:border-red-200 transition-all duration-300 group">
+            <div class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                <i data-lucide="youtube" class="w-4 h-4 text-white"></i>
+            </div>
+            <div class="flex flex-col text-left">
+                <span class="text-[8px] font-bold text-stone-400 tracking-widest uppercase leading-none mb-0.5">Video Infrastructure</span>
+                <span class="text-xs font-bold text-stone-700 uppercase tracking-wider leading-none group-hover:text-red-600 transition-colors">Powered by YouTube</span>
+            </div>
+        </a>
+    </div>
 
     <!-- Bottom Navigation -->
     <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-[450px]">
@@ -256,7 +275,7 @@
                 <span class="text-[10px] mt-1.5 font-bold uppercase tracking-wider">ตำราเชือก</span>
             </button>
 
-            <!-- ปุ่มกู้ภัยใกล้ฉัน (ใหม่) -->
+            <!-- ปุ่มกู้ภัยใกล้ฉัน -->
             <button onclick="openRescueModal()" class="flex flex-col items-center text-stone-400 hover:text-red-600 transition-all group w-14 relative">
                 <div class="absolute -top-1 right-2 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping opacity-75"></div>
                 <div class="absolute -top-1 right-2 w-2.5 h-2.5 bg-red-500 rounded-full"></div>
@@ -458,6 +477,9 @@
 
                 document.getElementById('loader').classList.add('hidden');
                 renderHome();
+                
+                // Show YouTube badge after loading
+                document.getElementById('youtube-footer-badge').classList.remove('hidden');
             } catch (e) {
                 console.error(e);
                 document.getElementById('loader').innerHTML = '<p class="text-orange-600 text-sm font-bold bg-orange-100 px-4 py-2 rounded-xl border border-orange-200">สายป่านขาด! ไม่สามารถเชื่อมต่อข้อมูลได้ กรุณาลองใหม่อีกครั้ง</p>';
@@ -625,6 +647,10 @@
                 container.appendChild(section);
                 setupDragScroll(section.querySelector('.slide-container'));
             });
+            
+            // Toggle visibility of YouTube Footer based on search
+            document.getElementById('youtube-footer-badge').classList.remove('hidden');
+            
             lucide.createIcons();
         }
 
@@ -657,6 +683,10 @@
             currentPlaylist = filtered;
             container.innerHTML = `<div class="px-6 mb-12"><h2 class="text-sm text-stone-400 font-bold uppercase tracking-[0.2em] mb-8">ผลการค้นหาเงื่อน: <span class="text-rope-600">"${term}"</span></h2><div class="grid grid-cols-2 md:grid-cols-4 gap-6">${filtered.map((v, i) => renderCard(v, 'search', i)).join('')}</div></div>`;
             if(filtered.length === 0) container.innerHTML = `<div class="text-center py-32"><i data-lucide="search-x" class="w-16 h-16 mx-auto mb-6 text-stone-300"></i><p class="text-stone-400 font-medium">ไม่พบเทคนิคผูกเชือกนี้</p></div>`;
+            
+            // ซ่อน/แสดง Footer Badge ให้เข้ากับการค้นหา
+            document.getElementById('youtube-footer-badge').classList.remove('hidden');
+            
             lucide.createIcons();
         }
 
@@ -757,6 +787,9 @@
             const container = document.getElementById('main-content');
             container.innerHTML = `<div class="px-6 mb-12"><h2 class="text-xl font-bold text-rope-600 uppercase tracking-widest mb-8 flex items-center gap-3"><i data-lucide="bookmark-check" class="fill-current"></i> เทคนิคเงื่อนที่บันทึกไว้</h2><div class="grid grid-cols-2 md:grid-cols-4 gap-6">${list.map((v, i) => renderCard(v, 'fav', i)).join('')}</div></div>`;
             if(list.length === 0) container.innerHTML = `<div class="text-center py-32"><i data-lucide="slash" class="w-16 h-16 mx-auto mb-6 text-stone-200"></i><p class="text-stone-400 font-medium">ยังไม่ได้บันทึกเทคนิคใดๆ ไว้</p><button onclick="goHome()" class="mt-6 px-8 py-3 bg-rope-600 text-white rounded-2xl font-bold shadow-lg shadow-rope-300 hover:bg-rope-700 transition-colors">ดูเทคนิคทั้งหมด</button></div>`;
+            
+            document.getElementById('youtube-footer-badge').classList.add('hidden'); // ซ่อนเวลาดูหน้า Fav
+            
             lucide.createIcons();
         }
 
