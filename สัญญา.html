@@ -3,11 +3,11 @@
 <head>
     <base target="_top">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Corporate Data Directory</title>
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Prompt for Thai language -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -15,187 +15,286 @@
     
     <style>
         :root {
-            /* Palette: Professional Corporate */
-            --header-bg: #1e293b;        /* สีน้ำเงินเข้มเกือบดำ */
-            --header-text: #ffffff;
-            --primary-color: #2563eb;    /* สีน้ำเงินสดสำหรับปุ่ม */
+            --primary: #2563eb;
             --primary-hover: #1d4ed8;
-            --bg-color: #f8fafc;         /* สีพื้นหลังเทาอ่อนสว่าง */
-            --card-bg: #ffffff;
-            --text-main: #334155;        /* สีตัวหนังสือเทาเข้ม */
-            --text-muted: #64748b;
+            --secondary: #64748b;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #94a3b8;
             --border-color: #e2e8f0;
-            --nav-height: 60px;
+            --nav-height: 65px;
+            --header-height: 70px;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-body);
+            color: var(--text-dark);
             font-family: 'Prompt', sans-serif;
-            font-weight: 300;
-            padding-bottom: calc(var(--nav-height) + 20px); /* เว้นที่ให้ Bottom Nav */
+            -webkit-font-smoothing: antialiased;
+            padding-top: calc(var(--header-height) + 20px);
+            padding-bottom: calc(var(--nav-height) + 30px);
         }
 
-        /* --- Header Design --- */
+        /* --- Header / App Bar --- */
         .app-header {
-            background-color: var(--header-bg);
-            color: var(--header-text);
-            padding: 20px 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            position: sticky;
+            background-color: var(--bg-card);
+            height: var(--header-height);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            position: fixed;
             top: 0;
-            z-index: 1000;
+            left: 0;
+            right: 0;
+            z-index: 1030;
         }
 
-        .app-title {
-            font-size: 1.3rem;
+        .header-title {
+            font-size: 1.25rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            color: var(--primary);
             margin: 0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .app-subtitle {
-            font-size: 0.75rem;
-            opacity: 0.8;
-            font-weight: 300;
-            margin-top: 2px;
+        .btn-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: transparent;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            transition: background 0.2s;
         }
 
-        /* --- Search Box --- */
-        .search-container {
-            max-width: 700px;
-            margin: 0 auto 30px auto;
-            position: relative;
+        .btn-icon:hover, .btn-icon:focus {
+            background: #f1f5f9;
         }
 
-        .search-input {
+        /* --- Search Area --- */
+        .search-box {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 14px 20px 14px 50px;
-            width: 100%;
-            background: var(--card-bg);
-            font-size: 1rem;
-            color: var(--text-main);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
         }
 
-        .search-input:focus {
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
-        .search-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-            font-size: 1.1rem;
+        .search-box i {
+            color: var(--text-light);
+            font-size: 1.2rem;
         }
 
-        /* --- Table Design --- */
-        .table-card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-color);
-            overflow: hidden;
-        }
-
-        .custom-table {
-            width: 100%;
-            margin-bottom: 0;
-            border-collapse: collapse;
-        }
-
-        .custom-table th {
-            background-color: #f1f5f9;
-            color: var(--text-main);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-            padding: 16px 20px;
-            border-bottom: 2px solid var(--border-color);
-            text-align: left;
-        }
-
-        .custom-table td {
-            padding: 20px;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: top;
-            color: var(--text-main);
-        }
-
-        .custom-table tr:hover td {
-            background-color: #f8fafc;
-        }
-
-        .custom-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        /* --- Name & Button Layout --- */
-        .doc-name {
-            font-size: 1rem;
-            font-weight: 500;
-            line-height: 1.5;
-            color: var(--text-main);
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .action-row {
+        /* --- Unique List Items --- */
+        .list-item-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 10px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0; /* for entrance animation */
+            animation: slideUpFade 0.4s ease forwards;
         }
 
-        .btn-open-link {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            text-decoration: none;
-            padding: 6px 16px;
-            border-radius: 6px;
-            font-size: 0.85rem;
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .list-item-row:hover {
+            transform: scale(1.01) translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
+            border-color: #bfdbfe;
+        }
+
+        .list-item-row::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: var(--primary);
+            border-radius: 16px 0 0 16px;
+            opacity: 0.8;
+        }
+
+        .list-item-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+            min-width: 0; /* Enable truncation for children */
+        }
+
+        .cat-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: #eff6ff;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+            flex-shrink: 0;
+            border: 1px solid #dbeafe;
+        }
+
+        .list-item-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .doc-title {
+            font-size: 1.05rem;
             font-weight: 500;
-            display: inline-flex;
+            color: var(--text-dark);
+            margin: 0 0 4px 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.3;
+        }
+
+        .doc-cat {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            display: flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.2s;
         }
 
-        .btn-open-link:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+        .list-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+            padding-left: 15px;
         }
 
-        /* Favorite Heart Button */
+        /* Buttons in List */
         .btn-fav {
             background: transparent;
             border: none;
-            color: #cbd5e1; /* Gray by default */
-            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: transform 0.2s, color 0.2s;
-            padding: 0 10px;
+            transition: all 0.2s;
         }
-        
+
         .btn-fav:hover {
-            transform: scale(1.1);
+            background: #fee2e2;
+            color: #ef4444;
         }
 
         .btn-fav.active {
-            color: #ef4444; /* Red when active */
+            color: #ef4444;
+        }
+
+        .btn-open-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .btn-open-circle:hover {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            transform: scale(1.05);
+        }
+
+        .btn-open-circle:hover i {
+            transform: translateX(2px);
+            transition: transform 0.2s;
+        }
+
+        /* --- Offcanvas Sidebar (หมวดหมู่ยุบข้าง) --- */
+        .offcanvas-custom {
+            border-right: none;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.1);
+        }
+
+        .cat-list-item {
+            padding: 12px 20px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cat-list-item:hover {
+            background-color: #f1f5f9;
+        }
+
+        .cat-list-item.active {
+            background-color: #e0e7ff;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cat-count {
+            background: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            color: var(--secondary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         /* --- Bottom Navigation --- */
@@ -203,153 +302,226 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            width: 100%;
+            right: 0;
             height: var(--nav-height);
-            background-color: #ffffff;
-            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-card);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
             display: flex;
             justify-content: space-around;
             align-items: center;
-            z-index: 1050;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            z-index: 1020;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         .nav-item {
-            text-align: center;
-            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
             text-decoration: none;
-            font-size: 0.75rem;
-            flex: 1;
-            padding: 8px 0;
+            font-size: 0.7rem;
+            width: 100%;
+            height: 100%;
+            transition: color 0.2s;
         }
 
         .nav-item i {
-            display: block;
             font-size: 1.4rem;
             margin-bottom: 2px;
         }
 
         .nav-item.active {
-            color: var(--primary-color);
+            color: var(--primary);
             font-weight: 500;
         }
         
-        /* Mobile fixes */
-        @media (max-width: 768px) {
-            .app-title { font-size: 1.1rem; }
-            .custom-table th, .custom-table td { padding: 15px; }
-            .doc-name { font-size: 0.95rem; }
+        .nav-item.active i {
+            transform: scale(1.1);
         }
 
-        /* Pagination */
-        .pagination-container {
-            margin-top: 25px;
-            display: flex;
-            justify-content: flex-end;
+        /* --- Pagination --- */
+        .pagination-wrapper {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 100px;
+            display: inline-flex;
             align-items: center;
             gap: 15px;
-            padding: 0 10px;
-        }
-
-        .page-info { font-size: 0.9rem; color: var(--text-muted); }
-        .btn-page {
-            background: white; border: 1px solid var(--border-color); color: var(--text-main);
-            padding: 6px 12px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
-        }
-        .btn-page:hover:not(:disabled) { border-color: var(--primary-color); color: var(--primary-color); }
-        .btn-page:disabled { opacity: 0.5; cursor: default; }
-
-        #loading { text-align: center; padding: 60px; color: var(--text-muted); }
-
-        /* Modal Customization */
-        .modal-body-custom {
-            max-height: 60vh;
-            overflow-y: auto;
-            background-color: var(--bg-color);
-        }
-        .fav-item-row {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
+        }
+
+        .btn-page {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: white;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-page:hover:not(:disabled) {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .btn-page:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Loading */
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
+            color: var(--secondary);
+        }
+
+        /* Desktop Fixes */
+        @media (min-width: 768px) {
+            .bottom-nav { display: none; } /* Hide bottom nav on desktop */
+            body { padding-bottom: 40px; }
+            .offcanvas-custom { width: 350px !important; }
+        }
+
+        /* Mobile specific adjustments */
+        @media (max-width: 576px) {
+            .list-item-row { padding: 14px 15px; }
+            .cat-avatar { width: 40px; height: 40px; font-size: 1.1rem; }
+            .doc-title { font-size: 0.95rem; }
+            .btn-open-circle { width: 36px; height: 36px; font-size: 1rem; }
+            .list-item-left { gap: 12px; }
+        }
+
+        /* Modal custom */
+        .fav-modal-item {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
+            background: #f8fafc;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header App Bar -->
     <header class="app-header">
-        <div class="container-fluid px-3 px-lg-5">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
-                    <h1 class="app-title">
-                        <i class="bi bi-database-fill-gear"></i> Data Directory
-                    </h1>
-                    <div class="app-subtitle">ระบบสารบัญข้อมูลองค์กร</div>
-                </div>
-                <div class="d-flex gap-2">
-                    <!-- Favorites Button (Trigger Modal) -->
-                    <button onclick="openFavoritesModal()" class="btn btn-outline-light btn-sm position-relative">
-                        <i class="bi bi-heart-fill text-danger"></i> รายการโปรด
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="favCountBadge" style="display: none;">
-                            0
-                        </span>
-                    </button>
-                    <!-- Refresh Button -->
-                    <button onclick="loadData()" class="btn btn-outline-light btn-sm opacity-75">
-                        <i class="bi bi-arrow-clockwise"></i>
-                    </button>
-                </div>
+        <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-2">
+                <!-- Hamburger Menu Button -->
+                <button class="btn-icon" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+                    <i class="bi bi-list"></i>
+                </button>
+                <h1 class="header-title">
+                    <i class="bi bi-folder2-open d-none d-sm-inline"></i> Directory
+                </h1>
+            </div>
+            
+            <div class="d-flex gap-2 align-items-center">
+                <!-- Status & Active Category Label (Desktop mostly) -->
+                <span class="badge bg-primary d-none d-md-inline-block px-3 py-2 rounded-pill" id="currentCatLabelTop">ทุกหมวดหมู่</span>
+                
+                <button class="btn-icon position-relative" onclick="openFavoritesModal()">
+                    <i class="bi bi-heart-fill text-danger"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light" id="favCountBadge" style="display: none; font-size: 0.6rem;">0</span>
+                </button>
+                <button class="btn-icon" onclick="loadData()">
+                    <i class="bi bi-arrow-clockwise"></i>
+                </button>
             </div>
         </div>
     </header>
 
-    <div class="container-fluid px-3 px-lg-5">
+    <!-- Sidebar / Offcanvas Menu (เมนูยุบข้าง) -->
+    <div class="offcanvas offcanvas-start offcanvas-custom" tabindex="-1" id="sidebarMenu">
+        <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title fw-bold text-primary">
+                <i class="bi bi-tags-fill me-2"></i>หมวดหมู่ข้อมูล
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="text-muted small mb-3">เลือกหมวดหมู่ที่ต้องการค้นหา</div>
+            <div id="categoryListContainer">
+                <!-- Category items generated by JS -->
+            </div>
+        </div>
+        <div class="offcanvas-footer p-3 border-top bg-light text-center">
+            <small class="text-muted">Corporate Data System</small>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="container px-3 px-md-4">
         
-        <!-- Search Area -->
-        <div class="search-container">
-            <i class="bi bi-search search-icon"></i>
-            <input type="text" id="searchInput" class="search-input" placeholder="ค้นหารายการเอกสาร..." onkeyup="filterData()">
+        <!-- Search and Filter Info -->
+        <div class="row mb-3">
+            <div class="col-12 col-md-8 mx-auto">
+                <div class="search-box">
+                    <i class="bi bi-search ms-2"></i>
+                    <input type="text" id="searchInput" placeholder="ค้นหาชื่อเอกสาร หรือคีย์เวิร์ด..." onkeyup="handleSearch()">
+                    <i class="bi bi-x-circle-fill text-muted me-2" style="cursor:pointer; display:none;" id="clearSearchBtn" onclick="clearSearch()"></i>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="text-muted small">
+                        แสดงผล: <strong class="text-dark" id="currentCatText">ทุกหมวดหมู่</strong>
+                    </div>
+                    <div class="text-muted small">
+                        พบ <strong class="text-primary" id="resultCount">0</strong> รายการ
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Content Area -->
-        <div id="loading">
-            <div class="spinner-border text-secondary" role="status"></div>
-            <div class="mt-3 font-weight-light">กำลังเชื่อมต่อฐานข้อมูล...</div>
+        <!-- Loading State -->
+        <div id="loading" class="loader-container">
+            <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>
+            <h5 class="fw-light">กำลังดาวน์โหลดข้อมูล...</h5>
         </div>
 
+        <!-- Data Container (Unique List) -->
         <div id="dataContainer" style="display: none;">
-            <div class="table-card">
-                <table class="custom-table">
-                    <thead>
-                        <tr>
-                            <th style="width: 50px; text-align: center;">#</th>
-                            <th>รายละเอียดเอกสาร</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <!-- Data Rows Generated via JS -->
-                    </tbody>
-                </table>
+            
+            <div class="row">
+                <div class="col-12 col-md-10 col-lg-8 mx-auto" id="dataList">
+                    <!-- List items generated via JS -->
+                </div>
             </div>
 
-            <div id="emptyState" style="display: none; text-align: center; padding: 60px; color: #94a3b8;">
-                <i class="bi bi-inbox" style="font-size: 2.5rem; display: block; margin-bottom: 10px;"></i>
-                ไม่พบข้อมูลที่ค้นหา
+            <!-- Empty State -->
+            <div id="emptyState" style="display: none;" class="text-center py-5">
+                <div class="mb-3">
+                    <i class="bi bi-search text-light" style="font-size: 4rem;"></i>
+                </div>
+                <h5 class="text-muted">ไม่พบข้อมูลที่ตรงกับคำค้นหา</h5>
+                <button class="btn btn-outline-primary rounded-pill mt-3 px-4" onclick="resetFilters()">ดูข้อมูลทั้งหมด</button>
             </div>
 
-            <div id="paginationFooter" class="pagination-container" style="display: none;">
-                <span class="page-info">
-                    หน้า <strong id="curPageDisplay">1</strong> / <span id="totalPageDisplay">1</span>
-                </span>
-                <div>
+            <!-- Pagination -->
+            <div id="paginationFooter" class="text-center mt-4" style="display: none;">
+                <div class="pagination-wrapper">
                     <button class="btn-page" id="prevBtn" onclick="changePage(currentPage - 1)">
                         <i class="bi bi-chevron-left"></i>
                     </button>
+                    <span class="text-muted small px-2">
+                        หน้า <strong id="curPageDisplay" class="text-dark">1</strong> จาก <span id="totalPageDisplay">1</span>
+                    </span>
                     <button class="btn-page" id="nextBtn" onclick="changePage(currentPage + 1)">
                         <i class="bi bi-chevron-right"></i>
                     </button>
@@ -357,16 +529,20 @@
             </div>
         </div>
 
-    </div>
+    </main>
 
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">
+    <!-- Bottom Navigation (Mobile Only) -->
+    <nav class="bottom-nav d-flex d-md-none">
+        <a href="#" class="nav-item active" id="navHome" onclick="switchTab('home'); return false;">
             <i class="bi bi-house-door-fill"></i>
             หน้าหลัก
         </a>
-        <a href="#" class="nav-item" onclick="openFavoritesModal(); return false;">
-            <i class="bi bi-bookmark-heart"></i>
+        <a href="#" class="nav-item" id="navCategory" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+            <i class="bi bi-grid-fill"></i>
+            หมวดหมู่
+        </a>
+        <a href="#" class="nav-item" id="navFav" onclick="openFavoritesModal(); return false;">
+            <i class="bi bi-bookmark-heart-fill"></i>
             รายการโปรด
         </a>
     </nav>
@@ -374,35 +550,36 @@
     <!-- Favorites Modal -->
     <div class="modal fade" id="favoritesModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header border-bottom-0">
-                    <h5 class="modal-title fw-bold"><i class="bi bi-heart-fill text-danger"></i> รายการโปรดของฉัน</h5>
+            <div class="modal-content border-0 rounded-4 shadow-lg">
+                <div class="modal-header border-bottom-0 pb-0">
+                    <h5 class="modal-title fw-bold text-dark">
+                        <i class="bi bi-bookmark-heart-fill text-danger me-2"></i>รายการโปรด
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body modal-body-custom" id="favoritesListBody">
-                    <!-- Favorite items will be injected here -->
-                </div>
-                <div class="modal-footer border-top-0">
-                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">ปิดหน้าต่าง</button>
+                <div class="modal-body" id="favoritesListBody">
+                    <!-- Favorite items injected here -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap Bundle -->
+    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         // --- Configuration ---
         const CSV_DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTItiReSbPwa0Fz_Afzmi8BrcUdpzdOINQiV7xFkiKWvl_x1KzmEKItpJjQNjtz1SgheZYdL3s4cSiy/pub?output=csv';
-        const ITEMS_PER_PAGE = 15;
-        const STORAGE_KEY = 'corporate_data_favorites';
+        const ITEMS_PER_PAGE = 10; // Reduced slightly for list layout
+        const STORAGE_KEY = 'corporate_data_favorites_v3';
 
         // --- State ---
         let allData = [];
         let filteredData = [];
         let currentPage = 1;
-        let favorites = []; // Array of names or unique keys
+        let favorites = [];
+        let categories = new Map();
+        let activeCategory = 'All';
 
         // --- Initialization ---
         window.onload = () => {
@@ -410,21 +587,25 @@
             loadData();
         };
 
-        // --- Data Loading ---
+        // --- Data Loading & Parsing ---
         function loadData() {
             toggleLoading(true);
             fetch(CSV_DATA_URL)
                 .then(res => res.text())
                 .then(text => {
                     parseCSV(text);
-                    renderTable();
+                    extractCategories();
+                    renderCategoryMenu();
+                    applyFilters();
                     toggleLoading(false);
                 })
                 .catch(err => {
                     console.error(err);
                     document.getElementById('loading').innerHTML = `
-                        <div class="text-danger">
-                            <i class="bi bi-exclamation-triangle"></i> ไม่สามารถโหลดข้อมูลได้
+                        <div class="text-danger text-center mt-5">
+                            <i class="bi bi-wifi-off fs-1 d-block mb-3"></i>
+                            <h5>ไม่สามารถเชื่อมต่อฐานข้อมูลได้</h5>
+                            <button class="btn btn-outline-danger mt-3" onclick="loadData()">ลองใหม่อีกครั้ง</button>
                         </div>
                     `;
                 });
@@ -447,116 +628,115 @@
                 const cols = rows[i].split(',');
                 if (cols.length < 2) continue;
 
-                const name = cols[nameIdx]?.trim() || 'No Name';
+                const name = cols[nameIdx]?.trim() || 'ไม่มีชื่อเอกสาร';
                 const rawUrl = cols[urlIdx]?.trim() || '#';
-                
-                let cat = 'General';
-                if (catIdx !== -1 && cols[catIdx]) cat = cols[catIdx].trim();
+                let cat = 'ทั่วไป';
+                if (catIdx !== -1 && cols[catIdx]) {
+                    cat = cols[catIdx].trim();
+                    if(cat === '') cat = 'ทั่วไป';
+                }
 
-                // Generate a simple ID based on name for favorites tracking
-                // In a real app, use a unique ID from database
                 allData.push({ 
-                    id: btoa(unescape(encodeURIComponent(name + rawUrl))), // Base64 encoding as makeshift ID
-                    name, 
+                    id: btoa(unescape(encodeURIComponent(name + rawUrl))).substring(0, 20),
+                    name: name, 
                     url: rawUrl, 
                     category: cat 
                 });
             }
-            filteredData = [...allData];
         }
 
-        // --- Favorites Logic (LocalStorage) ---
-        function loadFavorites() {
-            const stored = localStorage.getItem(STORAGE_KEY);
-            if (stored) {
-                favorites = JSON.parse(stored);
-            }
-            updateFavBadge();
-        }
-
-        function toggleFavorite(id) {
-            const itemIndex = favorites.indexOf(id);
-            if (itemIndex === -1) {
-                favorites.push(id); // Add
-            } else {
-                favorites.splice(itemIndex, 1); // Remove
-            }
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+        // --- Category Management ---
+        function extractCategories() {
+            categories.clear();
+            categories.set('All', allData.length);
             
-            // Re-render to update heart icons
-            renderTable();
-            updateFavBadge();
-            
-            // If modal is open, refresh it too
-            const modalEl = document.getElementById('favoritesModal');
-            if (modalEl.classList.contains('show')) {
-                openFavoritesModal();
-            }
+            allData.forEach(item => {
+                const count = categories.get(item.category) || 0;
+                categories.set(item.category, count + 1);
+            });
         }
 
-        function updateFavBadge() {
-            const badge = document.getElementById('favCountBadge');
-            if (favorites.length > 0) {
-                badge.innerText = favorites.length;
-                badge.style.display = 'inline-block';
-            } else {
-                badge.style.display = 'none';
-            }
-        }
-
-        function openFavoritesModal() {
-            const modalBody = document.getElementById('favoritesListBody');
+        function renderCategoryMenu() {
+            const container = document.getElementById('categoryListContainer');
+            let html = '';
             
-            if (favorites.length === 0) {
-                modalBody.innerHTML = `
-                    <div class="text-center py-5 text-muted">
-                        <i class="bi bi-heart" style="font-size: 3rem;"></i><br>
-                        ยังไม่มีรายการโปรด<br>
-                        <small>กดรูปหัวใจเพื่อบันทึกรายการ</small>
+            categories.forEach((count, cat) => {
+                const isAll = cat === 'All';
+                const displayName = isAll ? 'ทุกหมวดหมู่ (All)' : cat;
+                const icon = isAll ? 'bi-collection' : 'bi-folder2';
+                const activeClass = activeCategory === cat ? 'active' : '';
+                
+                html += `
+                    <div class="cat-list-item ${activeClass}" onclick="selectCategory('${cat}')">
+                        <div>
+                            <i class="bi ${icon} me-2 text-muted"></i>
+                            ${displayName}
+                        </div>
+                        <span class="cat-count">${count}</span>
                     </div>
                 `;
-            } else {
-                // Find full item details from allData
-                const favItems = allData.filter(item => favorites.includes(item.id));
-                
-                let html = '';
-                favItems.forEach(item => {
-                    html += `
-                        <div class="fav-item-row">
-                            <div style="flex:1; padding-right:10px;">
-                                <div class="fw-bold text-dark mb-1">${item.name}</div>
-                                <a href="${item.url}" target="_blank" class="text-primary text-decoration-none small">
-                                    <i class="bi bi-box-arrow-up-right"></i> เปิดเอกสาร
-                                </a>
-                            </div>
-                            <button onclick="toggleFavorite('${item.id}')" class="btn btn-sm btn-outline-danger border-0">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </div>
-                    `;
-                });
-                modalBody.innerHTML = html;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function selectCategory(cat) {
+            activeCategory = cat;
+            
+            const displayName = cat === 'All' ? 'ทุกหมวดหมู่' : cat;
+            document.getElementById('currentCatText').innerText = displayName;
+            document.getElementById('currentCatLabelTop').innerText = displayName;
+            
+            renderCategoryMenu();
+            
+            const offcanvasEl = document.getElementById('sidebarMenu');
+            const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasEl);
+            if(offcanvasInstance && window.innerWidth < 768) {
+                offcanvasInstance.hide();
             }
 
-            // Show Modal
-            const myModal = new bootstrap.Modal(document.getElementById('favoritesModal'));
-            myModal.show();
-        }
-
-        // --- Table Rendering ---
-        function filterData() {
-            const q = document.getElementById('searchInput').value.toLowerCase();
-            filteredData = allData.filter(d => 
-                d.name.toLowerCase().includes(q) || 
-                d.category.toLowerCase().includes(q)
-            );
             currentPage = 1;
-            renderTable();
+            applyFilters();
         }
 
-        function renderTable() {
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = '';
+        // --- Filtering Logic ---
+        function handleSearch() {
+            const q = document.getElementById('searchInput').value;
+            const clearBtn = document.getElementById('clearSearchBtn');
+            clearBtn.style.display = q.length > 0 ? 'inline-block' : 'none';
+            
+            currentPage = 1;
+            applyFilters();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearSearchBtn').style.display = 'none';
+            applyFilters();
+        }
+
+        function resetFilters() {
+            clearSearch();
+            selectCategory('All');
+        }
+
+        function applyFilters() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            
+            filteredData = allData.filter(d => {
+                const matchCategory = (activeCategory === 'All') || (d.category === activeCategory);
+                const matchSearch = d.name.toLowerCase().includes(q) || d.category.toLowerCase().includes(q);
+                return matchCategory && matchSearch;
+            });
+            
+            document.getElementById('resultCount').innerText = filteredData.length;
+            renderList();
+        }
+
+        // --- Rendering Unique List ---
+        function renderList() {
+            const listContainer = document.getElementById('dataList');
+            listContainer.innerHTML = '';
 
             if (filteredData.length === 0) {
                 document.getElementById('emptyState').style.display = 'block';
@@ -565,59 +745,158 @@
             }
 
             document.getElementById('emptyState').style.display = 'none';
-            document.getElementById('paginationFooter').style.display = 'flex';
+            document.getElementById('paginationFooter').style.display = 'block';
 
             const start = (currentPage - 1) * ITEMS_PER_PAGE;
             const end = Math.min(start + ITEMS_PER_PAGE, filteredData.length);
             const items = filteredData.slice(start, end);
 
             let html = '';
-            items.forEach((item, idx) => {
+            items.forEach((item, index) => {
                 const isFav = favorites.includes(item.id);
-                const heartClass = isFav ? 'bi-heart-fill active' : 'bi-heart';
+                const heartClass = isFav ? 'bi-heart-fill' : 'bi-heart';
+                const btnActive = isFav ? 'active' : '';
+                
+                // Get the first character for the avatar
+                const initial = item.category ? item.category.charAt(0).toUpperCase() : 'D';
+                
+                // Added delay for the staggered entrance animation
+                const delay = index * 0.05;
                 
                 html += `
-                    <tr>
-                        <td style="text-align: center; color: #94a3b8; font-weight: 400; padding-top: 20px;">
-                            ${start + idx + 1}
-                        </td>
-                        <td>
-                            <span class="doc-name">${item.name}</span>
-                            
-                            <div class="action-row">
-                                <a href="${item.url}" target="_blank" class="btn-open-link">
-                                    <i class="bi bi-box-arrow-up-right"></i> เปิดเอกสาร
-                                </a>
-                                
-                                <button onclick="toggleFavorite('${item.id}')" class="btn-fav ${isFav ? 'active' : ''}" title="บันทึกรายการโปรด">
-                                    <i class="bi ${heartClass}"></i>
-                                </button>
+                    <div class="list-item-row" style="animation-delay: ${delay}s;">
+                        <div class="list-item-left">
+                            <div class="cat-avatar">${initial}</div>
+                            <div class="list-item-content">
+                                <div class="doc-title" title="${item.name}">${item.name}</div>
+                                <div class="doc-cat">
+                                    <i class="bi bi-tag-fill text-primary" style="font-size:0.7rem;"></i> ${item.category}
+                                </div>
                             </div>
-                        </td>
-                    </tr>
+                        </div>
+                        <div class="list-item-actions">
+                            <button onclick="toggleFavorite('${item.id}')" class="btn-fav ${btnActive}" title="บันทึกรายการโปรด">
+                                <i class="bi ${heartClass}"></i>
+                            </button>
+                            <a href="${item.url}" target="_blank" class="btn-open-circle" title="เปิดเอกสาร">
+                                <i class="bi bi-arrow-right-short fs-4"></i>
+                            </a>
+                        </div>
+                    </div>
                 `;
             });
-            tbody.innerHTML = html;
+            listContainer.innerHTML = html;
             
             updatePagination();
         }
 
+        // --- Pagination ---
         function updatePagination() {
+            const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE) || 1;
             document.getElementById('curPageDisplay').innerText = currentPage;
-            document.getElementById('totalPageDisplay').innerText = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+            document.getElementById('totalPageDisplay').innerText = totalPages;
+            
             document.getElementById('prevBtn').disabled = currentPage === 1;
-            document.getElementById('nextBtn').disabled = currentPage >= Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+            document.getElementById('nextBtn').disabled = currentPage >= totalPages;
         }
 
         function changePage(p) {
             currentPage = p;
-            renderTable();
+            renderList();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // --- Favorites Management ---
+        function loadFavorites() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) favorites = JSON.parse(stored);
+            updateFavBadge();
+        }
+
+        function toggleFavorite(id) {
+            const index = favorites.indexOf(id);
+            if (index === -1) {
+                favorites.push(id);
+            } else {
+                favorites.splice(index, 1);
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+            
+            renderList(); 
+            updateFavBadge();
+            
+            const modalEl = document.getElementById('favoritesModal');
+            if (modalEl.classList.contains('show')) openFavoritesModal();
+        }
+
+        function updateFavBadge() {
+            const badge = document.getElementById('favCountBadge');
+            if (favorites.length > 0) {
+                badge.innerText = favorites.length > 99 ? '99+' : favorites.length;
+                badge.style.display = 'inline-block';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function openFavoritesModal() {
+            switchTab('fav');
+            const modalBody = document.getElementById('favoritesListBody');
+            
+            if (favorites.length === 0) {
+                modalBody.innerHTML = `
+                    <div class="text-center py-5">
+                        <div class="bg-light rounded-circle d-inline-flex p-4 mb-3">
+                            <i class="bi bi-bookmark-x text-muted" style="font-size: 3rem;"></i>
+                        </div>
+                        <h6 class="text-muted">ยังไม่มีเอกสารในรายการโปรด</h6>
+                        <p class="small text-light mb-0">กดไอคอนหัวใจที่เอกสารเพื่อบันทึกเก็บไว้ดูภายหลัง</p>
+                    </div>
+                `;
+            } else {
+                const favItems = allData.filter(item => favorites.includes(item.id));
+                let html = '';
+                favItems.forEach(item => {
+                    html += `
+                        <div class="fav-modal-item">
+                            <div style="flex: 1; padding-right: 15px;">
+                                <span class="badge bg-secondary mb-1" style="font-size:0.65rem;">${item.category}</span>
+                                <div class="fw-medium text-dark lh-sm mb-2" style="font-size:0.95rem;">${item.name}</div>
+                                <a href="${item.url}" target="_blank" class="text-primary text-decoration-none small">
+                                    <i class="bi bi-box-arrow-up-right"></i> เปิดดูเอกสาร
+                                </a>
+                            </div>
+                            <button onclick="toggleFavorite('${item.id}')" class="btn btn-sm btn-outline-danger rounded-circle" style="width: 35px; height: 35px;">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </div>
+                    `;
+                });
+                modalBody.innerHTML = html;
+            }
+
+            const myModal = new bootstrap.Modal(document.getElementById('favoritesModal'));
+            myModal.show();
+            
+            document.getElementById('favoritesModal').addEventListener('hidden.bs.modal', function () {
+                switchTab('home');
+            }, {once:true});
+        }
+
+        // --- Utils ---
         function toggleLoading(show) {
-            document.getElementById('loading').style.display = show ? 'block' : 'none';
+            document.getElementById('loading').style.display = show ? 'flex' : 'none';
             document.getElementById('dataContainer').style.display = show ? 'none' : 'block';
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
+            if(tab === 'home') {
+                document.getElementById('navHome').classList.add('active');
+                window.scrollTo({top:0, behavior:'smooth'});
+            } else if(tab === 'fav') {
+                document.getElementById('navFav').classList.add('active');
+            }
         }
     </script>
 </body>
