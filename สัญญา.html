@@ -1,46 +1,75 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="th" data-bs-theme="light">
 <head>
     <base target="_top">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Corporate Data Directory</title>
     
-    <!-- Google Fonts: Prompt for Thai language -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Prompt for Thai language & Inter for sleek numbers/icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
         :root {
+            --font-main: 'Prompt', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --primary: #2563eb;
             --primary-hover: #1d4ed8;
+            --primary-light: #eff6ff;
+            --primary-border: #bfdbfe;
             --secondary: #64748b;
-            --bg-body: #f1f5f9;
+            --bg-body: #f8fafc;
             --bg-card: #ffffff;
-            --text-dark: #1e293b;
-            --text-light: #94a3b8;
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
             --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 25px -5px rgba(37, 99, 235, 0.08);
             --nav-height: 65px;
             --header-height: 70px;
+            --radius-main: 16px;
+        }
+
+        [data-bs-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --bg-glass: rgba(30, 41, 59, 0.85);
+            --text-dark: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --primary-light: rgba(37, 99, 235, 0.15);
+            --primary-border: #1e40af;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.4);
         }
 
         body {
             background-color: var(--bg-body);
             color: var(--text-dark);
-            font-family: 'Prompt', sans-serif;
+            font-family: var(--font-main);
             -webkit-font-smoothing: antialiased;
-            padding-top: calc(var(--header-height) + 20px);
+            padding-top: calc(var(--header-height) + 16px);
             padding-bottom: calc(var(--nav-height) + 30px);
+            min-height: 100vh;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* --- Header / App Bar --- */
         .app-header {
-            background-color: var(--bg-card);
+            background-color: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             height: var(--header-height);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             position: fixed;
@@ -48,95 +77,187 @@
             left: 0;
             right: 0;
             z-index: 1030;
+            transition: all 0.3s ease;
+        }
+
+        .brand-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
 
         .header-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-dark);
             margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            letter-spacing: -0.3px;
         }
 
-        .btn-icon {
+        .btn-icon-btn {
             width: 40px;
             height: 40px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
+            border-radius: 12px;
             background: transparent;
-            border: none;
+            border: 1px solid var(--border-color);
             color: var(--text-dark);
-            font-size: 1.3rem;
-            transition: background 0.2s;
+            font-size: 1.1rem;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        .btn-icon:hover, .btn-icon:focus {
-            background: #f1f5f9;
+        .btn-icon-btn:hover {
+            background: var(--primary-light);
+            border-color: var(--primary-border);
+            color: var(--primary);
+            transform: translateY(-1px);
+        }
+
+        /* Quick Category Chip Bar */
+        .chip-scroll-container {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .chip-scroll-container::-webkit-scrollbar { display: none; }
+
+        .cat-chip {
+            white-space: nowrap;
+            padding: 6px 14px;
+            border-radius: 50px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cat-chip:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .cat-chip.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
         }
 
         /* --- Search Area --- */
-        .search-box {
+        .search-wrapper {
+            position: relative;
             background: var(--bg-card);
-            border-radius: 16px;
-            padding: 8px 16px;
+            border-radius: 20px;
+            padding: 6px 16px;
             display: flex;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-color);
-            margin-bottom: 24px;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .search-box:focus-within {
+        .search-wrapper:focus-within {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12), var(--shadow-md);
+            transform: translateY(-1px);
         }
 
-        .search-box input {
+        .search-wrapper input {
             border: none;
             background: transparent;
             width: 100%;
             padding: 10px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             outline: none;
+            color: var(--text-dark);
         }
 
-        .search-box i {
-            color: var(--text-light);
+        .search-wrapper input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-wrapper i.search-icon {
+            color: var(--text-muted);
             font-size: 1.2rem;
         }
 
-        /* --- Unique List Items --- */
+        /* View Toggle Switcher */
+        .view-btn-group {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3px;
+            display: inline-flex;
+        }
+
+        .btn-view {
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .btn-view.active {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* --- Document Items: List View --- */
+        .doc-list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
         .list-item-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: var(--bg-card);
-            border-radius: 16px;
+            border-radius: var(--radius-main);
             padding: 16px 20px;
-            margin-bottom: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-color);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            opacity: 0; /* for entrance animation */
-            animation: slideUpFade 0.4s ease forwards;
+            opacity: 0;
+            animation: slideUpFade 0.35s ease forwards;
         }
 
         @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .list-item-row:hover {
-            transform: scale(1.01) translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
-            border-color: #bfdbfe;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-border);
         }
 
         .list-item-row::before {
@@ -145,212 +266,243 @@
             left: 0;
             top: 0;
             bottom: 0;
-            width: 6px;
+            width: 4px;
             background: var(--primary);
-            border-radius: 16px 0 0 16px;
-            opacity: 0.8;
+            border-radius: 4px 0 0 4px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
         }
 
-        .list-item-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex: 1;
-            min-width: 0; /* Enable truncation for children */
+        .list-item-row:hover::before {
+            opacity: 1;
         }
 
-        .cat-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            background: #eff6ff;
-            color: var(--primary);
+        .file-icon-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            font-weight: 600;
+            font-size: 1.35rem;
             flex-shrink: 0;
-            border: 1px solid #dbeafe;
+            transition: transform 0.2s ease;
         }
 
-        .list-item-content {
-            flex: 1;
-            min-width: 0;
+        .list-item-row:hover .file-icon-avatar {
+            transform: scale(1.05);
         }
+
+        /* Dynamic File Type Colors */
+        .type-sheet { background: rgba(16, 185, 129, 0.12); color: #10b981; }
+        .type-pdf { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
+        .type-doc { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
+        .type-slide { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+        .type-generic { background: rgba(100, 116, 139, 0.12); color: #64748b; }
 
         .doc-title {
-            font-size: 1.05rem;
-            font-weight: 500;
+            font-size: 1rem;
+            font-weight: 600;
             color: var(--text-dark);
             margin: 0 0 4px 0;
+            line-height: 1.35;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            line-height: 1.3;
         }
 
-        .doc-cat {
+        .doc-meta {
             font-size: 0.8rem;
-            color: var(--secondary);
+            color: var(--text-muted);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
-        .list-item-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
-            padding-left: 15px;
-        }
-
-        /* Buttons in List */
-        .btn-fav {
-            background: transparent;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #cbd5e1;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-fav:hover {
-            background: #fee2e2;
-            color: #ef4444;
-        }
-
-        .btn-fav.active {
-            color: #ef4444;
-        }
-
-        .btn-open-circle {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: #f1f5f9;
+        .doc-badge {
+            background: var(--primary-light);
             color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* --- Document Items: Grid View --- */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .grid-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-main);
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            position: relative;
+            animation: slideUpFade 0.35s ease forwards;
+        }
+
+        .grid-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-border);
+        }
+
+        .btn-action-round {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            color: var(--text-dark);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             transition: all 0.2s;
-            border: 1px solid transparent;
+            cursor: pointer;
         }
 
-        .btn-open-circle:hover {
+        .btn-action-round:hover {
             background: var(--primary);
             color: white;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
         }
 
-        .btn-open-circle:hover i {
-            transform: translateX(2px);
-            transition: transform 0.2s;
+        .btn-fav {
+            border: none;
+            background: transparent;
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+            cursor: pointer;
+            padding: 4px;
         }
 
-        /* --- Offcanvas Sidebar (หมวดหมู่ยุบข้าง) --- */
+        .btn-fav:hover, .btn-fav.active {
+            color: #ef4444;
+            transform: scale(1.15);
+        }
+
+        /* Highlight matching search keywords */
+        .highlight-text {
+            background-color: rgba(253, 224, 71, 0.4);
+            color: inherit;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        /* --- Sidebar Drawer --- */
         .offcanvas-custom {
             border-right: none;
-            box-shadow: 5px 0 25px rgba(0,0,0,0.1);
+            background-color: var(--bg-card);
+            color: var(--text-dark);
         }
 
         .cat-list-item {
-            padding: 12px 20px;
+            padding: 12px 16px;
             border-radius: 12px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text-dark);
-            font-weight: 400;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            font-size: 0.95rem;
         }
 
         .cat-list-item:hover {
-            background-color: #f1f5f9;
+            background-color: var(--primary-light);
+            color: var(--primary);
         }
 
         .cat-list-item.active {
-            background-color: #e0e7ff;
-            color: var(--primary);
+            background-color: var(--primary);
+            color: white;
             font-weight: 600;
         }
 
-        .cat-count {
-            background: white;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            color: var(--secondary);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        .cat-list-item.active .badge-count {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
         }
 
-        /* --- Bottom Navigation --- */
+        .badge-count {
+            background: var(--bg-body);
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- Bottom Nav Mobile --- */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             height: var(--nav-height);
-            background-color: var(--bg-card);
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+            background-color: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: space-around;
             align-items: center;
             z-index: 1020;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
             padding-bottom: env(safe-area-inset-bottom);
         }
 
-        .nav-item {
+        .nav-link-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: var(--text-light);
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             width: 100%;
             height: 100%;
             transition: color 0.2s;
         }
 
-        .nav-item i {
-            font-size: 1.4rem;
+        .nav-link-item i {
+            font-size: 1.3rem;
             margin-bottom: 2px;
+            transition: transform 0.2s;
         }
 
-        .nav-item.active {
+        .nav-link-item.active {
             color: var(--primary);
-            font-weight: 500;
+            font-weight: 600;
         }
-        
-        .nav-item.active i {
-            transform: scale(1.1);
+
+        .nav-link-item.active i {
+            transform: translateY(-2px);
         }
 
         /* --- Pagination --- */
-        .pagination-wrapper {
-            background: white;
-            padding: 10px 20px;
-            border-radius: 100px;
+        .pagination-container {
+            background: var(--bg-card);
+            padding: 8px 16px;
+            border-radius: 50px;
             display: inline-flex;
             align-items: center;
-            gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            gap: 12px;
+            box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-color);
         }
 
@@ -359,7 +511,7 @@
             height: 36px;
             border-radius: 50%;
             border: 1px solid var(--border-color);
-            background: white;
+            background: var(--bg-body);
             color: var(--text-dark);
             display: flex;
             align-items: center;
@@ -375,46 +527,22 @@
         }
 
         .btn-page:disabled {
-            opacity: 0.4;
+            opacity: 0.3;
             cursor: not-allowed;
         }
 
-        /* Loading */
-        .loader-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 50vh;
-            color: var(--secondary);
+        /* Toast notification */
+        .toast-container {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1100;
         }
 
-        /* Desktop Fixes */
         @media (min-width: 768px) {
-            .bottom-nav { display: none; } /* Hide bottom nav on desktop */
+            .bottom-nav { display: none; }
             body { padding-bottom: 40px; }
-            .offcanvas-custom { width: 350px !important; }
-        }
-
-        /* Mobile specific adjustments */
-        @media (max-width: 576px) {
-            .list-item-row { padding: 14px 15px; }
-            .cat-avatar { width: 40px; height: 40px; font-size: 1.1rem; }
-            .doc-title { font-size: 0.95rem; }
-            .btn-open-circle { width: 36px; height: 36px; font-size: 1rem; }
-            .list-item-left { gap: 12px; }
-        }
-
-        /* Modal custom */
-        .fav-modal-item {
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f8fafc;
+            .toast-container { bottom: 30px; }
         }
     </style>
 </head>
@@ -423,104 +551,151 @@
     <!-- Header App Bar -->
     <header class="app-header">
         <div class="container-fluid px-3 px-md-4 d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center gap-2">
-                <!-- Hamburger Menu Button -->
-                <button class="btn-icon" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
-                    <i class="bi bi-list"></i>
+            <div class="d-flex align-items-center gap-3">
+                <button class="btn-icon-btn" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" title="เมนูหมวดหมู่">
+                    <i class="bi bi-filter-left fs-4"></i>
                 </button>
-                <h1 class="header-title">
-                    <i class="bi bi-folder2-open d-none d-sm-inline"></i> Directory
-                </h1>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="brand-logo">
+                        <i class="bi bi-folder2-open"></i>
+                    </div>
+                    <div>
+                        <h1 class="header-title">Corporate Directory</h1>
+                        <span class="d-none d-sm-inline-block text-muted" style="font-size:0.75rem;">คลังข้อมูลเอกสารองค์กร</span>
+                    </div>
+                </div>
             </div>
             
             <div class="d-flex gap-2 align-items-center">
-                <!-- Status & Active Category Label (Desktop mostly) -->
-                <span class="badge bg-primary d-none d-md-inline-block px-3 py-2 rounded-pill" id="currentCatLabelTop">ทุกหมวดหมู่</span>
-                
-                <button class="btn-icon position-relative" onclick="openFavoritesModal()">
-                    <i class="bi bi-heart-fill text-danger"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light" id="favCountBadge" style="display: none; font-size: 0.6rem;">0</span>
+                <!-- Theme Toggle Button -->
+                <button class="btn-icon-btn" onclick="toggleTheme()" id="themeToggleBtn" title="เปลี่ยนธีม">
+                    <i class="bi bi-moon-stars"></i>
                 </button>
-                <button class="btn-icon" onclick="loadData()">
-                    <i class="bi bi-arrow-clockwise"></i>
+
+                <!-- Favorites Button -->
+                <button class="btn-icon-btn" onclick="openFavoritesModal()" title="รายการโปรด">
+                    <i class="bi bi-bookmark-heart text-danger"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-light" id="favCountBadge" style="display: none; font-size: 0.65rem;">0</span>
+                </button>
+
+                <!-- Reload Button -->
+                <button class="btn-icon-btn" onclick="loadData()" title="รีเฟรชข้อมูล">
+                    <i class="bi bi-arrow-clockwise" id="refreshIcon"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Sidebar / Offcanvas Menu (เมนูยุบข้าง) -->
+    <!-- Sidebar / Offcanvas Menu -->
     <div class="offcanvas offcanvas-start offcanvas-custom" tabindex="-1" id="sidebarMenu">
         <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title fw-bold text-primary">
-                <i class="bi bi-tags-fill me-2"></i>หมวดหมู่ข้อมูล
-            </h5>
+            <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-tags-fill text-primary fs-5"></i>
+                <h5 class="offcanvas-title fw-bold mb-0">หมวดหมู่เอกสาร</h5>
+            </div>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <div class="text-muted small mb-3">เลือกหมวดหมู่ที่ต้องการค้นหา</div>
+            <p class="text-muted small mb-3">เลือกหมวดหมู่ที่ต้องการกรองข้อมูล</p>
             <div id="categoryListContainer">
                 <!-- Category items generated by JS -->
             </div>
         </div>
-        <div class="offcanvas-footer p-3 border-top bg-light text-center">
-            <small class="text-muted">Corporate Data System</small>
+        <div class="offcanvas-footer p-3 border-top text-center bg-body-tertiary">
+            <small class="text-muted">Corporate Data Directory v2.5</small>
         </div>
     </div>
 
     <!-- Main Content Area -->
     <main class="container px-3 px-md-4">
         
-        <!-- Search and Filter Info -->
-        <div class="row mb-3">
-            <div class="col-12 col-md-8 mx-auto">
-                <div class="search-box">
-                    <i class="bi bi-search ms-2"></i>
-                    <input type="text" id="searchInput" placeholder="ค้นหาชื่อเอกสาร หรือคีย์เวิร์ด..." onkeyup="handleSearch()">
+        <!-- Search & Control Header Bar -->
+        <div class="row g-3 mb-4 align-items-center">
+            <div class="col-12 col-lg-7">
+                <div class="search-wrapper">
+                    <i class="bi bi-search search-icon ms-1"></i>
+                    <input type="text" id="searchInput" placeholder="ค้นหาชื่อเอกสาร คีย์เวิร์ด หรือหมวดหมู่..." onkeyup="handleSearch()">
                     <i class="bi bi-x-circle-fill text-muted me-2" style="cursor:pointer; display:none;" id="clearSearchBtn" onclick="clearSearch()"></i>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="text-muted small">
-                        แสดงผล: <strong class="text-dark" id="currentCatText">ทุกหมวดหมู่</strong>
-                    </div>
-                    <div class="text-muted small">
-                        พบ <strong class="text-primary" id="resultCount">0</strong> รายการ
-                    </div>
+            </div>
+
+            <div class="col-12 col-lg-5 d-flex align-items-center justify-content-between justify-content-lg-end gap-2">
+                <!-- Sort Dropdown -->
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle rounded-3 py-2 px-3" type="button" data-bs-toggle="dropdown" id="sortDropdownLabel">
+                        <i class="bi bi-sort-down me-1"></i> เรียงตามลำดับเดิม
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                        <li><a class="dropdown-item active" href="#" onclick="setSort('default', 'เรียงตามลำดับเดิม'); return false;">เรียงตามลำดับเดิม</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSort('az', 'ชื่อเอกสาร (ก - ฮ / A - Z)'); return false;">ชื่อเอกสาร (ก - ฮ / A - Z)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSort('za', 'ชื่อเอกสาร (ฮ - ก / Z - A)'); return false;">ชื่อเอกสาร (ฮ - ก / Z - A)</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="setSort('category', 'จัดกลุ่มตามหมวดหมู่'); return false;">จัดกลุ่มตามหมวดหมู่</a></li>
+                    </ul>
+                </div>
+
+                <!-- View Mode Switcher -->
+                <div class="view-btn-group">
+                    <button class="btn-view active" id="btnViewList" onclick="setViewMode('list')" title="มุมมองรายการ">
+                        <i class="bi bi-list-task fs-6"></i>
+                    </button>
+                    <button class="btn-view" id="btnViewGrid" onclick="setViewMode('grid')" title="มุมมองการ์ด">
+                        <i class="bi bi-grid-3x3-gap-fill fs-6"></i>
+                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- Loading State -->
-        <div id="loading" class="loader-container">
-            <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;"></div>
-            <h5 class="fw-light">กำลังดาวน์โหลดข้อมูล...</h5>
+        <!-- Quick Category Chip Bar -->
+        <div class="mb-3">
+            <div class="chip-scroll-container" id="chipScrollContainer">
+                <!-- Chips dynamically injected here -->
+            </div>
         </div>
 
-        <!-- Data Container (Unique List) -->
+        <!-- Status Summary Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-3 px-1">
+            <div class="text-muted small">
+                หมวดหมู่: <strong class="text-primary" id="currentCatText">ทุกหมวดหมู่</strong>
+            </div>
+            <div class="text-muted small">
+                พบข้อมูล <span class="badge bg-primary rounded-pill px-2 py-1" id="resultCount">0</span> รายการ
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div id="loading" class="text-center py-5">
+            <div class="spinner-border text-primary mb-3" style="width: 2.8rem; height: 2.8rem;" role="status"></div>
+            <h6 class="fw-normal text-muted">กำลังโหลดข้อมูลเอกสาร...</h6>
+        </div>
+
+        <!-- Data Display Container -->
         <div id="dataContainer" style="display: none;">
             
-            <div class="row">
-                <div class="col-12 col-md-10 col-lg-8 mx-auto" id="dataList">
-                    <!-- List items generated via JS -->
-                </div>
+            <!-- List/Grid Container -->
+            <div id="dataList">
+                <!-- Items injected here by JS -->
             </div>
 
             <!-- Empty State -->
-            <div id="emptyState" style="display: none;" class="text-center py-5">
-                <div class="mb-3">
-                    <i class="bi bi-search text-light" style="font-size: 4rem;"></i>
+            <div id="emptyState" style="display: none;" class="text-center py-5 my-4">
+                <div class="bg-body-tertiary rounded-circle d-inline-flex p-4 mb-3 border">
+                    <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
                 </div>
-                <h5 class="text-muted">ไม่พบข้อมูลที่ตรงกับคำค้นหา</h5>
-                <button class="btn btn-outline-primary rounded-pill mt-3 px-4" onclick="resetFilters()">ดูข้อมูลทั้งหมด</button>
+                <h5 class="fw-bold mb-1">ไม่พบข้อมูลที่ตรงกับคำค้นหา</h5>
+                <p class="text-muted small mb-3">ลองปรับเปลี่ยนคำค้นหา หรือเลือกหมวดหมู่อื่น</p>
+                <button class="btn btn-primary rounded-pill px-4" onclick="resetFilters()">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> ล้างการกรองทั้งหมด
+                </button>
             </div>
 
-            <!-- Pagination -->
+            <!-- Pagination Controls -->
             <div id="paginationFooter" class="text-center mt-4" style="display: none;">
-                <div class="pagination-wrapper">
+                <div class="pagination-container">
                     <button class="btn-page" id="prevBtn" onclick="changePage(currentPage - 1)">
                         <i class="bi bi-chevron-left"></i>
                     </button>
                     <span class="text-muted small px-2">
-                        หน้า <strong id="curPageDisplay" class="text-dark">1</strong> จาก <span id="totalPageDisplay">1</span>
+                        หน้า <strong id="curPageDisplay" class="text-dark">1</strong> / <span id="totalPageDisplay">1</span>
                     </span>
                     <button class="btn-page" id="nextBtn" onclick="changePage(currentPage + 1)">
                         <i class="bi bi-chevron-right"></i>
@@ -531,17 +706,17 @@
 
     </main>
 
-    <!-- Bottom Navigation (Mobile Only) -->
+    <!-- Mobile Bottom Nav -->
     <nav class="bottom-nav d-flex d-md-none">
-        <a href="#" class="nav-item active" id="navHome" onclick="switchTab('home'); return false;">
+        <a href="#" class="nav-link-item active" id="navHome" onclick="switchTab('home'); return false;">
             <i class="bi bi-house-door-fill"></i>
             หน้าหลัก
         </a>
-        <a href="#" class="nav-item" id="navCategory" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+        <a href="#" class="nav-link-item" id="navCategory" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
             <i class="bi bi-grid-fill"></i>
             หมวดหมู่
         </a>
-        <a href="#" class="nav-item" id="navFav" onclick="openFavoritesModal(); return false;">
+        <a href="#" class="nav-link-item" id="navFav" onclick="openFavoritesModal(); return false;">
             <i class="bi bi-bookmark-heart-fill"></i>
             รายการโปรด
         </a>
@@ -551,98 +726,216 @@
     <div class="modal fade" id="favoritesModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content border-0 rounded-4 shadow-lg">
-                <div class="modal-header border-bottom-0 pb-0">
-                    <h5 class="modal-title fw-bold text-dark">
-                        <i class="bi bi-bookmark-heart-fill text-danger me-2"></i>รายการโปรด
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title fw-bold text-dark d-flex align-items-center gap-2">
+                        <i class="bi bi-bookmark-heart-fill text-danger fs-5"></i>
+                        รายการเอกสารโปรด
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="favoritesListBody">
+                <div class="modal-body p-3" id="favoritesListBody">
                     <!-- Favorite items injected here -->
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Toast Notification -->
+    <div class="toast-container">
+        <div id="actionToast" class="toast align-items-center text-bg-dark border-0 rounded-3 shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2" id="toastMessage">
+                    <i class="bi bi-check-circle-fill text-success"></i> คัดลอกลิงก์เรียบร้อยแล้ว
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5.3 JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // --- Configuration ---
+        // --- Configurations ---
         const CSV_DATA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTItiReSbPwa0Fz_Afzmi8BrcUdpzdOINQiV7xFkiKWvl_x1KzmEKItpJjQNjtz1SgheZYdL3s4cSiy/pub?output=csv';
-        const ITEMS_PER_PAGE = 10; // Reduced slightly for list layout
-        const STORAGE_KEY = 'corporate_data_favorites_v3';
-
+        const STORAGE_KEY_FAV = 'corporate_data_favorites_v4';
+        const STORAGE_KEY_THEME = 'corporate_data_theme_v1';
+        
         // --- State ---
         let allData = [];
         let filteredData = [];
         let currentPage = 1;
+        let itemsPerPage = 10;
         let favorites = [];
         let categories = new Map();
         let activeCategory = 'All';
+        let currentView = 'list'; // 'list' or 'grid'
+        let currentSort = 'default';
 
-        // --- Initialization ---
         window.onload = () => {
+            initTheme();
             loadFavorites();
             loadData();
+            
+            // Adjust items per page based on window size
+            if (window.innerWidth >= 1200) {
+                itemsPerPage = 12;
+            }
         };
 
-        // --- Data Loading & Parsing ---
+        // Theme Switcher
+        function initTheme() {
+            const savedTheme = localStorage.getItem(STORAGE_KEY_THEME) || 'light';
+            setTheme(savedTheme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            localStorage.setItem(STORAGE_KEY_THEME, theme);
+            const icon = document.querySelector('#themeToggleBtn i');
+            if (icon) {
+                icon.className = theme === 'dark' ? 'bi bi-sun-fill text-warning' : 'bi bi-moon-stars';
+            }
+        }
+
+        // --- Data Fetching & Robust CSV Parser ---
         function loadData() {
             toggleLoading(true);
+            const refreshIcon = document.getElementById('refreshIcon');
+            if (refreshIcon) refreshIcon.classList.add('spin-anim');
+
             fetch(CSV_DATA_URL)
-                .then(res => res.text())
+                .then(res => {
+                    if (!res.ok) throw new Error('Network response was not ok');
+                    return res.text();
+                })
                 .then(text => {
                     parseCSV(text);
                     extractCategories();
-                    renderCategoryMenu();
+                    renderCategoryDrawer();
+                    renderCategoryChips();
                     applyFilters();
                     toggleLoading(false);
                 })
                 .catch(err => {
-                    console.error(err);
-                    document.getElementById('loading').innerHTML = `
-                        <div class="text-danger text-center mt-5">
-                            <i class="bi bi-wifi-off fs-1 d-block mb-3"></i>
-                            <h5>ไม่สามารถเชื่อมต่อฐานข้อมูลได้</h5>
-                            <button class="btn btn-outline-danger mt-3" onclick="loadData()">ลองใหม่อีกครั้ง</button>
-                        </div>
-                    `;
+                    console.error('Error fetching data:', err);
+                    showErrorState();
+                })
+                .finally(() => {
+                    if (refreshIcon) refreshIcon.classList.remove('spin-anim');
                 });
         }
 
+        // Full RFC-4180 Compliant CSV Parser
         function parseCSV(text) {
-            const rows = text.split(/\r\n|\n/).filter(r => r.trim() !== '');
+            const rows = [];
+            let currentRow = [];
+            let currentVal = '';
+            let inQuotes = false;
+
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                const nextChar = text[i + 1];
+
+                if (char === '"') {
+                    if (inQuotes && nextChar === '"') {
+                        currentVal += '"';
+                        i++; // Skip escaped quote
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    currentRow.push(currentVal.trim());
+                    currentVal = '';
+                } else if ((char === '\r' || char === '\n') && !inQuotes) {
+                    if (char === '\r' && nextChar === '\n') i++;
+                    currentRow.push(currentVal.trim());
+                    if (currentRow.some(field => field.length > 0)) {
+                        rows.push(currentRow);
+                    }
+                    currentRow = [];
+                    currentVal = '';
+                } else {
+                    currentVal += char;
+                }
+            }
+
+            if (currentVal || currentRow.length > 0) {
+                currentRow.push(currentVal.trim());
+                if (currentRow.some(field => field.length > 0)) {
+                    rows.push(currentRow);
+                }
+            }
+
             if (rows.length === 0) return;
-            
-            const header = rows[0].split(',').map(h => h.trim().toLowerCase());
-            let nameIdx = header.findIndex(h => h.includes('name') || h.includes('ชื่อ'));
-            let urlIdx = header.findIndex(h => h.includes('url') || h.includes('link'));
-            let catIdx = header.findIndex(h => h.includes('category') || h.includes('หมวด')); 
+
+            // Header mapping
+            const header = rows[0].map(h => h.toLowerCase());
+            let nameIdx = header.findIndex(h => h.includes('name') || h.includes('ชื่อ') || h.includes('title'));
+            let urlIdx = header.findIndex(h => h.includes('url') || h.includes('link') || h.includes('ลิงก์'));
+            let catIdx = header.findIndex(h => h.includes('category') || h.includes('หมวด') || h.includes('group'));
 
             if (nameIdx === -1) nameIdx = 0;
             if (urlIdx === -1) urlIdx = 1;
 
             allData = [];
             for (let i = 1; i < rows.length; i++) {
-                const cols = rows[i].split(',');
+                const cols = rows[i];
                 if (cols.length < 2) continue;
 
-                const name = cols[nameIdx]?.trim() || 'ไม่มีชื่อเอกสาร';
-                const rawUrl = cols[urlIdx]?.trim() || '#';
-                let cat = 'ทั่วไป';
-                if (catIdx !== -1 && cols[catIdx]) {
-                    cat = cols[catIdx].trim();
-                    if(cat === '') cat = 'ทั่วไป';
-                }
+                const name = cols[nameIdx] || 'เอกสารไม่มีชื่อ';
+                const rawUrl = cols[urlIdx] || '#';
+                let cat = (catIdx !== -1 && cols[catIdx]) ? cols[catIdx] : 'ทั่วไป';
+                if (!cat) cat = 'ทั่วไป';
 
-                allData.push({ 
-                    id: btoa(unescape(encodeURIComponent(name + rawUrl))).substring(0, 20),
-                    name: name, 
-                    url: rawUrl, 
-                    category: cat 
+                const fileMeta = detectFileType(rawUrl, name);
+
+                allData.push({
+                    id: btoa(unescape(encodeURIComponent(name + rawUrl))).substring(0, 24),
+                    name: name,
+                    url: rawUrl,
+                    category: cat,
+                    fileType: fileMeta.type,
+                    iconClass: fileMeta.icon,
+                    typeClass: fileMeta.bgClass
                 });
             }
+        }
+
+        // Helper: Detect File Extension & Dynamic Type
+        function detectFileType(url, name) {
+            const combined = (url + ' ' + name).toLowerCase();
+            if (combined.includes('sheet') || combined.includes('excel') || combined.includes('.csv') || combined.includes('.xlsx')) {
+                return { type: 'Spreadsheet', icon: 'bi-file-earmark-excel-fill', bgClass: 'type-sheet' };
+            } else if (combined.includes('pdf') || url.includes('.pdf')) {
+                return { type: 'PDF Document', icon: 'bi-file-earmark-pdf-fill', bgClass: 'type-pdf' };
+            } else if (combined.includes('doc') || combined.includes('word') || combined.includes('.docx')) {
+                return { type: 'Word Document', icon: 'bi-file-earmark-word-fill', bgClass: 'type-doc' };
+            } else if (combined.includes('slide') || combined.includes('presentation') || combined.includes('.pptx')) {
+                return { type: 'Presentation', icon: 'bi-file-earmark-slides-fill', bgClass: 'type-slide' };
+            }
+            return { type: 'Link / File', icon: 'bi-file-earmark-text-fill', bgClass: 'type-generic' };
+        }
+
+        function showErrorState() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('dataContainer').style.display = 'block';
+            document.getElementById('dataList').innerHTML = `
+                <div class="text-danger text-center py-5">
+                    <i class="bi bi-exclamation-triangle-fill fs-1 d-block mb-3"></i>
+                    <h5 class="fw-bold">ไม่สามารถโหลดข้อมูลเอกสารได้</h5>
+                    <p class="text-muted small">โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตหรือลิงก์ข้อมูลอีกครั้ง</p>
+                    <button class="btn btn-outline-danger rounded-pill mt-2 px-4" onclick="loadData()">
+                        <i class="bi bi-arrow-clockwise me-1"></i> ลองอีกครั้ง
+                    </button>
+                </div>
+            `;
         }
 
         // --- Category Management ---
@@ -656,23 +949,23 @@
             });
         }
 
-        function renderCategoryMenu() {
+        function renderCategoryDrawer() {
             const container = document.getElementById('categoryListContainer');
             let html = '';
             
             categories.forEach((count, cat) => {
                 const isAll = cat === 'All';
-                const displayName = isAll ? 'ทุกหมวดหมู่ (All)' : cat;
-                const icon = isAll ? 'bi-collection' : 'bi-folder2';
+                const displayName = isAll ? 'ทุกหมวดหมู่ทั้งหมด' : cat;
+                const icon = isAll ? 'bi-grid-fill' : 'bi-folder-fill';
                 const activeClass = activeCategory === cat ? 'active' : '';
                 
                 html += `
                     <div class="cat-list-item ${activeClass}" onclick="selectCategory('${cat}')">
-                        <div>
-                            <i class="bi ${icon} me-2 text-muted"></i>
-                            ${displayName}
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi ${icon} opacity-75"></i>
+                            <span>${displayName}</span>
                         </div>
-                        <span class="cat-count">${count}</span>
+                        <span class="badge-count">${count}</span>
                     </div>
                 `;
             });
@@ -680,18 +973,37 @@
             container.innerHTML = html;
         }
 
+        function renderCategoryChips() {
+            const container = document.getElementById('chipScrollContainer');
+            let html = '';
+
+            categories.forEach((count, cat) => {
+                const isAll = cat === 'All';
+                const displayName = isAll ? 'ทั้งหมด' : cat;
+                const activeClass = activeCategory === cat ? 'active' : '';
+
+                html += `
+                    <div class="cat-chip ${activeClass}" onclick="selectCategory('${cat}')">
+                        ${displayName} <span class="opacity-75">(${count})</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
         function selectCategory(cat) {
             activeCategory = cat;
-            
             const displayName = cat === 'All' ? 'ทุกหมวดหมู่' : cat;
             document.getElementById('currentCatText').innerText = displayName;
-            document.getElementById('currentCatLabelTop').innerText = displayName;
             
-            renderCategoryMenu();
+            renderCategoryDrawer();
+            renderCategoryChips();
             
+            // Close offcanvas if mobile
             const offcanvasEl = document.getElementById('sidebarMenu');
             const offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasEl);
-            if(offcanvasInstance && window.innerWidth < 768) {
+            if (offcanvasInstance) {
                 offcanvasInstance.hide();
             }
 
@@ -699,7 +1011,7 @@
             applyFilters();
         }
 
-        // --- Filtering Logic ---
+        // --- Search, Filtering & Sorting ---
         function handleSearch() {
             const q = document.getElementById('searchInput').value;
             const clearBtn = document.getElementById('clearSearchBtn');
@@ -720,23 +1032,52 @@
             selectCategory('All');
         }
 
+        function setSort(sortType, label) {
+            currentSort = sortType;
+            document.getElementById('sortDropdownLabel').innerHTML = `<i class="bi bi-sort-down me-1"></i> ${label}`;
+            applyFilters();
+        }
+
+        function setViewMode(mode) {
+            currentView = mode;
+            document.getElementById('btnViewList').classList.toggle('active', mode === 'list');
+            document.getElementById('btnViewGrid').classList.toggle('active', mode === 'grid');
+            renderList();
+        }
+
         function applyFilters() {
-            const q = document.getElementById('searchInput').value.toLowerCase();
+            const q = document.getElementById('searchInput').value.toLowerCase().trim();
             
+            // Filter
             filteredData = allData.filter(d => {
                 const matchCategory = (activeCategory === 'All') || (d.category === activeCategory);
                 const matchSearch = d.name.toLowerCase().includes(q) || d.category.toLowerCase().includes(q);
                 return matchCategory && matchSearch;
             });
-            
+
+            // Sort
+            if (currentSort === 'az') {
+                filteredData.sort((a, b) => a.name.localeCompare(b.name, 'th'));
+            } else if (currentSort === 'za') {
+                filteredData.sort((a, b) => b.name.localeCompare(a.name, 'th'));
+            } else if (currentSort === 'category') {
+                filteredData.sort((a, b) => a.category.localeCompare(b.category, 'th'));
+            }
+
             document.getElementById('resultCount').innerText = filteredData.length;
             renderList();
         }
 
-        // --- Rendering Unique List ---
+        function highlightKeyword(text, keyword) {
+            if (!keyword) return text;
+            const regex = new RegExp(`(${keyword})`, 'gi');
+            return text.replace(regex, '<span class="highlight-text">$1</span>');
+        }
+
+        // --- Render List / Grid ---
         function renderList() {
-            const listContainer = document.getElementById('dataList');
-            listContainer.innerHTML = '';
+            const container = document.getElementById('dataList');
+            container.innerHTML = '';
 
             if (filteredData.length === 0) {
                 document.getElementById('emptyState').style.display = 'block';
@@ -747,52 +1088,97 @@
             document.getElementById('emptyState').style.display = 'none';
             document.getElementById('paginationFooter').style.display = 'block';
 
-            const start = (currentPage - 1) * ITEMS_PER_PAGE;
-            const end = Math.min(start + ITEMS_PER_PAGE, filteredData.length);
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = Math.min(start + itemsPerPage, filteredData.length);
             const items = filteredData.slice(start, end);
 
-            let html = '';
-            items.forEach((item, index) => {
-                const isFav = favorites.includes(item.id);
-                const heartClass = isFav ? 'bi-heart-fill' : 'bi-heart';
-                const btnActive = isFav ? 'active' : '';
-                
-                // Get the first character for the avatar
-                const initial = item.category ? item.category.charAt(0).toUpperCase() : 'D';
-                
-                // Added delay for the staggered entrance animation
-                const delay = index * 0.05;
-                
-                html += `
-                    <div class="list-item-row" style="animation-delay: ${delay}s;">
-                        <div class="list-item-left">
-                            <div class="cat-avatar">${initial}</div>
-                            <div class="list-item-content">
-                                <div class="doc-title" title="${item.name}">${item.name}</div>
-                                <div class="doc-cat">
-                                    <i class="bi bi-tag-fill text-primary" style="font-size:0.7rem;"></i> ${item.category}
+            const searchQuery = document.getElementById('searchInput').value.trim();
+
+            if (currentView === 'list') {
+                container.className = 'doc-list-container';
+                let html = '';
+                items.forEach((item, index) => {
+                    const isFav = favorites.includes(item.id);
+                    const heartClass = isFav ? 'bi-heart-fill active' : 'bi-heart';
+                    const titleText = highlightKeyword(item.name, searchQuery);
+                    const delay = index * 0.03;
+
+                    html += `
+                        <div class="list-item-row" style="animation-delay: ${delay}s;">
+                            <div class="d-flex align-items-center gap-3 flex-grow-1 min-w-0 me-3">
+                                <div class="file-icon-avatar ${item.typeClass}">
+                                    <i class="bi ${item.iconClass}"></i>
+                                </div>
+                                <div class="min-w-0 flex-grow-1">
+                                    <div class="doc-title" title="${item.name}">${titleText}</div>
+                                    <div class="doc-meta">
+                                        <span class="doc-badge">${item.category}</span>
+                                        <span><i class="bi bi-filetype-raw me-1"></i>${item.fileType}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-2 flex-shrink-0">
+                                <button onclick="toggleFavorite('${item.id}')" class="btn-fav ${isFav ? 'active' : ''}" title="บันทึกรายการโปรด">
+                                    <i class="bi ${heartClass}"></i>
+                                </button>
+                                <button onclick="copyLink('${item.url}')" class="btn-action-round" title="คัดลอกลิงก์">
+                                    <i class="bi bi-link-45deg fs-5"></i>
+                                </button>
+                                <a href="${item.url}" target="_blank" class="btn-action-round" title="เปิดดูเอกสาร">
+                                    <i class="bi bi-box-arrow-up-right fs-6"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            } else {
+                // Grid View
+                container.className = 'grid-layout';
+                let html = '';
+                items.forEach((item, index) => {
+                    const isFav = favorites.includes(item.id);
+                    const heartClass = isFav ? 'bi-heart-fill active' : 'bi-heart';
+                    const titleText = highlightKeyword(item.name, searchQuery);
+                    const delay = index * 0.03;
+
+                    html += `
+                        <div class="grid-card" style="animation-delay: ${delay}s;">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="file-icon-avatar ${item.typeClass}">
+                                        <i class="bi ${item.iconClass}"></i>
+                                    </div>
+                                    <button onclick="toggleFavorite('${item.id}')" class="btn-fav ${isFav ? 'active' : ''}" title="บันทึกรายการโปรด">
+                                        <i class="bi ${heartClass}"></i>
+                                    </button>
+                                </div>
+                                <span class="doc-badge mb-2 d-inline-block">${item.category}</span>
+                                <h6 class="doc-title mb-3" title="${item.name}">${titleText}</h6>
+                            </div>
+                            <div class="pt-3 border-top d-flex align-items-center justify-content-between mt-2">
+                                <small class="text-muted" style="font-size: 0.75rem;">${item.fileType}</small>
+                                <div class="d-flex gap-2">
+                                    <button onclick="copyLink('${item.url}')" class="btn-action-round" title="คัดลอกลิงก์">
+                                        <i class="bi bi-link-45deg"></i>
+                                    </button>
+                                    <a href="${item.url}" target="_blank" class="btn-action-round" title="เปิดเอกสาร">
+                                        <i class="bi bi-box-arrow-up-right fs-6"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="list-item-actions">
-                            <button onclick="toggleFavorite('${item.id}')" class="btn-fav ${btnActive}" title="บันทึกรายการโปรด">
-                                <i class="bi ${heartClass}"></i>
-                            </button>
-                            <a href="${item.url}" target="_blank" class="btn-open-circle" title="เปิดเอกสาร">
-                                <i class="bi bi-arrow-right-short fs-4"></i>
-                            </a>
-                        </div>
-                    </div>
-                `;
-            });
-            listContainer.innerHTML = html;
-            
+                    `;
+                });
+                container.innerHTML = html;
+            }
+
             updatePagination();
         }
 
         // --- Pagination ---
         function updatePagination() {
-            const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE) || 1;
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage) || 1;
             document.getElementById('curPageDisplay').innerText = currentPage;
             document.getElementById('totalPageDisplay').innerText = totalPages;
             
@@ -808,7 +1194,7 @@
 
         // --- Favorites Management ---
         function loadFavorites() {
-            const stored = localStorage.getItem(STORAGE_KEY);
+            const stored = localStorage.getItem(STORAGE_KEY_FAV);
             if (stored) favorites = JSON.parse(stored);
             updateFavBadge();
         }
@@ -817,10 +1203,12 @@
             const index = favorites.indexOf(id);
             if (index === -1) {
                 favorites.push(id);
+                showToast('เพิ่มในรายการโปรดเรียบร้อย');
             } else {
                 favorites.splice(index, 1);
+                showToast('นำออกจากรายการโปรดแล้ว');
             }
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+            localStorage.setItem(STORAGE_KEY_FAV, JSON.stringify(favorites));
             
             renderList(); 
             updateFavBadge();
@@ -846,11 +1234,11 @@
             if (favorites.length === 0) {
                 modalBody.innerHTML = `
                     <div class="text-center py-5">
-                        <div class="bg-light rounded-circle d-inline-flex p-4 mb-3">
-                            <i class="bi bi-bookmark-x text-muted" style="font-size: 3rem;"></i>
+                        <div class="bg-body-tertiary rounded-circle d-inline-flex p-4 mb-3 border">
+                            <i class="bi bi-bookmark-x text-muted" style="font-size: 2.5rem;"></i>
                         </div>
-                        <h6 class="text-muted">ยังไม่มีเอกสารในรายการโปรด</h6>
-                        <p class="small text-light mb-0">กดไอคอนหัวใจที่เอกสารเพื่อบันทึกเก็บไว้ดูภายหลัง</p>
+                        <h6 class="fw-bold mb-1">ยังไม่มีรายการโปรด</h6>
+                        <p class="small text-muted mb-0">กดไอคอนหัวใจที่เอกสารเพื่อบันทึกไว้เข้าถึงอย่างรวดเร็ว</p>
                     </div>
                 `;
             } else {
@@ -858,15 +1246,15 @@
                 let html = '';
                 favItems.forEach(item => {
                     html += `
-                        <div class="fav-modal-item">
-                            <div style="flex: 1; padding-right: 15px;">
-                                <span class="badge bg-secondary mb-1" style="font-size:0.65rem;">${item.category}</span>
-                                <div class="fw-medium text-dark lh-sm mb-2" style="font-size:0.95rem;">${item.name}</div>
-                                <a href="${item.url}" target="_blank" class="text-primary text-decoration-none small">
+                        <div class="p-3 mb-2 rounded-3 border bg-body d-flex justify-content-between align-items-center gap-3">
+                            <div class="min-w-0">
+                                <span class="badge bg-primary-subtle text-primary mb-1" style="font-size: 0.7rem;">${item.category}</span>
+                                <div class="fw-semibold text-truncate" style="font-size: 0.9rem;">${item.name}</div>
+                                <a href="${item.url}" target="_blank" class="text-primary small text-decoration-none d-inline-flex align-items-center gap-1 mt-1">
                                     <i class="bi bi-box-arrow-up-right"></i> เปิดดูเอกสาร
                                 </a>
                             </div>
-                            <button onclick="toggleFavorite('${item.id}')" class="btn btn-sm btn-outline-danger rounded-circle" style="width: 35px; height: 35px;">
+                            <button onclick="toggleFavorite('${item.id}')" class="btn btn-sm btn-outline-danger rounded-circle p-2" title="ลบออก">
                                 <i class="bi bi-trash3"></i>
                             </button>
                         </div>
@@ -880,23 +1268,50 @@
             
             document.getElementById('favoritesModal').addEventListener('hidden.bs.modal', function () {
                 switchTab('home');
-            }, {once:true});
+            }, { once: true });
         }
 
-        // --- Utils ---
+        // --- Utilities ---
         function toggleLoading(show) {
-            document.getElementById('loading').style.display = show ? 'flex' : 'none';
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
             document.getElementById('dataContainer').style.display = show ? 'none' : 'block';
         }
 
         function switchTab(tab) {
-            document.querySelectorAll('.bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
-            if(tab === 'home') {
+            document.querySelectorAll('.bottom-nav .nav-link-item').forEach(el => el.classList.remove('active'));
+            if (tab === 'home') {
                 document.getElementById('navHome').classList.add('active');
-                window.scrollTo({top:0, behavior:'smooth'});
-            } else if(tab === 'fav') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (tab === 'fav') {
                 document.getElementById('navFav').classList.add('active');
             }
+        }
+
+        function copyLink(url) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showToast('คัดลอกลิงก์เรียบร้อยแล้ว');
+                });
+            } else {
+                const textArea = document.createElement("textarea");
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('คัดลอกลิงก์เรียบร้อยแล้ว');
+                } catch (err) {
+                    console.error('Copy failed', err);
+                }
+                document.body.removeChild(textArea);
+            }
+        }
+
+        function showToast(msg) {
+            const toastEl = document.getElementById('actionToast');
+            document.getElementById('toastMessage').innerHTML = `<i class="bi bi-check-circle-fill text-success"></i> ${msg}`;
+            const toast = new bootstrap.Toast(toastEl, { delay: 2500 });
+            toast.show();
         }
     </script>
 </body>
