@@ -321,6 +321,7 @@
     overflow: hidden;
     border: 1px solid rgba(0,0,0,0.05);
     width: 100%;
+    height: auto;
   }
   
   .fb-page, .fb-page span, .fb-page iframe {
@@ -735,6 +736,64 @@
     width: 22px; height: 22px; fill: currentColor;
   }
 
+  @media (max-width: 480px) {
+    body {
+      padding-bottom: 75px;
+    }
+    .container {
+      padding: 10px;
+      gap: 10px;
+    }
+    header {
+      padding: 10px 14px;
+    }
+    .header-title-box h1 {
+      font-size: 1.1rem;
+    }
+    .doc-card {
+      padding: 14px 6px;
+      border-radius: 16px;
+    }
+    .icon-box {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 6px;
+      border-radius: 12px;
+    }
+    .icon-box svg {
+      width: 22px;
+      height: 22px;
+    }
+    .card-title {
+      font-size: 0.95rem;
+    }
+    .card-desc {
+      font-size: 0.7rem;
+    }
+    .fb-wrapper {
+      height: auto;
+      max-height: none;
+    }
+    .floating-actions {
+      bottom: 72px;
+      right: 12px;
+      gap: 6px;
+    }
+    .fab-btn {
+      padding: 8px 14px;
+      font-size: 0.8rem;
+    }
+    .fab-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+    .chat-window {
+      right: 0; left: 0; bottom: 0;
+      width: 100%; height: 75vh;
+      border-radius: 20px 20px 0 0;
+    }
+  }
+
   @media (min-width: 640px) {
     .menu-list { grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .doc-card { padding: 24px 16px; }
@@ -886,12 +945,10 @@
       <div class="fb-page" 
         data-href="https://www.facebook.com/p/%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%AA%E0%B8%99%E0%B8%B2%E0%B8%A1%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87-Royal-Dhamma-Studies-Office-61568725258865/" 
         data-tabs="timeline" 
-        data-width="500" 
-        data-height="" 
-        data-small-header="false" 
+        data-small-header="true" 
         data-adapt-container-width="true" 
         data-hide-cover="false" 
-        data-show-facepile="true">
+        data-show-facepile="false">
       </div>
     </div>
 
