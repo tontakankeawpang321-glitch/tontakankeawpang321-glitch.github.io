@@ -2,12 +2,16 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>นักธรรม</title>
-<!-- Import Fonts -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>นักธรรม - ชุมชนธรรมะ</title>
+
+<!-- Import Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Maitree:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Maitree:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- SweetAlert2 CSS & JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
   :root {
@@ -41,430 +45,195 @@
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    padding-bottom: 120px; /* เพิ่มพื้นที่ด้านล่างกันปุ่มบัง */
+    padding-bottom: 90px; /* Space for bottom nav */
   }
 
-  /* Header Design */
   header {
     width: 100%;
-    padding: 30px 20px 20px;
-    text-align: center;
-    background: linear-gradient(to bottom, #FFFFFF, rgba(255,255,255,0));
-    margin-bottom: 10px;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    padding: 15px 20px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .logo-icon {
-    width: 60px;
-    height: 60px;
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .menu-toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+
+  .menu-toggle-btn:hover {
+    background: rgba(245, 158, 11, 0.1);
+  }
+
+  .logo-icon-sm {
+    width: 38px;
+    height: 38px;
     background: var(--gold-gradient);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 10px;
-    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.2);
     color: white;
-  }
-  
-  .logo-icon svg {
-    width: 32px;
-    height: 32px;
-    fill: currentColor;
-    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
   }
 
-  header h1 {
+  .logo-icon-sm svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
+  }
+
+  .header-title-box h1 {
     font-family: "Maitree", serif;
-    font-size: 1.8rem;
+    font-size: 1.25rem;
     color: var(--primary);
     font-weight: 700;
-    margin-bottom: 4px;
-    letter-spacing: -0.5px;
+    line-height: 1.1;
   }
 
-  header p {
-    font-family: "Maitree", serif;
+  .header-title-box p {
+    font-size: 0.75rem;
     color: var(--text-sub);
-    font-size: 0.9rem;
   }
 
-  /* Container */
   .container {
     width: 100%;
     max-width: 600px;
-    padding: 0 16px;
+    padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
 
-  /* --- Floating Actions Container --- */
-  .floating-actions {
-    position: fixed;
-    bottom: 24px;
-    right: 20px;
-    display: flex;
+  .page-view {
+    display: none;
     flex-direction: column;
-    align-items: flex-end; /* ชิดขวา */
-    gap: 12px;
-    z-index: 900;
+    gap: 16px;
+    animation: fadeIn 0.25s ease-in-out forwards;
   }
 
-  /* Floating Button Style */
-  .fab-btn {
+  .page-view.active {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 12px 20px;
-    border-radius: 50px;
-    color: white;
-    font-family: "Maitree", serif;
-    font-weight: 600;
-    font-size: 1rem;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
-  .fab-btn:active {
-    transform: scale(0.95);
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .fab-btn svg {
-    width: 24px;
-    height: 24px;
-    fill: white;
-  }
-
-  /* Check-in Specific Style */
-  .fab-checkin {
-    background: var(--gold-gradient);
-    animation: float 3s ease-in-out infinite;
-  }
-
-  /* AI Chatbot Specific Style */
-  .fab-chatbot {
-    background: var(--ai-gradient);
-    padding: 12px 18px;
-  }
-
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0px); }
-  }
-
-  /* --- Chatbot Window Styles --- */
-  .chat-window {
+  .sidebar-backdrop {
     position: fixed;
-    bottom: 90px;
-    right: 20px;
-    width: 350px;
-    height: 500px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    z-index: 1000;
-    transform: translateY(20px);
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
+    z-index: 1100;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(0,0,0,0.05);
+    transition: opacity 0.3s ease;
   }
 
-  .chat-window.active {
-    transform: translateY(0);
+  .sidebar-backdrop.active {
     opacity: 1;
     pointer-events: all;
   }
 
-  /* Mobile Chat Window */
-  @media (max-width: 480px) {
-    .chat-window {
-      right: 0;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 70vh;
-      border-radius: 20px 20px 0 0;
-      margin: 0;
-    }
-  }
-
-  .chat-header {
-    background: var(--ai-gradient);
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-  }
-
-  .chat-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 600;
-    font-family: "Maitree", serif;
-  }
-
-  .close-chat {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    line-height: 1;
-    opacity: 0.8;
-  }
-
-  .chat-messages {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    background: #F9FAFB;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .message {
-    display: flex;
-    flex-direction: column;
-    max-width: 80%;
-  }
-
-  .message.bot {
-    align-self: flex-start;
-  }
-
-  .message.user {
-    align-self: flex-end;
-    align-items: flex-end;
-  }
-
-  .msg-bubble {
-    padding: 10px 15px;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    line-height: 1.4;
-    position: relative;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    word-wrap: break-word;
-  }
-
-  .message.bot .msg-bubble {
-    background: white;
-    color: var(--text-main);
-    border-top-left-radius: 4px;
-    border: 1px solid #E5E7EB;
-  }
-
-  .message.user .msg-bubble {
-    background: var(--primary);
-    color: white;
-    border-top-right-radius: 4px;
-    background: var(--ai-gradient);
-  }
-
-  .msg-time {
-    font-size: 0.7rem;
-    color: #9CA3AF;
-    margin-top: 4px;
-  }
-
-  .chat-input-area {
-    padding: 15px;
-    background: white;
-    border-top: 1px solid #E5E7EB;
-    display: flex;
-    gap: 10px;
-  }
-
-  .chat-input {
-    flex: 1;
-    padding: 10px 15px;
-    border: 1px solid #E5E7EB;
-    border-radius: 25px;
-    font-family: "Sarabun", sans-serif;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .chat-input:focus {
-    border-color: #7C3AED;
-  }
-
-  .send-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background: var(--ai-gradient);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-
-  .send-btn:active {
-    transform: scale(0.9);
-  }
-
-  /* Typing Indicator */
-  .typing {
-    display: flex;
-    gap: 4px;
-    padding: 5px 0;
-  }
-  .typing span {
-    width: 6px;
-    height: 6px;
-    background: #9CA3AF;
-    border-radius: 50%;
-    animation: bounce 1.4s infinite ease-in-out both;
-  }
-  .typing span:nth-child(1) { animation-delay: -0.32s; }
-  .typing span:nth-child(2) { animation-delay: -0.16s; }
-  @keyframes bounce {
-    0%, 80%, 100% { transform: scale(0); }
-    40% { transform: scale(1); }
-  }
-
-
-  /* --- Modal (Popup) Styles --- */
-  .modal-overlay {
+  .sidebar {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .modal-overlay.active {
-    display: flex;
-    opacity: 1;
-  }
-
-  .modal-content {
+    top: 0; left: 0; width: 280px; height: 100%;
     background: white;
-    border-radius: 24px;
-    padding: 30px;
-    width: 100%;
-    max-width: 340px;
-    text-align: center;
-    position: relative;
-    transform: scale(0.8);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    z-index: 1200;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 4px 0 25px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
   }
 
-  .modal-overlay.active .modal-content {
-    transform: scale(1);
+  .sidebar.active {
+    transform: translateX(0);
   }
 
-  .modal-icon {
-    width: 80px;
-    height: 80px;
-    background: #FEF3C7;
+  .sidebar-header {
+    background: var(--gold-gradient);
+    color: white;
+    padding: 30px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .sidebar-header .logo-icon {
+    width: 50px; height: 50px;
+    background: rgba(255,255,255,0.2);
     border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .sidebar-header .logo-icon svg { width: 30px; height: 30px; fill: white; }
+
+  .sidebar-menu {
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+
+  .sidebar-item {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    color: #D97706;
-  }
-
-  .modal-icon svg { width: 48px; height: 48px; }
-
-  .modal-title {
-    font-family: "Maitree", serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    margin-bottom: 10px;
-  }
-
-  .modal-desc {
-    color: var(--text-sub);
-    font-size: 1rem;
-    margin-bottom: 25px;
-    line-height: 1.5;
-  }
-
-  .modal-btn {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 12px 30px;
+    gap: 14px;
+    padding: 12px 16px;
     border-radius: 12px;
-    font-size: 1rem;
+    color: var(--text-main);
+    text-decoration: none;
+    font-family: "Maitree", serif;
     font-weight: 600;
-    cursor: pointer;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    border: none;
+    background: transparent;
     width: 100%;
+    text-align: left;
+    cursor: pointer;
   }
 
-  /* Special Reward Modal Style */
-  .modal-content.reward {
-    background: linear-gradient(135deg, #FFFBEB 0%, #FFFFFF 100%);
-    border: 2px solid #F59E0B;
-  }
-  .modal-content.reward .modal-icon {
-    background: linear-gradient(135deg, #F59E0B 0%, #B45309 100%);
-    color: white;
-    box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);
-  }
-  .secret-code {
-    background: #F3F4F6;
-    padding: 15px;
-    border-radius: 10px;
-    font-family: monospace;
-    font-size: 1.2rem;
-    color: #111;
-    margin: 15px 0;
-    border: 1px dashed #9CA3AF;
+  .sidebar-item:hover, .sidebar-item.active {
+    background: #FEF3C7;
+    color: var(--primary);
   }
 
-  /* Facebook Section */
-  .fb-wrapper {
-    background: white;
-    border-radius: 16px;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
-    border: 1px solid rgba(0,0,0,0.05);
-  }
-  
-  .fb-page, .fb-page span, .fb-page iframe {
-    width: 100% !important;
+  .sidebar-item svg {
+    width: 22px;
+    height: 22px;
+    fill: currentColor;
   }
 
-  /* --- Grid Layout 2 Columns --- */
   .menu-list {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
-  /* Card Design */
   .doc-card {
     position: relative;
     display: flex;
@@ -492,7 +261,6 @@
     transform: scale(0.96);
   }
 
-  /* Icon Box Styles */
   .icon-box {
     width: 52px;
     height: 52px;
@@ -500,7 +268,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 0;
     margin-bottom: 12px;
     background: linear-gradient(135deg, #FFF7ED 0%, #FEF3C7 100%);
     color: var(--primary);
@@ -521,7 +288,6 @@
     fill: currentColor;
   }
 
-  /* Text Styling */
   .card-content {
     display: flex;
     flex-direction: column;
@@ -542,137 +308,596 @@
     font-size: 0.75rem;
     color: var(--text-sub);
     font-weight: 400;
-    display: block;
   }
 
-  /* Footer */
-  .footer {
+  /* Facebook Section */
+  .fb-wrapper {
+    background: white;
+    border-radius: 16px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
     width: 100%;
-    text-align: center;
-    margin-top: 30px;
   }
   
-  .footer a {
+  .fb-page, .fb-page span, .fb-page iframe {
+    width: 100% !important;
+  }
+
+  .community-box {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(245, 158, 11, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .community-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F3F4F6;
+  }
+
+  .community-header h2 {
+    font-family: "Maitree", serif;
+    font-size: 1.25rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .post-create-btn {
+    background: var(--gold-gradient);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: "Maitree", serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .post-create-btn:active {
+    transform: scale(0.95);
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .post-card {
+    background: #FDFBF7;
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid #F3E8FF;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.8rem;
     color: var(--text-sub);
-    text-decoration: none;
+  }
+
+  .post-author {
+    font-weight: 600;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .post-tag {
+    background: #FEF3C7;
+    color: var(--primary-light);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .post-content {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    line-height: 1.5;
+    white-space: pre-line;
+  }
+
+  .post-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: 1px solid #F3F4F6;
+  }
+
+  .post-action-btn {
+    background: none;
+    border: none;
+    color: var(--primary-light);
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: "Sarabun", sans-serif;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+
+  .post-action-btn:hover {
+    background: #FEF3C7;
+  }
+
+  .delete-post-btn {
+    background: none;
+    border: none;
+    color: #EF4444;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.8;
+  }
+
+  .delete-post-btn:hover {
+    opacity: 1;
+  }
+
+  /* Comment Section Styles */
+  .comments-container {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px dashed #E5E7EB;
+    animation: fadeIn 0.2s ease-in-out forwards;
+  }
+
+  .comments-container.active {
+    display: flex;
+  }
+
+  .comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .comment-item {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 10px 12px;
+    border: 1px solid #E5E7EB;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .comment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+  }
+
+  .comment-author {
+    font-weight: 600;
+    color: var(--primary-light);
+  }
+
+  .comment-time {
+    color: #9CA3AF;
+  }
+
+  .comment-text {
+    font-size: 0.88rem;
+    color: var(--text-main);
+    line-height: 1.4;
+  }
+
+  .add-comment-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: #FFFBEB;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #FDE68A;
+    margin-top: 4px;
+  }
+
+  .add-comment-inputs {
+    display: flex;
+    gap: 8px;
+  }
+
+  .comment-input-name {
+    width: 35%;
+    padding: 6px 10px;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-family: "Sarabun", sans-serif;
+    outline: none;
+  }
+
+  .comment-input-text {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-family: "Sarabun", sans-serif;
+    outline: none;
+  }
+
+  .send-comment-btn {
+    align-self: flex-end;
+    background: var(--gold-gradient);
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 16px;
     font-size: 0.8rem;
     font-family: "Maitree", serif;
-    opacity: 0.7;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.2);
   }
 
-  /* Media Query */
-  @media (min-width: 640px) {
-    .menu-list {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .doc-card {
-      padding: 24px 16px;
-    }
+  .floating-actions {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    z-index: 850;
+  }
+
+  .fab-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 50px;
+    color: white;
+    font-family: "Maitree", serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .fab-btn:active { transform: scale(0.95); }
+  .fab-btn svg { width: 20px; height: 20px; fill: white; }
+  .fab-checkin { background: var(--gold-gradient); }
+  .fab-chatbot { background: var(--ai-gradient); }
+
+  .chat-window {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 350px;
+    height: 480px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .chat-window.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  @media (max-width: 480px) {
     .chat-window {
-        width: 380px;
+      right: 0; left: 0; bottom: 0;
+      width: 100%; height: 75vh;
+      border-radius: 20px 20px 0 0;
     }
   }
 
+  .chat-header {
+    background: var(--ai-gradient);
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+  }
+
+  .chat-title {
+    display: flex; align-items: center; gap: 8px;
+    font-weight: 600; font-family: "Maitree", serif;
+  }
+
+  .close-chat {
+    background: none; border: none; color: white;
+    font-size: 1.5rem; cursor: pointer; opacity: 0.8;
+  }
+
+  .chat-messages {
+    flex: 1; padding: 16px; overflow-y: auto;
+    background: #F9FAFB; display: flex;
+    flex-direction: column; gap: 12px;
+  }
+
+  .message { display: flex; flex-direction: column; max-width: 85%; }
+  .message.bot { align-self: flex-start; }
+  .message.user { align-self: flex-end; align-items: flex-end; }
+
+  .msg-bubble {
+    padding: 10px 14px; border-radius: 12px;
+    font-size: 0.9rem; line-height: 1.4;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    word-wrap: break-word;
+  }
+
+  .message.bot .msg-bubble { background: white; color: var(--text-main); border: 1px solid #E5E7EB; border-top-left-radius: 2px; }
+  .message.user .msg-bubble { background: var(--ai-gradient); color: white; border-top-right-radius: 2px; }
+
+  .msg-time { font-size: 0.65rem; color: #9CA3AF; margin-top: 3px; }
+
+  .chat-input-area {
+    padding: 12px; background: white;
+    border-top: 1px solid #E5E7EB;
+    display: flex; gap: 8px;
+  }
+
+  .chat-input {
+    flex: 1; padding: 8px 14px;
+    border: 1px solid #E5E7EB; border-radius: 20px;
+    font-family: "Sarabun", sans-serif; outline: none;
+  }
+
+  .send-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: none; background: var(--ai-gradient);
+    color: white; display: flex; align-items: center;
+    justify-content: center; cursor: pointer;
+  }
+
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 0; width: 100%;
+    height: 65px; background: white;
+    display: flex; justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+    z-index: 900;
+    border-top: 1px solid #F3F4F6;
+  }
+
+  .nav-item {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px; color: var(--text-sub);
+    text-decoration: none; border: none;
+    background: transparent; font-family: "Maitree", serif;
+    font-size: 0.75rem; font-weight: 600;
+    cursor: pointer; width: 50%; height: 100%;
+    transition: color 0.2s;
+  }
+
+  .nav-item.active {
+    color: var(--primary);
+  }
+
+  .nav-item svg {
+    width: 22px; height: 22px; fill: currentColor;
+  }
+
+  @media (min-width: 640px) {
+    .menu-list { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .doc-card { padding: 24px 16px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- โหลด SDK ของ Facebook -->
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" 
   src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v19.0" nonce="abc123">
 </script>
 
 <header>
-  <div class="logo-icon">
-    <!-- Icon: Dhamma Wheel -->
-    <svg viewBox="0 0 24 24"><path d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6C8.69,6 6,8.69 6,12C6,15.31 8.69,18 12,18C15.31,18 18,15.31 18,12C18,8.69 15.31,6 12,6M12,8C14.21,8 16,9.79 16,12C16,14.21 14.21,16 12,16C9.79,16 8,14.21 8,12C8,9.79 9.79,8 12,8Z"/></svg>
-  </div>
-  <h1>นักธรรม</h1>
-  <p>ปัญญาบารมี ธรรมศึกษาเพื่อชีวิต</p>
-</header>
-
-<div class="container">
-
-  <!-- Facebook Page Section -->
-  <div class="fb-wrapper">
-    <div class="fb-page" 
-      data-href="https://www.facebook.com/p/%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%AA%E0%B8%99%E0%B8%B2%E0%B8%A1%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87-Royal-Dhamma-Studies-Office-61568725258865/" 
-      data-tabs="timeline" 
-      data-width="500" 
-      data-height="" 
-      data-small-header="false" 
-      data-adapt-container-width="true" 
-      data-hide-cover="false" 
-      data-show-facepile="true">
+  <div class="header-left">
+    <button class="menu-toggle-btn" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:currentColor;"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+    </button>
+    <div class="logo-icon-sm">
+      <svg viewBox="0 0 24 24"><path d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6C8.69,6 6,8.69 6,12C6,15.31 8.69,18 12,18C15.31,18 18,15.31 18,12C18,8.69 15.31,6 12,6M12,8C14.21,8 16,9.79 16,12C16,14.21 14.21,16 12,16C9.79,16 8,14.21 8,12C8,9.79 9.79,8 12,8Z"/></svg>
+    </div>
+    <div class="header-title-box">
+      <h1>นักธรรม</h1>
+      <p>ปัญญาบารมี ธรรมศึกษา</p>
     </div>
   </div>
+</header>
 
-  <!-- Menu List Grid -->
-  <div class="menu-list">
-    
-    <!-- นักธรรมตรี -->
-    <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%95%E0%B8%A3" class="doc-card" target="_blank">
-      <div class="icon-box">
-        <svg viewBox="0 0 24 24"><path d="M12,2C12,2 6,8 6,13C6,16.31 8.69,19 12,19C15.31,19 18,16.31 18,13C18,8 12,2 12,2M12,22C9.5,22 8,20.5 8,20.5L12,18L16,20.5C16,20.5 14.5,22 12,22Z"/></svg>
-      </div>
-      <div class="card-content">
-        <span class="card-title">นักธรรมตรี</span>
-        <span class="card-desc">หลักสูตรพื้นฐาน</span>
-      </div>
-    </a>
-
-    <!-- นักธรรมโท -->
-    <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1-%E0%B9%82%E0%B8%97" class="doc-card" target="_blank">
-      <div class="icon-box">
-         <svg viewBox="0 0 24 24"><path d="M11,6V9L13.5,7.5L11,6M13,9V6L15.5,7.5L13,9M7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17C9.24,17 7,14.76 7,12M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"/></svg>
-      </div>
-      <div class="card-content">
-        <span class="card-title">นักธรรมโท</span>
-        <span class="card-desc">หลักสูตรชั้นกลาง</span>
-      </div>
-    </a>
-
-    <!-- นักธรรมเอก -->
-    <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%AD%E0%B8%81" class="doc-card" target="_blank">
-      <div class="icon-box">
-        <svg viewBox="0 0 24 24"><path d="M12,2L5,14H19L12,2M12,5.27L16.27,12.5H7.73L12,5.27M6,15V17H18V15H6M4,18V20H20V18H4Z"/></svg>
-      </div>
-      <div class="card-content">
-        <span class="card-title">นักธรรมเอก</span>
-        <span class="card-desc">หลักสูตรชั้นสูง</span>
-      </div>
-    </a>
-
-    <!-- ข้อสอบย้อนหลัง -->
-    <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%82%E0%B8%AD%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%A2%E0%B8%AD%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%87" class="doc-card" target="_blank">
-      <div class="icon-box">
-        <svg viewBox="0 0 24 24"><path d="M19,2L14,6.5V17.5L19,13V2M6.5,5C4.55,5 2.45,5.4 1,6.5V21.16C1,21.41 1.25,21.66 1.5,21.66C1.6,21.66 1.65,21.59 1.75,21.59C3.1,20.94 5.05,20.5 6.5,20.5C8.45,20.5 10.55,20.9 12,22C13.35,21.15 15.8,20.5 17.5,20.5C19.15,20.5 20.85,20.81 22.25,21.56C22.35,21.61 22.4,21.59 22.5,21.59C22.75,21.59 23,21.34 23,21.09V6.5C22.4,5.9 21.5,5.4 20.5,5C19,4.5 17.5,4.5 16,5C14.8,5.4 13.55,5.9 12.5,6.5L12,6.5L11.5,6.5C10.45,5.9 9.2,5.4 8,5C7.5,4.8 7,4.8 6.5,5Z"/></svg>
-      </div>
-      <div class="card-content">
-        <span class="card-title">ข้อสอบเก่า</span>
-        <span class="card-desc">คลังความรู้</span>
-      </div>
-    </a>
-
-    <!-- แบบทดสอบ 100 ข้อ -->
-    <a href="https://sites.google.com/view/nakthamtee/%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A-100-%E0%B8%82%E0%B8%AD?authuser=0" class="doc-card" target="_blank">
-      <div class="icon-box">
-        <svg viewBox="0 0 24 24"><path d="M12,2A2,2 0 0,1 14,4C14,5.1 13.1,6 12,6A2,2 0 0,1 10,4C10,2.9 10.9,2 12,2M10,8H14C15.1,8 16,8.9 16,10V20C16,21.1 15.1,22 14,22H10C8.9,22 8,21.1 8,20V10C8,8.9 8.9,8 10,8M10,10V20H14V10H10Z"/></svg>
-      </div>
-      <div class="card-content">
-        <span class="card-title">ทดสอบ 100 ข้อ</span>
-        <span class="card-desc">วัดผลปัญญา</span>
-      </div>
-    </a>
-
+<div id="sidebar-backdrop" class="sidebar-backdrop" onclick="toggleSidebar()"></div>
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,6C8.69,6 6,8.69 6,12C6,15.31 8.69,18 12,18C15.31,18 18,15.31 18,12C18,8.69 15.31,6 12,6M12,8C14.21,8 16,9.79 16,12C16,14.21 14.21,16 12,16C9.79,16 8,14.21 8,12C8,9.79 9.79,8 12,8Z"/></svg>
+    </div>
+    <div>
+      <h3 style="font-family:'Maitree',serif;">นักธรรม ชุมชนธรรมะ</h3>
+      <p style="font-size:0.8rem; opacity:0.9;">เมนูหลักและการนำทาง</p>
+    </div>
+  </div>
+  <div class="sidebar-menu">
+    <button class="sidebar-item active" onclick="switchTab('home'); toggleSidebar();">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      หน้าแรก (บทเรียน)
+    </button>
+    <button class="sidebar-item" onclick="switchTab('community'); toggleSidebar();">
+      <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+      ชุมชนสนทนาธรรม
+    </button>
+    <button class="sidebar-item" onclick="handleCheckIn(); toggleSidebar();">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+      เช็คชื่อสะสมบุญ
+    </button>
+    <button class="sidebar-item" onclick="toggleChatbot(); toggleSidebar();">
+      <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+      ถาม AI ปัญหาธรรมะ
+    </button>
   </div>
 </div>
 
-<footer class="footer">
-  <a href="#">นโยบายความเป็นส่วนตัว</a>
-</footer>
+<div class="container">
+
+  <!-- PAGE 1: หน้าแรก (Home View) -->
+  <div id="page-home" class="page-view active">
+    <!-- Menu List Grid -->
+    <div class="menu-list">
+      
+      <!-- นักธรรมตรี -->
+      <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B5%A3" class="doc-card" target="_blank">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><path d="M12,2C12,2 6,8 6,13C6,16.31 8.69,19 12,19C15.31,19 18,16.31 18,13C18,8 12,2 12,2M12,22C9.5,22 8,20.5 8,20.5L12,18L16,20.5C16,20.5 14.5,22 12,22Z"/></svg>
+        </div>
+        <div class="card-content">
+          <span class="card-title">นักธรรมตรี</span>
+          <span class="card-desc">หลักสูตรพื้นฐาน</span>
+        </div>
+      </a>
+
+      <!-- นักธรรมโท -->
+      <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1-%E0%B9%82%E0%B8%97" class="doc-card" target="_blank">
+        <div class="icon-box">
+           <svg viewBox="0 0 24 24"><path d="M11,6V9L13.5,7.5L11,6M13,9V6L15.5,7.5L13,9M7,12C7,9.24 9.24,7 12,7C14.76,7 17,9.24 17,12C17,14.76 14.76,17 12,17C9.24,17 7,14.76 7,12M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z"/></svg>
+        </div>
+        <div class="card-content">
+          <span class="card-title">นักธรรมโท</span>
+          <span class="card-desc">หลักสูตรชั้นกลาง</span>
+        </div>
+      </a>
+
+      <!-- นักธรรมเอก -->
+      <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%99%E0%B8%81%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B9%80%E0%B8%AD%E0%B8%81" class="doc-card" target="_blank">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><path d="M12,2L5,14H19L12,2M12,5.27L16.27,12.5H7.73L12,5.27M6,15V17H18V15H6M4,18V20H20V18H4Z"/></svg>
+        </div>
+        <div class="card-content">
+          <span class="card-title">นักธรรมเอก</span>
+          <span class="card-desc">หลักสูตรชั้นสูง</span>
+        </div>
+      </a>
+
+      <!-- ข้อสอบย้อนหลัง -->
+      <a href="https://sites.google.com/view/nakthamtee/%E0%B8%AB%E0%B8%99%E0%B8%B2%E0%B9%81%E0%B8%A3%E0%B8%81/%E0%B8%82%E0%B8%AD%E0%B8%AA%E0%B8%AD%E0%B8%9A%E0%B8%A2%E0%B8%AD%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%87" class="doc-card" target="_blank">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><path d="M19,2L14,6.5V17.5L19,13V2M6.5,5C4.55,5 2.45,5.4 1,6.5V21.16C1,21.41 1.25,21.66 1.5,21.66C1.6,21.66 1.65,21.59 1.75,21.59C3.1,20.94 5.05,20.5 6.5,20.5C8.45,20.5 10.55,20.9 12,22C13.35,21.15 15.8,20.5 17.5,20.5C19.15,20.5 20.85,20.81 22.25,21.56C22.35,21.61 22.4,21.59 22.5,21.59C22.75,21.59 23,21.34 23,21.09V6.5C22.4,5.9 21.5,5.4 20.5,5C19,4.5 17.5,4.5 16,5C14.8,5.4 13.55,5.9 12.5,6.5L12,6.5L11.5,6.5C10.45,5.9 9.2,5.4 8,5C7.5,4.8 7,4.8 6.5,5Z"/></svg>
+        </div>
+        <div class="card-content">
+          <span class="card-title">ข้อสอบเก่า</span>
+          <span class="card-desc">คลังความรู้</span>
+        </div>
+      </a>
+
+      <!-- แบบทดสอบ 100 ข้อ -->
+      <a href="https://sites.google.com/view/nakthamtee/%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%97%E0%B8%94%E0%B8%AA%E0%B8%AD%E0%B8%9A-100-%E0%B8%82%E0%B8%AD?authuser=0" class="doc-card" target="_blank">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><path d="M12,2A2,2 0 0,1 14,4C14,5.1 13.1,6 12,6A2,2 0 0,1 10,4C10,2.9 10.9,2 12,2M10,8H14C15.1,8 16,8.9 16,10V20C16,21.1 15.1,22 14,22H10C8.9,22 8,21.1 8,20V10C8,8.9 8.9,8 10,8M10,10V20H14V10H10Z"/></svg>
+        </div>
+        <div class="card-content">
+          <span class="card-title">ทดสอบ 100 ข้อ</span>
+          <span class="card-desc">วัดผลปัญญา</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- PAGE 2: ชุมชน (Community View) -->
+  <div id="page-community" class="page-view">
+    
+    <!-- Community Forum Box -->
+    <div class="community-box">
+      <div class="community-header">
+        <h2>
+          <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:currentColor;"><path d="M21 6h-2v9H6v2c0 .55.45 1 1 1h11l4 4V7c0-.55-.45-1-1-1zm-4 6V3c0-.55-.45-1-1-1H3c-.55 0-1 .45-1 1v14l4-4h10c.55 0 1-.45 1-1z"/></svg>
+          สนทนาธรรม
+        </h2>
+        <button class="post-create-btn" onclick="openCreatePostModal()">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:white;"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          ตั้งคำถาม
+        </button>
+      </div>
+
+      <div id="posts-container" class="posts-list">
+        <!-- Posts will be dynamically loaded here -->
+        <p style="text-align:center; color: var(--text-sub); padding: 20px;">กำลังโหลดกระทู้สนทนา...</p>
+      </div>
+    </div>
+
+    <!-- Facebook Page Section -->
+    <div class="fb-wrapper">
+      <div class="fb-page" 
+        data-href="https://www.facebook.com/p/%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%81%E0%B8%A1%E0%B9%88%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%98%E0%B8%A3%E0%B8%A3%E0%B8%A1%E0%B8%AA%E0%B8%99%E0%B8%B2%E0%B8%A1%E0%B8%AB%E0%B8%A5%E0%B8%A7%E0%B8%87-Royal-Dhamma-Studies-Office-61568725258865/" 
+        data-tabs="timeline" 
+        data-width="500" 
+        data-height="" 
+        data-small-header="false" 
+        data-adapt-container-width="true" 
+        data-hide-cover="false" 
+        data-show-facepile="true">
+      </div>
+    </div>
+
+  </div>
+
+</div>
 
 <!-- Floating Actions (Bottom Right) -->
 <div class="floating-actions">
@@ -693,13 +918,12 @@
 <div id="chatbot-window" class="chat-window">
   <div class="chat-header">
     <div class="chat-title">
-        <svg viewBox="0 0 24 24" style="width:24px;height:24px;fill:white;"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12C4,16.1 7.1,19.45 11.1,19.95L10.5,17.5L12,17L13.5,17.5L12.9,19.95C16.9,19.45 20,16.1 20,12A8,8 0 0,0 12,4M10.5,8A1.5,1.5 0 0,1 12,9.5A1.5,1.5 0 0,1 10.5,11A1.5,1.5 0 0,1 9,9.5A1.5,1.5 0 0,1 10.5,8M15,9.5A1.5,1.5 0 0,1 16.5,11A1.5,1.5 0 0,1 15,12.5A1.5,1.5 0 0,1 13.5,11A1.5,1.5 0 0,1 15,9.5Z"/></svg>
-        AI Backend Worker
+        <svg viewBox="0 0 24 24" style="width:22px;height:22px;fill:white;"><path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12C4,16.1 7.1,19.45 11.1,19.95L10.5,17.5L12,17L13.5,17.5L12.9,19.95C16.9,19.45 20,16.1 20,12A8,8 0 0,0 12,4M10.5,8A1.5,1.5 0 0,1 12,9.5A1.5,1.5 0 0,1 10.5,11A1.5,1.5 0 0,1 9,9.5A1.5,1.5 0 0,1 10.5,8M15,9.5A1.5,1.5 0 0,1 16.5,11A1.5,1.5 0 0,1 15,12.5A1.5,1.5 0 0,1 13.5,11A1.5,1.5 0 0,1 15,9.5Z"/></svg>
+        AI ตอบปัญหาธรรมะ
     </div>
     <button class="close-chat" onclick="toggleChatbot()">×</button>
   </div>
   <div class="chat-messages" id="chat-messages">
-    <!-- Default Welcome Message -->
     <div class="message bot">
         <div class="msg-bubble">เจริญพร ถามปัญหาธรรมะหรือข้อมูลการสอบได้เลย</div>
         <div class="msg-time">ตอนนี้</div>
@@ -708,85 +932,542 @@
   <div class="chat-input-area">
     <input type="text" id="chat-input" class="chat-input" placeholder="พิมพ์คำถาม..." onkeypress="handleEnter(event)">
     <button class="send-btn" onclick="sendMessage()">
-        <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:white;margin-left:2px;"><path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/></svg>
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:white;margin-left:2px;"><path d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/></svg>
     </button>
   </div>
 </div>
 
-<!-- Modals -->
-<!-- 1. Normal Check-in Success -->
-<div id="modal-success" class="modal-overlay">
-  <div class="modal-content">
-    <div class="modal-icon">
-      <svg viewBox="0 0 24 24"><path d="M9,16.17L4.83,12L3.41,13.41L9,19L21,7L19.59,5.59L9,16.17Z"/></svg>
-    </div>
-    <h3 class="modal-title">เช็คชื่อสำเร็จ!</h3>
-    <p class="modal-desc">คุณได้สะสมแต้มบุญวันนี้แล้ว<br>จำนวนวันสะสม: <b id="streak-count" style="color:#D97706">0</b> วัน</p>
-    <button class="modal-btn" onclick="closeModal('modal-success')">ตกลง</button>
-  </div>
-</div>
-
-<!-- 2. Already Checked-in -->
-<div id="modal-error" class="modal-overlay">
-  <div class="modal-content">
-    <div class="modal-icon" style="background:#FEE2E2; color:#DC2626;">
-      <svg viewBox="0 0 24 24"><path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2C6.47,2 2,6.47 2,12C2,17.53 6.47,22 12,22C17.53,22 22,17.53 22,12C22,6.47 17.53,2 12,2M11,7H13V13H11V7M11,15H13V17H11V15Z"/></svg>
-    </div>
-    <h3 class="modal-title" style="color:#DC2626;">วันนี้เช็คชื่อไปแล้ว</h3>
-    <p class="modal-desc">คุณสามารถเช็คชื่อได้วันละ 1 ครั้ง ครบ 100 วัน รับลบโฆษณาฟรีถาวร<br>โปรดกลับมาใหม่พรุ่งนี้</p>
-    <button class="modal-btn" onclick="closeModal('modal-error')" style="background:#DC2626;">ตกลง</button>
-  </div>
-</div>
-
-<!-- 3. Reward (100 Days) -->
-<div id="modal-reward" class="modal-overlay">
-  <div class="modal-content reward">
-    <div class="modal-icon">
-      <svg viewBox="0 0 24 24"><path d="M12,1L9,9L1,12L9,15L12,23L15,15L23,12L15,9L12,1Z"/></svg>
-    </div>
-    <h3 class="modal-title">ยินดีด้วย! ครบ 100 วัน</h3>
-    <p class="modal-desc">ความเพียรของคุณสัมฤทธิ์ผลแล้ว<br>นี่คือรหัสลับพิเศษสำหรับคุณ:</p>
-    <div class="secret-code">no-ads-2025</div>
-    <button class="modal-btn" onclick="closeModal('modal-reward')">รับรางวัล</button>
-  </div>
-</div>
+<!-- Bottom Navigation Bar -->
+<nav class="bottom-nav">
+  <button id="nav-home" class="nav-item active" onclick="switchTab('home')">
+    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    <span>หน้าแรก</span>
+  </button>
+  <button id="nav-community" class="nav-item" onclick="switchTab('community')">
+    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+    <span>ชุมชน</span>
+  </button>
+</nav>
 
 <script>
-  // Helper to open/close modals
-  function showModal(id) {
-    document.getElementById(id).classList.add('active');
-  }
-  function closeModal(id) {
-    document.getElementById(id).classList.remove('active');
+  // Configuration URLs
+  const BACKEND_URL = 'https://spring-bush-acec.tontakankeawpang321.workers.dev';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxV56uQlUU24xNJ4lX2dEtWIcZW2cj69qCV9CKhAsFOXuoqptvxr4dUOdcY5oeXF4jLiA/exec';
+
+  // Default Mock Posts with Comments for offline / initial state
+  const DEFAULT_POSTS = [
+    {
+      id: 'demo_1',
+      timestamp: 'วันนี้ 09:00 น.',
+      author: 'พระมหาธรรมะ',
+      category: 'นักธรรมตรี',
+      question: 'สอบถามเรื่องหัวข้อธรรมใน อริยสัจ 4 เหมาะสำหรับการเก็งข้อสอบปีนี้ครับ',
+      comments: [
+        {
+          id: 'cm_1_1',
+          author: 'สามเณรใฝ่ดี',
+          text: 'อริยสัจ 4 ออกข้อสอบบ่อยมากครับ โดยเฉพาะเรื่องทุกข์และสมุทัย',
+          timestamp: 'วันนี้ 09:15 น.'
+        },
+        {
+          id: 'cm_1_2',
+          author: 'อุบาสกวิชัย',
+          text: 'อนุโมทนาครับ แนะนำดูเรื่องมรรค 8 เพิ่มเติมด้วยนะครับ',
+          timestamp: 'วันนี้ 09:30 น.'
+        }
+      ]
+    },
+    {
+      id: 'demo_2',
+      timestamp: 'เมื่อวาน 15:30 น.',
+      author: 'ศิษย์ใฝ่เรียน',
+      category: 'ข้อสงสัย',
+      question: 'อยากทราบเทคนิคการท่องจำธรรมวิภาคของนักธรรมโทให้จำได้แม่นยำครับ',
+      comments: [
+        {
+          id: 'cm_2_1',
+          author: 'ครูสอนพระปริยัติ',
+          text: 'ลองแบ่งจำทีละหมวด และทำเป็นสรุปแผนผังความคิด (Mind Map) จะช่วยได้มากครับ',
+          timestamp: 'เมื่อวาน 16:00 น.'
+        }
+      ]
+    }
+  ];
+
+  function getLocalPosts() {
+    try {
+      const stored = localStorage.getItem('naktham_demo_posts');
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.warn('LocalStorage access restricted:', e);
+    }
+    return DEFAULT_POSTS;
   }
 
-  // Check-in Logic
+  function saveLocalPosts(posts) {
+    try {
+      localStorage.setItem('naktham_demo_posts', JSON.stringify(posts));
+    } catch (e) {
+      console.warn('LocalStorage save failed:', e);
+    }
+  }
+
+  // Tab Navigation Switching
+  function switchTab(tabName) {
+    document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+    if (tabName === 'home') {
+      document.getElementById('page-home').classList.add('active');
+      document.getElementById('nav-home').classList.add('active');
+    } else if (tabName === 'community') {
+      document.getElementById('page-community').classList.add('active');
+      document.getElementById('nav-community').classList.add('active');
+      loadPosts(); // Auto load posts when entering community tab
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Slide Sidebar Toggle
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('active');
+    document.getElementById('sidebar-backdrop').classList.toggle('active');
+  }
+
+  // Check-in System with SweetAlert2
   function handleCheckIn() {
-    const today = new Date().toDateString(); // e.g. "Mon Jan 01 2024"
-    const lastCheckIn = localStorage.getItem('naktham_last_checkin');
-    let streak = parseInt(localStorage.getItem('naktham_streak') || '0');
+    const today = new Date().toDateString();
+    let lastCheckIn = null;
+    let streak = 0;
 
-    // Case 1: Already checked in today
+    try {
+      lastCheckIn = localStorage.getItem('naktham_last_checkin');
+      streak = parseInt(localStorage.getItem('naktham_streak') || '0');
+    } catch (e) { console.warn(e); }
+
     if (lastCheckIn === today) {
-      showModal('modal-error');
+      Swal.fire({
+        icon: 'info',
+        title: 'วันนี้เช็คชื่อไปแล้ว',
+        text: 'คุณสามารถเช็คชื่อได้วันละ 1 ครั้ง สะสมครบ 100 วันเพื่อรับรางวัลพิเศษ!',
+        confirmButtonColor: '#854D0E'
+      });
       return;
     }
 
-    // Case 2: New Check-in
     streak++;
-    
-    // Save to storage
-    localStorage.setItem('naktham_last_checkin', today);
-    localStorage.setItem('naktham_streak', streak);
+    try {
+      localStorage.setItem('naktham_last_checkin', today);
+      localStorage.setItem('naktham_streak', streak);
+    } catch (e) { console.warn(e); }
 
-    // Update UI
-    document.getElementById('streak-count').innerText = streak;
-
-    // Check Reward Condition
     if (streak === 100) {
-      showModal('modal-reward');
+      Swal.fire({
+        icon: 'success',
+        title: '🎉 ครบ 100 วันสำเร็จ!',
+        html: `ความเพียรของคุณสัมฤทธิ์ผลแล้ว!<br>รหัสพิเศษของคุณคือ: <b style="color:#D97706; font-family:monospace;">no-ads-2025</b>`,
+        confirmButtonColor: '#854D0E'
+      });
     } else {
-      showModal('modal-success');
+      Swal.fire({
+        icon: 'success',
+        title: 'เช็คชื่อสำเร็จ!',
+        text: `คุณได้สะสมแต้มบุญวันนี้แล้ว (สะสมรวม ${streak} วัน)`,
+        confirmButtonColor: '#854D0E'
+      });
+    }
+  }
+
+  function renderPosts(posts) {
+    const container = document.getElementById('posts-container');
+    if (!posts || posts.length === 0) {
+      container.innerHTML = '<p style="text-align:center; color: var(--text-sub); padding: 20px;">ยังไม่มีกระทู้สนทนา ร่วมเปิดประเด็นธรรมะเป็นคนแรก!</p>';
+      return;
+    }
+
+    container.innerHTML = '';
+    posts.forEach(post => {
+      const comments = Array.isArray(post.comments) ? post.comments : [];
+      const card = document.createElement('div');
+      card.className = 'post-card';
+      card.innerHTML = `
+        <div class="post-meta">
+          <span class="post-author">
+            <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+            ${escapeHtml(post.author)}
+          </span>
+          <span class="post-tag">${escapeHtml(post.category)}</span>
+        </div>
+        <div class="post-content">${escapeHtml(post.question)}</div>
+        
+        <div class="post-footer">
+          <button class="post-action-btn" onclick="toggleComments('${post.id}')">
+            <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+            💬 ความคิดเห็น (${comments.length})
+          </button>
+          
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-size:0.75rem; color:#9CA3AF;">${escapeHtml(post.timestamp)}</span>
+            <button class="delete-post-btn" onclick="deletePost('${post.id}')">
+              <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+              ลบ
+            </button>
+          </div>
+        </div>
+
+        <!-- Section: Comments list and reply form -->
+        <div id="comments-${post.id}" class="comments-container">
+          <div class="comment-list" id="comment-list-${post.id}">
+            ${renderCommentItems(post.id, comments)}
+          </div>
+          
+          <!-- Add comment input box -->
+          <div class="add-comment-box">
+            <div class="add-comment-inputs">
+              <input type="text" id="cm-name-${post.id}" class="comment-input-name" placeholder="ชื่อของคุณ" value="ผู้ใฝ่ธรรม">
+              <input type="text" id="cm-text-${post.id}" class="comment-input-text" placeholder="พิมพ์ความคิดเห็น..." onkeypress="handleCommentEnter(event, '${post.id}')">
+            </div>
+            <button class="send-comment-btn" onclick="submitComment('${post.id}')">
+              <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:white;"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+              ส่งความเห็น
+            </button>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function renderCommentItems(postId, comments) {
+    if (!comments || comments.length === 0) {
+      return `<p style="font-size:0.8rem; color:#9CA3AF; text-align:center; padding: 4px;">ยังไม่มีความคิดเห็น ร่วมแสดงความคิดเห็นคนแรก!</p>`;
+    }
+
+    return comments.map(cm => `
+      <div class="comment-item">
+        <div class="comment-header">
+          <span class="comment-author">${escapeHtml(cm.author)}</span>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span class="comment-time">${escapeHtml(cm.timestamp)}</span>
+            <button onclick="deleteComment('${postId}', '${cm.id}')" style="background:none; border:none; color:#EF4444; font-size:0.7rem; cursor:pointer;" title="ลบคอมเมนต์">×</button>
+          </div>
+        </div>
+        <div class="comment-text">${escapeHtml(cm.text)}</div>
+      </div>
+    `).join('');
+  }
+
+  function toggleComments(postId) {
+    const el = document.getElementById(`comments-${postId}`);
+    if (el) el.classList.toggle('active');
+  }
+
+  function handleCommentEnter(e, postId) {
+    if (e.key === 'Enter') submitComment(postId);
+  }
+
+  // Submit comment handler with local and network sync
+  async function submitComment(postId) {
+    const nameInput = document.getElementById(`cm-name-${postId}`);
+    const textInput = document.getElementById(`cm-text-${postId}`);
+
+    const author = nameInput.value.trim() || 'ผู้ใฝ่ธรรม';
+    const text = textInput.value.trim();
+
+    if (!text) {
+      Swal.fire({ icon: 'warning', title: 'โปรดพิมพ์ข้อความ', text: 'กรุณากรอกความคิดเห็นก่อนส่ง', confirmButtonColor: '#854D0E' });
+      return;
+    }
+
+    const timestamp = new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.';
+    const newComment = {
+      id: 'cm_' + Date.now(),
+      author: author,
+      text: text,
+      timestamp: timestamp
+    };
+
+    // Update Local Posts
+    let posts = getLocalPosts();
+    const postIndex = posts.findIndex(p => p.id === postId);
+    if (postIndex !== -1) {
+      if (!Array.isArray(posts[postIndex].comments)) {
+        posts[postIndex].comments = [];
+      }
+      posts[postIndex].comments.push(newComment);
+      saveLocalPosts(posts);
+      renderPosts(posts);
+      
+      // Keep comments visible after posting
+      const commentEl = document.getElementById(`comments-${postId}`);
+      if (commentEl) commentEl.classList.add('active');
+    }
+
+    // Clear comment input text field after submission
+    if (textInput) textInput.value = '';
+
+    // Attempt Apps Script sync if available
+    const isPlaceholder = !APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('XXXXXXXXXXXXXX');
+    if (!isPlaceholder) {
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ action: 'addComment', postId: postId, comment: newComment })
+        });
+        // Refresh post list from backend and reopen the comments section
+        await loadPosts();
+        const commentEl = document.getElementById(`comments-${postId}`);
+        if (commentEl) commentEl.classList.add('active');
+      } catch (err) {
+        console.warn('Network sync failed for comment, saved locally.', err);
+      }
+    }
+  }
+
+  // Delete individual comment handler
+  async function deleteComment(postId, commentId) {
+    const confirm = await Swal.fire({
+      title: 'ลบคอมเมนต์นี้?',
+      text: 'ข้อความความคิดเห็นนี้จะถูกลบออก',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DC2626',
+      confirmButtonText: 'ลบ',
+      cancelButtonText: 'ยกเลิก'
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    let posts = getLocalPosts();
+    const postIndex = posts.findIndex(p => p.id === postId);
+    if (postIndex !== -1 && Array.isArray(posts[postIndex].comments)) {
+      posts[postIndex].comments = posts[postIndex].comments.filter(c => c.id !== commentId);
+      saveLocalPosts(posts);
+      renderPosts(posts);
+
+      const commentEl = document.getElementById(`comments-${postId}`);
+      if (commentEl) commentEl.classList.add('active');
+    }
+  }
+
+  // Load Posts from Google Apps Script with fallback
+  async function loadPosts() {
+    const container = document.getElementById('posts-container');
+    container.innerHTML = '<p style="text-align:center; color: var(--text-sub); padding:20px;">กำลังโหลดกระทู้สนทนา...</p>';
+
+    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('XXXXXXXXXXXXXX')) {
+      renderPosts(getLocalPosts());
+      return;
+    }
+
+    try {
+      const response = await fetch(APPS_SCRIPT_URL);
+      if (!response.ok) throw new Error('HTTP status ' + response.status);
+      const json = await response.json();
+
+      if (json.status === 'success' && Array.isArray(json.data)) {
+        renderPosts(json.data);
+      } else {
+        renderPosts(getLocalPosts());
+      }
+    } catch (err) {
+      console.warn('Network error or placeholder URL detected, falling back to local posts:', err);
+      renderPosts(getLocalPosts());
+    }
+  }
+
+  // Open Popup Modal to Create Post
+  async function openCreatePostModal() {
+    const { value: formValues } = await Swal.fire({
+      title: 'ตั้งคำถาม / สนทนาธรรม',
+      html: `
+        <input id="swal-author" class="swal2-input" placeholder="ชื่อของคุณ (เช่น ศิษย์วัด/ผู้ใฝ่ธรรม)" style="margin-bottom:10px;">
+        <select id="swal-category" class="swal2-select" style="display:flex; width:80%; margin:0 auto 10px auto;">
+          <option value="ธรรมทั่วไป">ธรรมทั่วไป</option>
+          <option value="นักธรรมตรี">นักธรรมตรี</option>
+          <option value="นักธรรมโท">นักธรรมโท</option>
+          <option value="นักธรรมเอก">นักธรรมเอก</option>
+          <option value="ข้อสงสัย">ข้อสงสัยการสอบ</option>
+        </select>
+        <textarea id="swal-question" class="swal2-textarea" placeholder="พิมพ์ข้อความคำถามหรือข้อธรรมะที่ต้องการสนทนา..." style="height:100px; margin-top:5px;"></textarea>
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: 'โพสต์ข้อความ',
+      cancelButtonText: 'ยกเลิก',
+      confirmButtonColor: '#854D0E',
+      preConfirm: () => {
+        const author = document.getElementById('swal-author').value.trim() || 'ผู้ใฝ่ธรรม';
+        const category = document.getElementById('swal-category').value;
+        const question = document.getElementById('swal-question').value.trim();
+
+        if (!question) {
+          Swal.showValidationMessage('กรุณากรอกข้อความคำถาม');
+          return false;
+        }
+        return { author, category, question };
+      }
+    });
+
+    if (formValues) {
+      createPost(formValues);
+    }
+  }
+
+  // Send Post Request to Apps Script with Local Fallback
+  async function createPost(postData) {
+    Swal.fire({
+      title: 'กำลังบันทึกข้อมูล...',
+      allowOutsideClick: false,
+      didOpen: () => Swal.showLoading()
+    });
+
+    const isPlaceholder = !APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('XXXXXXXXXXXXXX');
+
+    if (isPlaceholder) {
+      setTimeout(() => {
+        const posts = getLocalPosts();
+        const newPost = {
+          id: 'post_' + Date.now(),
+          timestamp: new Date().toLocaleDateString('th-TH') + ' ' + new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.',
+          author: postData.author,
+          category: postData.category,
+          question: postData.question,
+          comments: []
+        };
+        posts.unshift(newPost);
+        saveLocalPosts(posts);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'โพสต์สำเร็จ!',
+          text: 'ข้อความถูกบันทึกเรียบร้อยแล้ว',
+          timer: 1500,
+          showConfirmButton: false
+        });
+        loadPosts();
+      }, 300);
+      return;
+    }
+
+    try {
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'create', ...postData })
+      });
+
+      const json = await response.json();
+      if (json.status === 'success') {
+        Swal.fire({
+          icon: 'success',
+          title: 'โพสต์สำเร็จ!',
+          text: 'ข้อความของคุณถูกบันทึกลงเรียบร้อยแล้ว',
+          timer: 1500,
+          showConfirmButton: false
+        });
+        loadPosts();
+      } else {
+        throw new Error(json.message || 'บันทึกไม่สำเร็จ');
+      }
+    } catch (err) {
+      console.warn('Network error, saving post locally:', err);
+      const posts = getLocalPosts();
+      const newPost = {
+        id: 'post_' + Date.now(),
+        timestamp: new Date().toLocaleDateString('th-TH') + ' ' + new Date().toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น.',
+        author: postData.author,
+        category: postData.category,
+        question: postData.question,
+        comments: []
+      };
+      posts.unshift(newPost);
+      saveLocalPosts(posts);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'โพสต์สำเร็จ!',
+        text: 'ข้อความถูกบันทึกเรียบร้อยแล้ว',
+        timer: 1500,
+        showConfirmButton: false
+      });
+      loadPosts();
+    }
+  }
+
+  // Delete Post Request with Local Fallback
+  async function deletePost(id) {
+    const result = await Swal.fire({
+      title: 'ยืนยันการลบโพสต์?',
+      text: 'ข้อความนี้จะถูกลบออกจากระบบอย่างถาวร',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#DC2626',
+      cancelButtonColor: '#6B7280',
+      confirmButtonText: 'ลบโพสต์',
+      cancelButtonText: 'ยกเลิก'
+    });
+
+    if (!result.isConfirmed) return;
+
+    Swal.fire({
+      title: 'กำลังลบข้อมูล...',
+      allowOutsideClick: false,
+      didOpen: () => Swal.showLoading()
+    });
+
+    const isPlaceholder = !APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('XXXXXXXXXXXXXX');
+
+    if (isPlaceholder) {
+      setTimeout(() => {
+        let posts = getLocalPosts();
+        posts = posts.filter(p => p.id !== id);
+        saveLocalPosts(posts);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'ลบเรียบร้อย!',
+          timer: 1500,
+          showConfirmButton: false
+        });
+        loadPosts();
+      }, 300);
+      return;
+    }
+
+    try {
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'delete', id: id })
+      });
+
+      const json = await response.json();
+      if (json.status === 'success') {
+        Swal.fire({
+          icon: 'success',
+          title: 'ลบเรียบร้อย!',
+          timer: 1500,
+          showConfirmButton: false
+        });
+        loadPosts();
+      } else {
+        throw new Error(json.message || 'ลบไม่สำเร็จ');
+      }
+    } catch (err) {
+      console.warn('Network error, deleting post locally:', err);
+      let posts = getLocalPosts();
+      posts = posts.filter(p => p.id !== id);
+      saveLocalPosts(posts);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'ลบเรียบร้อย!',
+        timer: 1500,
+        showConfirmButton: false
+      });
+      loadPosts();
     }
   }
 
@@ -794,9 +1475,6 @@
   const chatWindow = document.getElementById('chatbot-window');
   const chatMessages = document.getElementById('chat-messages');
   const chatInput = document.getElementById('chat-input');
-  
-  // Backend URL (Cloudflare Worker)
-  const BACKEND_URL = 'https://spring-bush-acec.tontakankeawpang321.workers.dev';
 
   function toggleChatbot() {
     chatWindow.classList.toggle('active');
@@ -806,53 +1484,44 @@
   }
 
   function handleEnter(e) {
-    if (e.key === 'Enter') {
-      sendMessage();
-    }
+    if (e.key === 'Enter') sendMessage();
   }
 
   async function sendMessage() {
     const text = chatInput.value.trim();
     if (!text) return;
 
-    // 1. Add User Message
     addMessage(text, 'user');
     chatInput.value = '';
 
-    // 2. Add Typing Indicator
     const typingId = addTypingIndicator();
 
     try {
-        // 3. Call Backend
-        const response = await fetch(BACKEND_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message: text })
-        });
+      const response = await fetch(BACKEND_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text })
+      });
 
-        if (!response.ok) throw new Error('Network response was not ok');
+      if (!response.ok) throw new Error('Network error');
 
-        // Try to parse JSON, if fails, use text
-        const contentType = response.headers.get("content-type");
-        let botReply = "";
+      const contentType = response.headers.get("content-type");
+      let botReply = "";
 
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-             const data = await response.json();
-             // Adjust this based on your actual worker response structure
-             botReply = data.reply || data.response || data.message || JSON.stringify(data);
-        } else {
-             botReply = await response.text();
-        }
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json();
+        botReply = data.reply || data.response || data.message || JSON.stringify(data);
+      } else {
+        botReply = await response.text();
+      }
 
-        removeTypingIndicator(typingId);
-        addMessage(botReply, 'bot');
+      removeTypingIndicator(typingId);
+      addMessage(botReply, 'bot');
 
     } catch (error) {
-        console.error('Error:', error);
-        removeTypingIndicator(typingId);
-        addMessage("ขออภัย ระบบ AI กำลังประมวลผลหนักเกินไป หรือการเชื่อมต่อขัดข้อง (กรุณาลองใหม่)", 'bot');
+      console.error('Error:', error);
+      removeTypingIndicator(typingId);
+      addMessage("ขออภัย ระบบ AI กำลังประมวลผลหนักเกินไป หรือการเชื่อมต่อขัดข้อง (กรุณาลองใหม่)", 'bot');
     }
   }
 
@@ -862,7 +1531,7 @@
     const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     
     div.innerHTML = `
-      <div class="msg-bubble">${text}</div>
+      <div class="msg-bubble">${escapeHtml(text)}</div>
       <div class="msg-time">${time}</div>
     `;
     
@@ -876,7 +1545,7 @@
     div.id = 'typing-' + Date.now();
     div.innerHTML = `
       <div class="msg-bubble">
-        <div class="typing"><span></span><span></span><span></span></div>
+        <span style="font-size:0.8rem; color:#9CA3AF;">กำลังประมวลผล...</span>
       </div>
     `;
     chatMessages.appendChild(div);
@@ -889,6 +1558,15 @@
     if (el) el.remove();
   }
 
+  function escapeHtml(text) {
+    if (!text) return '';
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 </script>
 
 </body>
